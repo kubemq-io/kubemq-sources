@@ -1,0 +1,19 @@
+# github.com/go-task/task
+
+version: '2'
+
+vars:
+  BINARY_NAME: kubemq-source-connectors
+  VERSION: v0.1.0
+  DEV_VERSION: dev-v0.1.0
+
+tasks:
+  check_update:
+    cmds:
+      - go list -u -m -json all | go-mod-outdated -update -direct
+  lint:
+    cmds:
+      - golangci-lint run --disable gocritic --enable misspell --enable gosec
+  test:
+    cmds:
+      - go test -timeout 30m ./...
