@@ -19,8 +19,6 @@ type Client struct {
 	opts          options
 	consumerGroup string
 	cg            kafka.ConsumerGroup
-	topics        map[string]bool
-	config        *kafka.Config
 	target        middleware.Middleware
 	consumer      consumer
 }
