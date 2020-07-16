@@ -2,6 +2,7 @@ package kafka
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 
@@ -12,28 +13,54 @@ import (
 )
 
 type MockMiddleware struct {
+	error     chan error
+	wantError bool
 }
 
 func (m *MockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
-	return &types.Response{}, nil
+	if m.wantError {
+		err := fmt.Errorf("newError")
+		m.error <- err
+		return nil, err
+	}
+
+	m.error <- nil
+	return &types.Response{
+		Data: request.Data,
+	}, nil
+
 }
 
 func TestClient_Init(t *testing.T) {
+
 	tests := []struct {
 		name    string
 		cfg     config.Metadata
 		wantErr bool
 	}{
 		{
-			name: "init",
+			name: "valid init",
 			cfg: config.Metadata{
 				Name: "kafka-target",
 				Properties: map[string]string{
-					"brokers": "localhost:9092",
-					"topics":  "TestTopicA,TestTopicB",
+					"brokers":       "localhost:9092",
+					"topics":        "TestTopicA,TestTopicB",
+					"consumerGroup": "test_client",
 				},
 			},
 			wantErr: false,
+		},
+		{
+			name: "invalid init",
+			cfg: config.Metadata{
+				Name: "kafka-target",
+				Properties: map[string]string{
+					"brokers":       "localhost:9090",
+					"topics":        "TestTopic",
+					"consumerGroup": "test_client1",
+				},
+			},
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -52,48 +79,85 @@ func TestClient_Init(t *testing.T) {
 }
 
 func TestClient_Do(t *testing.T) {
+	errors := make(chan error)
 	tests := []struct {
-		name    string
-		cfg     config.Metadata
-		target  middleware.Middleware
-		req     *types.Request
-		wantErr bool
+		name         string
+		cfg          config.Metadata
+		target       middleware.Middleware
+		req          *types.Request
+		wantErr      bool
+		wantErrorMsg bool
 	}{
 		{
-			name: "valid publish request ",
+			name: "valid connection target error ",
 			cfg: config.Metadata{
 				Name: "kafka-target",
 				Properties: map[string]string{
-					"brokers": "localhost:9092",
-					"topics":  "TestTopic",
+					"brokers":       "localhost:9092",
+					"topics":        "TestTopic",
+					"consumerGroup": "test_client1",
 				},
 			},
 
-			req:     types.NewRequest().SetData([]byte("some-data")),
-			target:  &MockMiddleware{},
+			req: types.NewRequest().SetData([]byte("some-data")),
+			target: &MockMiddleware{
+				error:     errors,
+				wantError: true,
+			},
+			wantErr:      false,
+			wantErrorMsg: true,
+		},
+		{
+			name: "valid connection target success ",
+			cfg: config.Metadata{
+				Name: "kafka-target",
+				Properties: map[string]string{
+					"brokers":       "localhost:9092",
+					"topics":        "TestTopic",
+					"consumerGroup": "test_client1",
+				},
+			},
+			req:          types.NewRequest().SetData([]byte("some-data")),
+			wantErrorMsg: false,
+			target: &MockMiddleware{
+				error:     errors,
+				wantError: false,
+			},
 			wantErr: false,
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			end := make(chan bool)
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
 			c := New()
 			err := c.Init(ctx, tt.cfg)
-			require.NoError(t, err)
+			if tt.wantErr {
+				require.Error(t, err)
+				return
+			}
 			err = c.Start(ctx, tt.target)
 			if tt.wantErr {
 				require.Error(t, err)
 				return
 			}
-			for {
-				if ctx.Err() != nil {
-					return
+			go func() {
+				for {
+					if ctx.Err() != nil {
+						end <- true
+					}
 				}
-
+			}()
+			err = <-errors
+			if tt.wantErrorMsg {
+				require.Error(t, err)
+				return
 			}
-			require.NoError(t, err)
-
+			require.Nil(t, err)
+			return
 		})
+
 	}
 }

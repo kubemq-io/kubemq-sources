@@ -23,44 +23,6 @@ type Client struct {
 	consumer      consumer
 }
 
-func New() *Client {
-	return &Client{}
-}
-func (c *Client) Name() string {
-	return c.name
-}
-
-func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
-	c.name = cfg.Name
-	c.log = logger.NewLogger(cfg.Name)
-	var err error
-	c.opts, err = parseOptions(cfg)
-	if err != nil {
-		return err
-	}
-	c.consumerGroup = "test1"
-
-	kc := kafka.NewConfig()
-	kc.Version = kafka.V2_0_0_0
-
-	if c.opts.saslUsername != "" {
-		kc.Net.SASL.Enable = true
-		kc.Net.SASL.User = c.opts.saslUsername
-		kc.Net.SASL.Password = c.opts.saslPassword
-
-		kc.Net.TLS.Enable = true
-		kc.Net.TLS.Config = &tls.Config{
-			ClientAuth: 0,
-		}
-	}
-
-	c.cg, err = kafka.NewConsumerGroup(c.opts.brokers, c.consumerGroup, kc)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
 type consumer struct {
 	ready    chan bool
 	callback func(ctx context.Context, request *types.Request) (*types.Response, error)
@@ -95,6 +57,44 @@ func (consumer *consumer) Setup(kafka.ConsumerGroupSession) error {
 	return nil
 }
 
+func New() *Client {
+	return &Client{}
+}
+func (c *Client) Name() string {
+	return c.name
+}
+
+func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
+	c.name = cfg.Name
+	c.log = logger.NewLogger(cfg.Name)
+	var err error
+	c.opts, err = parseOptions(cfg)
+	if err != nil {
+		return err
+	}
+	c.consumerGroup = c.opts.consumerGroup
+
+	kc := kafka.NewConfig()
+	kc.Version = kafka.V2_0_0_0
+
+	if c.opts.saslUsername != "" {
+		kc.Net.SASL.Enable = true
+		kc.Net.SASL.User = c.opts.saslUsername
+		kc.Net.SASL.Password = c.opts.saslPassword
+
+		kc.Net.TLS.Enable = true
+		kc.Net.TLS.Config = &tls.Config{
+			ClientAuth: 0,
+		}
+	}
+
+	c.cg, err = kafka.NewConsumerGroup(c.opts.brokers, c.consumerGroup, kc)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 
 	if target == nil {
@@ -113,7 +113,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		defer func() {
 			c.log.Debugf("Closing ConsumerGroup for topics: %v", c.opts.topics)
 			err := c.cg.Close()
-
 			if err != nil {
 				c.log.Errorf("Error closing consumer group: %v", err)
 			}
@@ -121,14 +120,10 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		c.log.Debugf("Subscribed and listening to topics: %s", c.opts.topics)
 
 		for {
-			// Consume the requested topic
 			err := c.cg.Consume(ctx, c.opts.topics, &(c.consumer))
 			if err != nil {
 				c.log.Errorf("error processing request %s", err.Error())
 			}
-
-			// If the context was cancelled, as is the case when handling SIGINT and SIGTERM below, then this pops
-			// us out of the consume loop
 			if ctx.Err() != nil {
 				return
 			}

@@ -5,15 +5,21 @@ import (
 )
 
 type options struct {
-	brokers      []string
-	topics       []string
-	saslUsername string
-	saslPassword string
+	brokers       []string
+	topics        []string
+	consumerGroup string
+	saslUsername  string
+	saslPassword  string
 }
 
 func parseOptions(cfg config.Metadata) (options, error) {
 	m := options{}
 	var err error
+
+	m.consumerGroup, err = cfg.MustParseString("consumerGroup")
+	if err != nil {
+		return m, err
+	}
 	m.brokers, err = cfg.MustParseStringList("brokers")
 	if err != nil {
 		return m, err
