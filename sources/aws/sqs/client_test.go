@@ -2,13 +2,13 @@ package sqs
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets/null"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-hub/kubemq-sources/targets/null"
+	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/stretchr/testify/require"
 	"os"
 	
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 	
 	"testing"
 	"time"

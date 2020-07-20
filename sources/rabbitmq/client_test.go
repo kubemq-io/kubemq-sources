@@ -2,11 +2,11 @@ package rabbitmq
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/middleware"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets/null"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-hub/kubemq-sources/targets/null"
+	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/nats-io/nuid"
 	"github.com/streadway/amqp"
 	"github.com/stretchr/testify/require"

@@ -2,7 +2,7 @@ package event
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/types"
 )
 
 type metadata struct {

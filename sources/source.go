@@ -3,10 +3,10 @@ package sources
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/sources/kubemq/query"
-	"github.com/kubemq-hub/kubemq-source-connectors/sources/kubemq/queue"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/sources/kubemq/query"
+	"github.com/kubemq-hub/kubemq-sources/sources/kubemq/queue"
+	"github.com/kubemq-hub/kubemq-sources/targets"
 )
 
 type Source interface {

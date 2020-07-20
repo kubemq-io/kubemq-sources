@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-source-connectors/pkg/logger"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
+	"github.com/kubemq-hub/kubemq-sources/types"
 )
 
 type Middleware interface {

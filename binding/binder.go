@@ -3,10 +3,10 @@ package binding
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/middleware"
-	"github.com/kubemq-hub/kubemq-source-connectors/sources"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/sources"
+	"github.com/kubemq-hub/kubemq-sources/targets"
 )
 
 type Binder struct {

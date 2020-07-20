@@ -1,7 +1,7 @@
 package google
 
 import (
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"

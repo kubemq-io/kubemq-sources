@@ -2,7 +2,7 @@ package activemq
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 )
 
 type options struct {

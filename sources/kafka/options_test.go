@@ -3,7 +3,7 @@ package kafka
 import (
 	"testing"
 
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
 )
 

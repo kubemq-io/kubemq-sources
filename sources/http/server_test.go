@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets/null"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/targets/null"
+	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
 
-	targetMiddleware "github.com/kubemq-hub/kubemq-source-connectors/middleware"
+	targetMiddleware "github.com/kubemq-hub/kubemq-sources/middleware"
 )
 
 func sendRequest(ctx context.Context, req *types.Request, url string) (*types.Response, error) {

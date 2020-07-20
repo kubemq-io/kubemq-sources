@@ -2,7 +2,7 @@ package mqtt
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/nats-io/nuid"
 )
 

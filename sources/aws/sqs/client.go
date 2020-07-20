@@ -7,14 +7,14 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-hub/kubemq-sources/types"
 	"strconv"
 	
 	"errors"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/pkg/logger"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 )
 
 var (

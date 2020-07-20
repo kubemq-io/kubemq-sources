@@ -1,1 +1,1 @@
-# kubemq-source-connectors
+# kubemq-sources

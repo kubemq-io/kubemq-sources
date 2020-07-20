@@ -2,12 +2,12 @@ package google
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets"
-	"github.com/kubemq-hub/kubemq-source-connectors/targets/null"
+	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-hub/kubemq-sources/targets/null"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 
 	"testing"
 	"time"

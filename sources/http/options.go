@@ -2,7 +2,7 @@ package http
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
+	"github.com/kubemq-hub/kubemq-sources/config"
 )
 
 const (

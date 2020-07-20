@@ -7,10 +7,10 @@ import (
 	"sync"
 
 	kafka "github.com/Shopify/sarama"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/middleware"
-	"github.com/kubemq-hub/kubemq-source-connectors/pkg/logger"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
+	"github.com/kubemq-hub/kubemq-sources/types"
 )
 
 type Client struct {

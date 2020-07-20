@@ -2,8 +2,8 @@ package targets
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-source-connectors/config"
-	"github.com/kubemq-hub/kubemq-source-connectors/types"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/types"
 )
 
 type Target interface {
