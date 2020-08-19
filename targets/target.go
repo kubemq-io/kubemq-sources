@@ -2,35 +2,51 @@ package targets
 
 import (
 	"context"
+	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/targets/command"
+	event_store "github.com/kubemq-hub/kubemq-sources/targets/event-store"
+	"github.com/kubemq-hub/kubemq-sources/targets/events"
+	"github.com/kubemq-hub/kubemq-sources/targets/query"
 	"github.com/kubemq-hub/kubemq-sources/types"
 )
 
 type Target interface {
-	Init(ctx context.Context, cfg config.Metadata) error
+	Init(ctx context.Context, cfg config.Spec) error
 	Do(ctx context.Context, request *types.Request) (*types.Response, error)
 	Name() string
 }
 
-//
-//func Load(ctx context.Context, cfgs []config.Metadata) (map[string]Target, error) {
-//	targets := make(map[string]Target)
-//	for _, cfg := range cfgs {
-//		_, ok := targets[cfg.Name]
-//		if ok {
-//			return nil, fmt.Errorf("duplicated target name found, %s", cfg.Name)
-//		}
-//
-//		switch cfg.Kind {
-//		case "target.http":
-//			target := http.New()
-//			if err := target.Init(ctx, cfg); err != nil {
-//				return nil, err
-//			}
-//			targets[cfg.Name] = target
-//		default:
-//			return nil, fmt.Errorf("invalid target kind %s for target %s", cfg.Kind, cfg.Name)
-//		}
-//	}
-//	return targets, nil
-//}
+func Init(ctx context.Context, cfg config.Spec) (Target, error) {
+
+	switch cfg.Kind {
+	case "target.command":
+		target := command.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
+	case "target.query":
+		target := query.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
+	case "target.events":
+		target := events.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
+	case "target.events-store":
+		target := event_store.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
+
+	default:
+		return nil, fmt.Errorf("invalid kind %s for target %s", cfg.Kind, cfg.Name)
+	}
+
+}

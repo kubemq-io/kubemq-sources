@@ -4,43 +4,30 @@ import (
 	"context"
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/sources/kubemq/query"
-	"github.com/kubemq-hub/kubemq-sources/sources/kubemq/queue"
-	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
 
 type Source interface {
-	Init(ctx context.Context, cfg config.Metadata) error
-	Start(ctx context.Context, target targets.Target) error
+	Init(ctx context.Context, cfg config.Spec) error
+	Start(ctx context.Context, target middleware.Middleware) error
 	Stop() error
 	Name() string
 }
 
-func Load(ctx context.Context, cfgs []config.Metadata) (map[string]Source, error) {
-	sources := make(map[string]Source)
-	for _, cfg := range cfgs {
-		_, ok := sources[cfg.Name]
-		if ok {
-			return nil, fmt.Errorf("duplicated source name found, %s", cfg.Name)
-		}
+func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 
-		switch cfg.Kind {
-		case "source.queue":
-			source := queue.New()
-			if err := source.Init(ctx, cfg); err != nil {
-				return nil, err
-			}
-			sources[cfg.Name] = source
-		case "source.rpc":
-			source := query.New()
-			if err := source.Init(ctx, cfg); err != nil {
-				return nil, err
-			}
-			sources[cfg.Name] = source
+	switch cfg.Kind {
 
-		default:
-			return nil, fmt.Errorf("invalid source kind %s for source %s", cfg.Kind, cfg.Name)
+	case "source.messaging.rabbitmq":
+		source := rabbitmq.New()
+
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
 		}
+		return source, nil
+	default:
+		return nil, fmt.Errorf("invalid kind %s for source %s", cfg.Kind, cfg.Name)
 	}
-	return sources, nil
+
 }

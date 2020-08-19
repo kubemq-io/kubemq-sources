@@ -1,18 +1,26 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kubemq-hub/kubemq-sources/types"
+)
 
-type Binding struct {
-	Source string
-	Target string
+type BindingConfig struct {
+	Name       string         `json:"name"`
+	Source     Spec           `json:"source"`
+	Target     Spec           `json:"target"`
+	Properties types.Metadata `json:"properties"`
 }
 
-func (b Binding) Validate() error {
-	if b.Source == "" {
-		return fmt.Errorf("binding source cannot be empty")
+func (b BindingConfig) Validate() error {
+	if b.Name == "" {
+		return fmt.Errorf("binding must have name")
 	}
-	if b.Target == "" {
-		return fmt.Errorf("binding target cannot be empty")
+	if err := b.Source.Validate(); err != nil {
+		return fmt.Errorf("binding source error, %w", err)
+	}
+	if err := b.Target.Validate(); err != nil {
+		return fmt.Errorf("binding target error, %w", err)
 	}
 	return nil
 }

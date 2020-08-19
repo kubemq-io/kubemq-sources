@@ -1,4 +1,4 @@
-package event
+package events
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ type options struct {
 	defaultChannel string
 }
 
-func parseOptions(cfg config.Metadata) (options, error) {
+func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
 	m.host = cfg.ParseString("host", defaultHost)

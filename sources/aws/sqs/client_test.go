@@ -83,7 +83,7 @@ func TestClient_Start(t *testing.T) {
 	sqsQueue := os.Getenv("SQS_QUEUE_NAME")
 	tests := []struct {
 		name    string
-		target  targets.Target
+		target  -sources.Target
 		cfg     config.Metadata
 		wantErr bool
 	}{

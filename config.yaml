@@ -1,0 +1,22 @@
+apiPort: 8082
+bindings:
+  - name: kubemq-rabbitmq-events
+    source:
+      kind: source.messaging.rabbitmq
+      name: source-rabbitmq
+      properties:
+        url: "amqp://rabbitmq:rabbitmq@localhost:7238/"
+        queue: "some-queue"
+        consumer: "kubemq-source"
+    target:
+      kind: target.events
+      name: target-kubemq-events
+      properties:
+        host: "localhost"
+        port: "50000"
+        client_id: "kubemq-rabbitmq-events-connector"
+        auth_token: ""
+        default_channel: "rabbitmq.events"
+    properties:
+      log_level: "error"
+

@@ -5,7 +5,6 @@ version: '2'
 vars:
   BINARY_NAME: kubemq-sources
   VERSION: v0.1.0
-  DEV_VERSION: dev-v0.1.0
 
 tasks:
   check_update:
@@ -17,3 +16,17 @@ tasks:
   test:
     cmds:
       - go test -timeout 30m ./...
+  docker:
+    env:
+      GOOS: linux
+      GOARCH: amd64
+    cmds:
+      - go mod tidy
+      - go mod vendor
+      - docker build --build-arg VERSION={{.VERSION}} . -t kubemq/{{.BINARY_NAME}}:{{.VERSION}}
+      - docker tag kubemq/{{.BINARY_NAME}}:{{.VERSION}} kubemq/{{.BINARY_NAME}}:latest
+  release:
+    cmds:
+      - task: docker
+      - docker push kubemq/{{.BINARY_NAME}}:{{.VERSION}}
+      - docker push kubemq/{{.BINARY_NAME}}:latest

@@ -1,6 +1,7 @@
 package types
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 )
@@ -58,6 +59,14 @@ func (m Metadata) MustParseString(key string) (string, error) {
 		return val, nil
 	} else {
 		return "", fmt.Errorf("value of key %s cannot be empty", key)
+	}
+}
+
+func (m Metadata) MustNotParseString(key string, conflictValueName string) (string, error) {
+	if val, ok := m[key]; ok && val != "" {
+		return "", nil
+	} else {
+		return "", fmt.Errorf("value of key %s cannot exists when %s is set", key, conflictValueName)
 	}
 }
 
@@ -149,4 +158,12 @@ func (m Metadata) MustParseJsonMap(key string) (map[string]string, error) {
 	} else {
 		return map[string]string{}, nil
 	}
+}
+
+func (m Metadata) GetValidMethodTypes(methodsMap map[string]string) error {
+	s := "invalid method type, method type should be one of the following:"
+	for k := range methodsMap {
+		s = fmt.Sprintf("%s :%s,", s, k)
+	}
+	return errors.New(s)
 }

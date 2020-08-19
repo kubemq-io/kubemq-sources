@@ -26,7 +26,7 @@ type Client struct {
 	opts   options
 	client *sqs.SQS
 	log    *logger.Logger
-	target targets.Target
+	target -sources.Target
 	doneCh chan struct{}
 }
 
@@ -64,7 +64,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
 
 
 
-func (c *Client) Start(ctx context.Context, target targets.Target) error {
+func (c *Client) Start(ctx context.Context, target -sources.Target) error {
 	if target == nil {
 		return errInvalidTarget
 	} else {

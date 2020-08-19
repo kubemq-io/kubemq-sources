@@ -4,48 +4,35 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/ghodss/yaml"
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/ghodss/yaml"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 )
 
-var configFile = pflag.String("config", "", "set config file name")
+const defaultApiPort = 8080
+
+var configFile = pflag.String("config", "config.yaml", "set config file name")
 
 type Config struct {
-	Sources  []Metadata
-	Targets  []Metadata
-	Bindings []Binding
+	Bindings []BindingConfig `json:"bindings"`
+	ApiPort  int             `json:"api_port"`
 }
 
 func (c *Config) Validate() error {
-
-	if len(c.Targets) == 0 {
-		return fmt.Errorf("at least one target must be defined")
+	if c.ApiPort == 0 {
+		c.ApiPort = defaultApiPort
 	}
-	for i, target := range c.Targets {
-		if err := target.Validate(); err != nil {
-			return fmt.Errorf("target entry %d configuration error, %w", i, err)
-		}
-	}
-	if len(c.Sources) == 0 {
-		return fmt.Errorf("at least one source must be defined")
-	}
-	for i, source := range c.Sources {
-		if err := source.Validate(); err != nil {
-			return fmt.Errorf("source entry %d configuration error, %w", i, err)
-		}
-	}
-
 	if len(c.Bindings) == 0 {
 		return fmt.Errorf("at least one binding must be defined")
 	}
-	for i, binding := range c.Bindings {
+	for _, binding := range c.Bindings {
 		if err := binding.Validate(); err != nil {
-			return fmt.Errorf("binding entry %d configuration error, %w", i, err)
+			return err
 		}
 	}
 	return nil
@@ -97,6 +84,7 @@ func getConfigDataFromEnv() (string, error) {
 		if fileExt == "" {
 			return "", fmt.Errorf("invalid environment config format")
 		}
+		/* #nosec */
 		err := ioutil.WriteFile("./config."+fileExt, []byte(envConfigData), 0644)
 		if err != nil {
 			return "", fmt.Errorf("cannot save environment config file")
@@ -130,7 +118,6 @@ func Load() (*Config, error) {
 	} else {
 		viper.SetConfigFile(loadedConfigFile)
 	}
-	fmt.Println(loadedConfigFile)
 	err = viper.ReadInConfig()
 	if err != nil {
 		return nil, err

@@ -53,7 +53,7 @@ func sendMessage(queue string, data []byte) error {
 func TestClient_Start(t *testing.T) {
 	tests := []struct {
 		name    string
-		target  targets.Target
+		target  -sources.Target
 		req     *types.Request
 		queue   string
 		wantErr bool

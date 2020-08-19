@@ -26,6 +26,7 @@ require (
 	github.com/lib/pq v1.1.1
 	github.com/nats-io/nuid v1.0.1
 	github.com/olivere/elastic/v7 v7.0.17
+	github.com/prometheus/client_golang v0.9.3
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.7.0
 	github.com/streadway/amqp v1.0.0

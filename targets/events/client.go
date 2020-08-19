@@ -1,10 +1,9 @@
-package event
+package events
 
 import (
 	"context"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/targets"
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
 )
@@ -14,8 +13,7 @@ type Client struct {
 	opts   options
 	client *kubemq.Client
 	log    *logger.Logger
-	target targets.Target
-}
+	}
 
 func New() *Client {
 	return &Client{}
@@ -24,7 +22,7 @@ func New() *Client {
 func (c *Client) Name() string {
 	return c.name
 }
-func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
 	c.log = logger.NewLogger(cfg.Name)
 	var err error
