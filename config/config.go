@@ -4,14 +4,13 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
-
 	"github.com/ghodss/yaml"
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
+	"strings"
 )
 
 const defaultApiPort = 8080
@@ -37,17 +36,18 @@ func (c *Config) Validate() error {
 	}
 	return nil
 }
-func getConfigFormat(in []byte) string {
+func getConfigFormat(in []byte) (string, error) {
 	c := &Config{}
-	err := yaml.Unmarshal(in, c)
-	if err == nil {
-		return "yaml"
+	yamlErr := yaml.Unmarshal(in, c)
+	if yamlErr == nil {
+		return "yaml", nil
 	}
-	err = json.Unmarshal(in, c)
-	if err == nil {
-		return "json"
+	jsonErr := json.Unmarshal(in, c)
+	if jsonErr == nil {
+		return "json", nil
 	}
-	return ""
+
+	return "", fmt.Errorf("yaml parsing error: %s, json parsing error: %s", yamlErr.Error(), jsonErr.Error())
 }
 func decodeBase64(in string) string {
 	// base64 string cannot contain space so this is indication of base64 string
@@ -66,9 +66,9 @@ func getConfigDataFromLocalFile(filename string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fileExt := getConfigFormat(data)
+	fileExt, err := getConfigFormat(data)
 	if fileExt == "" {
-		return "", fmt.Errorf("invalid file format")
+		return "", err
 	}
 	if strings.HasSuffix(filename, "."+fileExt) {
 		return filename, nil
@@ -80,12 +80,12 @@ func getConfigDataFromEnv() (string, error) {
 	envConfigData, ok := os.LookupEnv("CONFIG")
 	envConfigData = decodeBase64(envConfigData)
 	if ok {
-		fileExt := getConfigFormat([]byte(envConfigData))
+		fileExt, err := getConfigFormat([]byte(envConfigData))
 		if fileExt == "" {
-			return "", fmt.Errorf("invalid environment config format")
+			return "", err
 		}
 		/* #nosec */
-		err := ioutil.WriteFile("./config."+fileExt, []byte(envConfigData), 0644)
+		err = ioutil.WriteFile("./config."+fileExt, []byte(envConfigData), 0644)
 		if err != nil {
 			return "", fmt.Errorf("cannot save environment config file")
 		}

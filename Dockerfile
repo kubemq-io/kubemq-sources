@@ -12,17 +12,17 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal
 MAINTAINER KubeMQ info@kubemq.io
 LABEL name="KubeMQ Target Connectors" \
       maintainer="info@kubemq.io" \
-      vendor="" \
+      vendor="kubemq.io" \
       version="" \
       release="" \
-      summary="" \
+      summary="KubeMQ Sources connects external systems and cloud services to KubeMQ Message Broker" \
       description=""
 COPY licenses /licenses
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:$PATH
-RUN mkdir /kubemq-sources
-COPY --from=builder $GOPATH/github.com/kubemq-hub/kubemq-sources/kubemq-sources-run ./kubemq-sources
-RUN chown -R 1001:root  /kubemq-sources && chmod g+rwX  /kubemq-sources
-WORKDIR kubemq-sources
+RUN mkdir /kubemq-connector
+COPY --from=builder $GOPATH/github.com/kubemq-hub/kubemq-sources/kubemq-sources-run ./kubemq-connector
+RUN chown -R 1001:root  /kubemq-connector && chmod g+rwX  /kubemq-connector
+WORKDIR kubemq-connector
 USER 1001
 CMD ["./kubemq-sources-run"]
