@@ -50,7 +50,7 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 	if err != nil {
 		return fmt.Errorf("error loading target conntector %s on binding %s, %w", cfg.Target.Name, b.name, err)
 	}
-
+	b.log.Infof("binding: %s, target: %s, initialized successfully", b.name, cfg.Target.Name)
 	b.md, err = b.buildMiddleware(cfg, exporter)
 	if err != nil {
 		return fmt.Errorf("error loading middlewares %s on binding %s, %w", cfg.Target.Name, b.name, err)
@@ -59,7 +59,8 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 	if err != nil {
 		return fmt.Errorf("error loading source conntector %s on binding %s, %w", cfg.Source.Name, b.name, err)
 	}
-	b.log.Infof("binding %s initialized successfully", b.name)
+	b.log.Infof("binding: %s, source: %s, initialized successfully", b.name, cfg.Source.Name)
+	b.log.Infof("binding: %s, initialized successfully", b.name)
 	return nil
 }
 
@@ -74,7 +75,7 @@ func (b *Binder) Start(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	b.log.Infof("binding %s started successfully", b.name)
+	b.log.Infof("binding: %s, started successfully", b.name)
 	return nil
 }
 func (b *Binder) Stop() error {
@@ -82,6 +83,6 @@ func (b *Binder) Stop() error {
 	if err != nil {
 		return err
 	}
-	b.log.Infof("binding %s stopped successfully", b.name)
+	b.log.Infof("binding: %s, stopped successfully", b.name)
 	return nil
 }

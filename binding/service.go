@@ -70,6 +70,7 @@ func (s *Service) Add(ctx context.Context, cfg config.BindingConfig) error {
 	if err != nil {
 		return err
 	}
+
 	err = binder.Start(ctx)
 	if err != nil {
 		return err
