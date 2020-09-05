@@ -13,8 +13,8 @@ MAINTAINER KubeMQ info@kubemq.io
 LABEL name="KubeMQ Target Connectors" \
       maintainer="info@kubemq.io" \
       vendor="kubemq.io" \
-      version="" \
-      release="" \
+      version="0.1.0" \
+      release="stable" \
       summary="KubeMQ Sources connects external systems and cloud services to KubeMQ Message Broker" \
       description=""
 COPY licenses /licenses
