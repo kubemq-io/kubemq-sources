@@ -7,6 +7,7 @@ require (
 	github.com/Shopify/sarama v1.27.0
 	github.com/aws/aws-sdk-go v1.32.4
 	github.com/eclipse/paho.mqtt.golang v1.2.0
+	github.com/fortytw2/leaktest v1.3.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-resty/resty/v2 v2.3.0 // indirect
 	github.com/go-stomp/stomp v2.0.6+incompatible
