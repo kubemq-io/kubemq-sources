@@ -20,6 +20,7 @@ type Client struct {
 	log    *logger.Logger
 	client *sqs.SQS
 	ctx    context.Context
+	cancel context.CancelFunc
 }
 
 func New() *Client {
@@ -48,7 +49,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 
 	svc := sqs.New(sess)
 	c.client = svc
-	c.ctx, _ = context.WithCancel(ctx)
+	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
@@ -89,6 +90,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 }
 
 func (c *Client) Stop() error {
-	c.ctx.Done()
+	c.cancel()
 	return nil
 }
