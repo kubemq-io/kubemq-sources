@@ -22,8 +22,8 @@ sqs source connector configuration properties:
 | token                          | no       | aws token ("default" empty string                                 | "my token"                      |
 | queue                          | yes      | queue name                                                        | "my_queue_name"          |
 | max_number_of_messages         | no       | max messages receive per call                                     | "1" (default 1)                      |
-| visibility_timeout             | no       | max messages receive per call                                     | "1" (default 0)                      |
-| pullDelay                      | no       | wait time between calls (milliseconds)                            | "1" (default 60)                      |
+| visibility_timeout             | no       | message visibility timeout (milliseconds)                         | "1" (default 0)                      |
+| pullDelay                      | no       | wait time between calls (milliseconds)                            | "1" (default 5)                      |
  
 
 Example:

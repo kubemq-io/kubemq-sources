@@ -9,9 +9,9 @@ import (
 const (
 	DefaultMaxNumberOfMessages = 1
 	DefaultWaitTimeSeconds     = 0
-	DefaultVisibilityTimeout          = 0
+	DefaultVisibilityTimeout   = 0
 	DefaultToken               = ""
-	DefaultWaitBetweenPull     = 60
+	DefaultWaitBetweenPull     = 5
 )
 
 type options struct {
@@ -21,7 +21,7 @@ type options struct {
 
 	queue               string
 	token               string
-	visibilityTimeout          int64
+	visibilityTimeout   int64
 	maxNumberOfMessages int64
 	waitTimeSeconds     int64
 	pullDelay           time.Duration
@@ -44,7 +44,6 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error region , %w", err)
 	}
-
 
 	o.visibilityTimeout = int64(cfg.ParseInt("visibility_timeout", DefaultVisibilityTimeout))
 	o.maxNumberOfMessages = int64(cfg.ParseInt("max_number_of_messages", DefaultMaxNumberOfMessages))
