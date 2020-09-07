@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/sources/aws/amazonmq"
+	"github.com/kubemq-hub/kubemq-sources/sources/aws/kinesis"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
@@ -29,6 +31,20 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 		return source, nil
 	case "source.aws.sqs":
 		source := sqs.New()
+
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
+	case "source.aws.amazonmq":
+		source := amazonmq.New()
+
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
+	case "source.aws.kinesis":
+		source := kinesis.New()
 
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
