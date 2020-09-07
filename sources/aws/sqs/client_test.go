@@ -1,218 +1,202 @@
 package sqs
-//
-//import (
-//	"context"
-//	"github.com/kubemq-hub/kubemq-sources/targets"
-//	"github.com/kubemq-hub/kubemq-sources/targets/null"
-//	"github.com/kubemq-hub/kubemq-sources/types"
-//	"github.com/stretchr/testify/require"
-//	"os"
-//
-//	"github.com/kubemq-hub/kubemq-sources/config"
-//
-//	"testing"
-//	"time"
-//)
-//
-//func TestClient_Init(t *testing.T) {
-//
-//	aswKey := os.Getenv("AWS_ACCESS_KEY_ID")
-//	awsSecret := os.Getenv("AWS_SECRET_ACCESS_KEY")
-//	sqsQueue := os.Getenv("SQS_QUEUE_NAME")
-//	deadLetter := os.Getenv("DEAD_LETTER")
-//	tests := []struct {
-//		name    string
-//		cfg     config.Metadata
-//		wantErr bool
-//	}{
-//		{
-//			name: "init",
-//			cfg: config.Metadata{
-//				Name: "sqs-queue",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"sqs_key":                aswKey,
-//					"sqs_secret_key":         awsSecret,
-//					"queue":                  sqsQueue,
-//					"region":                 "us-west-2",
-//					"visibility":             "0",
-//					"dead_letter":             deadLetter,
-//					"max_receive":             "2",
-//					"max_number_of_messages": "0",
-//					"wait_time_seconds":      "0",
-//					"concurrency":            "1",
-//				},
-//			},
-//			wantErr: false,
-//		},
-//		{
-//			name: "init - error",
-//			cfg: config.Metadata{
-//				Name: "sqs-queue",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"region":                 "us-west-2",
-//					"visibility":             "0",
-//					"max_number_of_messages": "0",
-//					"wait_time_seconds":      "0",
-//					"concurrency":            "1",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-//			defer cancel()
-//			c := New()
-//			err := c.Init(ctx, tt.cfg)
-//			if tt.wantErr {
-//				require.Error(t, err)
-//				t.Logf("init() error = %v, wantSetErr %v", err, tt.wantErr)
-//				return
-//			}
-//			require.NoError(t, err)
-//		})
-//	}
-//}
-//
-//func TestClient_Start(t *testing.T) {
-//	aswKey := os.Getenv("AWS_ACCESS_KEY_ID")
-//	awsSecret := os.Getenv("AWS_SECRET_ACCESS_KEY")
-//	sqsQueue := os.Getenv("SQS_QUEUE_NAME")
-//	tests := []struct {
-//		name    string
-//		target  -sources.Target
-//		cfg     config.Metadata
-//		wantErr bool
-//	}{
-//		{
-//			name: "start",
-//			target: &null.Client{
-//				Delay:         0,
-//				DoError:       nil,
-//				ResponseError: nil,
-//			},
-//			cfg: config.Metadata{
-//				Name: "sqs-queue",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"sqs_key":                aswKey,
-//					"sqs_secret_key":         awsSecret,
-//					"queue":                  sqsQueue,
-//					"region":                 "us-west-2",
-//					"visibility":             "0",
-//					"max_number_of_messages": "2",
-//					"wait_time_seconds":      "0",
-//					"concurrency":            "1",
-//				},
-//			},
-//			wantErr: false,
-//		},
-//		{
-//			name:   "start - bad target",
-//			target: nil,
-//			cfg: config.Metadata{
-//				Name: "sqs-queue",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"sqs_key":                aswKey,
-//					"sqs_secret_key":         awsSecret,
-//					"queue":                  "sqsQueue",
-//					"region":                 "us-west-2",
-//					"visibility":             "0",
-//					"max_number_of_messages": "0",
-//					"wait_time_seconds":      "0",
-//					"concurrency":            "1",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-//			defer cancel()
-//			c := New()
-//			err := c.Init(ctx, tt.cfg)
-//			require.NoError(t, err)
-//			err = c.Start(ctx, tt.target)
-//			if tt.wantErr {
-//				require.Error(t, err)
-//				t.Logf("init() error = %v, wantSetErr %v", err, tt.wantErr)
-//				return
-//			}
-//			//For debugging
-//			time.Sleep(10 * time.Millisecond)
-//			require.NoError(t, err)
-//		})
-//	}
-//}
-//
-//func TestClient_SetQueueAttributes(t *testing.T) {
-//	aswKey := os.Getenv("AWS_ACCESS_KEY_ID")
-//	awsSecret := os.Getenv("AWS_SECRET_ACCESS_KEY")
-//	sqsQueue := os.Getenv("SQS_QUEUE_NAME")
-//	deadLetter:= os.Getenv("DEAD_LETTER_QUEUE")
-//	tests := []struct {
-//		name    string
-//		cfg     config.Metadata
-//		queueURL string
-//		want    *types.Response
-//		wantErr bool
-//	}{
-//		{
-//			name: "valid set queue attribute",
-//			cfg: config.Metadata{
-//				Name: "target.sqs",
-//				Kind: "target.sqs",
-//				Properties: map[string]string{
-//					"sqs_key":                     aswKey,
-//					"sqs_secret_key":              awsSecret,
-//					"region":                      "us-west-2",
-//					"max_receive":                 "10",
-//					"dead_letter":                 deadLetter,
-//					"max_retries":                 "0",
-//					"max_retries_backoff_seconds": "0",
-//					"retries":                     "0",
-//				},
-//			},
-//			queueURL: sqsQueue,
-//			wantErr: false,
-//		},{
-//			name: "in-valid set queue attribute",
-//			cfg: config.Metadata{
-//				Name: "target.sqs",
-//				Kind: "target.sqs",
-//				Properties: map[string]string{
-//					"sqs_key":                     aswKey,
-//					"sqs_secret_key":              awsSecret,
-//					"region":                      "us-west-2",
-//					"dead_letter":                 deadLetter,
-//					"max_retries":                 "0",
-//					"max_retries_backoff_seconds": "0",
-//					"retries":                     "0",
-//				},
-//			},
-//			queueURL: sqsQueue,
-//			wantErr: true,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			ctx, cancel := context.WithCancel(context.Background())
-//			defer cancel()
-//			c := New()
-//			err := c.Init(ctx, tt.cfg)
-//			require.NoError(t, err)
-//			err = c.SetQueueAttributes(ctx, sqsQueue)
-//			if tt.wantErr {
-//				require.Error(t, err)
-//				t.Logf("init() error = %v, wantSetErr %v", err, tt.wantErr)
-//				return
-//			}
-//			require.NoError(t, err)
-//		})
-//	}
-//}
+
+import (
+	"context"
+	"fmt"
+	"github.com/fortytw2/leaktest"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/stretchr/testify/require"
+	"io/ioutil"
+	"testing"
+	"time"
+)
+
+type mockMiddleware struct {
+}
+
+func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
+	fmt.Println(request)
+	r := types.NewResponse()
+	r.SetData([]byte("ok"))
+	r.SetMetadataKeyValue("result", "ok")
+	return r, nil
+}
+
+type testStructure struct {
+	awsKey       string
+	awsSecretKey string
+	region       string
+	token        string
+
+	sqsQueue   string
+	deadLetter string
+}
+
+func getTestStructure() (*testStructure, error) {
+	t := &testStructure{}
+	dat, err := ioutil.ReadFile("./../../../credentials/aws/awsKey.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.awsKey = string(dat)
+	dat, err = ioutil.ReadFile("./../../../credentials/aws/awsSecretKey.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.awsSecretKey = string(dat)
+	dat, err = ioutil.ReadFile("./../../../credentials/aws/region.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.region = string(dat)
+
+	dat, err = ioutil.ReadFile("./../../../credentials/aws/sqs/queue.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.sqsQueue = string(dat)
+
+	dat, err = ioutil.ReadFile("./../../../credentials/aws/sqs/deadLetter.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.deadLetter = string(dat)
+	return t, nil
+}
+
+func TestClient_Init(t *testing.T) {
+	dat, err := getTestStructure()
+	require.NoError(t, err)
+	tests := []struct {
+		name    string
+		cfg     config.Spec
+		wantErr bool
+	}{
+		{
+			name: "init",
+			cfg: config.Spec{
+				Name: "source-aws-sqs",
+				Kind: "source.aws.sqs",
+				Properties: map[string]string{
+					"aws_key":                dat.awsKey,
+					"aws_secret_key":         dat.awsSecretKey,
+					"token":                  dat.token,
+					"region":                 dat.region,
+					"max_number_of_messages": "10",
+					"pull_delay":             "15",
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "init - error no region",
+			cfg: config.Spec{
+				Name: "source-aws-sqs",
+				Kind: "source.aws.sqs",
+				Properties: map[string]string{
+					"aws_key":                dat.awsKey,
+					"aws_secret_key":         dat.awsSecretKey,
+					"token":                  dat.token,
+					"max_number_of_messages": "10",
+					"pull_delay":             "15",
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "init - error no aws_key",
+			cfg: config.Spec{
+				Name: "source-aws-sqs",
+				Kind: "source.aws.sqs",
+				Properties: map[string]string{
+					"aws_secret_key":         dat.awsSecretKey,
+					"token":                  dat.token,
+					"region":                 dat.region,
+					"max_number_of_messages": "10",
+					"pull_delay":             "15",
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "init -error no aws_secret_key",
+			cfg: config.Spec{
+				Name: "source-aws-sqs",
+				Kind: "source.aws.sqs",
+				Properties: map[string]string{
+					"aws_key":                dat.awsKey,
+					"token":                  dat.token,
+					"region":                 dat.region,
+					"max_number_of_messages": "1",
+					"pull_delay":             "15",
+					"visibility_timeout":     "10",
+				},
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancel()
+			c := New()
+
+			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
+				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
+				return
+			}
+			require.EqualValues(t, tt.cfg.Name, c.Name())
+		})
+	}
+}
+
+func TestClient_Do(t *testing.T) {
+	dat, err := getTestStructure()
+	require.NoError(t, err)
+	tests := []struct {
+		name       string
+		cfg        config.Spec
+		wantErr    bool
+		middleware middleware.Middleware
+	}{
+		{
+			name: "valid sqs receive",
+			cfg: config.Spec{
+				Name: "source-aws-sqs",
+				Kind: "source.aws.sqs",
+				Properties: map[string]string{
+					"aws_key":                dat.awsKey,
+					"aws_secret_key":         dat.awsSecretKey,
+					"token":                  dat.token,
+					"region":                 dat.region,
+					"max_number_of_messages": "1",
+					"pull_delay":             "2",
+					"queue":                  dat.sqsQueue,
+					"visibility_timeout":     "10",
+				},
+			},
+			middleware: &mockMiddleware{},
+
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			defer leaktest.Check(t)()
+			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(10)*time.Second)
+			defer cancel()
+			c := New()
+			err := c.Init(ctx, tt.cfg)
+			require.NoError(t, err)
+			err = c.Start(ctx, tt.middleware)
+			if tt.wantErr {
+				require.Error(t, err)
+				return
+			}
+			time.Sleep(time.Duration(15) * time.Second)
+			defer cancel()
+			require.NoError(t, err)
+		})
+	}
+}
