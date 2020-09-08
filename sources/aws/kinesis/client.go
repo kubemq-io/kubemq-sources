@@ -57,7 +57,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 
 
 	sp := &kinesis.StartingPosition{
-		Type: aws.String(c.opts.shardIteratorType),
+		Type: aws.String(c.opts.ShardIteratorType),
 	}
 	if c.opts.sequenceNumber != "" {
 		sp.SequenceNumber = aws.String(c.opts.sequenceNumber)

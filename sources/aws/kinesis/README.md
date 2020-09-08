@@ -18,12 +18,11 @@ kinesis source connector configuration properties:
 | aws_key                        | yes      | aws key                                                           | aws key supplied by aws         |
 | aws_secret_key                 | yes      | aws secret key                                                    | aws secret key supplied by aws  |
 | region                         | yes      | region                                                            | aws region                      |
-| retries                        | no       | number of retries on send                                         | 1 (default 0)                   |
-| token                          | no       | aws token ("default" empty string                                 | "my token"                      |
-| queue                          | yes      | queue name                                                        | "my_queue_name"          |
-| max_number_of_messages         | no       | max messages receive per call                                     | "1" (default 1)                      |
-| visibility_timeout             | no       | max messages receive per call                                     | "1" (default 0)                      |
-| pullDelay                      | no       | wait time between calls (milliseconds)                            | "1" (default 5)                      |
+| consumer_arn                   | yes      | consumer_arn generates when creating consumer                     | "arn:myid"                      |
+| shard_iterator_type            | yes      | Determines how the shard iterator is used to start                | "AT_SEQUENCE_NUMBER","AFTER_SEQUENCE_NUMBER","TRIM_HORIZON","LATEST"|
+| sequence_number                | no       | sequence to start streaming at (default "")                       | "1" (default 1)                 |
+| shard_id                       | yes      | The unique identifier of the shard                                | "my_shard"                      |
+| pull_delay                     | no       | wait time between calls (milliseconds)                            | "1" (default 5)                 |
  
 
 Example:
@@ -51,8 +50,12 @@ bindings:
       properties:
         aws_key: "id"
         aws_secret_key: 'json'
-        region:  "instance"
-        queue : "my_queue"
+        region:  "my region"
+        consumer_arn : "arn:my_consumer"
+        shard_iterator_type : "LATEST"
+        sequence_number : "2341"
+        shard_id : "my_shard-123456"
+        pull_delay : "5"
 ```
 
 

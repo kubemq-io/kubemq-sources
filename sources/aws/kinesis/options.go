@@ -17,10 +17,9 @@ type options struct {
 	awsSecretKey      string
 	region            string
 	token             string
-	streamARN         string
 	consumerARN       string
 	sequenceNumber    string
-	shardIteratorType string
+	ShardIteratorType string
 	shardID           string
 	pullDelay         time.Duration
 }
@@ -47,16 +46,12 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error region , %w", err)
 	}
-	o.streamARN, err = cfg.MustParseString("stream_arn")
-	if err != nil {
-		return options{}, fmt.Errorf("error parsing stream_arn, %w", err)
-	}
 	o.consumerARN, err = cfg.MustParseString("consumer_arn")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing consumer_arn, %w", err)
 	}
 
-	o.shardIteratorType, err = cfg.MustParseString("shard_iterator_type")
+	o.ShardIteratorType, err = cfg.MustParseString("shard_iterator_type")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing shard_iterator_type, %w", err)
 	}

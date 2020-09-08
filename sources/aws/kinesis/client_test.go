@@ -29,10 +29,10 @@ type testStructure struct {
 	awsSecretKey      string
 	region            string
 	token             string
-	shardIteratorType string
-	consumerARN      string
+	
+	ShardIteratorType string
+	consumerARN       string
 	shardID           string
-	streamARN         string
 }
 
 func getTestStructure() (*testStructure, error) {
@@ -52,15 +52,9 @@ func getTestStructure() (*testStructure, error) {
 		return nil, err
 	}
 	t.region = string(dat)
-
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/region.txt")
-	if err != nil {
-		return nil, err
-	}
-	t.region = string(dat)
-
-	t.shardIteratorType = "LATEST"
-
+	
+	t.ShardIteratorType = "LATEST"
+	
 	dat, err = ioutil.ReadFile("./../../../credentials/aws/kinesis/consumerARN.txt")
 	if err != nil {
 		return nil, err
@@ -71,11 +65,6 @@ func getTestStructure() (*testStructure, error) {
 		return nil, err
 	}
 	t.shardID = string(dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/kinesis/streamARN.txt")
-	if err != nil {
-		return nil, err
-	}
-	t.streamARN = string(dat)
 	return t, nil
 }
 
@@ -98,9 +87,8 @@ func TestClient_Init(t *testing.T) {
 					"token":               dat.token,
 					"region":              dat.region,
 					"shard_id":            dat.shardID,
-					"consumer_arn":       dat.consumerARN,
-					"shard_iterator_type": dat.shardIteratorType,
-					"stream_arn":          dat.streamARN,
+					"consumer_arn":        dat.consumerARN,
+					"shard_iterator_type": dat.ShardIteratorType,
 				},
 			},
 			wantErr: false,
@@ -115,9 +103,8 @@ func TestClient_Init(t *testing.T) {
 					"aws_secret_key":      dat.awsSecretKey,
 					"token":               dat.token,
 					"shard_id":            dat.shardID,
-					"consumer_arn":       dat.consumerARN,
-					"shard_iterator_type": dat.shardIteratorType,
-					"stream_arn":          dat.streamARN,
+					"consumer_arn":        dat.consumerARN,
+					"shard_iterator_type": dat.ShardIteratorType,
 				},
 			},
 			wantErr: true,
@@ -131,9 +118,8 @@ func TestClient_Init(t *testing.T) {
 					"token":               dat.token,
 					"region":              dat.region,
 					"shard_id":            dat.shardID,
-					"consumer_arn":       dat.consumerARN,
-					"shard_iterator_type": dat.shardIteratorType,
-					"stream_arn":          dat.streamARN,
+					"consumer_arn":        dat.consumerARN,
+					"shard_iterator_type": dat.ShardIteratorType,
 				},
 			},
 			wantErr: true,
@@ -148,9 +134,8 @@ func TestClient_Init(t *testing.T) {
 					"token":               dat.token,
 					"region":              dat.region,
 					"shard_id":            dat.shardID,
-					"consumer_arn":       dat.consumerARN,
-					"shard_iterator_type": dat.shardIteratorType,
-					"stream_arn":          dat.streamARN,
+					"consumer_arn":        dat.consumerARN,
+					"shard_iterator_type": dat.ShardIteratorType,
 				},
 			},
 			wantErr: true,
@@ -165,8 +150,38 @@ func TestClient_Init(t *testing.T) {
 					"token":          dat.token,
 					"region":         dat.region,
 					"shard_id":       dat.shardID,
-					"consumer_arn":  dat.consumerARN,
-					"stream_arn":     dat.streamARN,
+					"consumer_arn":   dat.consumerARN,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "init - error no consumer_arn",
+			cfg: config.Spec{
+				Name: "source-aws-kinesis",
+				Kind: "source.aws.kinesis",
+				Properties: map[string]string{
+					"aws_key":             dat.awsKey,
+					"aws_secret_key":      dat.awsSecretKey,
+					"token":               dat.token,
+					"region":              dat.region,
+					"shard_id":            dat.shardID,
+					"shard_iterator_type": dat.ShardIteratorType,
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "init -error no shard_id",
+			cfg: config.Spec{
+				Name: "source-aws-kinesis",
+				Kind: "source.aws.kinesis",
+				Properties: map[string]string{
+					"aws_key":             dat.awsKey,
+					"aws_secret_key":      dat.awsSecretKey,
+					"token":               dat.token,
+					"region":              dat.region,
+					"shard_iterator_type": dat.ShardIteratorType,
+					"consumer_arn":        dat.consumerARN,
 				},
 			},
 			wantErr: true,
@@ -177,7 +192,7 @@ func TestClient_Init(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
 			c := New()
-
+			
 			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
 				return
@@ -208,9 +223,8 @@ func TestClient_Do(t *testing.T) {
 					"token":               dat.token,
 					"region":              dat.region,
 					"shard_id":            dat.shardID,
-					"consumer_arn":       dat.consumerARN,
-					"shard_iterator_type": dat.shardIteratorType,
-					"stream_arn":          dat.streamARN,
+					"consumer_arn":        dat.consumerARN,
+					"shard_iterator_type": dat.ShardIteratorType,
 				},
 			},
 			middleware: &mockMiddleware{},
