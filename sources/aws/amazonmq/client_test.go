@@ -128,10 +128,10 @@ func TestClient_Do(t *testing.T) {
 		timeToWait time.Duration
 	}{
 		{
-			name: "valid sqs receive",
+			name: "valid amazonmq receive",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Name: "source-aws-amazonmq",
+				Kind: "source.aws.amazonmq",
 				Properties: map[string]string{
 					"host":        dat.host,
 					"username":    dat.username,

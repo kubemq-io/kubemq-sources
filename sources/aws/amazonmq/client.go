@@ -9,7 +9,6 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
-	"time"
 )
 
 type Client struct {
@@ -60,7 +59,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	go func() {
 		subscription, err := c.conn.Subscribe(c.opts.destination, stomp.AckAuto)
 		if err != nil {
-			errCh <- fmt.Errorf("error subscription to activemq destination, %w", err)
+			errCh <- fmt.Errorf("error subscription to amazonmq destination, %w", err)
 			return
 		}
 		errCh <- nil
@@ -73,8 +72,10 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 				req := types.NewRequest().SetData(msg.Body)
 				_, err := c.target.Do(ctx, req)
 				if err != nil {
-					c.log.Errorf("error processing activemq message, %s", err.Error())
+					c.log.Errorf("error processing amazonmq message, %s", err.Error())
 				}
+			case err := <-errCh:
+				c.log.Errorf("error on amazonmq connection, %w", err.Error())
 			case <-ctx.Done():
 				return
 			}
@@ -82,15 +83,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 
 	}()
 
-	select {
-	case err := <-errCh:
-		if err != nil {
-			return err
-		}
-		return nil
-	case <-time.After(c.opts.subTimeout):
-		return fmt.Errorf("activemq subscription timeout")
-	}
+	return nil
 }
 
 func (c *Client) Stop() error {

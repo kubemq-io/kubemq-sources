@@ -1,4 +1,4 @@
-package sqs
+package kinesis
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/sqs"
+	"github.com/aws/aws-sdk-go/service/kinesis"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
@@ -19,10 +19,9 @@ type Client struct {
 	name   string
 	opts   options
 	log    *logger.Logger
-	client *sqs.SQS
+	client *kinesis.Kinesis
 	ctx    context.Context
 	cancel context.CancelFunc
-	target middleware.Middleware
 }
 
 func New() *Client {
@@ -43,53 +42,58 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(c.opts.region),
-		Credentials: credentials.NewStaticCredentials(c.opts.sqsKey, c.opts.sqsSecretKey, c.opts.token),
+		Credentials: credentials.NewStaticCredentials(c.opts.awsKey, c.opts.awsSecretKey, c.opts.token),
 	})
 	if err != nil {
 		return err
 	}
 
-	svc := sqs.New(sess)
-	c.client = svc
+	svc := kinesis.New(sess)
 	c.ctx, c.cancel = context.WithCancel(ctx)
+	c.client = svc
 	return nil
 }
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 
-	if target == nil {
-		return fmt.Errorf("invalid target received, cannot be nil")
-	} else {
-		c.target = target
+
+	sp := &kinesis.StartingPosition{
+		Type: aws.String(c.opts.ShardIteratorType),
+	}
+	if c.opts.sequenceNumber != "" {
+		sp.SequenceNumber = aws.String(c.opts.sequenceNumber)
+	}
+	si := &kinesis.SubscribeToShardInput{
+		ConsumerARN:      aws.String(c.opts.consumerARN),
+		ShardId:          aws.String(c.opts.shardID),
+		StartingPosition: sp,
 	}
 
-	r := sqs.ReceiveMessageInput{
-		MaxNumberOfMessages: aws.Int64(c.opts.maxNumberOfMessages),
-		QueueUrl:            aws.String(c.opts.queue),
-		WaitTimeSeconds:     aws.Int64(c.opts.waitTimeSeconds),
-		VisibilityTimeout:   aws.Int64(c.opts.visibilityTimeout),
+	response, err := c.client.SubscribeToShardWithContext(ctx, si)
+	if err != nil {
+		return fmt.Errorf("failed to connect to subscribe to shard on err :%s", err.Error())
 	}
+
 	go func() {
 		for {
 			select {
 			case <-time.After(c.opts.pullDelay * time.Millisecond):
-				r, err := c.client.ReceiveMessageWithContext(ctx, &r)
-				if err != nil {
-					c.log.Errorf("error receiving request %v", err)
-				} else {
-					for _, message := range r.Messages {
-						b, err := json.Marshal(message)
+				for events := range response.GetStream().Events() {
+					if events == nil {
+						c.log.Errorf("failed to receive events on error %s", err.Error())
+					}
+					b, err := json.Marshal(events)
+					if err != nil {
+						c.log.Errorf("failed to parse record on error %s", err.Error())
+					} else {
+						req := types.NewRequest().SetData(b)
+						_, err := target.Do(ctx, req)
 						if err != nil {
-							c.log.Errorf("failed to parse message on error %s", err.Error())
-						} else {
-							req := types.NewRequest().SetData(b)
-							_, err := target.Do(ctx, req)
-							if err != nil {
-								c.log.Errorf("error processing request %s", err.Error())
-							}
+							c.log.Errorf("error processing request %s", err.Error())
 						}
 					}
 				}
 			case <-c.ctx.Done():
+				response.GetStream().Close()
 				return
 			}
 		}
