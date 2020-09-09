@@ -18,10 +18,10 @@ type options struct {
 	saslPassword  string
 }
 
-func parseOptions(cfg config.Metadata) (options, error) {
+func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
-	
+
 	m.consumerGroup, err = cfg.MustParseString("consumer_group")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing consumer_group name, %w", err)
@@ -36,6 +36,6 @@ func parseOptions(cfg config.Metadata) (options, error) {
 	}
 	m.saslUsername = cfg.ParseString("sasl_username", defaultUsername)
 	m.saslPassword = cfg.ParseString("sasl_password", defaultPassword)
-	
+
 	return m, nil
 }

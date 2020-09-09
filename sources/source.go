@@ -7,6 +7,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/amazonmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/kinesis"
+	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
