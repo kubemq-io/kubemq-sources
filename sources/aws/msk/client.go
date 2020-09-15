@@ -64,7 +64,7 @@ func (c *Client) Name() string {
 	return c.name
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
 	c.log = logger.NewLogger(cfg.Name)
 	var err error
@@ -110,13 +110,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	}
 	
 	go func() {
-		defer func() {
-			c.log.Debugf("Closing ConsumerGroup for topics: %v", c.opts.topics)
-			err := c.cg.Close()
-			if err != nil {
-				c.log.Errorf("Error closing consumer group: %v", err)
-			}
-		}()
 		c.log.Debugf("Subscribed and listening to topics: %s", c.opts.topics)
 		
 		for {
@@ -131,4 +124,10 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	}()
 	<-ready
 	return nil
+}
+
+
+func (c *Client) Stop() error {
+	err := c.cg.Close()
+	return err
 }
