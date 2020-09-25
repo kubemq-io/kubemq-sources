@@ -33,10 +33,8 @@ func New() *Server {
 	return &Server{}
 
 }
-func (s *Server) Name() string {
-	return s.name
-}
-func (s *Server) Init(ctx context.Context, cfg config.Metadata) error {
+
+func (s *Server) Init(ctx context.Context, cfg config.Spec) error {
 	s.name = cfg.Name
 	s.log = logger.NewLogger(cfg.Name)
 	var err error

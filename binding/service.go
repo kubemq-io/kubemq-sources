@@ -12,24 +12,28 @@ import (
 
 type Service struct {
 	sync.Mutex
-	bindings map[string]*Binder
-	log      *logger.Logger
-	exporter *metrics.Exporter
+	bindings          map[string]*Binder
+	log               *logger.Logger
+	exporter          *metrics.Exporter
+	currentCtx        context.Context
+	currentCancelFunc context.CancelFunc
 }
 
-func New() *Service {
-	return &Service{
+func New() (*Service, error) {
+	s := &Service{
 		Mutex:    sync.Mutex{},
 		bindings: make(map[string]*Binder),
 		log:      logger.NewLogger("binding-service"),
 	}
-}
-func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 	var err error
 	s.exporter, err = metrics.NewExporter()
 	if err != nil {
-		return fmt.Errorf("failed to to initialized metrics exporter, %w", err)
+		return nil, fmt.Errorf("failed to to initialized metrics exporter, %w", err)
 	}
+	return s, nil
+}
+func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
+	s.currentCtx, s.currentCancelFunc = context.WithCancel(ctx)
 	wg := sync.WaitGroup{}
 	wg.Add(len(cfg.Bindings))
 	for _, bindingCfg := range cfg.Bindings {
@@ -57,6 +61,7 @@ func (s *Service) Stop() {
 			s.log.Error(err)
 		}
 	}
+	s.currentCancelFunc()
 }
 func (s *Service) Add(ctx context.Context, cfg config.BindingConfig) error {
 	s.Lock()

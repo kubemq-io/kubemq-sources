@@ -10,6 +10,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/gcp/pubsub"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
 
@@ -17,13 +19,17 @@ type Source interface {
 	Init(ctx context.Context, cfg config.Spec) error
 	Start(ctx context.Context, target middleware.Middleware) error
 	Stop() error
-	Name() string
 }
 
 func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 
 	switch cfg.Kind {
-
+	case "source.messaging.activemq":
+		source := activemq.New()
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
 	case "source.messaging.rabbitmq":
 		source := rabbitmq.New()
 
@@ -31,16 +37,20 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
+	case "source.messaging.kafka":
+		source := kafka.New()
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
 	case "source.aws.sqs":
 		source := sqs.New()
-
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
 	case "source.aws.amazonmq":
 		source := amazonmq.New()
-
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
@@ -54,7 +64,7 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 		return source, nil
 	case "source.aws.msk":
 		source := msk.New()
-		
+
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}

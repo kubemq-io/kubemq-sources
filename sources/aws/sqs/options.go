@@ -30,30 +30,30 @@ type options struct {
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error
-	o.sqsKey, err = cfg.MustParseString("aws_key")
+	o.sqsKey, err = cfg.Properties.MustParseString("aws_key")
 	if err != nil {
 		return options{}, fmt.Errorf("error aws_key , %w", err)
 	}
 
-	o.sqsSecretKey, err = cfg.MustParseString("aws_secret_key")
+	o.sqsSecretKey, err = cfg.Properties.MustParseString("aws_secret_key")
 	if err != nil {
 		return options{}, fmt.Errorf("error aws_secret_key , %w", err)
 	}
 
-	o.region, err = cfg.MustParseString("region")
+	o.region, err = cfg.Properties.MustParseString("region")
 	if err != nil {
 		return options{}, fmt.Errorf("error region , %w", err)
 	}
 
-	o.visibilityTimeout = int64(cfg.ParseInt("visibility_timeout", DefaultVisibilityTimeout))
-	o.maxNumberOfMessages = int64(cfg.ParseInt("max_number_of_messages", DefaultMaxNumberOfMessages))
-	o.waitTimeSeconds = int64(cfg.ParseInt("wait_time_seconds", DefaultWaitTimeSeconds))
+	o.visibilityTimeout = int64(cfg.Properties.ParseInt("visibility_timeout", DefaultVisibilityTimeout))
+	o.maxNumberOfMessages = int64(cfg.Properties.ParseInt("max_number_of_messages", DefaultMaxNumberOfMessages))
+	o.waitTimeSeconds = int64(cfg.Properties.ParseInt("wait_time_seconds", DefaultWaitTimeSeconds))
 
-	o.token = cfg.ParseString("token", DefaultToken)
-	o.queue, err = cfg.MustParseString("queue")
+	o.token = cfg.Properties.ParseString("token", DefaultToken)
+	o.queue, err = cfg.Properties.MustParseString("queue")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing queue, %w", err)
 	}
-	o.pullDelay = time.Duration(cfg.ParseInt("pull_delay", DefaultWaitBetweenPull))
+	o.pullDelay = time.Duration(cfg.Properties.ParseInt("pull_delay", DefaultWaitBetweenPull))
 	return o, nil
 }

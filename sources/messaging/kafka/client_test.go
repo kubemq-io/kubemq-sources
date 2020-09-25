@@ -35,12 +35,12 @@ func TestClient_Init(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "valid init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kafka-target",
 				Properties: map[string]string{
 					"brokers":       "localhost:9092",
@@ -52,7 +52,7 @@ func TestClient_Init(t *testing.T) {
 		},
 		{
 			name: "invalid init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kafka-target",
 				Properties: map[string]string{
 					"brokers":       "localhost:9090",
@@ -82,7 +82,7 @@ func TestClient_Do(t *testing.T) {
 	errors := make(chan error)
 	tests := []struct {
 		name         string
-		cfg          config.Metadata
+		cfg          config.Spec
 		target       middleware.Middleware
 		req          *types.Request
 		wantErr      bool
@@ -90,7 +90,7 @@ func TestClient_Do(t *testing.T) {
 	}{
 		{
 			name: "valid connection target error ",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kafka-target",
 				Properties: map[string]string{
 					"brokers":       "localhost:9092",
@@ -109,7 +109,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "valid connection target success ",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kafka-target",
 				Properties: map[string]string{
 					"brokers":       "localhost:9092",

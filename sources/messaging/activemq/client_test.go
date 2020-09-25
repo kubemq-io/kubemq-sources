@@ -16,7 +16,7 @@ package activemq
 //
 //func setupClient(ctx context.Context, queue string, target middleware.Middleware) (*Client, error) {
 //	c := New()
-//	err := c.Init(ctx, config.Metadata{
+//	err := c.Init(ctx, config.Spec{
 //		Name: "activemq",
 //		Kind: "",
 //		Properties: map[string]string{
@@ -116,12 +116,12 @@ package activemq
 //
 //	tests := []struct {
 //		name    string
-//		cfg     config.Metadata
+//		cfg     config.Spec
 //		wantErr bool
 //	}{
 //		{
 //			name: "init",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "activemq",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -135,7 +135,7 @@ package activemq
 //		},
 //		{
 //			name: "init - bad url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "activemq-target",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -149,7 +149,7 @@ package activemq
 //		},
 //		{
 //			name: "bad init - no  url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "activemq",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -162,7 +162,7 @@ package activemq
 //		},
 //		{
 //			name: "bad init - no destination",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "activemq",
 //				Kind: "",
 //				Properties: map[string]string{

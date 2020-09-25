@@ -168,7 +168,7 @@ bindings:
 		t.Run(tt.name, func(t *testing.T) {
 			_ = os.Setenv("CONFIG", tt.cfgString)
 			defer os.RemoveAll("./config.yaml")
-			got, err := Load()
+			got, err := Load(nil)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Load() error = %v, wantErr %v", err, tt.wantErr)
 				return

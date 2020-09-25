@@ -10,18 +10,17 @@ func TestOptions_parseOptions(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		cfg      config.Metadata
+		cfg      config.Spec
 		wantOpts options
 		wantErr  bool
 	}{
 		{
 			name: "valid options",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
+					"address":                    "localhost:50000",
 					"client_id":               "client_id",
 					"auth_token":              "some-auth token",
 					"default_channel":         "some-channel",
@@ -34,7 +33,6 @@ func TestOptions_parseOptions(t *testing.T) {
 				port:                  50000,
 				clientId:              "client_id",
 				authToken:             "some-auth token",
-				concurrency:           1,
 				defaultChannel:        "some-channel",
 				defaultTimeoutSeconds: 100,
 			},
@@ -42,29 +40,11 @@ func TestOptions_parseOptions(t *testing.T) {
 		},
 		{
 			name: "invalid options - bad port",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "-1",
-				},
-			},
-			wantOpts: options{},
-			wantErr:  true,
-		},
-		{
-			name: "invalid options - bad concurrency",
-			cfg: config.Metadata{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host":            "localhost",
-					"port":            "50000",
-					"client_id":       "client_id",
-					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
-					"concurrency":     "-1",
+					"address":                    "localhost:-1",
 				},
 			},
 			wantOpts: options{},
@@ -72,16 +52,14 @@ func TestOptions_parseOptions(t *testing.T) {
 		},
 		{
 			name: "invalid options - bad default timeout seconds",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
+					"address":                    "localhost:50000",
 					"client_id":               "client_id",
 					"auth_token":              "some-auth token",
 					"default_channel":         "some-channel",
-					"concurrency":             "1",
 					"default_timeout_seconds": "-1",
 				},
 			},
@@ -94,10 +72,8 @@ func TestOptions_parseOptions(t *testing.T) {
 			gotOpts, err := parseOptions(tt.cfg)
 			if tt.wantErr {
 				require.Error(t, err)
-
 			} else {
 				require.NoError(t, err)
-
 			}
 			require.EqualValues(t, tt.wantOpts, gotOpts)
 		})

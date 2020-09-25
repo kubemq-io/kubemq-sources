@@ -20,7 +20,7 @@ type mockEventReceiver struct {
 	timeout time.Duration
 }
 
-func (m *mockEventReceiver) run(ctx context.Context) (*types.Request, error) {
+func (m *mockEventReceiver) run(ctx context.Context) (*kubemq.Event, error) {
 	client, err := kubemq.NewClient(ctx,
 		kubemq.WithAddress(m.host, m.port),
 		kubemq.WithClientId("response-id"),
@@ -36,10 +36,7 @@ func (m *mockEventReceiver) run(ctx context.Context) (*types.Request, error) {
 	}
 	select {
 	case event := <-eventCh:
-		if event == nil {
-			return nil, nil
-		}
-		return types.ParseRequestFromEvent(event)
+		return event, nil
 	case err := <-errCh:
 		return nil, err
 	case <-ctx.Done():
@@ -54,7 +51,7 @@ func (m *mockEventReceiver) run(ctx context.Context) (*types.Request, error) {
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
-		cfg          config.Metadata
+		cfg          config.Spec
 		mockReceiver *mockEventReceiver
 		sendReq      *types.Request
 		wantReq      *types.Request
@@ -63,7 +60,7 @@ func TestClient_Do(t *testing.T) {
 	}{
 		{
 			name: "request",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -90,7 +87,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - no data",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -113,7 +110,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - empty channel",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -176,12 +173,12 @@ func TestClient_Init(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -196,7 +193,7 @@ func TestClient_Init(t *testing.T) {
 		},
 		{
 			name: "init - error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{

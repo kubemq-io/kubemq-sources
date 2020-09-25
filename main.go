@@ -27,8 +27,8 @@ func run() error {
 	signal.Notify(gracefulShutdown, syscall.SIGTERM)
 	signal.Notify(gracefulShutdown, syscall.SIGINT)
 	signal.Notify(gracefulShutdown, syscall.SIGQUIT)
-
-	cfg, err := config.Load()
+	configCh := make(chan *config.Config)
+	cfg, err := config.Load(configCh)
 	if err != nil {
 		return err
 	}
@@ -38,7 +38,10 @@ func run() error {
 	}
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	bindingsService := binding.New()
+	bindingsService, err := binding.New()
+	if err != nil {
+		return err
+	}
 	err = bindingsService.Start(ctx, cfg)
 	if err != nil {
 		return err
@@ -47,11 +50,27 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	<-gracefulShutdown
-	apiServer.Stop()
-	bindingsService.Stop()
+	for {
+		select {
+		case newConfig := <-configCh:
+			err = cfg.Validate()
+			if err != nil {
+				log.Errorf("error on validation new config file: %s", err.Error())
+				continue
+			}
+			bindingsService.Stop()
+			err = bindingsService.Start(ctx, newConfig)
+			if err != nil {
+				log.Errorf("error on restarting service with new config file: %s", err.Error())
+				continue
+			}
+		case <-gracefulShutdown:
 
-	return nil
+			apiServer.Stop()
+			bindingsService.Stop()
+			return nil
+		}
+	}
 }
 func main() {
 	log = logger.NewLogger("main")

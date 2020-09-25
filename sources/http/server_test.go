@@ -22,7 +22,7 @@ package http
 //func TestServer_process(t *testing.T) {
 //	tests := []struct {
 //		name     string
-//		cfg      config.Metadata
+//		cfg      config.Spec
 //		target   targetMiddleware.Middleware
 //		req      *types.Request
 //		wantResp *types.Response
@@ -31,7 +31,7 @@ package http
 //	}{
 //		{
 //			name: "request",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -52,7 +52,7 @@ package http
 //		},
 //		{
 //			name: "request - target error",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -73,7 +73,7 @@ package http
 //		},
 //		{
 //			name: "request - target error 2",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -119,12 +119,12 @@ package http
 //
 //	tests := []struct {
 //		name    string
-//		cfg     config.Metadata
+//		cfg     config.Spec
 //		wantErr bool
 //	}{
 //		{
 //			name: "init",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -137,7 +137,7 @@ package http
 //		},
 //		{
 //			name: "init",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -167,7 +167,7 @@ package http
 //	tests := []struct {
 //		name    string
 //		target  targetMiddleware.Middleware
-//		cfg     config.Metadata
+//		cfg     config.Spec
 //		wantErr bool
 //	}{
 //		{
@@ -177,7 +177,7 @@ package http
 //				DoError:       nil,
 //				ResponseError: nil,
 //			},
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -191,7 +191,7 @@ package http
 //		{
 //			name:   "start - no target",
 //			target: nil,
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -209,7 +209,7 @@ package http
 //				DoError:       nil,
 //				ResponseError: nil,
 //			},
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "http",
 //				Kind: "",
 //				Properties: map[string]string{

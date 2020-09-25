@@ -62,7 +62,7 @@ func (m *mockCommandReceiver) run(ctx context.Context, t *testing.T) error {
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
-		cfg          config.Metadata
+		cfg          config.Spec
 		mockReceiver *mockCommandReceiver
 		req          *types.Request
 		wantResp     *types.Response
@@ -70,12 +70,11 @@ func TestClient_Do(t *testing.T) {
 	}{
 		{
 			name: "request",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":                    "localhost:50000",
 				},
 			},
 			mockReceiver: &mockCommandReceiver{
@@ -101,12 +100,11 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request with execution error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":                    "localhost:50000",
 				},
 			},
 			mockReceiver: &mockCommandReceiver{
@@ -132,12 +130,11 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - empty body",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":                    "localhost:50000",
 				},
 			},
 			mockReceiver: &mockCommandReceiver{
@@ -157,12 +154,11 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - no channel",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":                    "localhost:50000",
 				},
 			},
 			mockReceiver: &mockCommandReceiver{
@@ -182,12 +178,11 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - invalid timeout seconds",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":                    "localhost:50000",
 				},
 			},
 			mockReceiver: &mockCommandReceiver{
@@ -230,21 +225,19 @@ func TestClient_Init(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
+					"address":                    "localhost:50000",
 					"client_id":               "client_id",
 					"auth_token":              "some-auth token",
 					"default_channel":         "some-channel",
-					"concurrency":             "1",
 					"default_timeout_seconds": "100",
 				},
 			},
@@ -252,12 +245,11 @@ func TestClient_Init(t *testing.T) {
 		},
 		{
 			name: "init - error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "-1",
+					"address":                    "localhost:-1",
 				},
 			},
 			wantErr: true,

@@ -12,24 +12,24 @@ type options struct {
 	saslPassword  string
 }
 
-func parseOptions(cfg config.Metadata) (options, error) {
+func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
 
-	m.consumerGroup, err = cfg.MustParseString("consumerGroup")
+	m.consumerGroup, err = cfg.Properties.MustParseString("consumerGroup")
 	if err != nil {
 		return m, err
 	}
-	m.brokers, err = cfg.MustParseStringList("brokers")
+	m.brokers, err = cfg.Properties.MustParseStringList("brokers")
 	if err != nil {
 		return m, err
 	}
-	m.topics, err = cfg.MustParseStringList("topics")
+	m.topics, err = cfg.Properties.MustParseStringList("topics")
 	if err != nil {
 		return m, err
 	}
-	m.saslUsername = cfg.ParseString("saslUsername", "")
-	m.saslPassword = cfg.ParseString("saslPassword", "")
+	m.saslUsername = cfg.Properties.ParseString("saslUsername", "")
+	m.saslPassword = cfg.Properties.ParseString("saslPassword", "")
 
 	return m, nil
 }

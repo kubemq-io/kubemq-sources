@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/targets/command"
-	event_store "github.com/kubemq-hub/kubemq-sources/targets/event-store"
 	"github.com/kubemq-hub/kubemq-sources/targets/events"
+	event_store "github.com/kubemq-hub/kubemq-sources/targets/events-store"
 	"github.com/kubemq-hub/kubemq-sources/targets/query"
 	"github.com/kubemq-hub/kubemq-sources/types"
 )

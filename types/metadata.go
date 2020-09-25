@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 type Metadata map[string]string
@@ -166,4 +167,29 @@ func (m Metadata) GetValidMethodTypes(methodsMap map[string]string) error {
 		s = fmt.Sprintf("%s :%s,", s, k)
 	}
 	return errors.New(s)
+}
+
+
+func (m Metadata) MustParseAddress(key, defaultValue string) (string, int, error) {
+	var host string
+	var port int
+	var hostPort []string
+	if val, ok := m[key]; ok && val != "" {
+		hostPort = strings.Split(val, ":")
+	} else {
+		hostPort = strings.Split(defaultValue, ":")
+	}
+	if len(hostPort) >= 1 {
+		host = hostPort[0]
+	}
+	if len(hostPort) >= 2 {
+		port, _ = strconv.Atoi(hostPort[1])
+	}
+	if host == "" {
+		return "", 0, fmt.Errorf("no valid host found")
+	}
+	if port <0 {
+		return "", 0, fmt.Errorf("no valid port found")
+	}
+	return host, port, nil
 }

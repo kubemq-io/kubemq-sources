@@ -16,17 +16,17 @@ type options struct {
 	path string
 }
 
-func parseOptions(cfg config.Metadata) (options, error) {
+func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
-	m.host = cfg.ParseString("host", defaultHost)
+	m.host = cfg.Properties.ParseString("host", defaultHost)
 
-	m.port, err = cfg.ParseIntWithRange("port", defaultPort, 1, 65535)
+	m.port, err = cfg.Properties.ParseIntWithRange("port", defaultPort, 1, 65535)
 	if err != nil {
 		return m, fmt.Errorf("error parsing port value, %w", err)
 	}
 
-	m.path = cfg.ParseString("path", "/")
+	m.path = cfg.Properties.ParseString("path", "/")
 
 	return m, nil
 }

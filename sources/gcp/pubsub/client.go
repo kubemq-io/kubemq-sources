@@ -4,16 +4,11 @@ import (
 	"cloud.google.com/go/pubsub"
 	"context"
 	"encoding/json"
-	"errors"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"google.golang.org/api/option"
-)
-
-var (
-	errInvalidTarget = errors.New("invalid controller received, cannot be null")
 )
 
 type Client struct {
@@ -27,9 +22,7 @@ func New() *Client {
 	return &Client{}
 
 }
-func (c *Client) Name() string {
-	return c.name
-}
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
 	c.log = logger.NewLogger(cfg.Name)
@@ -39,7 +32,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		return err
 	}
 	b := []byte(c.opts.credentials)
-	client, err := pubsub.NewClient(ctx, c.opts.projectID,option.WithCredentialsJSON(b))
+	client, err := pubsub.NewClient(ctx, c.opts.projectID, option.WithCredentialsJSON(b))
 	if err != nil {
 		return err
 	}

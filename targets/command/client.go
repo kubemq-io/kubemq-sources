@@ -32,12 +32,14 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	if err != nil {
 		return err
 	}
-	c.client, _ = kubemq.NewClient(ctx,
+	c.client, err = kubemq.NewClient(ctx,
 		kubemq.WithAddress(c.opts.host, c.opts.port),
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken))
-
+	if err!=nil {
+		return err
+	}
 	return nil
 }
 

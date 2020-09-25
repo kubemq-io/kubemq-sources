@@ -10,12 +10,12 @@ func TestOptions_parseOptions(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "valid options",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "http",
 				Kind: "",
 				Properties: map[string]string{
@@ -28,7 +28,7 @@ func TestOptions_parseOptions(t *testing.T) {
 		},
 		{
 			name: "invalid options - bad port",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "http",
 				Kind: "",
 				Properties: map[string]string{

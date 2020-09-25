@@ -27,9 +27,7 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
-func (c *Client) Name() string {
-	return c.name
-}
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
 
@@ -54,7 +52,6 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	return nil
 }
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
 
 	sp := &kinesis.StartingPosition{
 		Type: aws.String(c.opts.ShardIteratorType),

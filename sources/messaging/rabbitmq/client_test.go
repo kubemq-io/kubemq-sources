@@ -18,7 +18,7 @@ package rabbitmq
 //
 //func setupClient(ctx context.Context, queue string, target middleware.Middleware) (*Client, error) {
 //	c := New()
-//	err := c.Init(ctx, config.Metadata{
+//	err := c.Init(ctx, config.Spec{
 //		Name: "rabbitmq",
 //		Kind: "",
 //		Properties: map[string]string{
@@ -113,12 +113,12 @@ package rabbitmq
 //
 //	tests := []struct {
 //		name    string
-//		cfg     config.Metadata
+//		cfg     config.Spec
 //		wantErr bool
 //	}{
 //		{
 //			name: "init",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "rabbitmq",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -134,7 +134,7 @@ package rabbitmq
 //		},
 //		{
 //			name: "init - bad url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "rabbitmq-target",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -150,7 +150,7 @@ package rabbitmq
 //		},
 //		{
 //			name: "bad init - no  url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "rabbitmq",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -165,7 +165,7 @@ package rabbitmq
 //		},
 //		{
 //			name: "bad init - no queue",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "rabbitmq",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -180,7 +180,7 @@ package rabbitmq
 //		},
 //		{
 //			name: "init - no consumer",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "rabbitmq-target",
 //				Kind: "",
 //				Properties: map[string]string{

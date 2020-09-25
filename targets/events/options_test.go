@@ -10,13 +10,13 @@ func TestOptions_parseOptions(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		cfg      config.Metadata
+		cfg      config.Spec
 		wantOpts options
 		wantErr  bool
 	}{
 		{
 			name: "valid options",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -39,7 +39,7 @@ func TestOptions_parseOptions(t *testing.T) {
 		},
 		{
 			name: "invalid options - bad port",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -52,7 +52,7 @@ func TestOptions_parseOptions(t *testing.T) {
 		},
 		{
 			name: "invalid options - bad concurrency",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{

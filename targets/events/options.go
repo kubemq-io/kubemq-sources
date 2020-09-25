@@ -25,16 +25,16 @@ type options struct {
 func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
-	m.host = cfg.ParseString("host", defaultHost)
+	m.host = cfg.Properties.ParseString("host", defaultHost)
 
-	m.port, err = cfg.ParseIntWithRange("port", defaultPort, 1, 65535)
+	m.port, err = cfg.Properties.ParseIntWithRange("port", defaultPort, 1, 65535)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing port value, %w", err)
 	}
-	m.authToken = cfg.ParseString("auth_token", "")
-	m.clientId = cfg.ParseString("client_id", nuid.Next())
-	m.defaultChannel = cfg.ParseString("default_channel", "")
-	m.concurrency, err = cfg.ParseIntWithRange("concurrency", defaultConcurrency, 1, defaultMaxConcurrency)
+	m.authToken = cfg.Properties.ParseString("auth_token", "")
+	m.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
+	m.defaultChannel = cfg.Properties.ParseString("default_channel", "")
+	m.concurrency, err = cfg.Properties.ParseIntWithRange("concurrency", defaultConcurrency, 1, defaultMaxConcurrency)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing concurrency value, %w", err)
 	}

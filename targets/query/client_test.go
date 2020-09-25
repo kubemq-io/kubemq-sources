@@ -64,7 +64,7 @@ func (m *mockQueryReceiver) run(ctx context.Context, t *testing.T) error {
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
-		cfg          config.Metadata
+		cfg          config.Spec
 		mockReceiver *mockQueryReceiver
 		req          *types.Request
 		wantResp     *types.Response
@@ -72,7 +72,7 @@ func TestClient_Do(t *testing.T) {
 	}{
 		{
 			name: "request",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -104,7 +104,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request with execution error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -135,7 +135,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - empty body",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -160,7 +160,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - no channel",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -185,7 +185,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - invalid timeout seconds",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -233,12 +233,12 @@ func TestClient_Init(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -255,7 +255,7 @@ func TestClient_Init(t *testing.T) {
 		},
 		{
 			name: "init - error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{

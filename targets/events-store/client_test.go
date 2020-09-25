@@ -1,4 +1,4 @@
-package event_store
+package events_store
 
 import (
 	"context"
@@ -54,7 +54,7 @@ func (m *mockEventStoreReceiver) run(ctx context.Context) (*types.Request, error
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
-		cfg          config.Metadata
+		cfg          config.Spec
 		mockReceiver *mockEventStoreReceiver
 		sendReq      *types.Request
 		wantReq      *types.Request
@@ -63,7 +63,7 @@ func TestClient_Do(t *testing.T) {
 	}{
 		{
 			name: "request",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -91,7 +91,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - no data",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -114,7 +114,7 @@ func TestClient_Do(t *testing.T) {
 		},
 		{
 			name: "request error - bad metadata - empty channel",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -177,12 +177,12 @@ func TestClient_Init(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		cfg     config.Metadata
+		cfg     config.Spec
 		wantErr bool
 	}{
 		{
 			name: "init",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
@@ -197,7 +197,7 @@ func TestClient_Init(t *testing.T) {
 		},
 		{
 			name: "init - error",
-			cfg: config.Metadata{
+			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{

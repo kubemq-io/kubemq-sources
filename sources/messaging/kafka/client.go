@@ -60,11 +60,8 @@ func (consumer *consumer) Setup(kafka.ConsumerGroupSession) error {
 func New() *Client {
 	return &Client{}
 }
-func (c *Client) Name() string {
-	return c.name
-}
 
-func (c *Client) Init(ctx context.Context, cfg config.Metadata) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
 	c.log = logger.NewLogger(cfg.Name)
 	var err error
@@ -130,5 +127,9 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		}
 	}()
 	<-ready
+	return nil
+}
+func (c *Client) Stop() error {
+
 	return nil
 }

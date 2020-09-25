@@ -4,18 +4,21 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/fsnotify/fsnotify"
+	"github.com/ghodss/yaml"
+	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
 	"os"
-	"github.com/ghodss/yaml"
 	"strings"
 )
 
 const defaultApiPort = 8080
 
 var configFile = pflag.String("config", "config.yaml", "set config file name")
+var logr = logger.NewLogger("config")
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
@@ -109,9 +112,7 @@ func getConfigFile() (string, error) {
 	}
 }
 
-func Load() (*Config, error) {
-	pflag.Parse()
-	viper.AddConfigPath("./")
+func load() (*Config, error) {
 	loadedConfigFile, err := getConfigFile()
 	if err != nil {
 		return nil, fmt.Errorf("error loading configuration, %w", err)
@@ -127,5 +128,26 @@ func Load() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	return cfg, err
+}
+
+func Load(cfgCh chan *Config) (*Config, error) {
+	pflag.Parse()
+	viper.AddConfigPath("./")
+	cfg, err := load()
+	if err != nil {
+		return nil, err
+	}
+	viper.WatchConfig()
+	viper.OnConfigChange(func(e fsnotify.Event) {
+		logr.Info("config file changed, reloading...")
+		cfg, err := load()
+		if err != nil {
+			logr.Errorf("error loading new configuration file: %s", err.Error())
+		} else {
+			cfgCh <- cfg
+		}
+	})
 	return cfg, err
 }

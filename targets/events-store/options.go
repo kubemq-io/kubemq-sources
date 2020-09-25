@@ -1,24 +1,21 @@
-package command
+package events_store
 
 import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/nats-io/nuid"
-	"math"
 )
 
 const (
-	defaultTimeoutSeconds = 600
-	defaultAddress       = "localhost:50000"
+	defaultAddress = "localhost:50000"
 )
 
 type options struct {
-	host                  string
-	port                  int
-	clientId              string
-	authToken             string
-	defaultChannel        string
-	defaultTimeoutSeconds int
+	host           string
+	port           int
+	clientId       string
+	authToken      string
+	defaultChannel string
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -31,9 +28,5 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
 	o.defaultChannel = cfg.Properties.ParseString("default_channel", "")
-	o.defaultTimeoutSeconds, err = cfg.Properties.ParseIntWithRange("default_timeout_seconds", defaultTimeoutSeconds, 1, math.MaxInt32)
-	if err != nil {
-		return options{}, fmt.Errorf("error parsing default timeout seconds value, %w", err)
-	}
 	return o, nil
 }

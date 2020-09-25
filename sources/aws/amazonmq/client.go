@@ -22,12 +22,9 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
-func (c *Client) Name() string {
-	return c.name
-}
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
-
 	c.log = logger.NewLogger(c.name)
 	var err error
 	c.opts, err = parseOptions(cfg)
@@ -47,7 +44,6 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 
 	return nil
 }
-
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 	if target == nil {
@@ -89,4 +85,3 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 func (c *Client) Stop() error {
 	return c.conn.Disconnect()
 }
-

@@ -17,7 +17,7 @@ package mqtt
 //
 //func setupClient(ctx context.Context, queue string, target middleware.Middleware) (*Client, error) {
 //	c := New()
-//	err := c.Init(ctx, config.Metadata{
+//	err := c.Init(ctx, config.Spec{
 //		Name: "mqtt",
 //		Kind: "",
 //		Properties: map[string]string{
@@ -121,12 +121,12 @@ package mqtt
 //
 //	tests := []struct {
 //		name    string
-//		cfg     config.Metadata
+//		cfg     config.Spec
 //		wantErr bool
 //	}{
 //		{
 //			name: "init",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "mqtt",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -142,7 +142,7 @@ package mqtt
 //		},
 //		{
 //			name: "init - bad url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "mqtt-target",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -158,7 +158,7 @@ package mqtt
 //		},
 //		{
 //			name: "bad init - no  url",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "mqtt",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -173,7 +173,7 @@ package mqtt
 //		},
 //		{
 //			name: "bad init - no topic",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "mqtt",
 //				Kind: "",
 //				Properties: map[string]string{
@@ -188,7 +188,7 @@ package mqtt
 //		},
 //		{
 //			name: "init - bad qos",
-//			cfg: config.Metadata{
+//			cfg: config.Spec{
 //				Name: "mqtt-target",
 //				Kind: "",
 //				Properties: map[string]string{
