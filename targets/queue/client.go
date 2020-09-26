@@ -11,7 +11,6 @@ import (
 type Client struct {
 	opts   options
 	client *kubemq.Client
-	sendCh chan *kubemq.Event
 }
 
 func New() *Client {

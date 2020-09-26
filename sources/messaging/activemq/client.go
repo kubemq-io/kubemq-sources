@@ -85,7 +85,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		}
 		return nil
 	case <-time.After(defaultSubTimeout):
-		return fmt.Errorf("activemq subscribtion timeout")
+		return fmt.Errorf("activemq subscription timeout")
 	}
 }
 

@@ -169,7 +169,6 @@ func (m Metadata) GetValidMethodTypes(methodsMap map[string]string) error {
 	return errors.New(s)
 }
 
-
 func (m Metadata) MustParseAddress(key, defaultValue string) (string, int, error) {
 	var host string
 	var port int
@@ -188,8 +187,19 @@ func (m Metadata) MustParseAddress(key, defaultValue string) (string, int, error
 	if host == "" {
 		return "", 0, fmt.Errorf("no valid host found")
 	}
-	if port <0 {
+	if port < 0 {
 		return "", 0, fmt.Errorf("no valid port found")
 	}
 	return host, port, nil
+}
+func (m Metadata) MustParseStringList(key string) ([]string, error) {
+	if val, ok := m[key]; ok && val != "" {
+		list := strings.Split(val, ",")
+		if len(list) == 0 {
+			return nil, fmt.Errorf("value of key %s cannot be empty", key)
+		}
+		return list, nil
+	} else {
+		return nil, fmt.Errorf("value of key %s cannot be empty", key)
+	}
 }

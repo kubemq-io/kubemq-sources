@@ -27,7 +27,6 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 type testStructure struct {
 	projectID    string
 	credentials  string
-	topicID      string
 	subscriberID string
 }
 
@@ -94,14 +93,14 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		},{
+		}, {
 			name: "init-missing-subscriber_id",
 			cfg: config.Spec{
 				Name: "source-gcp-pubsub",
 				Kind: "target.gcp.pubsub",
 				Properties: map[string]string{
-					"credentials":   dat.credentials,
-					"project_id":    dat.projectID,
+					"credentials": dat.credentials,
+					"project_id":  dat.projectID,
 				},
 			},
 			wantErr: true,
@@ -120,7 +119,7 @@ func TestClient_Init(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			require.EqualValues(t, tt.cfg.Name, c.Name())
+
 		})
 	}
 }

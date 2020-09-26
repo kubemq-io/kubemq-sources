@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 	"time"
-	
+
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/types"
@@ -23,16 +23,16 @@ func (m *MockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 		m.error <- err
 		return nil, err
 	}
-	
+
 	m.error <- nil
 	return &types.Response{
 		Data: request.Data,
 	}, nil
-	
+
 }
 
 func TestClient_Init(t *testing.T) {
-	
+
 	tests := []struct {
 		name    string
 		cfg     config.Spec
@@ -68,12 +68,12 @@ func TestClient_Init(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
 			c := New()
-			
+
 			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantExecErr %v", err, tt.wantErr)
 				return
 			}
-			require.EqualValues(t, tt.cfg.Name, c.Name())
+
 		})
 	}
 }
@@ -98,7 +98,7 @@ func TestClient_Do(t *testing.T) {
 					"consumer_group": "test_client1",
 				},
 			},
-			
+
 			req: types.NewRequest().SetData([]byte("some-data")),
 			target: &MockMiddleware{
 				error:     errors,
@@ -126,7 +126,7 @@ func TestClient_Do(t *testing.T) {
 			wantErr: false,
 		},
 	}
-	
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			end := make(chan bool)
@@ -157,6 +157,6 @@ func TestClient_Do(t *testing.T) {
 			}
 			require.Nil(t, err)
 		})
-		
+
 	}
 }

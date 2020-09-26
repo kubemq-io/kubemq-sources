@@ -25,11 +25,11 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 }
 
 type testStructure struct {
-	awsKey            string
-	awsSecretKey      string
-	region            string
-	token             string
-	
+	awsKey       string
+	awsSecretKey string
+	region       string
+	token        string
+
 	ShardIteratorType string
 	consumerARN       string
 	shardID           string
@@ -52,9 +52,9 @@ func getTestStructure() (*testStructure, error) {
 		return nil, err
 	}
 	t.region = string(dat)
-	
+
 	t.ShardIteratorType = "LATEST"
-	
+
 	dat, err = ioutil.ReadFile("./../../../credentials/aws/kinesis/consumerARN.txt")
 	if err != nil {
 		return nil, err
@@ -192,12 +192,12 @@ func TestClient_Init(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
 			c := New()
-			
+
 			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
 				return
 			}
-			require.EqualValues(t, tt.cfg.Name, c.Name())
+
 		})
 	}
 }

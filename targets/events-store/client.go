@@ -96,5 +96,5 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 	case <-ctx.Done():
 		return types.NewResponse().SetError(ctx.Err()), nil
 	}
-	return types.NewResponse(), nil
+
 }

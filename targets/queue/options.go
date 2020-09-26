@@ -8,10 +8,7 @@ import (
 )
 
 const (
-	defaultHost           = "localhost"
-	defaultPort           = 50000
-	defaultMaxConcurrency = 100
-	defaultConcurrency    = 1
+	defaultAddress = "localhost:50000"
 )
 
 type options struct {
@@ -29,7 +26,7 @@ type options struct {
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error
-	o.host, o.port, err = cfg.Properties.MustParseAddress("address", defaultHost)
+	o.host, o.port, err = cfg.Properties.MustParseAddress("address", defaultAddress)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing address value, %w", err)
 	}
