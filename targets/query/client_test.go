@@ -46,6 +46,7 @@ func (m *mockQueryReceiver) run(ctx context.Context, t *testing.T) error {
 					queryResponse.SetError(m.executionError)
 				} else {
 					queryResponse.SetBody(query.Body)
+					queryResponse.SetMetadata(query.Metadata)
 				}
 				err := queryResponse.Send(ctx)
 				require.NoError(t, err)
@@ -60,7 +61,6 @@ func (m *mockQueryReceiver) run(ctx context.Context, t *testing.T) error {
 	time.Sleep(time.Second)
 	return nil
 }
-
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
@@ -76,8 +76,9 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":         "localhost:50000",
+					"default_channel": "queries",
+					"timeout_seconds": "5",
 				},
 			},
 			mockReceiver: &mockQueryReceiver{
@@ -90,15 +91,9 @@ func TestClient_Do(t *testing.T) {
 			},
 			req: types.NewRequest().
 				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queries").
-				SetMetadataKeyValue("timeout_seconds", "5"),
+				SetMetadataKeyValue("id", "id"),
 			wantResp: types.NewResponse().
-				SetMetadataKeyValue("error", "").
-				SetMetadataKeyValue("query_id", "id").
-				SetMetadataKeyValue("response_client_id", "response-id").
-				SetMetadataKeyValue("executed", "true").
-				SetMetadataKeyValue("executed_at", time.Unix(1000, 0).String()).
+				SetMetadataKeyValue("id", "id").
 				SetData([]byte("data")),
 			wantErr: false,
 		},
@@ -108,8 +103,9 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":         "localhost:50000",
+					"default_channel": "queries",
+					"timeout_seconds": "5",
 				},
 			},
 			mockReceiver: &mockQueryReceiver{
@@ -121,92 +117,34 @@ func TestClient_Do(t *testing.T) {
 				executionTime:  0,
 			},
 			req: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queries").
-				SetMetadataKeyValue("timeout_seconds", "5"),
+				SetData([]byte("data")),
 			wantResp: types.NewResponse().
-				SetMetadataKeyValue("error", "error").
-				SetMetadataKeyValue("query_id", "id").
-				SetMetadataKeyValue("response_client_id", "response-id").
-				SetMetadataKeyValue("executed", "false").
-				SetMetadataKeyValue("executed_at", time.Unix(0, 0).String()),
+				SetError(fmt.Errorf("error")),
 			wantErr: false,
 		},
 		{
-			name: "request error - empty body",
+			name: "request error - timeout seconds",
 			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":         "localhost:50000",
+					"default_channel": "queries",
+					"timeout_seconds": "1",
 				},
 			},
 			mockReceiver: &mockQueryReceiver{
 				host:           "localhost",
 				port:           50000,
 				channel:        "queries",
-				executionDelay: 0,
+				executionDelay: 3 * time.Second,
 				executionError: nil,
 				executionTime:  0,
 			},
 			req: types.NewRequest().
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queries").
-				SetMetadataKeyValue("timeout_seconds", "5"),
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - no channel",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueryReceiver{
-				host:           "localhost",
-				port:           50000,
-				channel:        "queries",
-				executionDelay: 0,
-				executionError: nil,
-				executionTime:  0,
-			},
-			req: types.NewRequest().
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "").
-				SetMetadataKeyValue("timeout_seconds", "5"),
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - invalid timeout seconds",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueryReceiver{
-				host:           "localhost",
-				port:           50000,
-				channel:        "queries",
-				executionDelay: 0,
-				executionError: nil,
-				executionTime:  0,
-			},
-			req: types.NewRequest().
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queries").
-				SetMetadataKeyValue("timeout_seconds", "-1"),
-			wantResp: nil,
-			wantErr:  true,
+				SetMetadataKeyValue("id", "id"),
+			wantResp: types.NewResponse().SetError(fmt.Errorf("rpc error: code = Internal desc = Error 301: timeout for request message")),
+			wantErr:  false,
 		},
 	}
 	for _, tt := range tests {
@@ -242,13 +180,11 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
-					"client_id":               "client_id",
-					"auth_token":              "some-auth token",
-					"default_channel":         "some-channel",
-					"concurrency":             "1",
-					"default_timeout_seconds": "100",
+					"address":         "localhost:50000",
+					"client_id":       "client_id",
+					"auth_token":      "some-auth token",
+					"default_channel": "some-channel",
+					"timeout_seconds": "100",
 				},
 			},
 			wantErr: false,
@@ -259,8 +195,7 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "-1",
+					"address": "localhost:-1",
 				},
 			},
 			wantErr: true,
@@ -276,7 +211,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			require.EqualValues(t, tt.cfg.Name, c.Name())
 		})
 	}
 }

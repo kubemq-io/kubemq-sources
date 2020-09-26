@@ -20,7 +20,7 @@ type mockQueueReceiver struct {
 	timeout int32
 }
 
-func (m *mockQueueReceiver) run(ctx context.Context) (*types.Request, error) {
+func (m *mockQueueReceiver) run(ctx context.Context) (*kubemq.QueueMessage, error) {
 	client, err := kubemq.NewClient(ctx,
 		kubemq.WithAddress(m.host, m.port),
 		kubemq.WithClientId("response-id"),
@@ -44,7 +44,7 @@ func (m *mockQueueReceiver) run(ctx context.Context) (*types.Request, error) {
 	if len(queueMessages.Messages) == 0 {
 		return nil, nil
 	}
-	return types.ParseRequestFromQueueMessage(queueMessages.Messages[0])
+	return queueMessages.Messages[0], nil
 }
 
 func TestClient_Do(t *testing.T) {
@@ -63,8 +63,8 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":         "localhost:50000",
+					"default_channel": "queues",
 				},
 			},
 			mockReceiver: &mockQueueReceiver{
@@ -74,28 +74,21 @@ func TestClient_Do(t *testing.T) {
 				timeout: 5,
 			},
 			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queues"),
+				SetData([]byte("data")),
 			wantReq: types.NewRequest().
 				SetData([]byte("data")),
-			wantResp: types.NewResponse().
-				SetMetadataKeyValue("error", "").
-				SetMetadataKeyValue("queue_id", "id").
-				SetMetadataKeyValue("delayed_to", "0").
-				SetMetadataKeyValue("expire_at", "0").
-				SetMetadataKeyValue("is_error", "false"),
+			wantResp: types.NewResponse(),
 
 			wantErr: false,
 		},
 		{
-			name: "request error - bad request",
+			name: "bad request - bad channel",
 			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "40000",
+					"address":         "localhost:50000",
+					"default_channel": "queues>  ",
 				},
 			},
 			mockReceiver: &mockQueueReceiver{
@@ -105,109 +98,9 @@ func TestClient_Do(t *testing.T) {
 				timeout: 5,
 			},
 			sendReq: types.NewRequest().
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "**bad-channel").
-				SetMetadataKeyValue("max_receive_count", "100000"),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - empty channel",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueueReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "queues",
-				timeout: 5,
-			},
-			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", ""),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - expiration seconds",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueueReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "queues",
-				timeout: 5,
-			},
-			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queues").
-				SetMetadataKeyValue("expiration_seconds", "-1"),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - delay seconds",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueueReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "queues",
-				timeout: 5,
-			},
-			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queues").
-				SetMetadataKeyValue("delay_seconds", "-1"),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - max receive count",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockQueueReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "queues",
-				timeout: 5,
-			},
-			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "queues").
-				SetMetadataKeyValue("max_receive_count", "-1"),
-			wantReq:  nil,
+				SetData([]byte("data")),
+			wantReq: types.NewRequest().
+				SetData([]byte("data")),
 			wantResp: nil,
 			wantErr:  true,
 		},
@@ -216,7 +109,7 @@ func TestClient_Do(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
-			recRequestCh := make(chan *types.Request, 1)
+			recRequestCh := make(chan *kubemq.QueueMessage, 1)
 			recErrCh := make(chan error, 1)
 			go func() {
 				gotRequest, err := tt.mockReceiver.run(ctx)
@@ -238,7 +131,7 @@ func TestClient_Do(t *testing.T) {
 			require.EqualValues(t, tt.wantResp, gotResp)
 			select {
 			case gotRequest := <-recRequestCh:
-				require.EqualValues(t, tt.wantReq, gotRequest)
+				require.EqualValues(t, tt.wantReq.Data, gotRequest.Body)
 			case err := <-recErrCh:
 				require.NoError(t, err)
 			case <-ctx.Done():
@@ -261,8 +154,7 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":            "localhost",
-					"port":            "50000",
+					"address":         "localhost:50000",
 					"client_id":       "client_id",
 					"auth_token":      "some-auth token",
 					"default_channel": "some-channel",
@@ -293,7 +185,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			require.EqualValues(t, tt.cfg.Name, c.Name())
 		})
 	}
 }

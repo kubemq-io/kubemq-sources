@@ -11,11 +11,11 @@ const (
 )
 
 type options struct {
-	host           string
-	port           int
-	clientId       string
-	authToken      string
-	defaultChannel string
+	host      string
+	port      int
+	clientId  string
+	authToken string
+	channel   string
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -27,6 +27,9 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
-	o.defaultChannel = cfg.Properties.ParseString("default_channel", "")
+	o.channel, err = cfg.Properties.MustParseString("default_channel")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing default channel value, %w", err)
+	}
 	return o, nil
 }

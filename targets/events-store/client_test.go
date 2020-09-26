@@ -20,7 +20,7 @@ type mockEventStoreReceiver struct {
 	timeout time.Duration
 }
 
-func (m *mockEventStoreReceiver) run(ctx context.Context) (*types.Request, error) {
+func (m *mockEventStoreReceiver) run(ctx context.Context) (*kubemq.EventStoreReceive, error) {
 	client, err := kubemq.NewClient(ctx,
 		kubemq.WithAddress(m.host, m.port),
 		kubemq.WithClientId("response-id"),
@@ -30,21 +30,17 @@ func (m *mockEventStoreReceiver) run(ctx context.Context) (*types.Request, error
 		return nil, err
 	}
 	errCh := make(chan error, 1)
-	eventStoreCh, err := client.SubscribeToEventsStore(ctx, m.channel, "", errCh, kubemq.StartFromNewEvents())
+	eventCh, err := client.SubscribeToEventsStore(ctx, m.channel, "", errCh, kubemq.StartFromNewEvents())
 	if err != nil {
 		return nil, err
 	}
 	select {
-	case eventStore := <-eventStoreCh:
-		if eventStore == nil {
-			return nil, nil
-		}
-		return types.ParseRequestFromEventStoreReceive(eventStore)
+	case event := <-eventCh:
+		return event, nil
 	case err := <-errCh:
 		return nil, err
 	case <-ctx.Done():
 		return nil, nil
-
 	case <-time.After(m.timeout):
 		return nil, fmt.Errorf("timeout")
 	}
@@ -67,8 +63,8 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
+					"address":         "localhost:50000",
+					"default_channel": "event_stores",
 				},
 			},
 			mockReceiver: &mockEventStoreReceiver{
@@ -78,76 +74,24 @@ func TestClient_Do(t *testing.T) {
 				timeout: 5 * time.Second,
 			},
 			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "event_stores"),
+				SetData([]byte("data")),
 			wantReq: types.NewRequest().
 				SetData([]byte("data")),
-			wantResp: types.NewResponse().
-				SetMetadataKeyValue("error", "").
-				SetMetadataKeyValue("sent", "true").
-				SetMetadataKeyValue("event_store_id", "id"),
-			wantErr: false,
-		},
-		{
-			name: "request error - no data",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockEventStoreReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "event_stores",
-				timeout: 5 * time.Second,
-			},
-			sendReq: types.NewRequest().
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", "event_stores"),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
-		},
-		{
-			name: "request error - bad metadata - empty channel",
-			cfg: config.Spec{
-				Name: "kubemq-target",
-				Kind: "",
-				Properties: map[string]string{
-					"host": "localhost",
-					"port": "50000",
-				},
-			},
-			mockReceiver: &mockEventStoreReceiver{
-				host:    "localhost",
-				port:    50000,
-				channel: "event_stores",
-				timeout: 5 * time.Second,
-			},
-			sendReq: types.NewRequest().
-				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id").
-				SetMetadataKeyValue("channel", ""),
-			wantReq:  nil,
-			wantResp: nil,
-			wantErr:  true,
+			wantResp: types.NewResponse(),
+			wantErr:  false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 			defer cancel()
-			recRequestCh := make(chan *types.Request, 1)
+			recEventCh := make(chan *kubemq.EventStoreReceive, 1)
 			recErrCh := make(chan error, 1)
 			go func() {
-				gotRequest, err := tt.mockReceiver.run(ctx)
+				gotEvent, err := tt.mockReceiver.run(ctx)
 				select {
 				case recErrCh <- err:
-				case recRequestCh <- gotRequest:
+				case recEventCh <- gotEvent:
 				}
 			}()
 			time.Sleep(time.Second)
@@ -162,8 +106,8 @@ func TestClient_Do(t *testing.T) {
 			require.NoError(t, err)
 			require.EqualValues(t, tt.wantResp, gotResp)
 			select {
-			case gotRequest := <-recRequestCh:
-				require.EqualValues(t, tt.wantReq, gotRequest)
+			case gotEvent := <-recEventCh:
+				require.EqualValues(t, tt.wantReq.Data, gotEvent.Body)
 			case err := <-recErrCh:
 				require.NoError(t, err)
 			case <-ctx.Done():
@@ -186,8 +130,7 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":            "localhost",
-					"port":            "50000",
+					"address":         "localhost:50000",
 					"client_id":       "client_id",
 					"auth_token":      "some-auth token",
 					"default_channel": "some-channel",
@@ -201,8 +144,7 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "-1",
+					"address": "localhost:-1",
 				},
 			},
 			wantErr: true,
@@ -218,7 +160,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			require.EqualValues(t, tt.cfg.Name, c.Name())
 		})
 	}
 }

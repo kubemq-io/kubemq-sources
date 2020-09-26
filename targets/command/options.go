@@ -9,16 +9,16 @@ import (
 
 const (
 	defaultTimeoutSeconds = 600
-	defaultAddress       = "localhost:50000"
+	defaultAddress        = "localhost:50000"
 )
 
 type options struct {
-	host                  string
-	port                  int
-	clientId              string
-	authToken             string
-	defaultChannel        string
-	defaultTimeoutSeconds int
+	host           string
+	port           int
+	clientId       string
+	authToken      string
+	channel        string
+	timeoutSeconds int
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -30,8 +30,11 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
-	o.defaultChannel = cfg.Properties.ParseString("default_channel", "")
-	o.defaultTimeoutSeconds, err = cfg.Properties.ParseIntWithRange("default_timeout_seconds", defaultTimeoutSeconds, 1, math.MaxInt32)
+	o.channel, err = cfg.Properties.MustParseString("default_channel")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing default channel value, %w", err)
+	}
+	o.timeoutSeconds, err = cfg.Properties.ParseIntWithRange("timeout_seconds", defaultTimeoutSeconds, 1, math.MaxInt32)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing default timeout seconds value, %w", err)
 	}

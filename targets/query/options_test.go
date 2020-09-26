@@ -20,23 +20,20 @@ func TestOptions_parseOptions(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
-					"client_id":               "client_id",
-					"auth_token":              "some-auth token",
-					"default_channel":         "some-channel",
-					"concurrency":             "1",
-					"default_timeout_seconds": "100",
+					"address":         "localhost:50000",
+					"client_id":       "client_id",
+					"auth_token":      "some-auth token",
+					"default_channel": "some-channel",
+					"timeout_seconds": "100",
 				},
 			},
 			wantOpts: options{
-				host:                  "localhost",
-				port:                  50000,
-				clientId:              "client_id",
-				authToken:             "some-auth token",
-				concurrency:           1,
-				defaultChannel:        "some-channel",
-				defaultTimeoutSeconds: 100,
+				host:           "localhost",
+				port:           50000,
+				clientId:       "client_id",
+				authToken:      "some-auth token",
+				channel:        "some-channel",
+				timeoutSeconds: 100,
 			},
 			wantErr: false,
 		},
@@ -46,25 +43,22 @@ func TestOptions_parseOptions(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host": "localhost",
-					"port": "-1",
+					"address": "localhost:-1",
 				},
 			},
 			wantOpts: options{},
 			wantErr:  true,
 		},
 		{
-			name: "invalid options - bad concurrency",
+			name: "invalid options - no default channel",
 			cfg: config.Spec{
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":            "localhost",
-					"port":            "50000",
+					"address":         "localhost:50000",
 					"client_id":       "client_id",
 					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
-					"concurrency":     "-1",
+					"timeout_seconds": "100",
 				},
 			},
 			wantOpts: options{},
@@ -76,13 +70,11 @@ func TestOptions_parseOptions(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"host":                    "localhost",
-					"port":                    "50000",
-					"client_id":               "client_id",
-					"auth_token":              "some-auth token",
-					"default_channel":         "some-channel",
-					"concurrency":             "1",
-					"default_timeout_seconds": "-1",
+					"address":         "localhost:50000",
+					"client_id":       "client_id",
+					"auth_token":      "some-auth token",
+					"default_channel": "some-channel",
+					"timeout_seconds": "-1",
 				},
 			},
 			wantOpts: options{},
@@ -94,10 +86,8 @@ func TestOptions_parseOptions(t *testing.T) {
 			gotOpts, err := parseOptions(tt.cfg)
 			if tt.wantErr {
 				require.Error(t, err)
-
 			} else {
 				require.NoError(t, err)
-
 			}
 			require.EqualValues(t, tt.wantOpts, gotOpts)
 		})

@@ -4,65 +4,97 @@ import (
 	"context"
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
+	"time"
+)
+
+const (
+	defaultSendTimeout          = 10 * time.Second
+	defaultStreamReconnect      = 1 * time.Second
+	defaultWaitForResultTimeout = 10 * time.Second
 )
 
 type Client struct {
-	name   string
-	opts   options
-	client *kubemq.Client
-	log    *logger.Logger
+	opts     options
+	client   *kubemq.Client
+	sendCh   chan *kubemq.EventStore
+	resultCh chan *kubemq.EventStoreResult
 }
 
 func New() *Client {
 	return &Client{}
 
 }
-func (c *Client) Name() string {
-	return c.name
-}
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
-	c.name = cfg.Name
-	c.log = logger.NewLogger(cfg.Name)
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {
 		return err
 	}
+
 	c.client, err = kubemq.NewClient(ctx,
 		kubemq.WithAddress(c.opts.host, c.opts.port),
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
-		kubemq.WithAuthToken(c.opts.authToken))
+		kubemq.WithAuthToken(c.opts.authToken),
+		kubemq.WithCheckConnection(false),
+	)
 	if err != nil {
 		return err
 	}
+	c.sendCh = make(chan *kubemq.EventStore, 1)
+	c.resultCh = make(chan *kubemq.EventStoreResult, 1)
+	go c.runStreamProcessing(ctx)
+
 	return nil
 }
 
+func (c *Client) runStreamProcessing(ctx context.Context) {
+	for {
+		errCh := make(chan error, 1)
+		go func() {
+			c.client.StreamEventsStore(ctx, c.sendCh, c.resultCh, errCh)
+		}()
+		select {
+		case <-errCh:
+			time.Sleep(defaultStreamReconnect)
+		case <-ctx.Done():
+			goto done
+		}
+	}
+done:
+}
+
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
-	eventStoreMetadata, err := parseMetadata(request.Metadata, c.opts)
-	if err != nil {
-		return nil, err
+
+	event := c.client.NewEventStore().
+		SetChannel(c.opts.channel).
+		SetMetadata(request.Metadata.String()).
+		SetBody(request.Data)
+
+	select {
+	case c.sendCh <- event:
+
+	case <-time.After(defaultSendTimeout):
+		return types.NewResponse().SetError(fmt.Errorf("error timeout on sending event store")), nil
+
+	case <-ctx.Done():
+		return types.NewResponse().SetError(ctx.Err()), nil
 	}
-	result, err := c.client.ES().
-		SetId(eventStoreMetadata.id).
-		SetChannel(eventStoreMetadata.channel).
-		SetMetadata(eventStoreMetadata.metadata).
-		SetBody(request.Data).
-		Send(ctx)
-	if err != nil {
-		return nil, err
+
+	select {
+	case result := <-c.resultCh:
+		if !result.Sent {
+			return types.NewResponse().SetError(result.Err), nil
+		} else {
+			return types.NewResponse(), nil
+		}
+	case <-time.After(defaultWaitForResultTimeout):
+		return types.NewResponse().SetError(fmt.Errorf("error timeout on wait for result of sending event store")), nil
+	case <-ctx.Done():
+		return types.NewResponse().SetError(ctx.Err()), nil
 	}
-	resp := types.NewResponse().
-		SetMetadataKeyValue("sent", fmt.Sprintf("%t", result.Sent)).
-		SetMetadataKeyValue("event_store_id", result.Id)
-	if result.Err != nil {
-		resp.SetMetadataKeyValue("error", result.Err.Error())
-	} else {
-		resp.SetMetadataKeyValue("error", "")
-	}
-	return resp, nil
+	return types.NewResponse(), nil
 }
