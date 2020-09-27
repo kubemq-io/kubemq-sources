@@ -6,6 +6,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/pkg/metrics"
+	httpsrc "github.com/kubemq-hub/kubemq-sources/sources/http"
 	"net/http"
 	"sync"
 )
@@ -104,4 +105,16 @@ func (s *Service) PrometheusHandler() http.Handler {
 }
 func (s *Service) Stats() []*metrics.Report {
 	return s.exporter.Store.List()
+}
+
+func (s *Service) GetHttpHandlers() []*httpsrc.Handler {
+	var list []*httpsrc.Handler
+	s.Lock()
+	defer s.Unlock()
+	for _, binder := range s.bindings {
+		if binder.httpSourceHandler != nil {
+			list = append(list, binder.httpSourceHandler)
+		}
+	}
+	return list
 }

@@ -6,25 +6,21 @@ import (
 )
 
 type Response struct {
-	Metadata Metadata `json:"metadata"`
-	Data     []byte   `json:"data"`
-	IsError  bool     `json:"is_error"`
-	Error    string   `json:"error"`
+	Metadata string `json:"metadata"`
+	Data     []byte `json:"data"`
+	IsError  bool   `json:"is_error"`
+	Error    string `json:"error"`
 }
 
 func NewResponse() *Response {
 	return &Response{
-		Metadata: NewMetadata(),
+		Metadata: "",
 		Data:     nil,
 	}
 }
 
-func (r *Response) SetMetadata(value Metadata) *Response {
+func (r *Response) SetMetadata(value string) *Response {
 	r.Metadata = value
-	return r
-}
-func (r *Response) SetMetadataKeyValue(key, value string) *Response {
-	r.Metadata.Set(key, value)
 	return r
 }
 
@@ -53,13 +49,13 @@ func (r *Response) ToEventStore() *kubemq.EventStore {
 
 func (r *Response) ToCommand() *kubemq.Command {
 	return kubemq.NewCommand().
-		SetMetadata(r.Metadata.String()).
+		SetMetadata(r.Metadata).
 		SetBody(r.Data)
 }
 
 func (r *Response) ToQuery() *kubemq.Query {
 	return kubemq.NewQuery().
-		SetMetadata(r.Metadata.String()).
+		SetMetadata(r.Metadata).
 		SetBody(r.Data)
 }
 
@@ -69,7 +65,7 @@ func (r *Response) ToQueueMessage() *kubemq.QueueMessage {
 }
 func (r *Response) ToResponse() *kubemq.Response {
 	return kubemq.NewResponse().
-		SetMetadata(r.Metadata.String()).
+		SetMetadata(r.Metadata).
 		SetBody(r.Data)
 }
 func (r *Response) Size() float64 {
@@ -84,15 +80,11 @@ func (r *Response) String() string {
 }
 func parseResponse(meta string, body []byte, errText string) (*Response, error) {
 	res := NewResponse()
-	parsedMeta, err := UnmarshallMetadata(meta)
-	if err != nil {
-		return nil, fmt.Errorf("error parsing response metadata, %w", err)
-	}
 	if errText != "" {
-		parsedMeta.Set("error", errText)
+		res.SetError(fmt.Errorf(errText))
 	}
 	return res.
-			SetMetadata(parsedMeta).
+			SetMetadata(meta).
 			SetData(body),
 
 		nil

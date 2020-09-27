@@ -32,7 +32,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
-	o.channel, err = cfg.Properties.MustParseString("default_channel")
+	o.channel, err = cfg.Properties.MustParseString("channel")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing default channel value, %w", err)
 	}

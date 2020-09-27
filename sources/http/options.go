@@ -5,28 +5,21 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 )
 
-const (
-	defaultHost = ""
-	defaultPort = 8080
-)
-
 type options struct {
-	host string
-	port int
-	path string
+	methods []string
+	path    string
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
-	m := options{}
+	o := options{}
 	var err error
-	m.host = cfg.Properties.ParseString("host", defaultHost)
-
-	m.port, err = cfg.Properties.ParseIntWithRange("port", defaultPort, 1, 65535)
+	o.methods, err = cfg.Properties.MustParseStringList("methods")
 	if err != nil {
-		return m, fmt.Errorf("error parsing port value, %w", err)
+		return options{}, fmt.Errorf("error parsing methods list value, %w", err)
 	}
-
-	m.path = cfg.Properties.ParseString("path", "/")
-
-	return m, nil
+	o.path, err = cfg.Properties.MustParseString("path")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing path value, %w", err)
+	}
+	return o, nil
 }

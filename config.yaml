@@ -1,22 +1,36 @@
-apiPort: 8082
+apiPort: 8091
 bindings:
-  - name: kubemq-rabbitmq-events
+  - name: http-post-kubemq-event
     source:
-      kind: source.messaging.rabbitmq
-      name: source-rabbitmq
+      kind: source.http
+      name: http-post
       properties:
-        url: "amqp://rabbitmq:rabbitmq@localhost:7238/"
-        queue: "some-queue"
-        consumer: "kubemq-source"
+        "methods": "post,put"
+        "path": "/post"
     target:
       kind: target.events
       name: target-kubemq-events
       properties:
-        host: "localhost"
-        port: "50000"
-        client_id: "kubemq-rabbitmq-events-connector"
+        address: "localhost:50000"
+        client_id: "kubemq-http-connector"
         auth_token: ""
-        default_channel: "rabbitmq.events"
+        channel: "events.post"
+  - name: http-post-kubemq-event-2
+    source:
+      kind: source.http
+      name: http-post
+      properties:
+        "methods": "get"
+        "path": "/query"
+    target:
+      kind: target.query
+      name: target-kubemq-events
+      properties:
+        address: "localhost:50000"
+        client_id: "kubemq-http-connector"
+        auth_token: ""
+        timeout_seconds: "10"
+        channel: "query"
     properties:
-      log_level: "error"
+      log_level: "debug"
 

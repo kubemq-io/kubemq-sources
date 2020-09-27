@@ -12,7 +12,7 @@ tasks:
       - go list -u -m -json -mod=mod all | go-mod-outdated -update -direct
   lint:
     cmds:
-      - golangci-lint run --disable gocritic --enable misspell --enable gosec
+      - golangci-lint run --disable gocritic --enable misspell
   test:
     cmds:
       - go test -timeout 30m ./...

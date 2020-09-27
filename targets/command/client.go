@@ -40,7 +40,7 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 	cmdResponse, err := c.client.C().
 		SetTimeout(time.Duration(c.opts.timeoutSeconds) * time.Second).
 		SetChannel(c.opts.channel).
-		SetMetadata(request.Metadata.String()).
+		SetMetadata(request.Metadata).
 		SetBody(request.Data).
 		Send(ctx)
 	if err != nil {

@@ -75,7 +75,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "commands",
+					"channel":         "commands",
 					"timeout_seconds": "5",
 				},
 			},
@@ -99,7 +99,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "commands",
+					"channel":         "commands",
 					"timeout_seconds": "5",
 				},
 			},
@@ -123,7 +123,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "commands",
+					"channel":         "commands",
 					"timeout_seconds": "2",
 				},
 			},
@@ -177,7 +177,7 @@ func TestClient_Init(t *testing.T) {
 					"address":         "localhost:50000",
 					"client_id":       "client_id",
 					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
+					"channel":         "some-channel",
 					"timeout_seconds": "100",
 				},
 			},

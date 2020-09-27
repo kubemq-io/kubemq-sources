@@ -8,15 +8,17 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/pkg/metrics"
 	"github.com/kubemq-hub/kubemq-sources/sources"
+	"github.com/kubemq-hub/kubemq-sources/sources/http"
 	"github.com/kubemq-hub/kubemq-sources/targets"
 )
 
 type Binder struct {
-	name   string
-	log    *logger.Logger
-	source sources.Source
-	target targets.Target
-	md     middleware.Middleware
+	name              string
+	log               *logger.Logger
+	source            sources.Source
+	target            targets.Target
+	md                middleware.Middleware
+	httpSourceHandler *http.Handler
 }
 
 func NewBinder() *Binder {
@@ -60,6 +62,12 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 		return fmt.Errorf("error loading source conntector %s on binding %s, %w", cfg.Source.Name, b.name, err)
 	}
 	b.log.Infof("binding: %s, source: %s, initialized successfully", b.name, cfg.Source.Name)
+	if cfg.Source.Kind == "source.http" {
+		val, ok := b.source.(*http.Handler)
+		if ok {
+			b.httpSourceHandler = val
+		}
+	}
 	b.log.Infof("binding: %s, initialized successfully", b.name)
 	return nil
 }

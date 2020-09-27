@@ -63,8 +63,8 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"address":         "localhost:50000",
-					"default_channel": "queues",
+					"address": "localhost:50000",
+					"channel": "queues",
 				},
 			},
 			mockReceiver: &mockQueueReceiver{
@@ -87,8 +87,8 @@ func TestClient_Do(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"address":         "localhost:50000",
-					"default_channel": "queues>  ",
+					"address": "localhost:50000",
+					"channel": "queues>  ",
 				},
 			},
 			mockReceiver: &mockQueueReceiver{
@@ -154,10 +154,10 @@ func TestClient_Init(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"address":         "localhost:50000",
-					"client_id":       "client_id",
-					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
+					"address":    "localhost:50000",
+					"client_id":  "client_id",
+					"auth_token": "some-auth token",
+					"channel":    "some-channel",
 				},
 			},
 			wantErr: false,

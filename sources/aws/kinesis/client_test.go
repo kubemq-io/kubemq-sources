@@ -20,7 +20,7 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 	fmt.Println(request)
 	r := types.NewResponse()
 	r.SetData([]byte("ok"))
-	r.SetMetadataKeyValue("result", "ok")
+	r.SetMetadata(`"result":"ok"`)
 	return r, nil
 }
 

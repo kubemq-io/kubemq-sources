@@ -20,10 +20,10 @@ func TestOptions_parseOptions(t *testing.T) {
 				Name: "kubemq-target",
 				Kind: "",
 				Properties: map[string]string{
-					"address":         "localhost:50000",
-					"client_id":       "client_id",
-					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
+					"address":    "localhost:50000",
+					"client_id":  "client_id",
+					"auth_token": "some-auth token",
+					"channel":    "some-channel",
 				},
 			},
 			wantOpts: options{

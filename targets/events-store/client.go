@@ -71,7 +71,7 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 
 	event := c.client.NewEventStore().
 		SetChannel(c.opts.channel).
-		SetMetadata(request.Metadata.String()).
+		SetMetadata(request.Metadata).
 		SetBody(request.Data)
 
 	select {

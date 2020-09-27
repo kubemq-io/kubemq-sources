@@ -41,7 +41,7 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 	queryResponse, err := c.client.Q().
 		SetTimeout(time.Duration(c.opts.timeoutSeconds) * time.Second).
 		SetChannel(c.opts.channel).
-		SetMetadata(request.Metadata.String()).
+		SetMetadata(request.Metadata).
 		SetBody(request.Data).
 		Send(ctx)
 	if err != nil {
@@ -50,9 +50,8 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 	if !queryResponse.Executed {
 		return types.NewResponse().SetError(fmt.Errorf(queryResponse.Error)), nil
 	}
-	mt, _ := types.UnmarshallMetadata(queryResponse.Metadata)
 	return types.NewResponse().
-			SetMetadata(mt).
+			SetMetadata(queryResponse.Metadata).
 			SetData(queryResponse.Body),
 		nil
 }

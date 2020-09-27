@@ -9,23 +9,19 @@ import (
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Request struct {
-	Metadata Metadata `json:"metadata,omitempty"`
-	Data     []byte   `json:"data,omitempty"`
+	Metadata string `json:"metadata,omitempty"`
+	Data     []byte `json:"data,omitempty"`
 }
 
 func NewRequest() *Request {
 	return &Request{
-		Metadata: NewMetadata(),
+		Metadata: "",
 		Data:     nil,
 	}
 }
 
-func (r *Request) SetMetadata(value Metadata) *Request {
+func (r *Request) SetMetadata(value string) *Request {
 	r.Metadata = value
-	return r
-}
-func (r *Request) SetMetadataKeyValue(key, value string) *Request {
-	r.Metadata.Set(key, value)
 	return r
 }
 

@@ -41,7 +41,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 	queueMessage := c.client.NewQueueMessage().
 		SetChannel(c.opts.channel).
-		SetMetadata(request.Metadata.String()).
+		SetMetadata(request.Metadata).
 		SetBody(request.Data).
 		SetPolicyDelaySeconds(c.opts.delaySeconds).
 		SetPolicyExpirationSeconds(c.opts.expirationSeconds).

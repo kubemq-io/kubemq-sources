@@ -10,6 +10,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/gcp/pubsub"
+	"github.com/kubemq-hub/kubemq-sources/sources/http"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
@@ -72,6 +73,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 	case "source.gcp.pubsub":
 		source := pubsub.New()
 
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
+	case "source.http":
+		source := http.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}

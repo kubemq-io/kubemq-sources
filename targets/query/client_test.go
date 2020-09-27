@@ -77,7 +77,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "queries",
+					"channel":         "queries",
 					"timeout_seconds": "5",
 				},
 			},
@@ -91,9 +91,9 @@ func TestClient_Do(t *testing.T) {
 			},
 			req: types.NewRequest().
 				SetData([]byte("data")).
-				SetMetadataKeyValue("id", "id"),
+				SetMetadata("id"),
 			wantResp: types.NewResponse().
-				SetMetadataKeyValue("id", "id").
+				SetMetadata("id").
 				SetData([]byte("data")),
 			wantErr: false,
 		},
@@ -104,7 +104,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "queries",
+					"channel":         "queries",
 					"timeout_seconds": "5",
 				},
 			},
@@ -129,7 +129,7 @@ func TestClient_Do(t *testing.T) {
 				Kind: "",
 				Properties: map[string]string{
 					"address":         "localhost:50000",
-					"default_channel": "queries",
+					"channel":         "queries",
 					"timeout_seconds": "1",
 				},
 			},
@@ -142,7 +142,7 @@ func TestClient_Do(t *testing.T) {
 				executionTime:  0,
 			},
 			req: types.NewRequest().
-				SetMetadataKeyValue("id", "id"),
+				SetMetadata(`"id": "id"`),
 			wantResp: types.NewResponse().SetError(fmt.Errorf("rpc error: code = Internal desc = Error 301: timeout for request message")),
 			wantErr:  false,
 		},
@@ -183,7 +183,7 @@ func TestClient_Init(t *testing.T) {
 					"address":         "localhost:50000",
 					"client_id":       "client_id",
 					"auth_token":      "some-auth token",
-					"default_channel": "some-channel",
+					"channel":         "some-channel",
 					"timeout_seconds": "100",
 				},
 			},
