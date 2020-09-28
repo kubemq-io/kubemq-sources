@@ -61,6 +61,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		for {
 			select {
 			case delivery := <-deliveries:
+				fmt.Println(string(delivery.Body))
 				req := types.NewRequest().SetData(delivery.Body)
 				_, err := target.Do(ctx, req)
 				if err != nil {
@@ -72,7 +73,9 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			case <-ctx.Done():
 				return
 			case err := <-errCh:
-				c.log.Errorf("error on rabbitmq connection, %w", err.Reason)
+				if err != nil {
+					c.log.Errorf("error on rabbitmq connection, %s", err.Reason)
+				}
 			}
 		}
 	}()
