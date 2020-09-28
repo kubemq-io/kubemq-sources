@@ -11,7 +11,7 @@ In addition, KubeMQ Sources allows to migrate legacy systems (together with [Kub
 - **Runs anywhere**  - Kubernetes, Cloud, on-prem, anywhere
 - **Stand-alone** - small docker container / binary
 - **Single Interface** - One interface all the services
-- **Any Service** - Support all major services types (databases, cache, messaging, serverless, HTTP, etc.)
+- **API Gateway** - Act as an REST Api gateway
 - **Plug-in Architecture** Easy to extend, easy to connect
 - **Middleware Supports** - Logs, Metrics, Retries, and Rate Limiters
 - **Easy Configuration** - simple yaml file builds your topology
@@ -22,16 +22,14 @@ KubeMQ Targets building blocks are:
  - Binding
  - Source
  - Target
- - Request/Response
-
 
 ### Binding
 
 Binding is a 1:1 connection between Source and Target. Every Binding runs independently.
 
-![binding](.github/assets/binding.jpeg)
+![binding](.github/assets/binding.jpg)
 
-### Target
+### Source
 
 Target is an external service that exposes an API allowing to interact and serve his functionalists with other services.
 
@@ -133,92 +131,35 @@ A list of supported targets is below.
 
 (Work in Progress)
 
-### Source
+### Target
 
-The source is a KubeMQ connection (in subscription mode), which listens to requests from services and route them to the appropriate target for action, and return back a response if needed.
+The target is a KubeMQ connection which send the data from the sources and route them to the appropriate KubeMQ channel for action, and return back a response if needed.
 
-KubeMQ Targets supports all of KubeMQ's messaging patterns: Queue, Events, Events-Store, Command, and Query.
+KubeMQ Sources supports all of KubeMQ's messaging patterns: Queue, Events, Events-Store, Command, and Query.
 
 
 | Type                                                                              | Kind                | Configuration                           |
 |:----------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
-| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | source.queue        | [Usage](sources/queue/README.md)        |
-| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | source.events       | [Usage](sources/events/README.md)       |
-| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | source.events-store | [Usage](sources/events-store/README.md) |
-| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | source.command      | [Usage](sources/command/README.md)      |
-| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | source.query        | [Usage](sources/query/README.md)        |
-
-
-### Request / Response
-
-![concept](.github/assets/concept.jpeg)
-
-#### Request
-
-A request is an object that sends to a designated target with metadata and data fields, which contains the needed information to perform the requested data.
-
-##### Request Object Structure
-
-| Field  | Type | Description                |
-|:-------|:---------|:---------------------------|
-| metadata | string, string object      | contains metadata information for action           |
-| data  | bytes array      | contains raw data for action |
-
-##### Example
-
-Request to get a data from Redis cache for the key "log"
-```json
-{
-  "metadata": {
-    "method": "get",
-    "key": "log"
-  },
-  "data": null
-}
-```
-#### Response
-The response is an object that sends back as a result of executing an action in the target
-
-
-##### Response Object Structure
-
-| Field    | Type                 | Description                                     |
-|:---------|:---------------------|:------------------------------------------------|
-| metadata | string, string object | contains metadata information result for action |
-| data     | bytes array          | contains raw data result                        |
-| is_error | bool                 | indicate if the action ended with an error      |
-| error    | string               | contains error information if any               |
-
-
-##### Example
-
-Response received on request to get the data stored in Redis for key "log"
-```json
-{
-  "metadata": {
-    "result": "ok",
-    "key": "log"
-  },
-  "data": "SU5TRVJUIElOVE8gcG9zdChJRCxUSVRMRSxDT05URU5UKSBWQUxVRVMKCSAgICAgICAgICAgICAgICAgICAgICA"
-}
-```
+| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | target.queue        | [Usage](targets/queue/README.md)        |
+| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | target.events       | [Usage](targets/events/README.md)       |
+| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | target.events-store | [Usage](targets/events-store/README.md) |
+| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | target.command      | [Usage](targets/command/README.md)      |
+| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | target.query        | [Usage](targets/query/README.md)        |
 
 ## Installation
 
 ### Kubernetes
 
-An example of Kubernetes deployment for Redis target connectors can be found below:
-
-1. Run Redis Cluster deployment yaml
+1. Install KubeMQ Cluster
 
 ```bash
-kubectl apply -f ./redis-example.yaml -n kubemq
+kubectl apply -f https://get.kubemq.io/deploy
 ```
 
-2. Run KubeMQ Targets deployment yaml
+2. Run KubeMQ Source deployment yaml
 
 ```bash
-kubectl apply -f ./deployment-example.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubemq-hub/kubemq-sources/master/deploy-example.yaml
 ```
 
 ### Binary (Cross-platform)
@@ -242,7 +183,7 @@ Config file structure:
 
 ```yaml
 
-apiPort: 8080 # kubemq targets api and health end-point port
+apiPort: 8080 # kubemq sources api and health end-point port
 bindings:
   - name: clusters-sources # unique binding name
     properties: # Bindings properties such middleware configurations
@@ -253,12 +194,12 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.query # source kind
+      kind: source.http # source kind
       name: name-of-sources # source name 
       properties: # a set of key/value settings per each source kind
         .....
     target:
-      kind: target.cache.redis # target kind
+      kind: target.events # target kind
       name: name-of-target # targets name
       properties: # a set of key/value settings per each target kind
         - .....
