@@ -1,0 +1,27 @@
+apiVersion: core.k8s.kubemq.io/v1alpha1
+kind: KubemqConnector
+metadata:
+  name: kubemq-sources
+  namespace: kubemq
+spec:
+  type: sources
+  replicas: 1
+  config: |-
+    bindings:
+      - name: http-post-kubemq-event
+        source:
+          kind: source.http
+          name: http-post
+          properties:
+            "methods": "post,put"
+            "path": "/post"
+        target:
+          kind: target.events
+          name: target-kubemq-events
+          properties:
+            address: "localhost:50000"
+            client_id: "kubemq-http-connector"
+            channel: "events.post"
+        properties:
+          log_level: "info"
+
