@@ -13,6 +13,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/http"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/mqtt"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
 
@@ -34,6 +35,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 	case "source.messaging.rabbitmq":
 		source := rabbitmq.New()
 
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
+	case "source.messaging.mqtt":
+		source := mqtt.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
