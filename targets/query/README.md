@@ -19,7 +19,7 @@ Query target connector configuration properties:
 | client_id       | no       | set client id                                      | "client_id"                                          |
 | auth_token      | no       | set authentication token                           | JWT token                                            |
 | channel | no       | set send request default channel               |          "queries"                                            |
-| timeout_seconds | no       | sets query request default timeout (600 seconds) |                                                      |
+| timeout_seconds | no       | sets query request default timeout (600 seconds) |          "10"                                            |
 
 
 Example:

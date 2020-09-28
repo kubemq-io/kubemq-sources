@@ -41,7 +41,7 @@ bindings:
         "path": "/events-store"
     target:
       kind: target.events-store # Sources kind
-      name: events-target 
+      name: events-store-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"
         client_id: "cluster-a-events-store-connection"
