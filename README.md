@@ -41,11 +41,14 @@ A list of supported sources is below.
 
 #### Standalone Services
 
-| Category   | Target                                                              | Kind                         | Configuration                                      | Example                                 |
-|:-----------|:--------------------------------------------------------------------|:-----------------------------|:---------------------------------------------------|:----------------------------------------|
-|            | Http                                                                | target.http                  | [Usage](sources/http)                              | [Example](examples/http)                |
-
-
+| Category  | Target                                  | Kind                      | Configuration                       | Example                                |
+|:----------|:----------------------------------------|:--------------------------|:------------------------------------|:---------------------------------------|
+| Http      | Http                                    | target.http               | [Usage](sources/http)               | [Example](examples/http)               |
+| Messaging |                                         |                           |                                     |                                        |
+|           | [Kafka](https://kafka.apache.org/)      | target.messaging.kafka    | [Usage](sources/messaging/kafka)    | [Example](examples/messaging/kafka)    |
+|           | [RabbitMQ](https://www.rabbitmq.com/)   | target.messaging.rabbitmq | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
+|           | [MQTT](http://mqtt.org/)                | target.messaging.mqtt     | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
+|           | [ActiveMQ](http://activemq.apache.org/) | target.messaging.activemq | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
 
 
 #### Google Cloud Platform (GCP)
