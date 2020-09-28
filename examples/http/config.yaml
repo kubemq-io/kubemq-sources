@@ -1,4 +1,4 @@
-apiPort: 8090
+apiPort: 8080
 bindings:
   - name: http-post-kubemq-event
     source:
@@ -15,5 +15,4 @@ bindings:
         client_id: "kubemq-http-connector"
         auth_token: ""
         channel: "events.post"
-    properties:
-      log_level: "debug"
+

@@ -31,40 +31,19 @@ Binding is a 1:1 connection between Source and Target. Every Binding runs indepe
 
 ### Source
 
-Target is an external service that exposes an API allowing to interact and serve his functionalists with other services.
+Source is an external service that provide ingress data to KubeMQ's channels which then later consumed by services connected to KubeMQ server.
 
-Targets can be Cache systems such as Redis and Memcached, SQL Databases such as Postgres and MySql, and event an HTTP generic Rest interface.
+Source can be services such HTTP REST Api, Messaging systems (RabbitMQ, Kafka, MQTT etc).
 
-KubeMQ Targets integrate each one of the supported targets and service requests based on the request data.
+KubeMQ Sources integrate each one of the supported sources and ingest data into KubeMQ via Targets.
 
-A list of supported targets is below.
+A list of supported sources is below.
 
 #### Standalone Services
 
 | Category   | Target                                                              | Kind                         | Configuration                                      | Example                                 |
 |:-----------|:--------------------------------------------------------------------|:-----------------------------|:---------------------------------------------------|:----------------------------------------|
-| Cache      |                                                                     |                              |                                                    |                                         |
-|            | [Redis](https://redis.io/)                                          | target.cache.redis           | [Usage](targets/cache/redis)                       | [Example](examples/cache/redis)         |
-|            | [Memcached](https://memcached.org/)                                 | target.cache.memcached       | [Usage](targets/cache/memcached)                   | [Example](examples/cache/memcached)    |
-| Stores/db  |                                                                     |                              |                                                    |                                         |
-|            | [Postgres](https://www.postgresql.org/)                             | target.stores.postgres       | [Usage](targets/stores/postgres)                   | [Example](examples/stores/postgres)     |
-|            | [Mysql](https://www.mysql.com/)                                     | target.stores.mysql          | [Usage](targets/stores/mysql)                      | [Example](examples/stores/mysql)        |
-|            | [MSSql](https://www.microsoft.com/en-us/sql-server/sql-server-2019) | target.stores.mssql          | [Usage](targets/stores/mssql)                      | [Example](examples/stores/mssql)        |
-|            | [MongoDB](https://www.mongodb.com/)                                 | target.stores.mongodb        | [Usage](targets/stores/mongodb)                    | [Example](examples/stores/mongodb)      |
-|            | [Elastic Search](https://www.elastic.co/)                           | target.stores.elastic-search | [Usage](targets/stores/elastic)                    | [Example](examples/stores/elastic)      |
-|            | [Cassandra](https://cassandra.apache.org/)                          | target.stores.cassandra      | [Usage](targets/stores/cassandra)                  | [Example](examples/stores/cassandra)    |
-|            | [Couchbase](https://www.couchbase.com/)                             | target.stores.couchbase      | [Usage](targets/stores/couchbase)                  | [Example](examples/stores/couchbase)    |
-| Messaging  |                                                                     |                              |                                                    |                                         |
-|            | [Kafka](https://kafka.apache.org/)                                  | target.messaging.kafka       | [Usage](targets/messaging/kafka)                   | [Example](examples/messaging/kafka)     |
-|            | [RabbitMQ](https://www.rabbitmq.com/)                               | target.messaging.rabbitmq    | [Usage](targets/messaging/rabbitmq)                | [Example](examples/messaging/rabbitmq)  |
-|            | [MQTT](http://mqtt.org/)                                            | target.messaging.mqtt        | [Usage](targets/messaging/mqtt)                    | [Example](examples/messaging/mqtt)      |
-|            | [ActiveMQ](http://activemq.apache.org/)                             | target.messaging.activemq    | [Usage](targets/messaging/activemq)                | [Example](examples/messaging/activemq)  |
-| Storage    |                                                                     |                              |                                                    |                                         |
-|            | [Minio/S3](https://min.io/)                                         | target.storage.minio         | [Usage](targets/storage/minio)                     | [Example](examples/storage/minio)       |
-| Serverless |                                                                     |                              |                                                    |                                         |
-|            | [OpenFaas](https://www.openfaas.com/)                               | target.serverless.openfaas   | [Usage](targets/serverless/openfass)               | [Example](examples/serverless/openfass) |
-| Http       |                                                                     |                              |                                                    |                                         |
-|            | Http                                                                | target.http                  | [Usage](targets/http)                              | [Example](examples/http)                |
+|            | Http                                                                | target.http                  | [Usage](sources/http)                              | [Example](examples/http)                |
 
 
 
@@ -73,63 +52,24 @@ A list of supported targets is below.
 
 | Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
 |:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
-| Cache      |                                                                     |                            |                                            |                                               |
-|            | [Redis](https://cloud.google.com/memorystore)                       | target.gcp.cache.redis     | [Usage](targets/gcp/memorystore/redis)     | [Example](examples/gcp/memorystore/redis)     |
-|            | [Memcached](https://cloud.google.com/memorystore)                   | target.gcp.cache.memcached | [Usage](targets/gcp/memorystore/memcached) | [Example](examples/gcp/memorystore/memcached) |
-| Stores/db  |                                                                     |                            |                                            |                                               |
-|            | [Postgres](https://cloud.google.com/sql)                            | target.gcp.stores.postgres | [Usage](targets/gcp/sql/postgres)          | [Example](examples/gcp/sql/postgres)           |
-|            | [Mysql](https://cloud.google.com/sql)                               | target.gcp.stores.mysql    | [Usage](targets/gcp/sql/mysql)             | [Example](examples/gcp/sql/mysql)              |
-|            | [BigQuery](https://cloud.google.com/bigquery)                       | target.gcp.bigquery        | [Usage](targets/gcp/bigquery)              | [Example](examples/gcp/bigquery)               |
-|            | [BigTable](https://cloud.google.com/bigtable)                       | target.gcp.bigtable        | [Usage](targets/gcp/bigtable)              | [Example](examples/gcp/bigtable)               |
-|            | [Firestore](https://cloud.google.com/firestore)                     | target.gcp.firestore       | [Usage](targets/gcp/firestore)             | [Example](examples/gcp/firestore)              |
-|            | [Spanner](https://cloud.google.com/spanner)                         | target.gcp.spanner         | [Usage](targets/gcp/spanner)               | [Example](examples/gcp/spanner)                |
-|            | [Firebase](https://firebase.google.com/products/realtime-database/) | target.gcp.firebase        | [Usage](targets/gcp/firebase)              | [Example](examples/gcp/firebase)               |
-| Messaging  |                                                                     |                            |                                            |                                               |
-|            | [Pub/Sub](https://cloud.google.com/pubsub)                          | target.gcp.pubsub          | [Usage](targets/gcp/pubsub)                | [Example](examples/gcp/pubsub)                 |
-| Storage    |                                                                     |                            |                                            |                                               |
-|            | [Storage](https://cloud.google.com/storage)                         | target.gcp.storage         | [Usage](targets/gcp/storage)               | [Example](examples/gcp/storage)                |
-| Serverless |                                                                     |                            |                                            |                                               |
-|            | [Functions](https://cloud.google.com/functions)                     | target.gcp.cloudfunctions  | [Usage](targets/gcp/cloudfunctions)        | [Example](examples/gcp/cloudfunctions)         |
-|            |                                                                     |                            |                                            |                                               |
 
+Coming soon
 
 
 #### Amazon Web Service (AWS)
 
 
-| Category   | Target                                                        | Kind                               | Configuration                                               | Example                                      |
-|:-----------|:--------------------------------------------------------------|:-----------------------------------|:------------------------------------------------------------|:---------------------------------------------|
-| Stores/db  |                                                               |                                    |                                                             |                                              |
-|            | [Athena](https://docs.aws.amazon.com/athena)                  | target.aws.athena                  | [Usage](targets/aws/athena)                                 | [Example](examples/aws/athena)               |
-|            | [DynamoDB](https://aws.amazon.com/dynamodb/)                  | target.aws.dynamodb                | [Usage](targets/aws/dynamodb)                               | [Example](examples/aws/dynamodb)             |
-|            | [Elasticsearch](https://aws.amazon.com/elasticsearch-service/)| target.aws.elasticsearch           | [Usage](targets/aws/elasticsearch)                          | [Example](examples/aws/elasticsearch)        |
-|            | [KeySpaces](https://docs.aws.amazon.com/keyspaces)            | target.aws.keyspaces               | [Usage](targets/aws/keyspaces)                              | [Example](examples/aws/keyspaces)            |
-|            | [MariaDB](https://aws.amazon.com/rds/mariadb/)                | target.aws.rds.mariadb             | [Usage](targets/aws/rds/mariadb)                            | [Example](examples/aws/rds/mariadb)          |
-|            | [MSSql](https://aws.amazon.com/rds/sqlserver/)                | target.aws.rds.mssql               | [Usage](targets/aws/rds/mssql)                              | [Example](examples/aws/rds/mssql)            |
-|            | [MySQL](https://aws.amazon.com/rds/mysql/)                    | target.aws.rds.mysql               | [Usage](targets/aws/rds/mysql)                              | [Example](examples/aws/rds/mysql)            |       
-|            | [Postgres](https://aws.amazon.com/rds/postgresql/)            | target.aws.rds.postgres            | [Usage](targets/aws/rds/postgres)                           | [Example](examples/aws/rds/postgres)         |     
-|            | [RedShift](https://aws.amazon.com/redshift/)                  | target.aws.rds.redshift            | [Usage](targets/aws/rds/redshift)                           | [Example](examples/aws/rds/redshift)         |
-|            | [RedShiftSVC](https://aws.amazon.com/redshift/)               | target.aws.rds.redshift.service    | [Usage](targets/aws/redshift)                               | [Example](examples/aws/redshift)             |
-| Messaging  |                                                               |                                    |                                                             |                                              |
-|            | [AmazonMQ](https://aws.amazon.com/amazon-mq/)                 | target.aws.amazonmq                | [Usage](targets/aws/amazonmq)                               | [Example](examples/aws/amazonmq)             |
-|            | [msk](https://aws.amazon.com/msk/)                            | target.aws.msk                     | [Usage](targets/aws/msk)                                    | [Example](examples/aws/msk)                  |       
-|            | [Kinesis](https://aws.amazon.com/kinesis/)                    | target.aws.kinesis                 | [Usage](targets/aws/kinesis)                                | [Example](examples/aws/kinesis)              |  
-|            | [SQS](https://aws.amazon.com/sqs/)                            | target.aws.sqs                     | [Usage](targets/aws/sqs)                                    | [Example](examples/aws/sqs)                  |         
-|            | [SNS](https://aws.amazon.com/sns/)                            | target.aws.sns                     | [Usage](targets/aws/sns)                                    | [Example](examples/aws/sns)                  |       
-| Storage    |                                                               |                                    |                                                             |                                              |
-|            | [s3](https://aws.amazon.com/s3/)                              | target.aws.s3                      | [Usage](targets/aws/s3)                                     | [Example](examples/aws/s3)                   |
-| Serverless |                                                               |                                    |                                                             |                                              |
-|            | [lambda](https://aws.amazon.com/lambda/)                      | target.aws.lambda                  | [Usage](targets/aws/lambda)                                 | [Example](examples/aws/lambda)               | 
-| Other      |                                                               |                                    |                                                             |                                              |
-|            | [Cloud Watch](https://aws.amazon.com/cloudwatch/)             | target.aws.cloudwatch.logs         | [Usage](targets/aws/cloudwatch/logs)                        | [Example](examples/aws/cloudwatch/logs)      |
-|            | [Cloud Watch](https://aws.amazon.com/cloudwatch/)             | target.aws.cloudwatch.events       | [Usage](targets/aws/cloudwatch/events)                      | [Example](examples/aws/cloudwatch/events)    |
-|            | [Cloud Watch](https://aws.amazon.com/cloudwatch/)             | target.aws.cloudwatch.metrics      | [Usage](targets/aws/cloudwatch/metrics)                     | [Example](examples/aws/cloudwatch/metrics)   |
-|            |                                                               |                                    |                                                             |                                              |
+| Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
+|:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
 
+Coming soon
 
 #### Microsoft Azure
 
-(Work in Progress)
+| Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
+|:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
+
+Coming soon
 
 ### Target
 
