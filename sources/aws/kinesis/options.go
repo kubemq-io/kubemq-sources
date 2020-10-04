@@ -3,7 +3,7 @@ package kinesis
 import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
-	"time"
+	"math"
 )
 
 const (
@@ -21,16 +21,12 @@ type options struct {
 	sequenceNumber    string
 	ShardIteratorType string
 	shardID           string
-	pullDelay         time.Duration
+	pullDelay         int
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error
-
-	o.token = cfg.Properties.ParseString("token", defaultToken)
-	o.sequenceNumber = cfg.Properties.ParseString("sequence_number", defaultSequence)
-	o.pullDelay = time.Duration(cfg.Properties.ParseInt("pull_delay", DefaultWaitBetweenPull))
 
 	o.awsKey, err = cfg.Properties.MustParseString("aws_key")
 	if err != nil {
@@ -60,5 +56,11 @@ func parseOptions(cfg config.Spec) (options, error) {
 		return options{}, fmt.Errorf("error parsing shard_id, %w", err)
 	}
 
+	o.token = cfg.Properties.ParseString("token", defaultToken)
+	o.sequenceNumber = cfg.Properties.ParseString("sequence_number", defaultSequence)
+	o.pullDelay, err = cfg.Properties.ParseIntWithRange("pull_delay", DefaultWaitBetweenPull, 1, math.MaxInt32)
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing pull delay value , %w", err)
+	}
 	return o, nil
 }

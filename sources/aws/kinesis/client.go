@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kinesis"
+	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
@@ -26,6 +27,9 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
+}
+func (c *Client) Connector() *common.Connector {
+	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
@@ -73,7 +77,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	go func() {
 		for {
 			select {
-			case <-time.After(c.opts.pullDelay * time.Millisecond):
+			case <-time.After(time.Duration(c.opts.pullDelay) * time.Millisecond):
 				for events := range response.GetStream().Events() {
 					if events == nil {
 						c.log.Errorf("failed to receive events on error %s", err.Error())

@@ -1,59 +1,59 @@
 apiPort: 8090
-bindings:
-#  - name: http-post-kubemq-event
+#bindings:
+##  - name: http-post-kubemq-event
+##    source:
+##      kind: source.http
+##      name: http-post
+##      properties:
+##        "methods": "post"
+##        "path": "/post"
+##    target:
+##      kind: target.events
+##      name: target-kubemq-events
+##      properties:
+##        address: "localhost:50000"
+##        client_id: "kubemq-http-connector"
+##        auth_token: ""
+##        channel: "events.post"
+##    properties:
+##      log_level: "debug"
+##  - name: rabbitmq-kubemq-event
+##    source:
+##      kind: source.messaging.rabbitmq
+##      name: rabbitmq-source
+##      properties:
+##        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
+##        "queue": "queue"
+##        "consumer": "kubemq"
+##        "requeue_on_error": "false"
+##        "auto_ack": "false"
+##        "exclusive": "false"
+##    target:
+##      kind: target.events
+##      name: target-kubemq-events
+##      properties:
+##        address: "localhost:50000"
+##        client_id: "kubemq-rabbitmq-connector"
+##        channel: "events.rabbitmq"
+##    properties:
+##      log_level: "info"
+#  - name: mqtt-kubemq-event
 #    source:
-#      kind: source.http
-#      name: http-post
+#      kind: source.messaging.mqtt
+#      name: mqtt-source
 #      properties:
-#        "methods": "post"
-#        "path": "/post"
+#        host: "localhost:1883"
+#        topic: "queue"
+#        username: "username"
+#        password: "password"
+#        client_id: "client_id_receiver"
+#        qos: "0"
 #    target:
 #      kind: target.events
 #      name: target-kubemq-events
 #      properties:
 #        address: "localhost:50000"
-#        client_id: "kubemq-http-connector"
-#        auth_token: ""
-#        channel: "events.post"
-#    properties:
-#      log_level: "debug"
-#  - name: rabbitmq-kubemq-event
-#    source:
-#      kind: source.messaging.rabbitmq
-#      name: rabbitmq-source
-#      properties:
-#        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
-#        "queue": "queue"
-#        "consumer": "kubemq"
-#        "requeue_on_error": "false"
-#        "auto_ack": "false"
-#        "exclusive": "false"
-#    target:
-#      kind: target.events
-#      name: target-kubemq-events
-#      properties:
-#        address: "localhost:50000"
-#        client_id: "kubemq-rabbitmq-connector"
-#        channel: "events.rabbitmq"
+#        client_id: "kubemq-mqtt-connector"
+#        channel: "events.mqtt"
 #    properties:
 #      log_level: "info"
-  - name: mqtt-kubemq-event
-    source:
-      kind: source.messaging.mqtt
-      name: mqtt-source
-      properties:
-        host: "localhost:1883"
-        topic: "queue"
-        username: "username"
-        password: "password"
-        client_id: "client_id_receiver"
-        qos: "0"
-    target:
-      kind: target.events
-      name: target-kubemq-events
-      properties:
-        address: "localhost:50000"
-        client_id: "kubemq-mqtt-connector"
-        channel: "events.mqtt"
-    properties:
-      log_level: "info"

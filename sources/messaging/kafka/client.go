@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"github.com/kubemq-hub/builder/common"
 	"sync"
 
 	kafka "github.com/Shopify/sarama"
@@ -59,6 +60,9 @@ func (consumer *consumer) Setup(kafka.ConsumerGroupSession) error {
 
 func New() *Client {
 	return &Client{}
+}
+func (c *Client) Connector() *common.Connector {
+	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {

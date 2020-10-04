@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-stomp/stomp"
+	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
@@ -25,6 +26,9 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
+}
+func (c *Client) Connector() *common.Connector {
+	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {

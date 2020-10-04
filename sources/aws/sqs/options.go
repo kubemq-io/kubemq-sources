@@ -15,10 +15,9 @@ const (
 )
 
 type options struct {
-	sqsKey       string
-	sqsSecretKey string
-	region       string
-
+	awsKey              string
+	awsSecretKey        string
+	region              string
 	queue               string
 	token               string
 	visibilityTimeout   int64
@@ -30,12 +29,12 @@ type options struct {
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error
-	o.sqsKey, err = cfg.Properties.MustParseString("aws_key")
+	o.awsKey, err = cfg.Properties.MustParseString("aws_key")
 	if err != nil {
 		return options{}, fmt.Errorf("error aws_key , %w", err)
 	}
 
-	o.sqsSecretKey, err = cfg.Properties.MustParseString("aws_secret_key")
+	o.awsSecretKey, err = cfg.Properties.MustParseString("aws_secret_key")
 	if err != nil {
 		return options{}, fmt.Errorf("error aws_secret_key , %w", err)
 	}

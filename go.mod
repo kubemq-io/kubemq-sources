@@ -13,6 +13,7 @@ require (
 	github.com/go-resty/resty/v2 v2.3.0 // indirect
 	github.com/go-stomp/stomp v2.0.6+incompatible
 	github.com/json-iterator/go v1.1.10
+	github.com/kubemq-hub/builder v0.0.0-20201003154349-f7267f282c50
 	github.com/kubemq-io/kubemq-go v1.4.3
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/nats-io/nuid v1.0.1
@@ -26,5 +27,4 @@ require (
 	go.uber.org/atomic v1.7.0
 	go.uber.org/zap v1.16.0
 	google.golang.org/api v0.32.0
-	gopkg.in/yaml.v2 v2.2.8 // indirect
 )

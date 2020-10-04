@@ -2,9 +2,9 @@ package http
 
 import (
 	"context"
+	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	targetMiddleware "github.com/kubemq-hub/kubemq-sources/middleware"
-
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"io/ioutil"
 	"net/http"
@@ -16,6 +16,10 @@ type Handler struct {
 	target  targetMiddleware.Middleware
 	Methods []string
 	Path    string
+}
+
+func (h *Handler) Connector() *common.Connector {
+	return Connector()
 }
 
 func New() *Handler {

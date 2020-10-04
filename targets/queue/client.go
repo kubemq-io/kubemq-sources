@@ -3,6 +3,7 @@ package queue
 import (
 	"context"
 	"fmt"
+	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
@@ -16,6 +17,9 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 
+}
+func (c *Client) Connector() *common.Connector {
+	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {

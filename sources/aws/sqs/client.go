@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
+	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
@@ -28,6 +29,9 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
+func (c *Client) Connector() *common.Connector {
+	return Connector()
+}
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
@@ -41,7 +45,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(c.opts.region),
-		Credentials: credentials.NewStaticCredentials(c.opts.sqsKey, c.opts.sqsSecretKey, c.opts.token),
+		Credentials: credentials.NewStaticCredentials(c.opts.awsKey, c.opts.awsSecretKey, c.opts.token),
 	})
 	if err != nil {
 		return err
