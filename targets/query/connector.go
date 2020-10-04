@@ -13,7 +13,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("address").
-				SetDescription("Sets Kubemq grpc endpoint address").
+				SetDescription("Sets Kubemq sgrpc endpoint address").
 				SetMust(true).
 				SetDefault("localhost:50000"),
 		).

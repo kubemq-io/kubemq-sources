@@ -33,7 +33,10 @@ tasks:
       - go mod vendor
       - docker build --build-arg VERSION={{.VERSION}} . -t kubemq/{{.BINARY_NAME}}:{{.VERSION}}
       - docker tag kubemq/{{.BINARY_NAME}}:{{.VERSION}} kubemq/{{.BINARY_NAME}}:latest
-
+  push:
+    cmds:
+      - docker push kubemq/{{.BINARY_NAME}}:{{.VERSION}}
+      - docker push kubemq/{{.BINARY_NAME}}:latest
   update-manifest:
     cmds:
       - task: build
@@ -43,10 +46,15 @@ tasks:
       - git add -A
       - git commit -a -m "release {{.VERSION}}"
       - git push origin master
+  tag:
+    cmds:
+      - git tag -a {{.VERSION}} -m {{.VERSION}}
+      - git push origin master --tags
   release:
     cmds:
       - task: lint
       - task: update-manifest
+      - task: commit-modifed
       - task: docker
-      - docker push kubemq/{{.BINARY_NAME}}:{{.VERSION}}
-      - docker push kubemq/{{.BINARY_NAME}}:latest
+      - task: push
+      - task: tag
