@@ -1,6 +1,6 @@
 # github.com/go-task/task
 
-version: '2'
+version: '3'
 
 vars:
   BINARY_NAME: kubemq-sources
@@ -16,6 +16,14 @@ tasks:
   test:
     cmds:
       - go test -timeout 30m ./...
+  build:
+    env:
+      GOOS: '{{OS}}'
+      GOARCH: '{{ARCH}}'
+    cmds:
+      - go mod tidy
+      - go mod vendor
+      - go build -o "{{.BINARY_NAME}}.exe" -ldflags "-X main.version={{.VERSION}}"
   docker:
     env:
       GOOS: linux
@@ -25,8 +33,20 @@ tasks:
       - go mod vendor
       - docker build --build-arg VERSION={{.VERSION}} . -t kubemq/{{.BINARY_NAME}}:{{.VERSION}}
       - docker tag kubemq/{{.BINARY_NAME}}:{{.VERSION}} kubemq/{{.BINARY_NAME}}:latest
+
+  update-manifest:
+    cmds:
+      - task: build
+      - ./{{.BINARY_NAME}}.exe --manifest
+  commit-modifed:
+    cmds:
+      - git add -A
+      - git commit -a -m "release {{.VERSION}}"
+      - git push origin master
   release:
     cmds:
+      - task: lint
+      - task: update-manifest
       - task: docker
       - docker push kubemq/{{.BINARY_NAME}}:{{.VERSION}}
       - docker push kubemq/{{.BINARY_NAME}}:latest

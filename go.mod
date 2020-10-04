@@ -20,7 +20,7 @@ require (
 	github.com/pelletier/go-toml v1.4.0 // indirect
 	github.com/prometheus/client_golang v1.7.1
 	github.com/smartystreets/assertions v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5
+	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.6.1
@@ -28,3 +28,5 @@ require (
 	go.uber.org/zap v1.16.0
 	google.golang.org/api v0.32.0
 )
+
+replace github.com/kubemq-hub/builder => ../builder

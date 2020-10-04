@@ -3,13 +3,10 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/kubemq-hub/builder/common"
 	"github.com/kubemq-hub/kubemq-sources/api"
 	"github.com/kubemq-hub/kubemq-sources/binding"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/sources"
-	"github.com/kubemq-hub/kubemq-sources/targets"
 	"os"
 	"os/signal"
 	"syscall"
@@ -24,16 +21,9 @@ var (
 var (
 	log              *logger.Logger
 	generateManifest = flag.Bool("manifest", false, "generate source connectors manifest")
+	build            = flag.Bool("build", false, "build sources configuration")
+	configFile       = flag.String("config", "config.yaml", "set config file name")
 )
-
-func saveManifest() error {
-	return common.NewManifest().
-		SetSchema("sources").
-		SetVersion(version).
-		SetSourceConnectors(sources.Connectors()).
-		SetTargetConnectors(targets.Connectors()).
-		Save("manifest.json")
-}
 
 func run() error {
 	var gracefulShutdown = make(chan os.Signal, 1)
@@ -101,16 +91,22 @@ func main() {
 	log = logger.NewLogger("main")
 	flag.Parse()
 	if *generateManifest {
-
 		err := saveManifest()
 		if err != nil {
 			log.Error(err)
 			os.Exit(1)
-
 		}
 		log.Infof("generated manifest.json completed")
 		os.Exit(0)
 	}
+	if *build {
+		err := buildConfig()
+		if err != nil {
+			log.Error(err)
+			os.Exit(1)
+		}
+	}
+	config.SetConfigFile(*configFile)
 	log = logger.NewLogger("main")
 	log.Infof("starting kubemq sources connectors version: %s, commit: %s, date %s", version, commit, date)
 	if err := run(); err != nil {

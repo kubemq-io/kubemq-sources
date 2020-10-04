@@ -37,7 +37,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("auth_token").
-				SetDescription("Sets Queue connection Authentication token").
+				SetDescription("Sets Queue connection authentication token").
 				SetMust(false).
 				SetDefault(""),
 		).
