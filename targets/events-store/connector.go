@@ -34,7 +34,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("auth_token").
-				SetDescription("Sets Events-Store connection Authentication token").
+				SetDescription("Sets Events-Store connection authentication token").
 				SetMust(false).
 				SetDefault(""),
 		)

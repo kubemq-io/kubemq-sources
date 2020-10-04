@@ -13,7 +13,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("address").
-				SetDescription("Sets Kubemq sgrpc endpoint address").
+				SetDescription("Sets Kubemq grpc endpoint address").
 				SetMust(true).
 				SetDefault("localhost:50000"),
 		).
@@ -37,7 +37,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("auth_token").
-				SetDescription("Sets Query connection Authentication token").
+				SetDescription("Sets Query connection authentication token").
 				SetMust(false).
 				SetDefault(""),
 		).

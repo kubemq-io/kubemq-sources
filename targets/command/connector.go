@@ -37,7 +37,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("auth_token").
-				SetDescription("Sets Command connection Authentication token").
+				SetDescription("Sets Command connection authentication token").
 				SetMust(false).
 				SetDefault(""),
 		).
