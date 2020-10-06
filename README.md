@@ -3,7 +3,7 @@
 KubeMQ Sources connects external systems and cloud services with KubeMQ message queue broker.
 
 KubeMQ Sources allows us to build a message-based microservices architecture on Kubernetes with minimal efforts and without developing connectivity interfaces between external system such as messaging components (RabbitMQ, Kafka, MQTT) ,REST APIs and KubeMQ message queue broker.
-In addition, KubeMQ Sources allows to migrate legacy systems (together with [KubeMQ Targets](https://github.com/kubemq-hub/kubemq-targets)) to KubeMQ based messaging architecture.
+In addition, KubeMQ Sources allows migrating legacy systems (together with [KubeMQ Targets](https://github.com/kubemq-hub/kubemq-targets)) to KubeMQ based messaging architecture.
 
 
 **Key Features**:
@@ -18,7 +18,7 @@ In addition, KubeMQ Sources allows to migrate legacy systems (together with [Kub
 
 ## Concepts
 
-KubeMQ Targets building blocks are:
+KubeMQ Sources building blocks are:
  - Binding
  - Source
  - Target
@@ -107,14 +107,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubemq-hub/kubemq-sources/mas
 
 ### Binary (Cross-platform)
 
-Download the appropriate version for your platform from KubeMQ Targets Releases. Once downloaded, the binary can be run from anywhere.
+Download the appropriate version for your platform from KubeMQ Sources Releases. Once downloaded, the binary can be run from anywhere.
 
 Ideally, you should install it somewhere in your PATH for easy use. /usr/local/bin is the most probable location.
 
-Running KubeMQ Targets
+Running KubeMQ Sources
 
 ```bash
-kubemq-targets --config config.yaml
+./kubemq-sources --config config.yaml
 ```
 
 
@@ -147,16 +147,22 @@ bindings:
       properties: # a set of key/value settings per each target kind
         - .....
 ```
+### Build Wizard
 
+KubeMQ Bridges configuration can be build with --build flag
+
+```
+./kubemq-bridges --build
+```
 ### Properties
 
-In bindings configuration, KubeMQ targets support properties setting for each pair of source and target bindings.
+In bindings configuration, KubeMQ Sources support properties setting for each pair of source and target bindings.
 
 These properties contain middleware information settings as follows:
 
 #### Logs Middleware
 
-KubeMQ targets support level based logging to console according to as follows:
+KubeMQ Sources support level based logging to console according to as follows:
 
 | Property  | Description       | Possible Values        |
 |:----------|:------------------|:-----------------------|
@@ -176,7 +182,7 @@ bindings:
 
 #### Retry Middleware
 
-KubeMQ targets support Retries' target execution before reporting of error back to the source on failed execution.
+KubeMQ Sources support Retries' target execution before reporting of error back to the source on failed execution.
 
 Retry middleware settings values:
 
@@ -206,7 +212,7 @@ bindings:
 
 #### Rate Limiter Middleware
 
-KubeMQ targets support a Rate Limiting of target executions.
+KubeMQ Sources support a Rate Limiting of target executions.
 
 Rate Limiter middleware settings values:
 
