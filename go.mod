@@ -29,4 +29,4 @@ require (
 	google.golang.org/api v0.32.0
 )
 
-//replace github.com/kubemq-hub/builder => ../builder
+replace github.com/kubemq-hub/builder => ../builder

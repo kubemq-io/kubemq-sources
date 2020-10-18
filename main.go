@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
+	"github.com/ghodss/yaml"
 	"github.com/kubemq-hub/kubemq-sources/sources"
 
 	"github.com/kubemq-hub/builder/connector/common"
@@ -48,18 +50,34 @@ func saveManifest() error {
 		SetTargetConnectors(targetConnectors).
 		Save("manifest.json")
 }
+func loadCfgBindings() []*common.Binding {
+	file, err := ioutil.ReadFile("./config.yaml")
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	list := &common.Bindings{}
+	err = yaml.Unmarshal(file, list)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return list.Bindings
+}
 
 func buildConfig() error {
 	var err error
 	var bindingsYaml []byte
+
 	if bindingsYaml, err = connectorSources.NewSource("kubemq-sources").
+		SetBindings(loadCfgBindings()).
 		SetManifestFile("./manifest.json").
 		SetDefaultOptions(common.NewDefaultOptions().
 			Add("kubemq-address", []string{"localhost:50000", "Other"})).
 		Render(); err != nil {
 		return err
 	}
-	return ioutil.WriteFile("config.yaml", bindingsYaml, 0644)
+	return ioutil.WriteFile("./config.yaml", bindingsYaml, 0644)
 }
 func run() error {
 	var gracefulShutdown = make(chan os.Signal, 1)
