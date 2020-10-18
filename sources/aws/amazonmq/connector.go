@@ -1,6 +1,6 @@
 package amazonmq
 
-import "github.com/kubemq-hub/builder/common"
+import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
@@ -10,14 +10,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
-				SetDescription("Sets AmazonMQ host").
+				SetDescription("Set AmazonMQ host").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("username").
-				SetDescription("Sets username").
+				SetDescription("Set username").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -25,7 +25,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("password").
-				SetDescription("Sets password").
+				SetDescription("Set password").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -33,7 +33,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("destination").
-				SetDescription("Sets destination").
+				SetDescription("Set destination").
 				SetMust(true).
 				SetDefault(""),
 		)

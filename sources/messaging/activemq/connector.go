@@ -1,6 +1,6 @@
 package activemq
 
-import "github.com/kubemq-hub/builder/common"
+import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
@@ -10,14 +10,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
-				SetDescription("Sets ActiveMQ Host connection").
+				SetDescription("Set ActiveMQ Host connection").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("username").
-				SetDescription("Sets Username").
+				SetDescription("Set Username").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -25,7 +25,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("password").
-				SetDescription("Sets Password").
+				SetDescription("Set Password").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -33,7 +33,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("destination").
-				SetDescription("Sets Destination").
+				SetDescription("Set Destination").
 				SetMust(true).
 				SetDefault(""),
 		)

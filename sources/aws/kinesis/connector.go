@@ -1,7 +1,7 @@
 package kinesis
 
 import (
-	"github.com/kubemq-hub/builder/common"
+	"github.com/kubemq-hub/builder/connector/common"
 	"math"
 )
 
@@ -13,14 +13,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("awsKey").
-				SetDescription("Sets AWS Key").
+				SetDescription("Set AWS Key").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("aws_secret_key").
-				SetDescription("Sets AWS Secret Key").
+				SetDescription("Set AWS Secret Key").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -28,7 +28,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("region").
-				SetDescription("Sets Region").
+				SetDescription("Set Region").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -36,7 +36,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("consumer_arn").
-				SetDescription("Sets Customer ARN").
+				SetDescription("Set Customer ARN").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -44,7 +44,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("shard_iterator_type").
-				SetDescription("Sets Shard Iterator Type").
+				SetDescription("Set Shard Iterator Type").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -52,7 +52,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("shard_id").
-				SetDescription("Sets Shard Id").
+				SetDescription("Set Shard Id").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -60,7 +60,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("token").
-				SetDescription("Sets Token").
+				SetDescription("Set Token").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -68,7 +68,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("sequence_number").
-				SetDescription("Sets Sequence Number").
+				SetDescription("Set Sequence Number").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -76,7 +76,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("pull_delay").
-				SetDescription("Sets Pull Delay in seconds").
+				SetDescription("Set Pull Delay in seconds").
 				SetMust(false).
 				SetDefault("5").
 				SetMin(0).

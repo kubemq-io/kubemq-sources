@@ -13,7 +13,7 @@ require (
 	github.com/go-resty/resty/v2 v2.3.0 // indirect
 	github.com/go-stomp/stomp v2.0.6+incompatible
 	github.com/json-iterator/go v1.1.10
-	github.com/kubemq-hub/builder v0.2.0
+	github.com/kubemq-hub/builder v0.3.0
 	github.com/kubemq-io/kubemq-go v1.4.3
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/nats-io/nuid v1.0.1
@@ -29,4 +29,4 @@ require (
 	google.golang.org/api v0.32.0
 )
 
-// replace github.com/kubemq-hub/builder => ../builder
+//replace github.com/kubemq-hub/builder => ../builder

@@ -1,7 +1,7 @@
 package command
 
 import (
-	"github.com/kubemq-hub/builder/common"
+	"github.com/kubemq-hub/builder/connector/common"
 	"math"
 )
 
@@ -13,7 +13,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("address").
-				SetDescription("Sets Kubemq grpc endpoint address").
+				SetDescription("Set Kubemq grpc endpoint address").
 				SetMust(true).
 				SetDefault("").
 				SetLoadedOptions("kubemq-address"),
@@ -22,7 +22,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("channel").
-				SetDescription("Sets Command channel").
+				SetDescription("Set Command channel").
 				SetMust(true).
 				SetDefault("commands"),
 		).
@@ -30,7 +30,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("client_id").
-				SetDescription("Sets Command connection client Id").
+				SetDescription("Set Command connection client Id").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -38,7 +38,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("multilines").
 				SetName("auth_token").
-				SetDescription("Sets Command connection authentication token").
+				SetDescription("Set Command connection authentication token").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -46,7 +46,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("timeout_seconds").
-				SetDescription("Sets Command request timeout in seconds").
+				SetDescription("Set Command request timeout in seconds").
 				SetMust(false).
 				SetDefault("60").
 				SetMin(1).

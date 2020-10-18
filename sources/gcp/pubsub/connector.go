@@ -1,7 +1,7 @@
 package pubsub
 
 import (
-	"github.com/kubemq-hub/builder/common"
+	"github.com/kubemq-hub/builder/connector/common"
 )
 
 func Connector() *common.Connector {
@@ -12,14 +12,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("project_id").
-				SetDescription("Sets Project Id").
+				SetDescription("Set Project Id").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("subscriber_id").
-				SetDescription("Sets Subscriber Id").
+				SetDescription("Set Subscriber Id").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -27,7 +27,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("credentials").
-				SetDescription("Sets Credentials").
+				SetDescription("Set Credentials").
 				SetMust(true).
 				SetDefault(""),
 		)

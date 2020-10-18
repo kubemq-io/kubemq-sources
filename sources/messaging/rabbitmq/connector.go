@@ -1,6 +1,6 @@
 package rabbitmq
 
-import "github.com/kubemq-hub/builder/common"
+import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
@@ -10,14 +10,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("url").
-				SetDescription("Stets RabbitMQ connection string").
+				SetDescription("Set RabbitMQ connection string").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("queue").
-				SetDescription("Sets queue name").
+				SetDescription("Set queue name").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -25,7 +25,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("consumer").
-				SetDescription("Sets consumer tag value").
+				SetDescription("Set consumer tag value").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -33,7 +33,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("bool").
 				SetName("requeue_on_error").
-				SetDescription("Sets requeue message on error").
+				SetDescription("Set requeue message on error").
 				SetMust(false).
 				SetDefault("false"),
 		).
@@ -41,7 +41,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("bool").
 				SetName("auto_ack").
-				SetDescription("Sets auto ack upon receive message").
+				SetDescription("Set auto ack upon receive message").
 				SetMust(false).
 				SetDefault("false"),
 		).
@@ -49,7 +49,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("bool").
 				SetName("exclusive").
-				SetDescription("Sets exclusive subscription").
+				SetDescription("Set exclusive subscription").
 				SetMust(false).
 				SetDefault("false"),
 		)

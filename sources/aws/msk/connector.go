@@ -1,7 +1,7 @@
 package msk
 
 import (
-	"github.com/kubemq-hub/builder/common"
+	"github.com/kubemq-hub/builder/connector/common"
 )
 
 func Connector() *common.Connector {
@@ -12,7 +12,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("brokers").
-				SetDescription("Sets Brokers list").
+				SetDescription("Set Brokers list").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -20,7 +20,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("topics").
-				SetDescription("Sets Topics list").
+				SetDescription("Set Topics list").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -28,7 +28,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("consumer_group").
-				SetDescription("Sets Consumer Group").
+				SetDescription("Set Consumer Group").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -36,7 +36,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("sasl_username").
-				SetDescription("Sets Saal Username").
+				SetDescription("Set Saal Username").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -44,7 +44,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("sasl_password").
-				SetDescription("Sets Saal Password").
+				SetDescription("Set Saal Password").
 				SetMust(false).
 				SetDefault(""),
 		)

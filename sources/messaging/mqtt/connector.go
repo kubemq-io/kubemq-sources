@@ -1,6 +1,6 @@
 package mqtt
 
-import "github.com/kubemq-hub/builder/common"
+import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
@@ -10,14 +10,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
-				SetDescription("Sets MQTT Host connection").
+				SetDescription("Set MQTT Host connection").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("username").
-				SetDescription("Sets username").
+				SetDescription("Set username").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -25,7 +25,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("password").
-				SetDescription("Sets password").
+				SetDescription("Set password").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -33,7 +33,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("topic").
-				SetDescription("Sets topic name").
+				SetDescription("Set topic name").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -41,7 +41,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("client_id").
-				SetDescription("Sets client ID").
+				SetDescription("Set client ID").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -49,7 +49,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("qos").
-				SetDescription("Sets QoS level").
+				SetDescription("Set QoS level").
 				SetMust(true).
 				SetDefault("0").
 				SetMin(0).

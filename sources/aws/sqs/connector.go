@@ -1,7 +1,7 @@
 package sqs
 
 import (
-	"github.com/kubemq-hub/builder/common"
+	"github.com/kubemq-hub/builder/connector/common"
 	"math"
 )
 
@@ -13,14 +13,14 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("awsKey").
-				SetDescription("Sets AWS Key").
+				SetDescription("Set AWS Key").
 				SetMust(true),
 		).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("aws_secret_key").
-				SetDescription("Sets AWS Secret Key").
+				SetDescription("Set AWS Secret Key").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -28,7 +28,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("region").
-				SetDescription("Sets Region").
+				SetDescription("Set Region").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -36,7 +36,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("queue").
-				SetDescription("Sets Queue").
+				SetDescription("Set Queue").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -44,7 +44,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("token").
-				SetDescription("Sets Token").
+				SetDescription("Set Token").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -52,7 +52,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("pull_delay").
-				SetDescription("Sets Pull Delay in seconds").
+				SetDescription("Set Pull Delay in seconds").
 				SetMust(false).
 				SetDefault("5").
 				SetMin(0).
@@ -62,7 +62,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("visibility_timeout").
-				SetDescription("Sets Visibility Timout").
+				SetDescription("Set Visibility Timout").
 				SetMust(false).
 				SetDefault("0").
 				SetMin(0).
@@ -72,7 +72,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("max_number_of_messages").
-				SetDescription("Sets Max Number of Messages").
+				SetDescription("Set Max Number of Messages").
 				SetMust(false).
 				SetDefault("1").
 				SetMin(0).
@@ -82,7 +82,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("wait_time_seconds").
-				SetDescription("Sets Wait Time Second").
+				SetDescription("Set Wait Time Second").
 				SetMust(false).
 				SetDefault("0").
 				SetMin(0).

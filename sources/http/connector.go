@@ -1,6 +1,6 @@
 package http
 
-import "github.com/kubemq-hub/builder/common"
+import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
