@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"github.com/ghodss/yaml"
 	"github.com/kubemq-hub/kubemq-sources/sources"
 
@@ -53,13 +52,11 @@ func saveManifest() error {
 func loadCfgBindings() []*common.Binding {
 	file, err := ioutil.ReadFile("./config.yaml")
 	if err != nil {
-		fmt.Println(err)
 		return nil
 	}
 	list := &common.Bindings{}
 	err = yaml.Unmarshal(file, list)
 	if err != nil {
-		fmt.Println(err)
 		return nil
 	}
 	return list.Bindings
