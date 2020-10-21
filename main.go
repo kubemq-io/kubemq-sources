@@ -47,7 +47,7 @@ func saveManifest() error {
 		SetVersion(version).
 		SetSourceConnectors(sourceConnectors).
 		SetTargetConnectors(targetConnectors).
-		Save("manifest.json")
+		Save()
 }
 func loadCfgBindings() []*common.Binding {
 	file, err := ioutil.ReadFile("./config.yaml")
@@ -68,7 +68,7 @@ func buildConfig() error {
 
 	if bindingsYaml, err = connectorSources.NewSource("kubemq-sources").
 		SetBindings(loadCfgBindings()).
-		SetManifestFile("./manifest.json").
+		SetManifestFile("./sources-manifest.json").
 		SetDefaultOptions(common.NewDefaultOptions().
 			Add("kubemq-address", []string{"localhost:50000", "Other"})).
 		Render(); err != nil {
