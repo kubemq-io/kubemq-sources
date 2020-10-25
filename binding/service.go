@@ -59,6 +59,8 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 					err := s.Add(ctx, cfg)
 					if err != nil {
 						s.log.Errorf("failed to initialized binding: %s, attempt: %d, error: %s", cfg.Name, count, err.Error())
+					} else {
+						return
 					}
 				case <-ctx.Done():
 					return
@@ -84,10 +86,6 @@ func (s *Service) Stop() {
 func (s *Service) Add(ctx context.Context, cfg config.BindingConfig) error {
 	s.Lock()
 	defer s.Unlock()
-	_, ok := s.bindings[cfg.Name]
-	if ok {
-		return fmt.Errorf("duplicate binding name")
-	}
 	binder := NewBinder()
 	err := binder.Init(ctx, cfg, s.exporter)
 	if err != nil {
