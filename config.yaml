@@ -1,5 +1,23 @@
+
 bindings:
 - name: b
+  source:
+    name: b
+    kind: source.http
+    properties:
+      methods: GET
+      path: /
+  target:
+    name: t
+    kind: target.queue
+    properties:
+      address: localhost:50000
+      channel: queues
+      delay_seconds: "0"
+      expiration_seconds: "0"
+      max_receive_count: "0"
+  properties: {}
+- name: b3
   source:
     name: b
     kind: source.http

@@ -33,13 +33,19 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		kubemq.WithAddress(c.opts.host, c.opts.port),
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
-		kubemq.WithAuthToken(c.opts.authToken))
+		kubemq.WithAuthToken(c.opts.authToken),
+		kubemq.WithCheckConnection(true))
 	if err != nil {
 		return err
 	}
 	return nil
 }
-
+func (c *Client) Stop() error {
+	if c.client != nil {
+		return c.client.Close()
+	}
+	return nil
+}
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 
 	queryResponse, err := c.client.Q().

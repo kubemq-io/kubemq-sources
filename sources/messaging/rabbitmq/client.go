@@ -40,6 +40,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	}
 	c.channel, err = c.conn.Channel()
 	if err != nil {
+		_ = c.conn.Close()
 		return fmt.Errorf("error getting rabbitmq channel, %w", err)
 	}
 
@@ -87,5 +88,5 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 }
 
 func (c *Client) Stop() error {
-	return c.channel.Close()
+	return c.conn.Close()
 }

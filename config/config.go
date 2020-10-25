@@ -31,12 +31,15 @@ func (c *Config) Validate() error {
 	if c.ApiPort == 0 {
 		c.ApiPort = defaultApiPort
 	}
-	if len(c.Bindings) == 0 {
-		return fmt.Errorf("at least one binding must be defined")
-	}
+	exitedBindings := map[string]string{}
 	for _, binding := range c.Bindings {
 		if err := binding.Validate(); err != nil {
 			return err
+		}
+		if _, ok := exitedBindings[binding.Name]; ok {
+			return fmt.Errorf("duplicated binding names found: %s", binding.Name)
+		} else {
+			exitedBindings[binding.Name] = binding.Name
 		}
 	}
 	return nil
@@ -130,7 +133,7 @@ func load() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	logr.Infof("%d bindings loaded", len(cfg.Bindings))
 	return cfg, err
 }
 

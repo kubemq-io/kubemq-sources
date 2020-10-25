@@ -33,7 +33,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken),
-		kubemq.WithCheckConnection(false),
+		kubemq.WithCheckConnection(true),
 	)
 	if err != nil {
 		return err
@@ -41,7 +41,12 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 
 	return nil
 }
-
+func (c *Client) Stop() error {
+	if c.client != nil {
+		return c.client.Close()
+	}
+	return nil
+}
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 	queueMessage := c.client.NewQueueMessage().
 		SetChannel(c.opts.channel).

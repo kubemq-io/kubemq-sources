@@ -91,6 +91,10 @@ func (b *Binder) Stop() error {
 	if err != nil {
 		return err
 	}
+	err = b.target.Stop()
+	if err != nil {
+		return err
+	}
 	b.log.Infof("binding: %s, stopped successfully", b.name)
 	return nil
 }

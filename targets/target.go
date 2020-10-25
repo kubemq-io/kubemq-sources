@@ -17,6 +17,7 @@ type Target interface {
 	Init(ctx context.Context, cfg config.Spec) error
 	Do(ctx context.Context, request *types.Request) (*types.Response, error)
 	Connector() *common.Connector
+	Stop() error
 }
 
 func Init(ctx context.Context, cfg config.Spec) (Target, error) {

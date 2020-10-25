@@ -28,7 +28,12 @@ func New() *Client {
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
-
+func (c *Client) Stop() error {
+	if c.client != nil {
+		return c.client.Close()
+	}
+	return nil
+}
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	var err error
 	c.opts, err = parseOptions(cfg)
@@ -41,7 +46,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken),
-		kubemq.WithCheckConnection(false),
+		kubemq.WithCheckConnection(true),
 	)
 	if err != nil {
 		return err

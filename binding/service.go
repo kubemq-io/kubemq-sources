@@ -9,6 +9,11 @@ import (
 	httpsrc "github.com/kubemq-hub/kubemq-sources/sources/http"
 	"net/http"
 	"sync"
+	"time"
+)
+
+const (
+	addRetryInterval = 1 * time.Second
 )
 
 type Service struct {
@@ -35,24 +40,36 @@ func New() (*Service, error) {
 }
 func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 	s.currentCtx, s.currentCancelFunc = context.WithCancel(ctx)
-	wg := sync.WaitGroup{}
-	wg.Add(len(cfg.Bindings))
+	if len(cfg.Bindings) == 0 {
+		return nil
+	}
 	for _, bindingCfg := range cfg.Bindings {
-		go func(cfg config.BindingConfig) {
-			defer wg.Done()
+		go func(ctx context.Context, cfg config.BindingConfig) {
 			err := s.Add(ctx, cfg)
-			if err != nil {
-				s.log.Errorf("failed to initialized binding, %s", err.Error())
+			if err == nil {
 				return
+			} else {
+				s.log.Errorf("failed to initialized binding, %s", err.Error())
 			}
-		}(bindingCfg)
+			count := 0
+			for {
+				select {
+				case <-time.After(addRetryInterval):
+					count++
+					err := s.Add(ctx, cfg)
+					if err != nil {
+						s.log.Errorf("failed to initialized binding: %s, attempt: %d, error: %s", cfg.Name, count, err.Error())
+					}
+				case <-ctx.Done():
+					return
+				}
+			}
+
+		}(s.currentCtx, bindingCfg)
 
 	}
-	wg.Wait()
-	if len(s.bindings) == 0 {
-		return fmt.Errorf("no valid bindings started")
-	}
 	return nil
+
 }
 
 func (s *Service) Stop() {

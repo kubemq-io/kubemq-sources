@@ -107,7 +107,7 @@ func run() error {
 	for {
 		select {
 		case newConfig := <-configCh:
-			err = cfg.Validate()
+			err = newConfig.Validate()
 			if err != nil {
 				log.Errorf("error on validation new config file: %s", err.Error())
 				continue
