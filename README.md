@@ -43,12 +43,12 @@ A list of supported sources is below.
 
 | Category  | Target                                  | Kind                      | Configuration                       | Example                                |
 |:----------|:----------------------------------------|:--------------------------|:------------------------------------|:---------------------------------------|
-| Http      | Http                                    | target.http               | [Usage](sources/http)               | [Example](examples/http)               |
+| Http      | Http                                    | http               | [Usage](sources/http)               | [Example](examples/http)               |
 | Messaging |                                         |                           |                                     |                                        |
-|           | [Kafka](https://kafka.apache.org/)      | target.messaging.kafka    | [Usage](sources/messaging/kafka)    | [Example](examples/messaging/kafka)    |
-|           | [RabbitMQ](https://www.rabbitmq.com/)   | target.messaging.rabbitmq | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
-|           | [MQTT](http://mqtt.org/)                | target.messaging.mqtt     | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
-|           | [ActiveMQ](http://activemq.apache.org/) | target.messaging.activemq | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
+|           | [Kafka](https://kafka.apache.org/)      | messaging.kafka    | [Usage](sources/messaging/kafka)    | [Example](examples/messaging/kafka)    |
+|           | [RabbitMQ](https://www.rabbitmq.com/)   | messaging.rabbitmq | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
+|           | [MQTT](http://mqtt.org/)                | messaging.mqtt     | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
+|           | [ActiveMQ](http://activemq.apache.org/) | messaging.activemq | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
 
 
 #### Google Cloud Platform (GCP)
@@ -83,11 +83,11 @@ KubeMQ Sources supports all of KubeMQ's messaging patterns: Queue, Events, Event
 
 | Type                                                                              | Kind                | Configuration                           |
 |:----------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
-| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | target.queue        | [Usage](targets/queue/README.md)        |
-| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | target.events       | [Usage](targets/events/README.md)       |
-| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | target.events-store | [Usage](targets/events-store/README.md) |
-| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | target.command      | [Usage](targets/command/README.md)      |
-| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | target.query        | [Usage](targets/query/README.md)        |
+| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | kubemq.queue        | [Usage](targets/queue/README.md)        |
+| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | kubemq.events       | [Usage](targets/events/README.md)       |
+| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | kubemq.events-store | [Usage](targets/events-store/README.md) |
+| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | kubemq.command      | [Usage](targets/command/README.md)      |
+| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | kubemq.query        | [Usage](targets/query/README.md)        |
 
 ## Installation
 
@@ -137,12 +137,12 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.http # source kind
+      kind: http # source kind
       name: name-of-sources # source name 
       properties: # a set of key/value settings per each source kind
         .....
     target:
-      kind: target.events # target kind
+      kind: kubemq.events # target kind
       name: name-of-target # targets name
       properties: # a set of key/value settings per each target kind
         - .....
@@ -232,32 +232,6 @@ bindings:
     source:
     ......  
 ```
-
-### Source
-
-Source section contains source configuration for Binding as follows:
-
-| Property    | Description                                       | Possible Values                                               |
-|:------------|:--------------------------------------------------|:--------------------------------------------------------------|
-| name        | sources name (will show up in logs)               | string without white spaces                                   |
-| kind        | source kind type                                  | source.queue                                                  |
-|             |                                                   | source.query                                                  |
-|             |                                                   | source.command                                                |
-|             |                                                   | source.events                                                 |
-|             |                                                   | source.events-store                                           |
-| properties | an array of key/value setting for source connection| see above               |
-
-
-### Target
-
-Target section contains the target configuration for Binding as follows:
-
-| Property    | Description                                       | Possible Values                                               |
-|:------------|:--------------------------------------------------|:--------------------------------------------------------------|
-| name        | targets name (will show up in logs)               | string without white spaces                                   |
-| kind        | source kind type                                  | target.type-of-target                                                  |
-| properties | an array of key/value set for target connection | see above              |
-
 
 
 

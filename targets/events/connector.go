@@ -4,7 +4,7 @@ import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("target.events").
+		SetKind("kubemq.events").
 		SetDescription("Kubemq Events Target").
 		AddProperty(
 			common.NewProperty().

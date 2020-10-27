@@ -32,7 +32,7 @@ Example:
 bindings:
   - name: kubemq-query-aws-sqs
     source:
-      kind: source.query
+      kind: query
       name: kubemq-query
       properties:
         host: "localhost"
@@ -46,7 +46,7 @@ bindings:
         reconnect_interval_seconds: "1"
         max_reconnects: "0"
     target:
-      kind: source.aws.sqs
+      kind: aws.sqs
       name: source-aws-sqs
       properties:
         aws_key: "id"

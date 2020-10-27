@@ -3,13 +3,13 @@ bindings:
 - name: b
   source:
     name: b
-    kind: source.http
+    kind: http
     properties:
       methods: GET
       path: /
   target:
     name: t
-    kind: target.queue
+    kind: kubemq.queue
     properties:
       address: localhost:50000
       channel: queues
@@ -20,13 +20,13 @@ bindings:
 - name: b3
   source:
     name: b
-    kind: source.http
+    kind: http
     properties:
       methods: GET
       path: /
   target:
     name: t
-    kind: target.queue
+    kind: kubemq.queue
     properties:
       address: localhost:50000
       channel: queues

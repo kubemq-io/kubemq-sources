@@ -34,13 +34,13 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.http
+      kind: http
       name: http-post-source
       properties:
         "methods": "post"
         "path": "/events-store"
     target:
-      kind: target.events-store # Sources kind
+      kind: kubemq.events-store # Sources kind
       name: events-store-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"

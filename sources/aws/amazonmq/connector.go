@@ -4,7 +4,7 @@ import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.aws.amazonmq").
+		SetKind("aws.amazonmq").
 		SetDescription("AWS AmazonMQ source properties").
 		AddProperty(
 			common.NewProperty().

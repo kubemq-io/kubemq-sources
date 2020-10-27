@@ -62,7 +62,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init",
 			cfg: config.Spec{
 				Name: "target-gcp-pubsub",
-				Kind: "target.gcp.pubsub",
+				Kind: "kubemq.gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
 					"subscriber_id": dat.subscriberID,
@@ -74,7 +74,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init-missing-credentials",
 			cfg: config.Spec{
 				Name: "target-gcp-pubsub",
-				Kind: "target.gcp.pubsub",
+				Kind: "kubemq.gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
 					"subscriber_id": dat.subscriberID,
@@ -86,7 +86,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init-missing-project-id",
 			cfg: config.Spec{
 				Name: "source-gcp-pubsub",
-				Kind: "target.gcp.pubsub",
+				Kind: "kubemq.gcp.pubsub",
 				Properties: map[string]string{
 					"credentials":   dat.credentials,
 					"subscriber_id": dat.subscriberID,
@@ -97,7 +97,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init-missing-subscriber_id",
 			cfg: config.Spec{
 				Name: "source-gcp-pubsub",
-				Kind: "target.gcp.pubsub",
+				Kind: "kubemq.gcp.pubsub",
 				Properties: map[string]string{
 					"credentials": dat.credentials,
 					"project_id":  dat.projectID,
@@ -138,7 +138,7 @@ func TestClient_Do(t *testing.T) {
 			name: "valid pubsub receive",
 			cfg: config.Spec{
 				Name: "source-gcp-pubsub",
-				Kind: "source.gcp.pubsub",
+				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
 					"subscriber_id": dat.subscriberID,

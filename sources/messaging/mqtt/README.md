@@ -30,7 +30,7 @@ Example:
 bindings:
   - name: mqtt-kubemq-event
     source:
-      kind: source.messaging.mqtt
+      kind: messaging.mqtt
       name: mqtt-source
       properties:
         host: "localhost:1883"
@@ -40,7 +40,7 @@ bindings:
         client_id: "client_id"
         qos: "0"
     target:
-      kind: target.events
+      kind: kubemq.events
       name: target-kubemq-events
       properties:
         address: "kubemq-cluster:50000"

@@ -68,7 +68,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init",
 			cfg: config.Spec{
 				Name: "source-aws-amazonmq",
-				Kind: "source.aws.amazonmq",
+				Kind: "aws.amazonmq",
 				Properties: map[string]string{
 					"host":        dat.host,
 					"username":    dat.username,
@@ -81,7 +81,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - no host",
 			cfg: config.Spec{
 				Name: "source-aws-amazonmq",
-				Kind: "source.aws.amazonmq",
+				Kind: "aws.amazonmq",
 				Properties: map[string]string{
 					"username":    dat.username,
 					"password":    dat.password,
@@ -93,7 +93,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - no destination",
 			cfg: config.Spec{
 				Name: "source-aws-amazonmq",
-				Kind: "source.aws.amazonmq",
+				Kind: "aws.amazonmq",
 				Properties: map[string]string{
 					"username": dat.username,
 					"password": dat.password,
@@ -130,7 +130,7 @@ func TestClient_Do(t *testing.T) {
 			name: "valid amazonmq receive",
 			cfg: config.Spec{
 				Name: "source-aws-amazonmq",
-				Kind: "source.aws.amazonmq",
+				Kind: "aws.amazonmq",
 				Properties: map[string]string{
 					"host":        dat.host,
 					"username":    dat.username,

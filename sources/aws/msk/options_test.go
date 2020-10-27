@@ -2,7 +2,7 @@ package msk
 
 import (
 	"testing"
-	
+
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
 )
@@ -18,10 +18,10 @@ func TestMetadata_parseOptions(t *testing.T) {
 			name: "valid options",
 			meta: config.Spec{
 				Name: "source-aws-msk",
-				Kind: "source.aws.msk",
+				Kind: "aws.msk",
 				Properties: map[string]string{
-					"brokers":       "localhost:9092,localhost:9093",
-					"topics":        "TestTopic,NewTopic",
+					"brokers":        "localhost:9092,localhost:9093",
+					"topics":         "TestTopic,NewTopic",
 					"consumer_group": "cg",
 				},
 			},
@@ -35,10 +35,10 @@ func TestMetadata_parseOptions(t *testing.T) {
 			name: "valid options with userpass",
 			meta: config.Spec{
 				Name: "source-aws-msk",
-				Kind: "source.aws.msk",
+				Kind: "aws.msk",
 				Properties: map[string]string{
-					"brokers":       "localhost:9092,localhost:9093",
-					"topics":        "TestTopic",
+					"brokers":        "localhost:9092,localhost:9093",
+					"topics":         "TestTopic",
 					"consumer_group": "cg",
 					"sasl_username":  "admin",
 					"sasl_password":  "password",

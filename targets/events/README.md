@@ -35,13 +35,13 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.http
+      kind: http
       name: http-post-source
       properties:
         "methods": "post"
         "path": "/events"
     target:
-      kind: target.command # Sources kind
+      kind: kubemq.command # Sources kind
       name: command-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"

@@ -80,7 +80,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"aws_secret_key":      dat.awsSecretKey,
@@ -97,7 +97,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - error no region",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"aws_secret_key":      dat.awsSecretKey,
@@ -112,7 +112,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - error no aws_key",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_secret_key":      dat.awsSecretKey,
 					"token":               dat.token,
@@ -128,7 +128,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init -error no aws_secret_key",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"token":               dat.token,
@@ -143,7 +143,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init -error no shard_iterator_type",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":        dat.awsKey,
 					"aws_secret_key": dat.awsSecretKey,
@@ -158,7 +158,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - error no consumer_arn",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"aws_secret_key":      dat.awsSecretKey,
@@ -174,7 +174,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init -error no shard_id",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"aws_secret_key":      dat.awsSecretKey,
@@ -216,7 +216,7 @@ func TestClient_Do(t *testing.T) {
 			name: "valid kinesis receive",
 			cfg: config.Spec{
 				Name: "source-aws-kinesis",
-				Kind: "source.aws.kinesis",
+				Kind: "aws.kinesis",
 				Properties: map[string]string{
 					"aws_key":             dat.awsKey,
 					"aws_secret_key":      dat.awsSecretKey,

@@ -2,13 +2,13 @@ apiPort: 8080
 bindings:
   - name: http-post-kubemq-event
     source:
-      kind: source.http
+      kind: http
       name: http-post
       properties:
         "methods": "post,put"
         "path": "/post"
     target:
-      kind: target.events
+      kind: kubemq.events
       name: target-kubemq-events
       properties:
         address: "localhost:50000"
@@ -17,13 +17,13 @@ bindings:
         channel: "events.post"
   - name: http-post-kubemq-event-2
     source:
-      kind: source.http
+      kind: http
       name: http-post
       properties:
         "methods": "get"
         "path": "/query"
     target:
-      kind: target.query
+      kind: kubemq.query
       name: target-kubemq-events
       properties:
         address: "localhost:50000"

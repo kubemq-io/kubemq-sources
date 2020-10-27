@@ -35,13 +35,13 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.http
+      kind: http
       name: http-get-source
       properties:
         "methods": "get"
         "path": "/query"
     target:
-      kind: target.query # Sources kind
+      kind: kubemq.query # Sources kind
       name: query-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"

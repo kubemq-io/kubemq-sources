@@ -23,31 +23,31 @@ type Target interface {
 func Init(ctx context.Context, cfg config.Spec) (Target, error) {
 
 	switch cfg.Kind {
-	case "target.command":
+	case "kubemq.command":
 		target := command.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return target, nil
-	case "target.query":
+	case "kubemq.query":
 		target := query.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return target, nil
-	case "target.events":
+	case "kubemq.events":
 		target := events.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return target, nil
-	case "target.events-store":
+	case "kubemq.events-store":
 		target := event_store.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return target, nil
-	case "target.queue":
+	case "kubemq.queue":
 		target := queue.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err

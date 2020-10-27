@@ -4,7 +4,7 @@ import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.http").
+		SetKind("http").
 		SetDescription("HTTP/REST source properties").
 		AddProperty(
 			common.NewProperty().

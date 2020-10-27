@@ -26,7 +26,7 @@ Example:
 bindings:
   - name: kubemq-query-gcp-pubsub
     source:
-      kind: source.query
+      kind: query
       name: kubemq-query
       properties:
         host: "localhost"
@@ -40,7 +40,7 @@ bindings:
         reconnect_interval_seconds: "1"
         max_reconnects: "0"
     target:
-      kind: source.gcp.pubsub
+      kind: gcp.pubsub
       name: source-gcp-pubsub
       properties:
         project_id: "projectID"

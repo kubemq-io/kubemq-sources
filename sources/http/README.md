@@ -25,13 +25,13 @@ Example:
 bindings:
   - name: http-post-kubemq-event
     source:
-      kind: source.http
+      kind: http
       name: http-post
       properties:
         "methods": "post"
         "path": "/post"
     target:
-      kind: target.events
+      kind: kubemq.events
       name: target-kubemq-events
       properties:
         address: "kubemq-cluster:50000"

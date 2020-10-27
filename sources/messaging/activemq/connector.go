@@ -4,7 +4,7 @@ import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.messaging.activemq").
+		SetKind("messaging.activemq").
 		SetDescription("ActiveMQ source properties").
 		AddProperty(
 			common.NewProperty().

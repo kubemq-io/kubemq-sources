@@ -6,7 +6,7 @@ import (
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.aws.msk").
+		SetKind("aws.msk").
 		SetDescription("AWS MSK source properties").
 		AddProperty(
 			common.NewProperty().

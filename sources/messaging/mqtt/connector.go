@@ -4,7 +4,7 @@ import "github.com/kubemq-hub/builder/connector/common"
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.messaging.mqtt").
+		SetKind("messaging.mqtt").
 		SetDescription("MQTT source properties").
 		AddProperty(
 			common.NewProperty().

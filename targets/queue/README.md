@@ -35,13 +35,13 @@ bindings:
       retry_delay_type: "back-off"
       rate_per_second: 100
     source:
-      kind: source.http
+      kind: http
       name: http-post-source
       properties:
         "methods": "post"
         "path": "/queue"
     target:
-      kind: target.queue # Sources kind
+      kind: kubemq.queue # Sources kind
       name: queue-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"

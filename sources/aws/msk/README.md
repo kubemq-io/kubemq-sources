@@ -27,20 +27,20 @@ Example:
 bindings:
   - name: kubemq-store-msk
     source:
-        kind: source.kubemq.event-store
+        kind: kubemq.event-store
         name: kubemq-query
         properties:
             host: "localhost"
             port: "50000"
             client_id: "kubemq-query-aws-connector"
             auth_token: ""
-            channel: "source.aws.msk"
+            channel: "aws.msk"
             group:   ""
             auto_reconnect: "true"
             reconnect_interval_seconds: "1"
             max_reconnects: "0"
     target:
-      kind: source.aws.msk
+      kind: aws.msk
       name: source-aws-msk
       properties:
      	brokers: "localhost:9092,localhost:9093",

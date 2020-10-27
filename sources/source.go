@@ -27,61 +27,61 @@ type Source interface {
 
 func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 	switch cfg.Kind {
-	case "source.messaging.activemq":
+	case "messaging.activemq":
 		source := activemq.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.messaging.rabbitmq":
+	case "messaging.rabbitmq":
 		source := rabbitmq.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.messaging.mqtt":
+	case "messaging.mqtt":
 		source := mqtt.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.messaging.kafka":
+	case "messaging.kafka":
 		source := kafka.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.aws.sqs":
+	case "aws.sqs":
 		source := sqs.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.aws.amazonmq":
+	case "aws.amazonmq":
 		source := amazonmq.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.aws.kinesis":
+	case "aws.kinesis":
 		source := kinesis.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.aws.msk":
+	case "aws.msk":
 		source := msk.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.gcp.pubsub":
+	case "gcp.pubsub":
 		source := pubsub.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err
 		}
 		return source, nil
-	case "source.http":
+	case "http":
 		source := http.New()
 		if err := source.Init(ctx, cfg); err != nil {
 			return nil, err

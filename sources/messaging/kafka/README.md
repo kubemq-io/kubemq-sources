@@ -27,7 +27,7 @@ Example:
 bindings:
   - name: kubemq-store-kafka
     source:
-        kind: source.kubemq.event-store
+        kind: kubemq.event-store
         name: kubemq-query
         properties:
             host: "localhost"
@@ -40,7 +40,7 @@ bindings:
             reconnect_interval_seconds: "1"
             max_reconnects: "0"
     target:
-      kind: target.messaging.kafka
+      kind: kubemq.messaging.kafka
       name: kafka-stream
       properties:
      	brokers: "localhost:9092,localhost:9093",

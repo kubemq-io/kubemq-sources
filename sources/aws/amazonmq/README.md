@@ -31,7 +31,7 @@ Example:
 bindings:
   - name: kubemq-query-amazonmq
     source:
-      kind: source.query
+      kind: query
       name: kubemq-query
       properties:
         host: "localhost"
@@ -45,7 +45,7 @@ bindings:
         reconnect_interval_seconds: "1"
         max_reconnects: "0"
     target:
-      kind: source.aws.amazonmq
+      kind: aws.amazonmq
       name: source-aws-amazonmq
       properties:
         host: "localhost:61613"

@@ -7,7 +7,7 @@ import (
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.aws.sqs").
+		SetKind("aws.sqs").
 		SetDescription("AWS Kinesis source properties").
 		AddProperty(
 			common.NewProperty().

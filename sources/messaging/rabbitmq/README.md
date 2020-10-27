@@ -30,7 +30,7 @@ Example:
 bindings:
   - name: rabbitmq-kubemq-event
     source:
-      kind: source.messaging.rabbitmq
+      kind: messaging.rabbitmq
       name: rabbitmq-source
       properties:
         "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
@@ -40,7 +40,7 @@ bindings:
         "auto_ack": "false"
         "exclusive": "false"
     target:
-      kind: target.events
+      kind: kubemq.events
       name: target-kubemq-events
       properties:
         address: "kubemq-cluster:50000"

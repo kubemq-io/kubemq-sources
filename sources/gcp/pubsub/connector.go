@@ -6,7 +6,7 @@ import (
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("source.gcp.pubsub").
+		SetKind("gcp.pubsub").
 		SetDescription("AWS Kinesis source properties").
 		AddProperty(
 			common.NewProperty().

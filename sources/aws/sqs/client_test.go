@@ -78,7 +78,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init",
 			cfg: config.Spec{
 				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
 					"aws_secret_key":         dat.awsSecretKey,
@@ -94,7 +94,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - error no region",
 			cfg: config.Spec{
 				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
 					"aws_secret_key":         dat.awsSecretKey,
@@ -108,7 +108,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init - error no aws_key",
 			cfg: config.Spec{
 				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_secret_key":         dat.awsSecretKey,
 					"token":                  dat.token,
@@ -123,7 +123,7 @@ func TestClient_Init(t *testing.T) {
 			name: "init -error no aws_secret_key",
 			cfg: config.Spec{
 				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
 					"token":                  dat.token,
@@ -164,7 +164,7 @@ func TestClient_Do(t *testing.T) {
 			name: "valid sqs receive",
 			cfg: config.Spec{
 				Name: "source-aws-sqs",
-				Kind: "source.aws.sqs",
+				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
 					"aws_secret_key":         dat.awsSecretKey,
