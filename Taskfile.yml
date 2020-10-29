@@ -4,7 +4,7 @@ version: '3'
 
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v0.3.6
+  VERSION: v0.3.7
 
 tasks:
   check_update:
@@ -52,6 +52,7 @@ tasks:
       - git push origin master --tags
   release:
     cmds:
+      - go mod vendor
       - task: lint
       - task: update-manifest
       - task: commit-modifed
