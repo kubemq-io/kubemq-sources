@@ -18,11 +18,9 @@ func NewMetricsMiddleware(cfg config.BindingConfig, exporter *metrics.Exporter) 
 	m := &MetricsMiddleware{
 		exporter: exporter,
 		metricReport: &metrics.Report{
-			Key:            fmt.Sprintf("%s-%s-%s-%s-%s", cfg.Name, cfg.Source.Name, cfg.Source.Kind, cfg.Target.Name, cfg.Target.Kind),
+			Key:            fmt.Sprintf("%s-%s-%s", cfg.Name, cfg.Source.Kind, cfg.Target.Kind),
 			Binding:        cfg.Name,
-			SourceName:     cfg.Source.Name,
 			SourceKind:     cfg.Source.Kind,
-			TargetName:     cfg.Target.Name,
 			TargetKind:     cfg.Target.Kind,
 			RequestCount:   0,
 			RequestVolume:  0,

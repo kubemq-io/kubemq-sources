@@ -50,24 +50,18 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 	b.log = logger.NewLogger(b.name)
 	b.target, err = targets.Init(ctx, cfg.Target)
 	if err != nil {
-		return fmt.Errorf("error loading target conntector %s on binding %s, %w", cfg.Target.Name, b.name, err)
+		return fmt.Errorf("error loading target conntector on binding %s, %w", b.name, err)
 	}
-	b.log.Infof("binding: %s, target: %s, initialized successfully", b.name, cfg.Target.Name)
+	b.log.Infof("binding: %s target: initialized successfully", b.name)
 	b.md, err = b.buildMiddleware(cfg, exporter)
 	if err != nil {
-		return fmt.Errorf("error loading middlewares %s on binding %s, %w", cfg.Target.Name, b.name, err)
+		return fmt.Errorf("error loading middlewares on binding %s, %w", b.name, err)
 	}
 	b.source, err = sources.Init(ctx, cfg.Source)
 	if err != nil {
-		return fmt.Errorf("error loading source conntector %s on binding %s, %w", cfg.Source.Name, b.name, err)
+		return fmt.Errorf("error loading source conntector on binding %s, %w", b.name, err)
 	}
-	b.log.Infof("binding: %s, source: %s, initialized successfully", b.name, cfg.Source.Name)
-	if cfg.Source.Kind == "http" {
-		val, ok := b.source.(*http.Handler)
-		if ok {
-			b.httpSourceHandler = val
-		}
-	}
+	b.log.Infof("binding: %s source initialized successfully", b.name)
 	b.log.Infof("binding: %s, initialized successfully", b.name)
 	return nil
 }

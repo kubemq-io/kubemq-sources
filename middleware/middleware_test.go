@@ -359,9 +359,7 @@ func TestClient_Metric(t *testing.T) {
 			wantReport: &metrics.Report{
 				Key:            "b-1-sn-sk-tn-tk",
 				Binding:        "b-1",
-				SourceName:     "sn",
 				SourceKind:     "sk",
-				TargetName:     "tn",
 				TargetKind:     "tk",
 				RequestCount:   1,
 				RequestVolume:  4,
@@ -397,9 +395,7 @@ func TestClient_Metric(t *testing.T) {
 			wantReport: &metrics.Report{
 				Key:            "b-2-sn-sk-tn-tk",
 				Binding:        "b-2",
-				SourceName:     "sn",
 				SourceKind:     "sk",
-				TargetName:     "tn",
 				TargetKind:     "tk",
 				RequestCount:   1,
 				RequestVolume:  4,
