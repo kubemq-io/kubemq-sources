@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/ghodss/yaml"
 	"github.com/kubemq-hub/kubemq-sources/sources"
+	"time"
 
 	"github.com/kubemq-hub/builder/connector/common"
 	connectorSources "github.com/kubemq-hub/builder/connector/sources"
@@ -98,6 +99,8 @@ func run() error {
 	if err != nil {
 		return err
 	}
+
+	time.Sleep(5 * time.Second)
 	apiServer, err := api.Start(ctx, cfg.ApiPort, bindingsService)
 	if err != nil {
 		return err
