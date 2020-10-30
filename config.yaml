@@ -1,36 +1,30 @@
-
 bindings:
-- name: b
-  source:
-    name: b
-    kind: http
+  - name: api.postgres
+    source:
+      kind: http
+      properties:
+        methods: get,post,put
+        path: /postgres
+    target:
+      kind: kubemq.query
+      properties:
+        address:  localhost:50000
+        auth_token: ""
+        channel: query.postgres
+        timeout_seconds: "60"
+    properties: {}
+  - name: api.redis
+    source:
+      kind: http
+      properties:
+        methods: get,post,put
+        path: /redis
+    target:
+      kind: kubemq.query
+      properties:
+        address: localhost:50000
+        auth_token: ""
+        channel: query.redis
+        timeout_seconds: "60"
     properties:
-      methods: GET
-      path: /
-  target:
-    name: t
-    kind: kubemq.queue
-    properties:
-      address: localhost:50000
-      channel: queues
-      delay_seconds: "0"
-      expiration_seconds: "0"
-      max_receive_count: "0"
-  properties: {}
-- name: b3
-  source:
-    name: b
-    kind: http
-    properties:
-      methods: GET
-      path: /
-  target:
-    name: t
-    kind: kubemq.queue
-    properties:
-      address: localhost:50000
-      channel: queues
-      delay_seconds: "0"
-      expiration_seconds: "0"
-      max_receive_count: "0"
-  properties: {}
+      log_level: "debug"

@@ -61,7 +61,13 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 	if err != nil {
 		return fmt.Errorf("error loading source conntector on binding %s, %w", b.name, err)
 	}
-	b.log.Infof("binding: %s source initialized successfully", b.name)
+	b.log.Infof("binding: %s, source: %s, initialized successfully", b.name, cfg.Source.Name)
+	if cfg.Source.Kind == "http" {
+		val, ok := b.source.(*http.Handler)
+		if ok {
+			b.httpSourceHandler = val
+		}
+	}
 	b.log.Infof("binding: %s, initialized successfully", b.name)
 	return nil
 }

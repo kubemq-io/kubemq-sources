@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-var labels = []string{"binding", "source_name", "source_kind", "target_name", "target_kind"}
+var labels = []string{"binding", "source_kind", "target_kind"}
 
 type Exporter struct {
 	Store                    *Store
