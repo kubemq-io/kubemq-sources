@@ -26,6 +26,6 @@ bindings:
       address: localhost:50000
       auth_token: ""
       channel: query.redis
-      timeout_seconds: "5"
+      timeout_seconds: "5hec"
   properties:
     log_level: debug
