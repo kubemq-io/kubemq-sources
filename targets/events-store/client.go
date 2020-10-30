@@ -43,6 +43,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		kubemq.WithClientId(c.opts.clientId),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken),
+		// making sure that this stays false in order the http source will work correctly
 		kubemq.WithCheckConnection(false),
 	)
 	if err != nil {
