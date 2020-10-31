@@ -4,7 +4,7 @@ version: '3'
 
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v0.3.11
+  VERSION: v0.3.12
 
 tasks:
   check_update:

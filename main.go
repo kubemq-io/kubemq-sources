@@ -5,15 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"github.com/ghodss/yaml"
-	"github.com/kubemq-hub/kubemq-sources/sources"
-	"time"
-
 	"github.com/kubemq-hub/builder/connector/common"
 	connectorSources "github.com/kubemq-hub/builder/connector/sources"
 	"github.com/kubemq-hub/kubemq-sources/api"
 	"github.com/kubemq-hub/kubemq-sources/binding"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
+	"github.com/kubemq-hub/kubemq-sources/sources"
 
 	"github.com/kubemq-hub/kubemq-sources/targets"
 	"io/ioutil"
@@ -100,7 +98,6 @@ func run() error {
 		return err
 	}
 
-	time.Sleep(5 * time.Second)
 	apiServer, err := api.Start(ctx, cfg.ApiPort, bindingsService)
 	if err != nil {
 		return err

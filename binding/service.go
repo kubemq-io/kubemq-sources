@@ -43,8 +43,11 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 	if len(cfg.Bindings) == 0 {
 		return nil
 	}
+	wg := sync.WaitGroup{}
+	wg.Add(len(cfg.Bindings))
 	for _, bindingCfg := range cfg.Bindings {
 		go func(ctx context.Context, cfg config.BindingConfig) {
+			defer wg.Done()
 			err := s.Add(ctx, cfg)
 			if err == nil {
 				return
@@ -70,6 +73,7 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 		}(s.currentCtx, bindingCfg)
 
 	}
+	wg.Wait()
 	return nil
 
 }
