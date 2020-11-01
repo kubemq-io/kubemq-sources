@@ -66,15 +66,21 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		for {
 			select {
 			case delivery := <-deliveries:
-				fmt.Println(string(delivery.Body))
 				req := types.NewRequest().SetData(delivery.Body)
 				_, err := target.Do(ctx, req)
-				if err != nil {
-					c.log.Errorf("error processing request %s", err.Error())
-					_ = delivery.Reject(c.opts.requeueOnError)
+				if c.opts.autoAck {
+					if err != nil {
+						c.log.Errorf("error processing request %s", err.Error())
+					}
 				} else {
-					_ = delivery.Ack(false)
+					if err != nil {
+						c.log.Errorf("error processing request %s", err.Error())
+						_ = delivery.Reject(c.opts.requeueOnError)
+					} else {
+						_ = delivery.Ack(false)
+					}
 				}
+
 			case <-ctx.Done():
 				return
 			case err := <-errCh:
