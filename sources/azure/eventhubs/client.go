@@ -21,7 +21,7 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-	
+
 }
 func (c *Client) Connector() *common.Connector {
 	return Connector()
@@ -62,12 +62,12 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		_, err := c.client.Receive(ctx, c.opts.partitionID, func(ctx context.Context, event *eventhub.Event) error {
 			go c.processIncomingMessages(ctx, event, c.opts.partitionID, errCh)
 			return nil
-		})
+		}, c.opts.receiveType)
 		if err != nil {
 			return fmt.Errorf("error subscription to eventhubs destination on partitionID %s, %w", c.opts.partitionID, err)
 		}
 	}
-	
+
 	return nil
 }
 

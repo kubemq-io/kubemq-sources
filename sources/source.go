@@ -10,6 +10,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/kinesis"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
+	"github.com/kubemq-hub/kubemq-sources/sources/azure/eventhubs"
 	"github.com/kubemq-hub/kubemq-sources/sources/gcp/pubsub"
 	"github.com/kubemq-hub/kubemq-sources/sources/http"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
@@ -81,6 +82,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
+	case "azure.eventhubs":
+		source := eventhubs.New()
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
 	case "http":
 		source := http.New()
 		if err := source.Init(ctx, cfg); err != nil {
@@ -108,5 +115,8 @@ func Connectors() common.Connectors {
 		msk.Connector(),
 		// GCP
 		pubsub.Connector(),
+
+		// Azure
+		eventhubs.Connector(),
 	}
 }

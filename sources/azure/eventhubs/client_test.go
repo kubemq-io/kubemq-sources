@@ -7,6 +7,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"
@@ -14,6 +16,23 @@ import (
 )
 
 type mockMiddleware struct {
+	client      *kubemq.Client
+	channelName string
+}
+
+func (m *mockMiddleware) Init() {
+
+	client, err := kubemq.NewClient(context.Background(),
+		kubemq.WithAddress("localhost", 50000),
+		kubemq.WithClientId(nuid.Next()),
+		kubemq.WithCheckConnection(true),
+		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
+
+	if err != nil {
+		panic(err)
+	}
+	m.client = client
+	m.channelName = "event.azure.eventhubs"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -21,6 +40,10 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 	r := types.NewResponse()
 	r.SetData([]byte("ok"))
 	r.SetMetadata(`"result":"ok"`)
+	event := m.client.NewEvent()
+	event.Channel = m.channelName
+	event.Body = request.Data
+	event.Send(ctx)
 	return r, nil
 }
 
@@ -59,7 +82,7 @@ func getTestStructure() (*testStructure, error) {
 		return nil, err
 	}
 	t.entityPath = fmt.Sprintf("%s", dat)
-	
+
 	return t, nil
 }
 
@@ -74,8 +97,8 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "aws-eventhubs",
-				Kind: "aws.eventhubs",
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
 				Properties: map[string]string{
 					"partition_id":           dat.partitionID,
 					"end_point":              dat.endPoint,
@@ -85,6 +108,71 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: false,
+		}, {
+			name: "invalid init - missing partition_id",
+			cfg: config.Spec{
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
+				Properties: map[string]string{
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
+					"entity_path":            dat.entityPath,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "invalid init - missing end_point",
+			cfg: config.Spec{
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
+				Properties: map[string]string{
+					"partition_id":           dat.partitionID,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
+					"entity_path":            dat.entityPath,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "invalid init - missing shared_access_key_name",
+			cfg: config.Spec{
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
+				Properties: map[string]string{
+					"partition_id":      dat.partitionID,
+					"end_point":         dat.endPoint,
+					"shared_access_key": dat.sharedAccessKey,
+					"entity_path":       dat.entityPath,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "invalid init - missing shared_access_key",
+			cfg: config.Spec{
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
+				Properties: map[string]string{
+					"partition_id":           dat.partitionID,
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"entity_path":            dat.entityPath,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "invalid init - missing entity_path",
+			cfg: config.Spec{
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
+				Properties: map[string]string{
+					"partition_id":           dat.partitionID,
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
+				},
+			},
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -92,7 +180,7 @@ func TestClient_Init(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
 			c := New()
-			
+
 			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
 				return
@@ -104,6 +192,8 @@ func TestClient_Init(t *testing.T) {
 func TestClient_Do(t *testing.T) {
 	dat, err := getTestStructure()
 	require.NoError(t, err)
+	middle := &mockMiddleware{}
+	middle.Init()
 	tests := []struct {
 		name       string
 		cfg        config.Spec
@@ -114,8 +204,8 @@ func TestClient_Do(t *testing.T) {
 		{
 			name: "valid eventhubs receive",
 			cfg: config.Spec{
-				Name: "aws-eventhubs",
-				Kind: "aws.eventhubs",
+				Name: "azure-eventhubs",
+				Kind: "azure.eventhubs",
 				Properties: map[string]string{
 					"partition_id":           dat.partitionID,
 					"end_point":              dat.endPoint,
@@ -124,7 +214,7 @@ func TestClient_Do(t *testing.T) {
 					"entity_path":            dat.entityPath,
 				},
 			},
-			middleware: &mockMiddleware{},
+			middleware: middle,
 			timeToWait: time.Duration(25) * time.Second,
 			wantErr:    false,
 		},
