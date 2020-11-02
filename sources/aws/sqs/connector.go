@@ -8,11 +8,11 @@ import (
 func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("aws.sqs").
-		SetDescription("AWS Kinesis source properties").
+		SetDescription("AWS SQS source properties").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
-				SetName("awsKey").
+				SetName("aws_key").
 				SetDescription("Set AWS Key").
 				SetMust(true),
 		).
@@ -28,15 +28,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("region").
-				SetDescription("Set Region").
-				SetMust(true).
-				SetDefault(""),
-		).
-		AddProperty(
-			common.NewProperty().
-				SetKind("string").
-				SetName("queue").
-				SetDescription("Set Queue").
+				SetDescription("Set AWS Region").
 				SetMust(true).
 				SetDefault(""),
 		).
@@ -44,8 +36,16 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("token").
-				SetDescription("Set Token").
+				SetDescription("Set AWS Token").
 				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("string").
+				SetName("queue").
+				SetDescription("Set Sqs Queue name").
+				SetMust(true).
 				SetDefault(""),
 		).
 		AddProperty(

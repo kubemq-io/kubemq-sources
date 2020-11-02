@@ -7,6 +7,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"
@@ -14,6 +16,23 @@ import (
 )
 
 type mockMiddleware struct {
+	client      *kubemq.Client
+	channelName string
+}
+
+func (m *mockMiddleware) Init() {
+
+	client, err := kubemq.NewClient(context.Background(),
+		kubemq.WithAddress("localhost", 50000),
+		kubemq.WithClientId(nuid.Next()),
+		kubemq.WithCheckConnection(true),
+		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
+
+	if err != nil {
+		panic(err)
+	}
+	m.client = client
+	m.channelName = "event.aws.sqs"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -21,6 +40,13 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 	r := types.NewResponse()
 	r.SetData([]byte("ok"))
 	r.SetMetadata(`"result":"ok"`)
+	event := m.client.NewEvent()
+	event.Channel = m.channelName
+	event.Body = request.Data
+	err := event.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
 	return r, nil
 }
 
@@ -77,7 +103,7 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
+				Name: "aws-sqs",
 				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
@@ -91,9 +117,9 @@ func TestClient_Init(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "init - error no region",
+			name: "invalid init - error no region",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
+				Name: "aws-sqs",
 				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
@@ -105,9 +131,9 @@ func TestClient_Init(t *testing.T) {
 			},
 			wantErr: true,
 		}, {
-			name: "init - error no aws_key",
+			name: "invalid init - error no aws_key",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
+				Name: "aws-sqs",
 				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_secret_key":         dat.awsSecretKey,
@@ -120,9 +146,9 @@ func TestClient_Init(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "init -error no aws_secret_key",
+			name: "invalid init -error no aws_secret_key",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
+				Name: "aws-sqs",
 				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
@@ -154,6 +180,8 @@ func TestClient_Init(t *testing.T) {
 func TestClient_Do(t *testing.T) {
 	dat, err := getTestStructure()
 	require.NoError(t, err)
+	middle := &mockMiddleware{}
+	middle.Init()
 	tests := []struct {
 		name       string
 		cfg        config.Spec
@@ -163,7 +191,7 @@ func TestClient_Do(t *testing.T) {
 		{
 			name: "valid sqs receive",
 			cfg: config.Spec{
-				Name: "source-aws-sqs",
+				Name: "aws-sqs",
 				Kind: "aws.sqs",
 				Properties: map[string]string{
 					"aws_key":                dat.awsKey,
@@ -173,10 +201,10 @@ func TestClient_Do(t *testing.T) {
 					"max_number_of_messages": "1",
 					"pull_delay":             "2",
 					"queue":                  dat.sqsQueue,
-					"visibility_timeout":     "10",
+					"visibility_timeout":     "0",
 				},
 			},
-			middleware: &mockMiddleware{},
+			middleware: middle,
 
 			wantErr: false,
 		},
@@ -194,7 +222,7 @@ func TestClient_Do(t *testing.T) {
 				require.Error(t, err)
 				return
 			}
-			time.Sleep(time.Duration(15) * time.Second)
+			time.Sleep(time.Duration(30) * time.Second)
 			defer cancel()
 			require.NoError(t, err)
 		})
