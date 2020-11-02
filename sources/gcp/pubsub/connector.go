@@ -25,9 +25,9 @@ func Connector() *common.Connector {
 		).
 		AddProperty(
 			common.NewProperty().
-				SetKind("string").
+				SetKind("multilines").
 				SetName("credentials").
-				SetDescription("Set Credentials").
+				SetDescription("Set gcp Credentials").
 				SetMust(true).
 				SetDefault(""),
 		)
