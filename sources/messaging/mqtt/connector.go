@@ -10,7 +10,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
-				SetDescription("Set MQTT Host connection").
+				SetDescription("Set MQTT Host:Port connection").
 				SetMust(true),
 		).
 		AddProperty(
