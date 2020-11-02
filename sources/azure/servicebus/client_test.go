@@ -1,4 +1,4 @@
-package sqs
+package servicebus
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func (m *mockMiddleware) Init() {
 		panic(err)
 	}
 	m.client = client
-	m.channelName = "event.aws.sqs"
+	m.channelName = "event.azure.servicebus"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -51,44 +51,35 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 }
 
 type testStructure struct {
-	awsKey       string
-	awsSecretKey string
-	region       string
-	token        string
-
-	sqsQueue   string
-	deadLetter string
+	endPoint            string
+	sharedAccessKeyName string
+	sharedAccessKey     string
+	queueName           string
 }
 
 func getTestStructure() (*testStructure, error) {
 	t := &testStructure{}
-	dat, err := ioutil.ReadFile("./../../../credentials/aws/awsKey.txt")
+	dat, err := ioutil.ReadFile("./../../../credentials/azure/servicebus/endPoint.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.awsKey = string(dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/awsSecretKey.txt")
+	t.endPoint = string(dat)
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/sharedAccessKeyName.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.awsSecretKey = string(dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/region.txt")
+	t.sharedAccessKeyName = fmt.Sprintf("%s", dat)
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/sharedAccessKey.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.region = string(dat)
+	t.sharedAccessKey = fmt.Sprintf("%s", dat)
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/queueName.txt")
+	if err != nil {
+		return nil, err
+	}
+	t.queueName = fmt.Sprintf("%s", dat)
 
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/sqs/queue.txt")
-	if err != nil {
-		return nil, err
-	}
-	t.sqsQueue = string(dat)
-
-	dat, err = ioutil.ReadFile("./../../../credentials/aws/sqs/deadLetter.txt")
-	if err != nil {
-		return nil, err
-	}
-	t.deadLetter = string(dat)
 	return t, nil
 }
 
@@ -103,60 +94,61 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "aws-sqs",
-				Kind: "aws.sqs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"aws_key":                dat.awsKey,
-					"aws_secret_key":         dat.awsSecretKey,
-					"token":                  dat.token,
-					"region":                 dat.region,
-					"max_number_of_messages": "10",
-					"pull_delay":             "15",
+					"queue_name":             dat.queueName,
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
 				},
 			},
 			wantErr: false,
-		},
-		{
-			name: "invalid init - error no region",
+		}, {
+			name: "invalid init - missing queue_name",
 			cfg: config.Spec{
-				Name: "aws-sqs",
-				Kind: "aws.sqs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"aws_key":                dat.awsKey,
-					"aws_secret_key":         dat.awsSecretKey,
-					"token":                  dat.token,
-					"max_number_of_messages": "10",
-					"pull_delay":             "15",
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
 				},
 			},
 			wantErr: true,
 		}, {
-			name: "invalid init - error no aws_key",
+			name: "invalid init - missing end_point",
 			cfg: config.Spec{
-				Name: "aws-sqs",
-				Kind: "aws.sqs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"aws_secret_key":         dat.awsSecretKey,
-					"token":                  dat.token,
-					"region":                 dat.region,
-					"max_number_of_messages": "10",
-					"pull_delay":             "15",
+					"queue_name":             dat.queueName,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
 				},
 			},
 			wantErr: true,
-		},
-		{
-			name: "invalid init -error no aws_secret_key",
+		}, {
+			name: "invalid init - missing shared_access_key_name",
 			cfg: config.Spec{
-				Name: "aws-sqs",
-				Kind: "aws.sqs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"aws_key":                dat.awsKey,
-					"token":                  dat.token,
-					"region":                 dat.region,
-					"max_number_of_messages": "1",
-					"pull_delay":             "15",
-					"visibility_timeout":     "10",
+					"queue_name":        dat.queueName,
+					"end_point":         dat.endPoint,
+					"shared_access_key": dat.sharedAccessKey,
+				},
+			},
+			wantErr: true,
+		}, {
+			name: "invalid init - missing shared_access_key",
+			cfg: config.Spec{
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
+				Properties: map[string]string{
+					"queue_name":             dat.queueName,
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
 				},
 			},
 			wantErr: true,
@@ -172,7 +164,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
 				return
 			}
-
 		})
 	}
 }
@@ -187,44 +178,43 @@ func TestClient_Do(t *testing.T) {
 		cfg        config.Spec
 		wantErr    bool
 		middleware middleware.Middleware
+		timeToWait time.Duration
 	}{
 		{
-			name: "valid sqs receive",
+			name: "valid servicebus receive",
 			cfg: config.Spec{
-				Name: "aws-sqs",
-				Kind: "aws.sqs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"aws_key":                dat.awsKey,
-					"aws_secret_key":         dat.awsSecretKey,
-					"token":                  dat.token,
-					"region":                 dat.region,
-					"max_number_of_messages": "1",
-					"pull_delay":             "2",
-					"queue":                  dat.sqsQueue,
-					"visibility_timeout":     "0",
+					"queue_name":             dat.queueName,
+					"end_point":              dat.endPoint,
+					"shared_access_key_name": dat.sharedAccessKeyName,
+					"shared_access_key":      dat.sharedAccessKey,
 				},
 			},
 			middleware: middle,
-
-			wantErr: false,
+			timeToWait: time.Duration(25) * time.Second,
+			wantErr:    false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			defer leaktest.Check(t)()
-			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(10)*time.Second)
+			ctx, cancel := context.WithTimeout(context.Background(), tt.timeToWait)
 			defer cancel()
 			c := New()
 			err := c.Init(ctx, tt.cfg)
 			require.NoError(t, err)
 			err = c.Start(ctx, tt.middleware)
+			defer func() {
+				_ = c.Stop()
+			}()
 			if tt.wantErr {
 				require.Error(t, err)
 				return
 			}
-			time.Sleep(time.Duration(30) * time.Second)
-			defer cancel()
 			require.NoError(t, err)
+			time.Sleep(tt.timeToWait + 5)
 		})
 	}
 }

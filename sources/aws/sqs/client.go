@@ -87,10 +87,18 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 							_, err := target.Do(ctx, req)
 							if err != nil {
 								c.log.Errorf("error processing request %s", err.Error())
+							} else {
+								_, err = c.client.DeleteMessage(&sqs.DeleteMessageInput{
+									QueueUrl:      aws.String(c.opts.queue),
+									ReceiptHandle: message.ReceiptHandle,
+								})
+								c.log.Errorf("failed to delete message on error %s", err.Error())
 							}
 						}
 					}
 				}
+			case <-ctx.Done():
+				return
 			case <-c.ctx.Done():
 				return
 			}

@@ -21,7 +21,7 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
+	
 }
 func (c *Client) Connector() *common.Connector {
 	return Connector()
@@ -45,13 +45,13 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
+	
 	var receivedMessage = make(chan *pubsub.Message, 1)
-
+	
 	var errCh = make(chan error, 1)
-
+	
 	sub := c.client.Subscription(c.opts.subscriberID)
-
+	
 	go func() {
 		for {
 			select {
@@ -75,7 +75,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			}
 		}
 	}()
-
+	
 	go func() {
 		err := sub.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
 			receivedMessage <- msg
@@ -84,7 +84,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			errCh <- err
 		}
 	}()
-
+	
 	return nil
 }
 

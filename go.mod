@@ -4,6 +4,8 @@ go 1.14
 
 require (
 	cloud.google.com/go/pubsub v1.6.2
+	github.com/Azure/azure-event-hubs-go/v3 v3.3.2
+	github.com/Azure/azure-service-bus-go v0.10.6
 	github.com/Shopify/sarama v1.27.0
 	github.com/aws/aws-sdk-go v1.34.31
 	github.com/eclipse/paho.mqtt.golang v1.2.0
