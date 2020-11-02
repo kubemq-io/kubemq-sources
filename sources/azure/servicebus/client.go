@@ -1,9 +1,9 @@
-package eventhubs
+package servicebus
 
 import (
 	"context"
 	"fmt"
-	"github.com/Azure/azure-event-hubs-go/v3"
+	"github.com/Azure/azure-service-bus-go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
@@ -15,7 +15,7 @@ type Client struct {
 	name   string
 	opts   options
 	log    *logger.Logger
-	client *eventhub.Hub
+	client *servicebus.Queue
 	target middleware.Middleware
 }
 
@@ -28,15 +28,18 @@ func (c *Client) Connector() *common.Connector {
 }
 func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.name = cfg.Name
-	c.log = logger.NewLogger(c.name)
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {
 		return err
 	}
-	c.client, err = eventhub.NewHubFromConnectionString(c.opts.connectionString)
+	ns, err := servicebus.NewNamespace(servicebus.NamespaceWithConnectionString(c.opts.connectionString))
 	if err != nil {
-		return fmt.Errorf("error connecting to eventhub at %s: %w", c.opts.connectionString, err)
+		return err
+	}
+	c.client, err = ns.NewQueue(c.opts.queueName)
+	if err != nil {
+		return fmt.Errorf("error connecting to servicebus at %s: %w", c.opts.connectionString, err)
 	}
 	return nil
 }
@@ -58,24 +61,24 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			}
 		}
 	}()
-	if c.opts.partitionID != "" {
-		_, err := c.client.Receive(ctx, c.opts.partitionID, func(ctx context.Context, event *eventhub.Event) error {
-			go c.processIncomingMessages(ctx, event, c.opts.partitionID, errCh)
+	go func() {
+		err := c.client.Receive(ctx, servicebus.HandlerFunc(func(ctx context.Context, message *servicebus.Message) error {
+			go c.processIncomingMessages(ctx, message, errCh)
 			return nil
-		}, c.opts.receiveType)
+		}))
 		if err != nil {
-			return fmt.Errorf("error subscription to eventhubs destination on partitionID %s, %w", c.opts.partitionID, err)
+			return
 		}
-	}
+	}()
 
 	return nil
 }
 
-func (c *Client) processIncomingMessages(ctx context.Context, event *eventhub.Event, partitionID string, errCh chan error) {
-	req := types.NewRequest().SetData(event.Data)
+func (c *Client) processIncomingMessages(ctx context.Context, message *servicebus.Message, errCh chan error) {
+	req := types.NewRequest().SetData(message.Data)
 	_, err := c.target.Do(ctx, req)
 	if err != nil {
-		errCh <- fmt.Errorf("error processing eventhubs eventID %s and partitionID %s , error:%s", event.ID, partitionID, err.Error())
+		errCh <- fmt.Errorf("error processing servicebus messageID %s, error:%s", message.ID, err.Error())
 	}
 }
 

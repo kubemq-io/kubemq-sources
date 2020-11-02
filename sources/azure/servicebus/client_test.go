@@ -1,4 +1,4 @@
-package eventhubs
+package servicebus
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func (m *mockMiddleware) Init() {
 		panic(err)
 	}
 	m.client = client
-	m.channelName = "event.azure.eventhubs"
+	m.channelName = "event.azure.servicebus"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -51,40 +51,34 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 }
 
 type testStructure struct {
-	partitionID         string
 	endPoint            string
 	sharedAccessKeyName string
 	sharedAccessKey     string
-	entityPath          string
+	queueName           string
 }
 
 func getTestStructure() (*testStructure, error) {
 	t := &testStructure{}
-	dat, err := ioutil.ReadFile("./../../../credentials/azure/eventhubs/partitionID.txt")
-	if err != nil {
-		return nil, err
-	}
-	t.partitionID = string(dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/endPoint.txt")
+	dat, err := ioutil.ReadFile("./../../../credentials/azure/servicebus/endPoint.txt")
 	if err != nil {
 		return nil, err
 	}
 	t.endPoint = string(dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/sharedAccessKeyName.txt")
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/sharedAccessKeyName.txt")
 	if err != nil {
 		return nil, err
 	}
 	t.sharedAccessKeyName = fmt.Sprintf("%s", dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/sharedAccessKey.txt")
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/sharedAccessKey.txt")
 	if err != nil {
 		return nil, err
 	}
 	t.sharedAccessKey = fmt.Sprintf("%s", dat)
-	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/entityPath.txt")
+	dat, err = ioutil.ReadFile("./../../../credentials/azure/servicebus/queueName.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.entityPath = fmt.Sprintf("%s", dat)
+	t.queueName = fmt.Sprintf("%s", dat)
 
 	return t, nil
 }
@@ -100,79 +94,61 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"partition_id":           dat.partitionID,
+					"queue_name":             dat.queueName,
 					"end_point":              dat.endPoint,
 					"shared_access_key_name": dat.sharedAccessKeyName,
 					"shared_access_key":      dat.sharedAccessKey,
-					"entity_path":            dat.entityPath,
 				},
 			},
 			wantErr: false,
 		}, {
-			name: "invalid init - missing partition_id",
+			name: "invalid init - missing queue_name",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
 					"end_point":              dat.endPoint,
 					"shared_access_key_name": dat.sharedAccessKeyName,
 					"shared_access_key":      dat.sharedAccessKey,
-					"entity_path":            dat.entityPath,
 				},
 			},
 			wantErr: true,
 		}, {
 			name: "invalid init - missing end_point",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"partition_id":           dat.partitionID,
+					"queue_name":             dat.queueName,
 					"shared_access_key_name": dat.sharedAccessKeyName,
 					"shared_access_key":      dat.sharedAccessKey,
-					"entity_path":            dat.entityPath,
 				},
 			},
 			wantErr: true,
 		}, {
 			name: "invalid init - missing shared_access_key_name",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"partition_id":      dat.partitionID,
+					"queue_name":        dat.queueName,
 					"end_point":         dat.endPoint,
 					"shared_access_key": dat.sharedAccessKey,
-					"entity_path":       dat.entityPath,
 				},
 			},
 			wantErr: true,
 		}, {
 			name: "invalid init - missing shared_access_key",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"partition_id":           dat.partitionID,
+					"queue_name":             dat.queueName,
 					"end_point":              dat.endPoint,
 					"shared_access_key_name": dat.sharedAccessKeyName,
-					"entity_path":            dat.entityPath,
-				},
-			},
-			wantErr: true,
-		}, {
-			name: "invalid init - missing entity_path",
-			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
-				Properties: map[string]string{
-					"partition_id":           dat.partitionID,
-					"end_point":              dat.endPoint,
-					"shared_access_key_name": dat.sharedAccessKeyName,
-					"shared_access_key":      dat.sharedAccessKey,
 				},
 			},
 			wantErr: true,
@@ -205,16 +181,15 @@ func TestClient_Do(t *testing.T) {
 		timeToWait time.Duration
 	}{
 		{
-			name: "valid eventhubs receive",
+			name: "valid servicebus receive",
 			cfg: config.Spec{
-				Name: "azure-eventhubs",
-				Kind: "azure.eventhubs",
+				Name: "azure-servicebus",
+				Kind: "azure.servicebus",
 				Properties: map[string]string{
-					"partition_id":           dat.partitionID,
+					"queue_name":             dat.queueName,
 					"end_point":              dat.endPoint,
 					"shared_access_key_name": dat.sharedAccessKeyName,
 					"shared_access_key":      dat.sharedAccessKey,
-					"entity_path":            dat.entityPath,
 				},
 			},
 			middleware: middle,
