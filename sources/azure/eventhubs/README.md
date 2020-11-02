@@ -24,9 +24,9 @@ event-hubs source connector configuration properties:
 | partition_id                    | yes      | event hubs partition_id to listen                                      | "0" |
 | time_stamp                      | no       | timestamp to read events from must supply with from_timestamp(RFC3339) | "0" |
 | with_consumer_group             | no       | consumer group to assign the listener must supply with with_consumer_group(RFC3339)  | "0" |
-| with_epoch                      | no      | timestamp to read from w must supply with with_epoch(RFC3339)                             | "0" |
-| with_prefetch_count             | no      | event hubs partition_id to listen                                    | "0" |
-| with_starting_offset            | no      | event hubs partition_id to listen                                    | "0" |
+| with_epoch                      | no       | timestamp to read from w must supply with with_epoch(RFC3339)                             | "0" |
+| with_prefetch_count             | no       | event hubs partition_id to listen                                    | "0" |
+| with_starting_offset            | no       | event hubs partition_id to listen                                    | "0" |
 
 
 
