@@ -29,19 +29,17 @@ bindings:
       kind: query
       name: kubemq-query
       properties:
-        host: "localhost"
-        port: "50000"
-        client_id: "kubemq-query-gcp-pubsub-connector"
+        address: "kubemq-cluster:50000"
+        client_id: "kubemq-query-pubsub"
         auth_token: ""
         channel: "query.gcp.pubsub"
         group:   ""
-        concurrency: "1"
         auto_reconnect: "true"
         reconnect_interval_seconds: "1"
         max_reconnects: "0"
     target:
       kind: gcp.pubsub
-      name: source-gcp-pubsub
+      name: gcp-pubsub
       properties:
         project_id: "projectID"
         subscriber_id:    "mysubscriberID"

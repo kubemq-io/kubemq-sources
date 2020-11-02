@@ -46,7 +46,7 @@ bindings:
         max_reconnects: "0"
     target:
       kind: aws.amazonmq
-      name: source-aws-amazonmq
+      name: aws-amazonmq
       properties:
         host: "localhost:61613"
         username: "admin"
