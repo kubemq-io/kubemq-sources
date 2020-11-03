@@ -3,6 +3,7 @@ package rabbitmq
 import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/nats-io/nuid"
 )
 
 type options struct {
@@ -25,10 +26,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing queue name, %w", err)
 	}
-	o.consumer, err = cfg.Properties.MustParseString("consumer")
-	if err != nil {
-		return options{}, fmt.Errorf("error parsing consumer tag, %w", err)
-	}
+	o.consumer = cfg.Properties.ParseString("consumer", nuid.Next())
 	o.requeueOnError = cfg.Properties.ParseBool("requeue_on_error", false)
 	o.autoAck = cfg.Properties.ParseBool("auto_ack", false)
 	o.exclusive = cfg.Properties.ParseBool("exclusive", false)

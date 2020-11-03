@@ -26,7 +26,7 @@ func Connector() *common.Connector {
 				SetKind("string").
 				SetName("consumer").
 				SetDescription("Set consumer tag value").
-				SetMust(true).
+				SetMust(false).
 				SetDefault(""),
 		).
 		AddProperty(

@@ -16,6 +16,14 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
+				SetName("topic").
+				SetDescription("Set topic name").
+				SetMust(true).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("string").
 				SetName("username").
 				SetDescription("Set username").
 				SetMust(false).
@@ -32,14 +40,6 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
-				SetName("topic").
-				SetDescription("Set topic name").
-				SetMust(true).
-				SetDefault(""),
-		).
-		AddProperty(
-			common.NewProperty().
-				SetKind("string").
 				SetName("client_id").
 				SetDescription("Set client ID").
 				SetMust(false).
@@ -50,7 +50,7 @@ func Connector() *common.Connector {
 				SetKind("int").
 				SetName("qos").
 				SetDescription("Set QoS level").
-				SetMust(true).
+				SetMust(false).
 				SetDefault("0").
 				SetMin(0).
 				SetMax(2),

@@ -11,7 +11,8 @@ func Connector() *common.Connector {
 				SetKind("string").
 				SetName("methods").
 				SetDescription("list of supported methods separated by a comma").
-				SetMust(true),
+				SetMust(true).
+				SetDefault("post"),
 		).
 		AddProperty(
 			common.NewProperty().
