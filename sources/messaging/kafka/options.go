@@ -16,7 +16,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	m := options{}
 	var err error
 
-	m.consumerGroup, err = cfg.Properties.MustParseString("consumerGroup")
+	m.consumerGroup, err = cfg.Properties.MustParseString("consumer_group")
 	if err != nil {
 		return m, err
 	}

@@ -1,0 +1,16 @@
+bindings:
+  - name: kafka
+    source:
+      kind: messaging.kafka
+      properties:
+        brokers: localhost:9092
+        consumer_group: test_client
+        topics: TestTopicA
+    target:
+      kind: kubemq.events
+      properties:
+        address: localhost:50000
+        auth_token: ""
+        channel: event.messaging.kafka
+        client_id: test
+    properties: {}
