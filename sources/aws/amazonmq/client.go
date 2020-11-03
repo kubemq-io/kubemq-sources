@@ -62,7 +62,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			errCh <- fmt.Errorf("error subscription to amazonmq destination, %w", err)
 			return
 		}
-		errCh <- nil
 		defer func() {
 			_ = subscription.Unsubscribe()
 		}()
@@ -75,7 +74,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 					c.log.Errorf("error processing amazonmq message, %s", err.Error())
 				}
 			case err := <-errCh:
-				c.log.Errorf("error on amazonmq connection, %w", err.Error())
+				c.log.Errorf("error on amazonmq connection, %v", err)
 			case <-ctx.Done():
 				return
 			}

@@ -3,26 +3,16 @@ package amazonmq
 import (
 	"context"
 	"fmt"
-	"github.com/fortytw2/leaktest"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"
 	"time"
 )
-
-type mockMiddleware struct {
-}
-
-func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
-	fmt.Println(request)
-	r := types.NewResponse()
-	r.SetData([]byte("ok"))
-	r.SetMetadata(`"result":"ok"`)
-	return r, nil
-}
 
 type testStructure struct {
 	host        string
@@ -56,9 +46,45 @@ func getTestStructure() (*testStructure, error) {
 	return t, nil
 }
 
+type mockMiddleware struct {
+	client      *kubemq.Client
+	channelName string
+}
+
+func (m *mockMiddleware) Init() {
+
+	client, err := kubemq.NewClient(context.Background(),
+		kubemq.WithAddress("localhost", 50000),
+		kubemq.WithClientId(nuid.Next()),
+		kubemq.WithCheckConnection(true),
+		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
+
+	if err != nil {
+		panic(err)
+	}
+	m.client = client
+	m.channelName = "event.aws.amazonmq"
+}
+
+func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
+	fmt.Println(request)
+	r := types.NewResponse()
+	r.SetData([]byte("ok"))
+	r.SetMetadata(`"result":"ok"`)
+	event := m.client.NewEvent()
+	event.Channel = m.channelName
+	event.Body = request.Data
+	err := event.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
 func TestClient_Init(t *testing.T) {
 	dat, err := getTestStructure()
 	require.NoError(t, err)
+
 	tests := []struct {
 		name    string
 		cfg     config.Spec
@@ -77,26 +103,44 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: false,
-		}, {
-			name: "invalid init - no host",
+		},
+		{
+			name: "invalid init - bad url",
 			cfg: config.Spec{
 				Name: "aws-amazonmq",
 				Kind: "aws.amazonmq",
 				Properties: map[string]string{
+					"host":        "localhost:41231",
 					"username":    dat.username,
 					"password":    dat.password,
 					"destination": dat.destination,
 				},
 			},
 			wantErr: true,
-		}, {
+		},
+		{
+			name: "invalid init - no  url",
+			cfg: config.Spec{
+				Name: "aws-amazonmq",
+				Kind: "aws.amazonmq",
+				Properties: map[string]string{
+					"host":        "fake",
+					"username":    dat.username,
+					"password":    dat.password,
+					"destination": dat.destination,
+				},
+			},
+			wantErr: true,
+		},
+		{
 			name: "invalid init - no destination",
 			cfg: config.Spec{
 				Name: "aws-amazonmq",
 				Kind: "aws.amazonmq",
 				Properties: map[string]string{
-					"username": dat.username,
-					"password": dat.password,
+					"host":        dat.host,
+					"username":    dat.username,
+					"password":    dat.password,
 				},
 			},
 			wantErr: true,
@@ -104,14 +148,13 @@ func TestClient_Init(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
 			c := New()
-
 			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
-				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
-				return
+				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 			}
+
 		})
 	}
 }
@@ -119,12 +162,13 @@ func TestClient_Init(t *testing.T) {
 func TestClient_Do(t *testing.T) {
 	dat, err := getTestStructure()
 	require.NoError(t, err)
+	middle := &mockMiddleware{}
+	middle.Init()
 	tests := []struct {
 		name       string
 		cfg        config.Spec
 		wantErr    bool
 		middleware middleware.Middleware
-		timeToWait time.Duration
 	}{
 		{
 			name: "valid amazonmq receive",
@@ -138,15 +182,14 @@ func TestClient_Do(t *testing.T) {
 					"destination": dat.destination,
 				},
 			},
-			middleware: &mockMiddleware{},
-			timeToWait: time.Duration(5) * time.Second,
-			wantErr:    false,
+			middleware: middle,
+
+			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			defer leaktest.Check(t)()
-			ctx, cancel := context.WithTimeout(context.Background(), tt.timeToWait)
+			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(10)*time.Second)
 			defer cancel()
 			c := New()
 			err := c.Init(ctx, tt.cfg)
@@ -156,11 +199,7 @@ func TestClient_Do(t *testing.T) {
 				require.Error(t, err)
 				return
 			}
-			time.Sleep(tt.timeToWait + 5)
-			err = c.Stop()
-			require.NoError(t, err)
-			time.Sleep(tt.timeToWait + 2)
-			defer cancel()
+			time.Sleep(time.Duration(5) * time.Second)
 			require.NoError(t, err)
 		})
 	}

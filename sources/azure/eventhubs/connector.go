@@ -72,7 +72,7 @@ func Connector() *common.Connector {
 						SetMust(true).
 						SetDefault("").
 						SetMin(0).
-						SetMax(math.MaxInt64),
+						SetMax(math.MaxInt32),
 				}).
 				NewCondition("with_consumer_group", []*common.Property{
 					common.NewProperty().
@@ -90,7 +90,7 @@ func Connector() *common.Connector {
 						SetMust(true).
 						SetDefault("").
 						SetMin(0).
-						SetMax(math.MaxInt64),
+						SetMax(math.MaxInt32),
 				}).
 				NewCondition("with_prefetch_count", []*common.Property{
 					common.NewProperty().
@@ -100,7 +100,7 @@ func Connector() *common.Connector {
 						SetMust(true).
 						SetDefault("").
 						SetMin(0).
-						SetMax(math.MaxInt64),
+						SetMax(math.MaxInt32),
 				}).
 				NewCondition("with_starting_offset", []*common.Property{
 					common.NewProperty().
