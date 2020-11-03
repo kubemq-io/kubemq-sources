@@ -1,0 +1,16 @@
+bindings:
+  - name: msk
+    source:
+      kind: aws.msk
+      properties:
+        brokers: localhost:9092
+        consumer_group: test_client
+        topics: TestTopicA
+    target:
+      kind: kubemq.events
+      properties:
+        address: localhost:50000
+        auth_token: ""
+        channel: event.messaging.msk
+        client_id: test
+    properties: {}

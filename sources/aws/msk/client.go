@@ -18,10 +18,13 @@ type Client struct {
 	name          string
 	log           *logger.Logger
 	opts          options
+	config        *kafka.Config
 	consumerGroup string
 	cg            kafka.ConsumerGroup
 	target        middleware.Middleware
 	consumer      consumer
+	ctx           context.Context
+	cancel        context.CancelFunc
 }
 
 type consumer struct {
@@ -88,11 +91,13 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 			ClientAuth: 0,
 		}
 	}
+	c.config = kc
 
 	c.cg, err = kafka.NewConsumerGroup(c.opts.brokers, c.consumerGroup, kc)
 	if err != nil {
 		return err
 	}
+	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
 
@@ -109,17 +114,21 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		ready:    ready,
 		callback: target.Do,
 	}
-
 	go func() {
-		c.log.Debugf("Subscribed and listening to topics: %s", c.opts.topics)
-
 		for {
-			err := c.cg.Consume(ctx, c.opts.topics, &(c.consumer))
-			if err != nil {
-				c.log.Errorf("error processing request %s", err.Error())
-			}
-			if ctx.Err() != nil {
+			select {
+			case <-c.ctx.Done():
 				return
+			case <-ctx.Done():
+				return
+			default:
+				err := c.cg.Consume(ctx, c.opts.topics, &(c.consumer))
+				if err != nil {
+					c.log.Errorf("error processing request %s", err.Error())
+				}
+				if ctx.Err() != nil {
+					return
+				}
 			}
 		}
 	}()
@@ -127,7 +136,12 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	return nil
 }
 
+//see https://github.com/Shopify/sarama/issues/1321
 func (c *Client) Stop() error {
-	err := c.cg.Close()
-	return err
+	c.cancel()
+	if c.cg != nil {
+		c.config.MetricRegistry.UnregisterAll()
+		return c.cg.Close()
+	}
+	return nil
 }
