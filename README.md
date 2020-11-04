@@ -53,26 +53,28 @@ A list of supported sources is below.
 
 #### Google Cloud Platform (GCP)
 
-| Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
-|:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
-
-Coming soon
-
+| Category  | Target                                      | Kind                      | Configuration                       | Example                                |
+|:----------|:--------------------------------------------|:--------------------------|:------------------------------------|:---------------------------------------|
+| Messaging | [Pub/Sub](https://cloud.google.com/pubsub)  | gcp.pubsub                | [Usage](sources/gcp/pubsub)         | [Example](examples/gcp/pubsub)               |
 
 #### Amazon Web Service (AWS)
 
 
-| Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
-|:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
-
-Coming soon
+| Category   | Target                                                         | Kind                       | Configuration                              | Example                                       |
+|:-----------|:---------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
+| Messaging  |                                                                |                                 |                                         |                                            |
+|            | [AmazonMQ](https://aws.amazon.com/amazon-mq/)                  |aws.amazonmq                     | [Usage](sources/aws/amazonmq)           | [Example](examples/aws/amazonmq)           |
+|            | [msk](https://aws.amazon.com/msk/)                             |aws.msk                          | [Usage](sources/aws/msk)                | [Example](examples/aws/msk)                |
+|            | [SQS](https://aws.amazon.com/sqs/)                             |aws.sqs                          | [Usage](sources/aws/sqs)                | [Example](examples/aws/sqs)                |
 
 #### Microsoft Azure
 
-| Category   | Target                                                              | Kind                       | Configuration                              | Example                                       |
-|:-----------|:--------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
-
-Coming soon
+| Category   | Target                                                                | Kind                       | Configuration                              | Example                                       |
+|:-----------|:----------------------------------------------------------------------|:---------------------------|:-------------------------------------------|:----------------------------------------------|
+| EventHubs  |                                                                       |                            |                                        |                                          |
+|            | [EventHubs](https://azure.microsoft.com/en-us/services/event-hubs/)   |azure.eventhubs             | [Usage](sources/azure/eventhubs)       | [Example](examples/azure/eventhubs)      |
+| ServiceBus |                                                                       |                            |                                        |                                          |
+|            | [ServiceBus](https://azure.microsoft.com/en-us/services/service-bus/) |azure.servicebus            | [Usage](sources/azure/servicebus)      | [Example](examples/azure/servicebus)     |
 
 ### Target
 
