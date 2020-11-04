@@ -1,209 +1,213 @@
 package rabbitmq
 
-//
-//import (
-//	"context"
-//	"github.com/kubemq-hub/kubemq-sources/config"
-//	"github.com/kubemq-hub/kubemq-sources/middleware"
-//	"github.com/kubemq-hub/kubemq-sources/targets"
-//	"github.com/kubemq-hub/kubemq-sources/targets/null"
-//	"github.com/kubemq-hub/kubemq-sources/types"
-//	"github.com/nats-io/nuid"
-//	"github.com/streadway/amqp"
-//	"github.com/stretchr/testify/require"
-//	"testing"
-//	"time"
-//)
-//
-//var rabbitmqUrl = "amqp://rabbitmq:rabbitmq@localhost:5672/"
-//
-//func setupClient(ctx context.Context, queue string, target middleware.Middleware) (*Client, error) {
-//	c := New()
-//	err := c.Init(ctx, config.Spec{
-//		Name: "rabbitmq",
-//		Kind: "",
-//		Properties: map[string]string{
-//			"url":              rabbitmqUrl,
-//			"queue":            queue,
-//			"consumer":         nuid.Next(),
-//			"requeue_on_error": "false",
-//			"auto_ack":         "false",
-//			"exclusive":        "false",
-//		},
-//	})
-//	if err != nil {
-//		return nil, err
-//	}
-//	err = c.Start(ctx, target)
-//	if err != nil {
-//		return nil, err
-//	}
-//	time.Sleep(time.Second)
-//	return c, nil
-//}
-//
-//func sendMessage(queue string, data []byte) error {
-//	conn, err := amqp.Dial(rabbitmqUrl)
-//	if err != nil {
-//		return err
-//	}
-//	channel, err := conn.Channel()
-//	if err != nil {
-//		return err
-//	}
-//	err = channel.Publish("", queue, false, false, amqp.Publishing{
-//		Headers:         amqp.Table{},
-//		ContentType:     "text/plain",
-//		ContentEncoding: "",
-//		DeliveryMode:    1,
-//		Priority:        0,
-//		CorrelationId:   "",
-//		ReplyTo:         "",
-//		Expiration:      "",
-//		MessageId:       "",
-//		Timestamp:       time.Time{},
-//		Type:            "",
-//		UserId:          "",
-//		AppId:           "",
-//		Body:            data,
-//	})
-//	return err
-//}
-//
-//func TestClient_Start(t *testing.T) {
-//	tests := []struct {
-//		name    string
-//		target  -sources.Target
-//		req     *types.Request
-//		queue   string
-//		wantErr bool
-//	}{
-//		{
-//			name: "request",
-//			target: &null.Client{
-//				Delay:         0,
-//				DoError:       nil,
-//				ResponseError: nil,
-//			},
-//			req:     types.NewRequest().SetData([]byte("some-data")),
-//			queue:   "some-queue",
-//			wantErr: false,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-//			defer cancel()
-//			c, err := setupClient(ctx, tt.queue, tt.target)
-//			require.NoError(t, err)
-//			defer func() {
-//				_ = c.Stop()
-//			}()
-//
-//			err = sendMessage(tt.queue, tt.req.Data)
-//			if tt.wantErr {
-//				require.Error(t, err)
-//				return
-//			}
-//			require.NoError(t, err)
-//		})
-//	}
-//}
-//
-//func TestClient_Init(t *testing.T) {
-//
-//	tests := []struct {
-//		name    string
-//		cfg     config.Spec
-//		wantErr bool
-//	}{
-//		{
-//			name: "init",
-//			cfg: config.Spec{
-//				Name: "rabbitmq",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"url":              "amqp://rabbitmq:rabbitmq@localhost:5672/",
-//					"queue":            "some-queue",
-//					"consumer":         nuid.Next(),
-//					"requeue_on_error": "false",
-//					"auto_ack":         "false",
-//					"exclusive":        "false",
-//				},
-//			},
-//			wantErr: false,
-//		},
-//		{
-//			name: "init - bad url",
-//			cfg: config.Spec{
-//				Name: "rabbitmq-target",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"url":              "amqp://rabbitmq:rabbitmq@localhost:6000/",
-//					"consumer":         nuid.Next(),
-//					"queue":            "some-queue",
-//					"requeue_on_error": "false",
-//					"auto_ack":         "false",
-//					"exclusive":        "false",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//		{
-//			name: "bad init - no  url",
-//			cfg: config.Spec{
-//				Name: "rabbitmq",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"queue":            "some-queue",
-//					"consumer":         nuid.Next(),
-//					"requeue_on_error": "false",
-//					"auto_ack":         "false",
-//					"exclusive":        "false",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//		{
-//			name: "bad init - no queue",
-//			cfg: config.Spec{
-//				Name: "rabbitmq",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"url":              "amqp://rabbitmq:rabbitmq@localhost:5672/",
-//					"consumer":         nuid.Next(),
-//					"requeue_on_error": "false",
-//					"auto_ack":         "false",
-//					"exclusive":        "false",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//		{
-//			name: "init - no consumer",
-//			cfg: config.Spec{
-//				Name: "rabbitmq-target",
-//				Kind: "",
-//				Properties: map[string]string{
-//					"url":              "amqp://rabbitmq:rabbitmq@localhost:5432/",
-//					"queue":            "some-queue",
-//					"requeue_on_error": "false",
-//					"auto_ack":         "false",
-//					"exclusive":        "false",
-//				},
-//			},
-//			wantErr: true,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-//			defer cancel()
-//			c := New()
-//			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
-//				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
-//			}
-//
-//		})
-//	}
-//}
+import (
+	"context"
+	"fmt"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/middleware"
+	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
+	"github.com/stretchr/testify/require"
+	"testing"
+	"time"
+)
+
+type mockMiddleware struct {
+	client      *kubemq.Client
+	channelName string
+}
+
+func (m *mockMiddleware) Init() {
+
+	client, err := kubemq.NewClient(context.Background(),
+		kubemq.WithAddress("localhost", 50000),
+		kubemq.WithClientId(nuid.Next()),
+		kubemq.WithCheckConnection(true),
+		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
+
+	if err != nil {
+		panic(err)
+	}
+	m.client = client
+	m.channelName = "events.messaging.rabbitmq"
+}
+
+func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
+	fmt.Println(request)
+	r := types.NewResponse()
+	r.SetData([]byte("ok"))
+	r.SetMetadata(`"result":"ok"`)
+	event := m.client.NewEvent()
+	event.Channel = m.channelName
+	event.Body = request.Data
+	err := event.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+func TestClient_Init(t *testing.T) {
+
+	tests := []struct {
+		name    string
+		cfg     config.Spec
+		wantErr bool
+	}{
+		{
+			name: "init",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:5672/",
+					"queue":            "some-queue",
+					"consumer":         nuid.Next(),
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "invalid init - bad url",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:6000/",
+					"consumer":         nuid.Next(),
+					"queue":            "some-queue",
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid bad init - missing url",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"queue":            "some-queue",
+					"consumer":         nuid.Next(),
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid init - missing queue",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:5672/",
+					"consumer":         nuid.Next(),
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid init - missing consumer",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:5432/",
+					"queue":            "some-queue",
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			defer cancel()
+			c := New()
+			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
+				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
+			}
+
+		})
+	}
+}
+
+func TestClient_Do(t *testing.T) {
+	middle := &mockMiddleware{}
+	middle.Init()
+	tests := []struct {
+		name       string
+		cfg        config.Spec
+		wantErr    bool
+		middleware middleware.Middleware
+	}{
+		{
+			name: "valid rabbitmq receive",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:5672/",
+					"queue":            "some-queue",
+					"consumer":         nuid.Next(),
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			middleware: middle,
+
+			wantErr: false,
+		}, {
+			name: "invalid valid rabbitmq receive - fake queue",
+			cfg: config.Spec{
+				Name: "messaging-rabbitmq",
+				Kind: "messaging.rabbitmq",
+				Properties: map[string]string{
+					"url":              "amqp://guest:guest@localhost:5672/",
+					"queue":            "fake-queue",
+					"consumer":         nuid.Next(),
+					"requeue_on_error": "false",
+					"auto_ack":         "false",
+					"exclusive":        "false",
+				},
+			},
+			middleware: middle,
+
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(10)*time.Second)
+			defer cancel()
+			c := New()
+			err := c.Init(ctx, tt.cfg)
+			require.NoError(t, err)
+			err = c.Start(ctx, tt.middleware)
+			if tt.wantErr {
+				require.Error(t, err)
+				return
+			}
+			require.Nil(t, err)
+			time.Sleep(time.Duration(5) * time.Second)
+			err = c.Stop()
+			require.Nil(t, err)
+			time.Sleep(time.Duration(15) * time.Second)
+		})
+	}
+}

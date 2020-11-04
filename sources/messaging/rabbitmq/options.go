@@ -27,7 +27,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	o.consumer, err = cfg.Properties.MustParseString("consumer")
 	if err != nil {
-		return options{}, fmt.Errorf("error parsing consumer tag, %w", err)
+		return options{}, fmt.Errorf("error parsing consumer, %w", err)
 	}
 	o.requeueOnError = cfg.Properties.ParseBool("requeue_on_error", false)
 	o.autoAck = cfg.Properties.ParseBool("auto_ack", false)

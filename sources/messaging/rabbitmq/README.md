@@ -16,7 +16,7 @@ RabbitMQ source connector configuration properties:
 
 | Properties Key   | Required | Description                         | Example                                    |
 |:-----------------|:---------|:------------------------------------|:-------------------------------------------|
-| url              | yes      | rabbitmq connection string address  | "amqp://rabbitmq:rabbitmq@localhost:5672/" |
+| url              | yes      | rabbitmq connection string address  | "amqp://guest:guest@localhost:5672/" |
 | queue            | yes      | set subscription queue              | "queue"                                    |
 | consumer         | yes      | set subscription consumer tag       | "consumer"                                 |
 | requeue_on_error | bool     | set requeue on error property       | "false"                                    |
@@ -33,7 +33,7 @@ bindings:
       kind: messaging.rabbitmq
       name: rabbitmq-source
       properties:
-        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
+        "url": "amqp://guest:guest@localhost:5672/"
         "queue": "some-queue"
         "consumer": "kubemq"
         "requeue_on_error": "false"

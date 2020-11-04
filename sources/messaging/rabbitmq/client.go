@@ -17,6 +17,8 @@ type Client struct {
 	channel *amqp.Channel
 	log     *logger.Logger
 	conn    *amqp.Connection
+	ctx           context.Context
+	cancel        context.CancelFunc
 }
 
 func New() *Client {
@@ -43,7 +45,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		_ = c.conn.Close()
 		return fmt.Errorf("error getting rabbitmq channel, %w", err)
 	}
-
+	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
 
@@ -60,6 +62,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	if err != nil {
 		return fmt.Errorf("error on queue Consume: %w", err)
 	}
+
 
 	go func() {
 		errCh := c.conn.NotifyClose(make(chan *amqp.Error))
@@ -80,7 +83,8 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 						_ = delivery.Ack(false)
 					}
 				}
-
+			case <-c.ctx.Done():
+				return
 			case <-ctx.Done():
 				return
 			case err := <-errCh:
@@ -94,5 +98,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 }
 
 func (c *Client) Stop() error {
+	c.cancel()
 	return c.conn.Close()
 }

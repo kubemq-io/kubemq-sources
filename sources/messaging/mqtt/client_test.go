@@ -187,8 +187,11 @@ func TestClient_Do(t *testing.T) {
 				require.Error(t, err)
 				return
 			}
-			time.Sleep(time.Duration(30) * time.Second)
-			require.NoError(t, err)
+			require.Nil(t, err)
+			time.Sleep(time.Duration(1) * time.Second)
+			err = c.Stop()
+			require.Nil(t, err)
+			time.Sleep(time.Duration(15) * time.Second)
 		})
 	}
 }

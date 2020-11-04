@@ -25,7 +25,7 @@ func main() {
 
 	go func() {
 		errCh := make(chan error)
-		eventsCh, err := client.SubscribeToEvents(ctx, "events.rabbitmq", "", errCh)
+		eventsCh, err := client.SubscribeToEvents(ctx, "events.messaging.rabbitmq", "", errCh)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -49,7 +49,7 @@ func main() {
 	}()
 
 	time.Sleep(time.Second)
-	conn, err := amqp.Dial("amqp://rabbitmq:rabbitmq@localhost:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
 		log.Fatal(fmt.Errorf("error dialing rabbitmq, %w", err))
 	}

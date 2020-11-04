@@ -5,7 +5,7 @@ bindings:
       kind: messaging.rabbitmq
       name: rabbitmq-source
       properties:
-        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
+        "url": "amqp://guest:guest@localhost:5672/"
         "queue": "queue"
         "consumer": "kubemq"
         "requeue_on_error": "false"
