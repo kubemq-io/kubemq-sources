@@ -49,9 +49,9 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	var receivedMessage = make(chan *pubsub.Message, 1)
 	
 	var errCh = make(chan error, 1)
-	
+
 	sub := c.client.Subscription(c.opts.subscriberID)
-	
+
 	go func() {
 		for {
 			select {
@@ -71,7 +71,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			case <-ctx.Done():
 				return
 			case err := <-errCh:
-				c.log.Errorf("error failed to pull message from queue on error %s", err.Error())
+				c.log.Errorf("error failed to pull message on error %s", err.Error())
 			}
 		}
 	}()

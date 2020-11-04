@@ -68,7 +68,7 @@ func main() {
 		Expiration:      "10000",
 		Body:            []byte("rabbitmq data"),
 	}
-	err = channel.Publish("", "queue", false, false, msg)
+	err = channel.Publish("", "some-queue", false, false, msg)
 	if err != nil {
 		log.Fatal(fmt.Errorf("error publishing rabbitmq message, %w", err))
 	}

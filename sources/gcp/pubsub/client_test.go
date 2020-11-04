@@ -7,6 +7,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"testing"
@@ -14,6 +16,23 @@ import (
 )
 
 type mockMiddleware struct {
+	client      *kubemq.Client
+	channelName string
+}
+
+func (m *mockMiddleware) Init() {
+
+	client, err := kubemq.NewClient(context.Background(),
+		kubemq.WithAddress("localhost", 50000),
+		kubemq.WithClientId(nuid.Next()),
+		kubemq.WithCheckConnection(true),
+		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
+
+	if err != nil {
+		panic(err)
+	}
+	m.client = client
+	m.channelName = "event.gcp.pubsub"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -21,6 +40,13 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 	r := types.NewResponse()
 	r.SetData([]byte("ok"))
 	r.SetMetadata(`"result":"ok"`)
+	event := m.client.NewEvent()
+	event.Channel = m.channelName
+	event.Body = request.Data
+	err := event.Send(ctx)
+	if err != nil {
+		return nil, err
+	}
 	return r, nil
 }
 
@@ -61,8 +87,8 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "target-gcp-pubsub",
-				Kind: "kubemq.gcp.pubsub",
+				Name: "gcp-pubsub",
+				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
 					"subscriber_id": dat.subscriberID,
@@ -71,10 +97,10 @@ func TestClient_Init(t *testing.T) {
 			},
 			wantErr: false,
 		}, {
-			name: "init-missing-credentials",
+			name: "invalid init-missing-credentials",
 			cfg: config.Spec{
-				Name: "target-gcp-pubsub",
-				Kind: "kubemq.gcp.pubsub",
+				Name: "gcp-pubsub",
+				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
 					"subscriber_id": dat.subscriberID,
@@ -83,10 +109,10 @@ func TestClient_Init(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "init-missing-project-id",
+			name: "invalid init-missing-project-id",
 			cfg: config.Spec{
-				Name: "source-gcp-pubsub",
-				Kind: "kubemq.gcp.pubsub",
+				Name: "gcp-pubsub",
+				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"credentials":   dat.credentials,
 					"subscriber_id": dat.subscriberID,
@@ -94,10 +120,10 @@ func TestClient_Init(t *testing.T) {
 			},
 			wantErr: true,
 		}, {
-			name: "init-missing-subscriber_id",
+			name: "invalid init-missing-subscriber_id",
 			cfg: config.Spec{
-				Name: "source-gcp-pubsub",
-				Kind: "kubemq.gcp.pubsub",
+				Name: "gcp-pubsub",
+				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"credentials": dat.credentials,
 					"project_id":  dat.projectID,
@@ -137,7 +163,7 @@ func TestClient_Do(t *testing.T) {
 		{
 			name: "valid pubsub receive",
 			cfg: config.Spec{
-				Name: "source-gcp-pubsub",
+				Name: "gcp-pubsub",
 				Kind: "gcp.pubsub",
 				Properties: map[string]string{
 					"project_id":    dat.projectID,
@@ -163,11 +189,11 @@ func TestClient_Do(t *testing.T) {
 				require.Error(t, err)
 				return
 			}
+			require.NoError(t, err)
 			time.Sleep(tt.timeToWait + 5)
 			err = c.Stop()
 			require.NoError(t, err)
 			time.Sleep(tt.timeToWait + 2)
-			defer cancel()
 			require.NoError(t, err)
 		})
 	}
