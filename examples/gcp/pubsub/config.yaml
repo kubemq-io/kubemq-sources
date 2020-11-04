@@ -1,0 +1,18 @@
+bindings:
+  - name: pubsub
+    source:
+      kind: gcp.pubsub
+      properties:
+        credentials: |-
+          {
+          }
+        project_id: kubemq-tests-294511
+        subscriber_id: test
+    target:
+      kind: kubemq.events
+      properties:
+        address: localhost:50000
+        auth_token: ""
+        channel: event.gcp.pubsub
+        client_id: pubsub
+    properties: {}

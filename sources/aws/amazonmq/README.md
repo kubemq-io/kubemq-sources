@@ -22,35 +22,27 @@ AmazonMQ Source connector configuration properties:
 | username                        | no      | set AmazonMQ username                        | "username" |
 | password                        | no      | set AmazonMQ password                        | "password" |
 | destination                     | yes     | set destination name                         | "destination"         |
-| subTimeout                      | no      | timeout for sub expired                      | "5"(default 5)         |
 
 
 Example:
 
 ```yaml
-bindings:
-  - name: kubemq-query-amazonmq
-    source:
-      kind: query
-      name: kubemq-query
-      properties:
-        host: "localhost"
-        port: "50000"
-        client_id: "kubemq-query-amazonmq-connector"
-        auth_token: ""
-        channel: "query.amazonmq"
-        group:   ""
-        concurrency: "1"
-        auto_reconnect: "true"
-        reconnect_interval_seconds: "1"
-        max_reconnects: "0"
-    target:
-      kind: aws.amazonmq
-      name: aws-amazonmq
-      properties:
-        host: "localhost:61613"
-        username: "admin"
-        password: "admin"
-        destination: "my-queue"
-        subTimeout: "5"
+    bindings:
+    - name: amazonmq
+      source:
+        kind: aws.amazonmq
+        properties:
+          destination: some-queue
+          host: localhost:61613
+          password: admin
+          username: admin
+      target:
+        kind: kubemq.events
+        properties:
+          address: localhost:50000
+          auth_token: ""
+          channel: event.aws.amazonmq
+          client_id: test
+      properties: {}
+
 ```

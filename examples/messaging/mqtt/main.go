@@ -25,7 +25,7 @@ func main() {
 
 	go func() {
 		errCh := make(chan error)
-		eventsCh, err := client.SubscribeToEvents(ctx, "events.mqtt", "", errCh)
+		eventsCh, err := client.SubscribeToEvents(ctx, "events.messaging.mqtt", "", errCh)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -59,7 +59,7 @@ func main() {
 	if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
 		log.Fatal(fmt.Errorf("error connecting to mqtt broker, %w", token.Error()))
 	}
-	token := mqttClient.Publish("queue", byte(0), false, []byte("mqtt-data"))
+	token := mqttClient.Publish("some-queue", byte(0), false, []byte("mqtt-data"))
 	token.Wait()
 	if token.Error() != nil {
 		log.Fatal(token.Error())

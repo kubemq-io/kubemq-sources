@@ -16,7 +16,7 @@ RabbitMQ source connector configuration properties:
 
 | Properties Key   | Required | Description                         | Example                                    |
 |:-----------------|:---------|:------------------------------------|:-------------------------------------------|
-| url              | yes      | rabbitmq connection string address  | "amqp://rabbitmq:rabbitmq@localhost:5672/" |
+| url              | yes      | rabbitmq connection string address  | "amqp://guest:guest@localhost:5672/" |
 | queue            | yes      | set subscription queue              | "queue"                                    |
 | consumer         | yes      | set subscription consumer tag       | "consumer"                                 |
 | requeue_on_error | bool     | set requeue on error property       | "false"                                    |
@@ -28,24 +28,23 @@ Example:
 
 ```yaml
 bindings:
-  - name: rabbitmq-kubemq-event
-    source:
-      kind: messaging.rabbitmq
-      name: rabbitmq-source
-      properties:
-        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
-        "queue": "some-queue"
-        "consumer": "kubemq"
-        "requeue_on_error": "false"
-        "auto_ack": "false"
-        "exclusive": "false"
-    target:
-      kind: kubemq.events
-      name: target-kubemq-events
-      properties:
-        address: "kubemq-cluster:50000"
-        client_id: "kubemq-http-connector"
-        channel: "events.rabbitmq"
+- name: rabbitmq
+  source:
+    kind: messaging.rabbitmq
     properties:
-      log_level: "info"
+      auto_ack: "false"
+      consumer: "1"
+      exclusive: "false"
+      queue: some-queue
+      requeue_on_error: "false"
+      url: amqp://guest:guest@localhost:5672/
+  target:
+    kind: kubemq.events
+    properties:
+      address: localhost:50000
+      auth_token: ""
+      channel: events.messaging.rabbitmq
+      client_id: rabbitmq
+  properties: {}
+
 ```

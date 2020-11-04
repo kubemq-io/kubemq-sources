@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"crypto/tls"
+	"github.com/go-stomp/stomp"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
-	"github.com/streadway/amqp"
 	"log"
 	"time"
 )
@@ -25,7 +25,7 @@ func main() {
 
 	go func() {
 		errCh := make(chan error)
-		eventsCh, err := client.SubscribeToEvents(ctx, "events.messaging.rabbitmq", "", errCh)
+		eventsCh, err := client.SubscribeToEvents(ctx, "event.aws.amazonmq", "", errCh)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -48,29 +48,16 @@ func main() {
 
 	}()
 
-	time.Sleep(time.Second)
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	netConn, err := tls.Dial("tcp", "localhost:61614", &tls.Config{})
 	if err != nil {
-		log.Fatal(fmt.Errorf("error dialing rabbitmq, %w", err))
+		log.Fatal(err)
 	}
-	channel, err := conn.Channel()
+
+	conn, err := stomp.Connect(netConn, stomp.ConnOpt.Login("admin", "admin"))
 	if err != nil {
-		log.Fatal(fmt.Errorf("error getting rabbitmq channel, %w", err))
+		log.Fatal(err)
 	}
-	msg := amqp.Publishing{
-		Headers:         amqp.Table{},
-		ContentType:     "text/plain",
-		ContentEncoding: "",
-		DeliveryMode:    uint8(1),
-		Priority:        uint8(0),
-		CorrelationId:   "",
-		ReplyTo:         "",
-		Expiration:      "10000",
-		Body:            []byte("rabbitmq data"),
-	}
-	err = channel.Publish("", "some-queue", false, false, msg)
-	if err != nil {
-		log.Fatal(fmt.Errorf("error publishing rabbitmq message, %w", err))
-	}
+
+	conn.Send("my-dest", "text/plain", []byte("test-send-amazonmq"))
 	time.Sleep(3 * time.Second)
 }

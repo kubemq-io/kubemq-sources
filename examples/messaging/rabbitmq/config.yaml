@@ -1,23 +1,19 @@
-apiPort: 8080
 bindings:
-  - name: rabbitmq-kubemq-event
+  - name: rabbitmq
     source:
       kind: messaging.rabbitmq
-      name: rabbitmq-source
       properties:
-        "url": "amqp://rabbitmq:rabbitmq@localhost:5672/"
-        "queue": "queue"
-        "consumer": "kubemq"
-        "requeue_on_error": "false"
-        "auto_ack": "false"
-        "exclusive": "false"
+        auto_ack: "false"
+        consumer: "1"
+        exclusive: "false"
+        queue: some-queue
+        requeue_on_error: "false"
+        url: amqp://guest:guest@localhost:5672/
     target:
       kind: kubemq.events
-      name: target-kubemq-events
       properties:
-        address: "kubemq-cluster:50000"
-        client_id: "kubemq-rabbit-connector"
-        channel: "events.rabbitmq"
-    properties:
-      log_level: "info"
-
+        address: localhost:50000
+        auth_token: ""
+        channel: events.messaging.rabbitmq
+        client_id: rabbitmq
+    properties: {}

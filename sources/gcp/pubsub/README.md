@@ -24,25 +24,23 @@ Example:
 
 ```yaml
 bindings:
-  - name: kubemq-query-gcp-pubsub
+  - name: pubsub
     source:
-      kind: query
-      name: kubemq-query
-      properties:
-        address: "kubemq-cluster:50000"
-        client_id: "kubemq-query-pubsub"
-        auth_token: ""
-        channel: "query.gcp.pubsub"
-        group:   ""
-        auto_reconnect: "true"
-        reconnect_interval_seconds: "1"
-        max_reconnects: "0"
-    target:
       kind: gcp.pubsub
-      name: gcp-pubsub
       properties:
-        project_id: "projectID"
-        subscriber_id:    "mysubscriberID"
-        credentials: 'json'
+        credentials: |-
+          {
+          }
+        project_id: kubemq-tests-294511
+        subscriber_id: test
+    target:
+      kind: kubemq.events
+      properties:
+        address: localhost:50000
+        auth_token: ""
+        channel: event.gcp.pubsub
+        client_id: pubsub
+    properties: {}
+
 
 ```

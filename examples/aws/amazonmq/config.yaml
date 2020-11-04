@@ -1,10 +1,10 @@
 bindings:
-  - name: activemq
+  - name: amazonmq
     source:
-      kind: messaging.activemq
+      kind: aws.amazonmq
       properties:
-        destination: some-queue
-        host: localhost:61613
+        destination: test
+        host: "localhost:61613"
         password: admin
         username: admin
     target:
@@ -12,6 +12,6 @@ bindings:
       properties:
         address: localhost:50000
         auth_token: ""
-        channel: event.messaging.activemq
+        channel: event.aws.amazonmq
         client_id: test
     properties: {}

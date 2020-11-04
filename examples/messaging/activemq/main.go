@@ -38,7 +38,7 @@ func main() {
 					log.Println("client done")
 					return
 				}
-				log.Printf("client:%s Channel: %s, Data: %s", event.ClientId, event.Channel, string(event.Body))
+				log.Printf("client: Channel: %s, Data: %s", event.Channel, string(event.Body))
 
 			case <-ctx.Done():
 				return
@@ -46,18 +46,17 @@ func main() {
 		}
 
 	}()
+
 	var options []func(*stomp.Conn) error = []func(*stomp.Conn) error{
 		stomp.ConnOpt.Login("admin", "admin"),
 		stomp.ConnOpt.Host("/"),
 	}
+
 	conn, err := stomp.Dial("tcp", "localhost:61613", options...)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = conn.Send("some-queue", "text/plain", []byte("my message to activeMQ"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	time.Sleep(30 * time.Second)
+	conn.Send("my-dest", "text/plain", []byte("test-send-activemq"))
+	time.Sleep(3 * time.Second)
 }

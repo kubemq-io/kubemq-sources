@@ -7,7 +7,6 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/amazonmq"
-	"github.com/kubemq-hub/kubemq-sources/sources/aws/kinesis"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/azure/eventhubs"
@@ -65,12 +64,6 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
-	case "aws.kinesis":
-		source := kinesis.New()
-		if err := source.Init(ctx, cfg); err != nil {
-			return nil, err
-		}
-		return source, nil
 	case "aws.msk":
 		source := msk.New()
 		if err := source.Init(ctx, cfg); err != nil {
@@ -118,7 +111,6 @@ func Connectors() common.Connectors {
 		// AWS
 		sqs.Connector(),
 		amazonmq.Connector(),
-		kinesis.Connector(),
 		msk.Connector(),
 		// GCP
 		pubsub.Connector(),

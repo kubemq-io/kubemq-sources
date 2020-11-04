@@ -44,9 +44,6 @@ bindings:
       name: source-aws-msk
       properties:
      	brokers: "localhost:9092,localhost:9093",
-		topic: "TestTopic",
-		consumer_group: "cg"
+	    topic: "TestTopic",
+	    consumer_group: "cg"
 ```
-
-## Usage
-

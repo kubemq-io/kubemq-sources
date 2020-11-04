@@ -2,10 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
+	kafka "github.com/Shopify/sarama"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
-	"github.com/streadway/amqp"
 	"log"
 	"time"
 )
@@ -25,7 +24,7 @@ func main() {
 
 	go func() {
 		errCh := make(chan error)
-		eventsCh, err := client.SubscribeToEvents(ctx, "events.messaging.rabbitmq", "", errCh)
+		eventsCh, err := client.SubscribeToEvents(ctx, "event.messaging.kafka", "", errCh)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -48,29 +47,24 @@ func main() {
 
 	}()
 
-	time.Sleep(time.Second)
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	kc := kafka.NewConfig()
+	kc.Version = kafka.V2_0_0_0
+	kc.Producer.RequiredAcks = kafka.WaitForAll
+	kc.Producer.Retry.Max = 5
+	kc.Producer.Return.Successes = true
+	var brokers []string
+	brokers = append(brokers, "localhost:9092")
+	producer, err := kafka.NewSyncProducer(brokers, kc)
 	if err != nil {
-		log.Fatal(fmt.Errorf("error dialing rabbitmq, %w", err))
+		log.Fatal(err)
 	}
-	channel, err := conn.Channel()
+	_, _, err = producer.SendMessage(&kafka.ProducerMessage{
+		Key:   kafka.ByteEncoder("test"),
+		Value: kafka.ByteEncoder("test_value"),
+		Topic: "TestTopicA",
+	})
 	if err != nil {
-		log.Fatal(fmt.Errorf("error getting rabbitmq channel, %w", err))
-	}
-	msg := amqp.Publishing{
-		Headers:         amqp.Table{},
-		ContentType:     "text/plain",
-		ContentEncoding: "",
-		DeliveryMode:    uint8(1),
-		Priority:        uint8(0),
-		CorrelationId:   "",
-		ReplyTo:         "",
-		Expiration:      "10000",
-		Body:            []byte("rabbitmq data"),
-	}
-	err = channel.Publish("", "some-queue", false, false, msg)
-	if err != nil {
-		log.Fatal(fmt.Errorf("error publishing rabbitmq message, %w", err))
+		log.Fatal(err)
 	}
 	time.Sleep(3 * time.Second)
 }
