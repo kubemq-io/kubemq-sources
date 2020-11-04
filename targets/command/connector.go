@@ -24,7 +24,7 @@ func Connector() *common.Connector {
 				SetName("channel").
 				SetDescription("Set Command channel").
 				SetMust(true).
-				SetDefault("commands"),
+				SetDefaultFromKey("channel.command"),
 		).
 		AddProperty(
 			common.NewProperty().

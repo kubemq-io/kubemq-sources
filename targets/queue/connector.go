@@ -24,7 +24,7 @@ func Connector() *common.Connector {
 				SetName("channel").
 				SetDescription("Set Queue channel").
 				SetMust(true).
-				SetDefault("queues"),
+				SetDefaultFromKey("channel.queue"),
 		).
 		AddProperty(
 			common.NewProperty().

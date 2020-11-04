@@ -21,7 +21,7 @@ func Connector() *common.Connector {
 				SetName("channel").
 				SetDescription("Set Events-Store channel").
 				SetMust(true).
-				SetDefault("events-store"),
+				SetDefaultFromKey("channel.events-store"),
 		).
 		AddProperty(
 			common.NewProperty().
