@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
@@ -11,6 +12,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"time"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 const (
 	defaultConnectTimeout = 5 * time.Second
@@ -66,8 +69,23 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	return nil
 }
 
+func (c *Client) createMetadataString(msg mqtt.Message) string {
+	md := map[string]string{}
+	md["message_id"] = fmt.Sprintf("%d", msg.MessageID())
+	md["topic"] = msg.Topic()
+	md["duplicate"] = fmt.Sprintf("%t", msg.Duplicate())
+	md["qos"] = fmt.Sprintf("%d", msg.Qos())
+	md["retained"] = fmt.Sprintf("%t", msg.Retained())
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing mqtt metadata, %s", err.Error())
+	}
+	return str
+}
 func (c *Client) processIncomingMessages(ctx context.Context, msg mqtt.Message) {
-	req := types.NewRequest().SetData(msg.Payload())
+	req := types.NewRequest().
+		SetMetadata(c.createMetadataString(msg)).
+		SetData(msg.Payload())
 	_, err := c.target.Do(ctx, req)
 	if err != nil {
 		c.log.Errorf("error processing mqtt message %d , %s", msg.MessageID(), err.Error())
