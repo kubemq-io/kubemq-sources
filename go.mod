@@ -1,6 +1,6 @@
 module github.com/kubemq-hub/kubemq-sources
 
-go 1.14
+go 1.15
 
 require (
 	cloud.google.com/go/pubsub v1.6.2
