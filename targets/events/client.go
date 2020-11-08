@@ -84,7 +84,6 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 		SetChannel(c.getChannel(request)).
 		SetMetadata(request.Metadata).
 		SetBody(request.Data)
-
 	select {
 	case c.sendCh <- event:
 	case <-time.After(defaultSendTimeout):

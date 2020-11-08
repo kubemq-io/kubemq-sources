@@ -19,6 +19,7 @@ Queue target connector configuration properties:
 | client_id       | no       | set client id                                      | "client_id"                                          |
 | auth_token      | no       | set authentication token                           | JWT token                                            |
 | channel | no       | set send request default channel               |          "queue"                                            |
+| dynamic_mapping | no       | set dynamic channel mapping per source               |          "false"                                            |
 
 
 
@@ -48,6 +49,7 @@ bindings:
         client_id: "cluster-a-queue-connection"
         auth_token: ""
         channel: "queue"
+        dynamic_mapping: "false"
         timeout_seconds: "10"
 ```
 

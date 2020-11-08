@@ -6,8 +6,9 @@ import (
 )
 
 type options struct {
-	methods []string
-	path    string
+	methods        []string
+	path           string
+	dynamicMapping bool
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -17,9 +18,14 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing methods list value, %w", err)
 	}
+
 	o.path, err = cfg.Properties.MustParseString("path")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing path value, %w", err)
+	}
+	o.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing dynamic mapping, %w", err)
 	}
 	return o, nil
 }

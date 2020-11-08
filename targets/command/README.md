@@ -19,6 +19,7 @@ Command target connector configuration properties:
 | client_id       | no       | set client id                                      | "client_id"                                          |
 | auth_token      | no       | set authentication token                           | JWT token                                            |
 | channel | no       | set send request default channel               |          "commands"                                            |
+| dynamic_mapping | no       | set dynamic channel mapping per source               |          "false"                                            |
 | timeout_seconds | no       | sets command request default timeout (600 seconds) |     "10"                                                 |
 
 
@@ -48,6 +49,7 @@ bindings:
         client_id: "cluster-a-command-connection"
         auth_token: ""
         channel: "commands"
+        dynamic_mapping: "false"
         timeout_seconds: "10"
 ```
 

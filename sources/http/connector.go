@@ -1,6 +1,8 @@
 package http
 
-import "github.com/kubemq-hub/builder/connector/common"
+import (
+	"github.com/kubemq-hub/builder/connector/common"
+)
 
 func Connector() *common.Connector {
 	return common.NewConnector().
@@ -20,6 +22,14 @@ func Connector() *common.Connector {
 				SetName("path").
 				SetDescription("http endpoint path").
 				SetMust(true).
-				SetDefault("/"),
+				SetDefault("/*"),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("bool").
+				SetName("dynamic_mapping").
+				SetDescription("Set Path/Channel dynamic mapping").
+				SetMust(true).
+				SetDefault("true"),
 		)
 }

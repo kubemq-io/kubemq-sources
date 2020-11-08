@@ -1,34 +1,15 @@
+apiPort: 8081
 bindings:
-- name: mqtt
+- name: as
   source:
-    kind: messaging.mqtt
+    kind: http
     properties:
-      client_id: receiver
-      host: 159.203.157.217:1883
-      qos: "0"
-      topic: mqtt.queue
-  target:
-    kind: kubemq.queue
-    properties:
-      address: localhost:50000
-      auth_token: ""
-      channel: queue.mqtt
-  properties:
-    log_level: info
-- name: rabbit.ping
-  source:
-    kind: messaging.rabbitmq
-    properties:
-      auto_ack: "true"
-      consumer: kubemq-source
-      exclusive: "false"
-      queue: ping
-      requeue_on_error: "false"
-      url: amqp://rabbitmq:rabbitmq@35.188.173.255:5672
+      dynamic_mapping: "true"
+      methods: get
+      path: /*
   target:
     kind: kubemq.events
     properties:
       address: localhost:50000
-      channel: events.rabbit.ping
-  properties:
-    log_level: info
+      dynamic_mapping: "true"
+  properties: {}

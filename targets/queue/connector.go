@@ -20,11 +20,34 @@ func Connector() *common.Connector {
 		).
 		AddProperty(
 			common.NewProperty().
-				SetKind("string").
-				SetName("channel").
-				SetDescription("Set Queue channel").
+				SetKind("condition").
+				SetName("connection-type").
+				SetDescription("Set Channel Mapping mode").
 				SetMust(true).
-				SetDefaultFromKey("channel.queue"),
+				SetOptions([]string{"Implicit", "Dynamic"}).
+				SetDefault("Implicit").
+				NewCondition("Implicit", []*common.Property{
+					common.NewProperty().
+						SetKind("null").
+						SetName("dynamic_mapping").
+						SetDescription("Set dynamic mapping").
+						SetMust(true).
+						SetDefault("false"),
+					common.NewProperty().
+						SetKind("string").
+						SetName("channel").
+						SetDescription("Set Events channel").
+						SetMust(true).
+						SetDefaultFromKey("channel.queue"),
+				}).
+				NewCondition("Dynamic", []*common.Property{
+					common.NewProperty().
+						SetKind("null").
+						SetName("dynamic_mapping").
+						SetDescription("Set dynamic mapping").
+						SetMust(true).
+						SetDefault("true"),
+				}),
 		).
 		AddProperty(
 			common.NewProperty().

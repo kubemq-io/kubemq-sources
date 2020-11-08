@@ -95,7 +95,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		for {
 			select {
 			case delivery := <-deliveries:
-
 				req := types.NewRequest().SetData(delivery.Body).SetMetadata(c.createMetadataString(delivery))
 				if c.opts.dynamicMapping {
 					req.SetChannel(c.opts.queue)

@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
+	"strings"
 )
 
 type Handler struct {
@@ -68,21 +69,23 @@ func (h *Handler) Stop() error {
 	return nil
 }
 
-func (h *Handler) parseRequest(req *http.Request) (*types.Request, error) {
-	mdBuff, err := httputil.DumpRequest(req, false)
+func (h *Handler) parseRequest(httpRequest *http.Request) (*types.Request, error) {
+	mdBuff, err := httputil.DumpRequest(httpRequest, false)
 	if err != nil {
 		return nil, err
 	}
-	if req.Body == nil {
-		return types.NewRequest().
-			SetMetadata(string(mdBuff)), nil
+	req := types.NewRequest().SetMetadata(string(mdBuff))
+	if h.opts.dynamicMapping {
+		req.SetChannel(strings.TrimPrefix(httpRequest.RequestURI, "/"))
+	}
+	if httpRequest.Body == nil {
+		return req, nil
 	}
 
-	body, err := ioutil.ReadAll(req.Body)
+	body, err := ioutil.ReadAll(httpRequest.Body)
 	if err != nil {
 		return nil, err
 	}
-	return types.NewRequest().
-		SetMetadata(string(mdBuff)).
-		SetData(body), nil
+	req.SetData(body)
+	return req, nil
 }

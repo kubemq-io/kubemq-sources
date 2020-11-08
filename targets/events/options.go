@@ -11,11 +11,12 @@ const (
 )
 
 type options struct {
-	host      string
-	port      int
-	clientId  string
-	authToken string
-	channel   string
+	host           string
+	port           int
+	dynamicMapping bool
+	clientId       string
+	authToken      string
+	channel        string
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -25,11 +26,15 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing address value, %w", err)
 	}
+	o.dynamicMapping = cfg.Properties.ParseBool("dynamic_mapping", false)
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
-	o.channel, err = cfg.Properties.MustParseString("channel")
-	if err != nil {
-		return options{}, fmt.Errorf("error parsing default channel value, %w", err)
+	if !o.dynamicMapping {
+		o.channel, err = cfg.Properties.MustParseString("channel")
+		if err != nil {
+			return options{}, fmt.Errorf("error parsing channel value, %w", err)
+		}
 	}
+
 	return o, nil
 }

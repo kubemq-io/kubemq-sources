@@ -19,7 +19,7 @@ Events-Store target connector configuration properties:
 | client_id       | no       | set client id                                      | "client_id"                                          |
 | auth_token      | no       | set authentication token                           | JWT token                                            |
 | channel | no       | set send request default channel               |          "events-store"                                            |
-
+| dynamic_mapping | no       | set dynamic channel mapping per source               |          "false"                                            |
 
 Example:
 
@@ -47,6 +47,7 @@ bindings:
         client_id: "cluster-a-events-store-connection"
         auth_token: ""
         channel: "events-store"
+        dynamic_mapping: "false"
         timeout_seconds: "10"
 ```
 
