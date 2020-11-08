@@ -18,6 +18,7 @@ MQTT source connector configuration properties:
 |:---------------|:---------|:-------------------------------|:-----------------|
 | host           | yes      | mqtt connection host           | "localhost:1883" |
 | topic          | yes      | set mqtt subscription topic    | "queue"          |
+| dynamic_mapping          | yes      | set if to map mqtt topic to kubemq channel    | "true"          |
 | username       | no       | set mqtt username              | "username"       |
 | password       | no       | set mqtt password              | "password"       |
 | client_id      | no       | mqtt connection string address | "client_id"      |
@@ -34,6 +35,7 @@ bindings:
       name: mqtt-source
       properties:
         host: "localhost:1883"
+        dynamic_map: "true"
         topic: "queue"
         username: "username"
         password: "password"

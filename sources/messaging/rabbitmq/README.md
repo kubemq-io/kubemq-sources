@@ -18,6 +18,7 @@ RabbitMQ source connector configuration properties:
 |:-----------------|:---------|:------------------------------------|:-------------------------------------------|
 | url              | yes      | rabbitmq connection string address  | "amqp://guest:guest@localhost:5672/" |
 | queue            | yes      | set subscription queue              | "queue"                                    |
+| dynamic_mapping          | yes      | set if to map rabbit topic to kubemq channel    | "true"          |
 | consumer         | yes      | set subscription consumer tag       | "consumer"                                 |
 | requeue_on_error | bool     | set requeue on error property       | "false"                                    |
 | auto_ack         | bool     | set auto_ack property               | "false"                                    |
@@ -35,6 +36,7 @@ bindings:
       auto_ack: "false"
       consumer: "1"
       exclusive: "false"
+      dynamic_mapping: "true"
       queue: some-queue
       requeue_on_error: "false"
       url: amqp://guest:guest@localhost:5672/
