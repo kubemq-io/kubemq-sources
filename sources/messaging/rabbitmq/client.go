@@ -51,7 +51,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
-func (c *Client) createMetadataString(msg amqp.Delivery) string {
+	func (c *Client) createMetadataString(msg amqp.Delivery) string {
 	md := map[string]string{}
 	md["delivery_mode"] = fmt.Sprintf("%d", msg.DeliveryMode)
 	md["priority"] = fmt.Sprintf("%d", msg.Priority)

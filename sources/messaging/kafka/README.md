@@ -17,6 +17,7 @@ Kafka source connector configuration properties:
 |:---------------|:---------|:-------------------------------------------|:-----------------|
 | brokers        | yes      | kafka brokers connection, comma separated  | "localhost:9092" |
 | topics         | yes      | kafka stored topic, comma separated        | "TestTopic"      |
+| dynamic_mapping| yes      | set if to map kafka topic to kubemq channel| "true"          |
 | consumer_group | yes      | kafka consumer group name                  | "Group1          |
 | saslUsername   | no       | SASL based authentication with broker      | "user"           |
 | saslPassword   | no       | SASL based authentication with broker      | "pass"           |

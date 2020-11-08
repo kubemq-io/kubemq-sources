@@ -13,12 +13,13 @@ The following are required to run the activemq source connector:
 
 ActiveMQ source connector configuration properties:
 
-| Properties Key                  | Required | Description                                 | Example                                                                |
-|:--------------------------------|:---------|:--------------------------------------------|:-----------------------------------------------------------------------|
-| host                            | yes      | activemq connection host          | "localhost:1883" |
-| username                        | no       | set activemq username          | "username" |
-| password                        | no       | set activemq password          | "password" |
-| destination                     | yes      | set destination name              | any string
+| Properties Key                  | Required | Description                                             | Example                                                                |
+|:--------------------------------|:---------|:--------------------------------------------------------|:-----------------------------------------------------------------------|
+| host                            | yes      | activemq connection host                                | "localhost:1883" |
+| dynamic_mapping                 | yes      | set if to map activemq Destination to kubemq channel    | "true"          |
+| username                        | no       | set activemq username                                   | "username" |
+| password                        | no       | set activemq password                                   | "password" |
+| destination                     | yes      | set destination name                                    | any string
 
 
 Example:

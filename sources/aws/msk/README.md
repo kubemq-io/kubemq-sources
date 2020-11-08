@@ -17,6 +17,7 @@ msk source connector configuration properties:
 |:---------------|:---------|:-------------------------------------------|:-----------------|
 | brokers        | yes      | msk brokers connection, comma separated    | "localhost:9092" |
 | topics         | yes      | msk stored topic, comma separated          | "TestTopic"      |
+| dynamic_mapping| yes      | set if to map msk topic to kubemq channel  | "true"          |
 | consumer_group | yes      | msk consumer group name                    | "Group1          |
 | sasl_username  | no       | SASL based authentication with broker      | "user"           |
 | sasl_password  | no       | SASL based authentication with broker      | "pass"           |

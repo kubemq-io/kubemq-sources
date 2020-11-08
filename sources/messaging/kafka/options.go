@@ -1,6 +1,7 @@
 package kafka
 
 import (
+	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/config"
 )
 
@@ -10,6 +11,7 @@ type options struct {
 	consumerGroup string
 	saslUsername  string
 	saslPassword  string
+	dynamicMapping bool
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -30,6 +32,9 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	m.saslUsername = cfg.Properties.ParseString("saslUsername", "")
 	m.saslPassword = cfg.Properties.ParseString("saslPassword", "")
-
+	m.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing dynamic_mapping, %w", err)
+	}
 	return m, nil
 }

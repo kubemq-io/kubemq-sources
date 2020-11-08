@@ -47,5 +47,13 @@ func Connector() *common.Connector {
 				SetDescription("Set Saal Password").
 				SetMust(false).
 				SetDefault(""),
-		)
+		).
+		AddProperty(
+		common.NewProperty().
+			SetKind("bool").
+			SetName("dynamic_mapping").
+			SetDescription("Set Topic/Channel dynamic mapping").
+			SetMust(true).
+			SetDefault("true"),
+	)
 }

@@ -24,6 +24,7 @@ type options struct {
 	maxNumberOfMessages int64
 	waitTimeSeconds     int64
 	pullDelay           time.Duration
+	dynamicMapping      bool
 }
 
 func parseOptions(cfg config.Spec) (options, error) {

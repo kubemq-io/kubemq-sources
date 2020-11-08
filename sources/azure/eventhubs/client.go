@@ -4,12 +4,15 @@ import (
 	"context"
 	"fmt"
 	"github.com/Azure/azure-event-hubs-go/v3"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name   string
@@ -39,6 +42,24 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 		return fmt.Errorf("error connecting to eventhub at %s: %w", c.opts.connectionString, err)
 	}
 	return nil
+}
+
+func (c *Client) createMetadataString(event *eventhub.Event) string {
+	md := map[string]string{}
+	md["partition_key"] = fmt.Sprintf("%s", *event.PartitionKey)
+	if len(event.Properties) > 0 {
+		a, err := json.Marshal(event.Properties)
+		if err != nil {
+			return fmt.Sprintf("error parsing Properties, %s", err.Error())
+		}
+		md["properties"] = fmt.Sprintf("%s", a)
+	}
+	md["id"] = event.ID
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing eventhub.Event metadata, %s", err.Error())
+	}
+	return str
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
@@ -72,7 +93,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 }
 
 func (c *Client) processIncomingMessages(ctx context.Context, event *eventhub.Event, partitionID string, errCh chan error) {
-	req := types.NewRequest().SetData(event.Data)
+	req := types.NewRequest().SetMetadata(c.createMetadataString(event)).SetData(event.Data)
 	_, err := c.target.Do(ctx, req)
 	if err != nil {
 		errCh <- fmt.Errorf("error processing eventhubs eventID %s and partitionID %s , error:%s", event.ID, partitionID, err.Error())

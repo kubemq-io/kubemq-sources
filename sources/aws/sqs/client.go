@@ -2,12 +2,12 @@ package sqs
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
@@ -15,6 +15,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"time"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name   string
@@ -29,6 +31,32 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
+
+func (c *Client) createMetadataString(msg *sqs.Message) string {
+	md := map[string]string{}
+	md["message_id"] = fmt.Sprintf("%s", *msg.MessageId)
+	if len(msg.MessageAttributes) > 0 {
+		ma, err := json.Marshal(msg.MessageAttributes)
+		if err != nil {
+			return fmt.Sprintf("error parsing MessageAttributes, %s", err.Error())
+		}
+		md["message_attributes"] = fmt.Sprintf("%s", ma)
+	}
+	if len(msg.Attributes) > 0 {
+		a, err := json.Marshal(msg.Attributes)
+		if err != nil {
+			return fmt.Sprintf("error parsing Attributes, %s", err.Error())
+		}
+		md["attributes"] = fmt.Sprintf("%s", a)
+	}
+	md["receipt_handler"] = fmt.Sprintf("%s", *msg.ReceiptHandle)
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing stomp metadata, %s", err.Error())
+	}
+	return str
+}
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
@@ -56,6 +84,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
+
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 
 	if target == nil {
@@ -83,7 +112,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 						if err != nil {
 							c.log.Errorf("failed to parse message on error %s", err.Error())
 						} else {
-							req := types.NewRequest().SetData(b)
+							req := types.NewRequest().SetMetadata(c.createMetadataString(message)).SetData(b)
 							_, err := target.Do(ctx, req)
 							if err != nil {
 								c.log.Errorf("error processing request %s", err.Error())
