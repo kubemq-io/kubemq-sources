@@ -97,7 +97,11 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			case delivery := <-deliveries:
 				req := types.NewRequest().SetData(delivery.Body).SetMetadata(c.createMetadataString(delivery))
 				if c.opts.dynamicMapping {
-					req.SetChannel(c.opts.queue)
+					channel := delivery.RoutingKey
+					if delivery.Exchange != "" {
+						channel = fmt.Sprintf("%s.%s", delivery.Exchange, delivery.RoutingKey)
+					}
+					req.SetChannel(channel)
 				}
 				_, err := target.Do(ctx, req)
 				if c.opts.autoAck {
