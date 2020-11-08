@@ -8,6 +8,7 @@ import (
 
 type options struct {
 	url            string
+	dynamicMapping bool
 	queue          string
 	consumer       string
 	requeueOnError bool
@@ -25,6 +26,10 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.queue, err = cfg.Properties.MustParseString("queue")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing queue name, %w", err)
+	}
+	o.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing dynamic mapping, %w", err)
 	}
 	o.consumer = cfg.Properties.ParseString("consumer", nuid.Next())
 	o.requeueOnError = cfg.Properties.ParseBool("requeue_on_error", false)

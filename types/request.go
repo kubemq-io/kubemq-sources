@@ -11,6 +11,7 @@ var json = jsoniter.ConfigCompatibleWithStandardLibrary
 type Request struct {
 	Metadata string `json:"metadata,omitempty"`
 	Data     []byte `json:"data,omitempty"`
+	Channel  string `json:"channel"`
 }
 
 func NewRequest() *Request {
@@ -24,11 +25,16 @@ func (r *Request) SetMetadata(value string) *Request {
 	r.Metadata = value
 	return r
 }
+func (r *Request) SetChannel(value string) *Request {
+	r.Channel = value
+	return r
+}
 
 func (r *Request) SetData(value []byte) *Request {
 	r.Data = value
 	return r
 }
+
 func (r *Request) Size() float64 {
 	return float64(len(r.Data))
 }

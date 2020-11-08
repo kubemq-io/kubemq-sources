@@ -15,6 +15,14 @@ func Connector() *common.Connector {
 		).
 		AddProperty(
 			common.NewProperty().
+				SetKind("bool").
+				SetName("dynamic_mapping").
+				SetDescription("Set Queue/Channel dynamic mapping").
+				SetMust(true).
+				SetDefault("true"),
+		).
+		AddProperty(
+			common.NewProperty().
 				SetKind("string").
 				SetName("queue").
 				SetDescription("Set queue name").
