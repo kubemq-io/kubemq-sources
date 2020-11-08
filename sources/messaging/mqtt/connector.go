@@ -17,9 +17,17 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("topic").
-				SetDescription("Set topic name").
+				SetDescription("Set subscribed topic name").
 				SetMust(true).
 				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("bool").
+				SetName("dynamic_mapping").
+				SetDescription("Set Topic/Channel dynamic mapping").
+				SetMust(true).
+				SetDefault("true"),
 		).
 		AddProperty(
 			common.NewProperty().

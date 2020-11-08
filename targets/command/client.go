@@ -47,11 +47,17 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	}
 	return nil
 }
-
+func (c *Client) getChannel(request *types.Request) string {
+	if request.Channel != "" {
+		return request.Channel
+	}
+	return c.opts.channel
+}
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
+
 	cmdResponse, err := c.client.C().
 		SetTimeout(time.Duration(c.opts.timeoutSeconds) * time.Second).
-		SetChannel(c.opts.channel).
+		SetChannel(c.getChannel(request)).
 		SetMetadata(request.Metadata).
 		SetBody(request.Data).
 		Send(ctx)

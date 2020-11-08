@@ -48,9 +48,15 @@ func (c *Client) Stop() error {
 	}
 	return nil
 }
+func (c *Client) getChannel(request *types.Request) string {
+	if request.Channel != "" {
+		return request.Channel
+	}
+	return c.opts.channel
+}
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 	queueMessage := c.client.NewQueueMessage().
-		SetChannel(c.opts.channel).
+		SetChannel(c.getChannel(request)).
 		SetMetadata(request.Metadata).
 		SetBody(request.Data).
 		SetPolicyDelaySeconds(c.opts.delaySeconds).

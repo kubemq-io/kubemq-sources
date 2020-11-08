@@ -86,6 +86,9 @@ func (c *Client) processIncomingMessages(ctx context.Context, msg mqtt.Message) 
 	req := types.NewRequest().
 		SetMetadata(c.createMetadataString(msg)).
 		SetData(msg.Payload())
+	if c.opts.dynamicMapping {
+		req.SetChannel(msg.Topic())
+	}
 	_, err := c.target.Do(ctx, req)
 	if err != nil {
 		c.log.Errorf("error processing mqtt message %d , %s", msg.MessageID(), err.Error())

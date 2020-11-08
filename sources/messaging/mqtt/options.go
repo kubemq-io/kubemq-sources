@@ -7,12 +7,13 @@ import (
 )
 
 type options struct {
-	host     string
-	topic    string
-	username string
-	password string
-	clientId string
-	qos      int
+	host           string
+	dynamicMapping bool
+	topic          string
+	username       string
+	password       string
+	clientId       string
+	qos            int
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -25,6 +26,10 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.topic, err = cfg.Properties.MustParseString("topic")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing topic, %w", err)
+	}
+	o.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing dynamic mapping, %w", err)
 	}
 	o.username = cfg.Properties.ParseString("username", "")
 	o.password = cfg.Properties.ParseString("password", "")

@@ -76,11 +76,16 @@ func (c *Client) runStreamProcessing(ctx context.Context) {
 	}
 done:
 }
-
+func (c *Client) getChannel(request *types.Request) string {
+	if request.Channel != "" {
+		return request.Channel
+	}
+	return c.opts.channel
+}
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 
 	event := c.client.NewEventStore().
-		SetChannel(c.opts.channel).
+		SetChannel(c.getChannel(request)).
 		SetMetadata(request.Metadata).
 		SetBody(request.Data)
 
