@@ -104,7 +104,7 @@ func (c *Client) createMetadataString(message *servicebus.Message) string {
 	md["to"] = message.To
 	md["time_to_live"] = message.TTL.String()
 	if message.LockToken != nil {
-		md["lock_token"] = fmt.Sprintf("%s", *message.LockToken)
+		md["lock_token"] = message.LockToken.String()
 	}
 	if len(message.UserProperties) > 0 {
 		a, err := json.Marshal(message.UserProperties)

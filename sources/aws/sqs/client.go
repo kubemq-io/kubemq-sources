@@ -34,7 +34,9 @@ func New() *Client {
 
 func (c *Client) createMetadataString(msg *sqs.Message) string {
 	md := map[string]string{}
-	md["message_id"] = fmt.Sprintf("%s", *msg.MessageId)
+	if msg.MessageId != nil {
+		md["message_id"] = *msg.MessageId
+	}
 	if len(msg.MessageAttributes) > 0 {
 		ma, err := json.Marshal(msg.MessageAttributes)
 		if err != nil {
@@ -49,7 +51,7 @@ func (c *Client) createMetadataString(msg *sqs.Message) string {
 		}
 		md["attributes"] = fmt.Sprintf("%s", a)
 	}
-	md["receipt_handler"] = fmt.Sprintf("%s", *msg.ReceiptHandle)
+	md["receipt_handler"] = *msg.ReceiptHandle
 	str, err := json.MarshalToString(md)
 	if err != nil {
 		return fmt.Sprintf("error parsing stomp metadata, %s", err.Error())

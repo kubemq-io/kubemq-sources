@@ -47,7 +47,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 func (c *Client) createMetadataString(event *eventhub.Event) string {
 	md := map[string]string{}
 	if event.PartitionKey != nil {
-		md["partition_key"] = fmt.Sprintf("%s", *event.PartitionKey)
+		md["partition_key"] = *event.PartitionKey
 	}
 	if len(event.Properties) > 0 {
 		a, err := json.Marshal(event.Properties)
