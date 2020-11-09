@@ -15,7 +15,6 @@ import (
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
-
 type Client struct {
 	name   string
 	opts   options
@@ -59,7 +58,9 @@ func (c *Client) createMetadataString(msg *pubsub.Message) string {
 		md["attributes"] = fmt.Sprintf("%s", a)
 	}
 	md["publish_time"] = msg.PublishTime.String()
-	md["delivery_attempt"] = fmt.Sprintf("%d", *msg.DeliveryAttempt)
+	if msg.DeliveryAttempt != nil {
+		md["delivery_attempt"] = fmt.Sprintf("%d", *msg.DeliveryAttempt)
+	}
 	md["ordering_key"] = msg.OrderingKey
 	str, err := json.MarshalToString(md)
 	if err != nil {

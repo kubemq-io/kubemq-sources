@@ -153,6 +153,8 @@ func TestClient_Init(t *testing.T) {
 func TestClient_Do(t *testing.T) {
 	dat, err := getTestStructure()
 	require.NoError(t, err)
+	middle := &mockMiddleware{}
+	middle.Init()
 	tests := []struct {
 		name       string
 		cfg        config.Spec
@@ -171,7 +173,7 @@ func TestClient_Do(t *testing.T) {
 					"credentials":   dat.credentials,
 				},
 			},
-			middleware: &mockMiddleware{},
+			middleware: middle,
 			timeToWait: time.Duration(60) * time.Second,
 			wantErr:    false,
 		},
