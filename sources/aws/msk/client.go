@@ -79,7 +79,7 @@ func (consumer *consumer) createMetadataString(message *kafka.ConsumerMessage) s
 	md["offset"] = fmt.Sprintf("%d", message.Offset)
 	str, err := json.MarshalToString(md)
 	if err != nil {
-		return fmt.Sprintf("error parsing kafka.ConsumerMessage metadata, %s", err.Error())
+		return fmt.Sprintf("error parsing msk kafka.ConsumerMessage metadata, %s", err.Error())
 	}
 	return str
 }
