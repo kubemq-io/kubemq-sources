@@ -3,7 +3,8 @@ package pubsub
 import (
 	"cloud.google.com/go/pubsub"
 	"context"
-	"encoding/json"
+	"fmt"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
@@ -11,6 +12,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"google.golang.org/api/option"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name   string
@@ -21,7 +24,7 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-	
+
 }
 func (c *Client) Connector() *common.Connector {
 	return Connector()
@@ -44,10 +47,32 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	return nil
 }
 
+func (c *Client) createMetadataString(msg *pubsub.Message) string {
+	md := map[string]string{}
+	md["id"] = msg.ID
+	if len(msg.Attributes) > 0 {
+		a, err := json.Marshal(msg.Attributes)
+		if err != nil {
+			return fmt.Sprintf("error parsing Attributes, %s", err.Error())
+		}
+		md["attributes"] = fmt.Sprintf("%s", a)
+	}
+	md["publish_time"] = msg.PublishTime.String()
+	if msg.DeliveryAttempt != nil {
+		md["delivery_attempt"] = fmt.Sprintf("%d", *msg.DeliveryAttempt)
+	}
+	md["ordering_key"] = msg.OrderingKey
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing pubsub.message metadata, %s", err.Error())
+	}
+	return str
+}
+
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-	
+
 	var receivedMessage = make(chan *pubsub.Message, 1)
-	
+
 	var errCh = make(chan error, 1)
 
 	sub := c.client.Subscription(c.opts.subscriberID)
@@ -60,7 +85,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 				if err != nil {
 					c.log.Errorf("failed to parse message on error %s", err.Error())
 				}
-				req := types.NewRequest().SetData(b)
+				req := types.NewRequest().SetMetadata(c.createMetadataString(msg)).SetData(b)
 				_, err = target.Do(ctx, req)
 				if err != nil {
 					msg.Nack()
@@ -75,7 +100,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			}
 		}
 	}()
-	
+
 	go func() {
 		err := sub.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
 			receivedMessage <- msg
@@ -84,7 +109,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 			errCh <- err
 		}
 	}()
-	
+
 	return nil
 }
 

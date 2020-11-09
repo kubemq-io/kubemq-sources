@@ -4,12 +4,15 @@ import (
 	"context"
 	"fmt"
 	"github.com/Azure/azure-service-bus-go"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name   string
@@ -75,7 +78,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 }
 
 func (c *Client) processIncomingMessages(ctx context.Context, message *servicebus.Message, errCh chan error) {
-	req := types.NewRequest().SetData(message.Data)
+	req := types.NewRequest().SetMetadata(c.createMetadataString(message)).SetData(message.Data)
 	_, err := c.target.Do(ctx, req)
 	if err != nil {
 		errCh <- fmt.Errorf("error processing servicebus messageID %s, error:%s", message.ID, err.Error())
@@ -84,4 +87,36 @@ func (c *Client) processIncomingMessages(ctx context.Context, message *servicebu
 
 func (c *Client) Stop() error {
 	return c.client.Close(context.Background())
+}
+
+func (c *Client) createMetadataString(message *servicebus.Message) string {
+	md := map[string]string{}
+	md["content_type"] = message.ContentType
+	md["correlation_id"] = message.CorrelationID
+	md["delivery_count"] = fmt.Sprintf("%d", message.DeliveryCount)
+	if message.SessionID != nil {
+		md["session_id"] = *message.SessionID
+	}
+	md["group_sequence"] = fmt.Sprintf("%d", message.GroupSequence)
+	md["id"] = message.ID
+	md["label"] = message.Label
+	md["reply_to"] = message.ReplyTo
+	md["to"] = message.To
+	md["time_to_live"] = message.TTL.String()
+	if message.LockToken != nil {
+		md["lock_token"] = message.LockToken.String()
+	}
+	if len(message.UserProperties) > 0 {
+		a, err := json.Marshal(message.UserProperties)
+		if err != nil {
+			return fmt.Sprintf("error parsing UserProperties, %s", err.Error())
+		}
+		md["user_properties"] = fmt.Sprintf("%s", a)
+	}
+	md["format"] = fmt.Sprintf("%d", message.Format)
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing servicebus.Message metadata, %s", err.Error())
+	}
+	return str
 }

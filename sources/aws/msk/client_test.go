@@ -64,6 +64,7 @@ func TestClient_Init(t *testing.T) {
 					"brokers":        "localhost:9092",
 					"topics":         "TestTopicA,TestTopicB",
 					"consumer_group": "test_client",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: false,
@@ -76,6 +77,7 @@ func TestClient_Init(t *testing.T) {
 					"brokers":        "localhost:9090",
 					"topics":         "TestTopic",
 					"consumer_group": "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -86,6 +88,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"topics":         "TestTopic",
 					"consumer_group": "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -96,6 +99,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"brokers":        "localhost:9090",
 					"consumer_group": "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -106,6 +110,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"brokers": "localhost:9092",
 					"topics":  "TestTopic",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -144,6 +149,7 @@ func TestClient_Do(t *testing.T) {
 					"brokers":        "localhost:9092",
 					"topics":         "TestTopic",
 					"consumer_group": "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 

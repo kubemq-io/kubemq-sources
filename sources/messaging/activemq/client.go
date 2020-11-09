@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-stomp/stomp"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
@@ -15,6 +16,8 @@ import (
 const (
 	defaultSubTimeout = 5 * time.Second
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name   string
@@ -50,6 +53,20 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	return nil
 }
 
+func (c *Client) createMetadataString(msg *stomp.Message) string {
+	md := map[string]string{}
+	md["destination"] = msg.Destination
+	md["content_type"] = msg.ContentType
+	if msg.Err != nil {
+		md["error"] = msg.Err.Error()
+	}
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing stomp metadata, %s", err.Error())
+	}
+	return str
+}
+
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 	if target == nil {
 		return fmt.Errorf("invalid target received, cannot be nil")
@@ -70,7 +87,10 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		for {
 			select {
 			case msg := <-subscription.C:
-				req := types.NewRequest().SetData(msg.Body)
+				req := types.NewRequest().SetMetadata(c.createMetadataString(msg)).SetData(msg.Body)
+				if c.opts.dynamicMapping {
+					req.SetChannel(msg.Destination)
+				}
 				_, err := c.target.Do(ctx, req)
 				if err != nil {
 					c.log.Errorf("error processing activemq message, %s", err.Error())

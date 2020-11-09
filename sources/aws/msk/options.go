@@ -11,11 +11,12 @@ const (
 )
 
 type options struct {
-	brokers       []string
-	topics        []string
-	consumerGroup string
-	saslUsername  string
-	saslPassword  string
+	brokers        []string
+	topics         []string
+	consumerGroup  string
+	saslUsername   string
+	saslPassword   string
+	dynamicMapping bool
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -36,6 +37,10 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	m.saslUsername = cfg.Properties.ParseString("sasl_username", defaultUsername)
 	m.saslPassword = cfg.Properties.ParseString("sasl_password", defaultPassword)
+	m.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing dynamic_mapping, %w", err)
+	}
 
 	return m, nil
 }

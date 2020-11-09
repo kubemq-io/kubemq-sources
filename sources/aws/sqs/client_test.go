@@ -110,6 +110,7 @@ func TestClient_Init(t *testing.T) {
 					"aws_secret_key":         dat.awsSecretKey,
 					"token":                  dat.token,
 					"region":                 dat.region,
+					"queue":                  dat.sqsQueue,
 					"max_number_of_messages": "10",
 					"pull_delay":             "15",
 				},

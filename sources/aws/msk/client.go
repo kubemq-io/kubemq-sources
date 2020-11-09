@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"sync"
 
@@ -13,6 +14,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
 	name          string
@@ -28,17 +31,23 @@ type Client struct {
 }
 
 type consumer struct {
-	ready    chan bool
-	callback func(ctx context.Context, request *types.Request) (*types.Response, error)
-	once     sync.Once
+	ready          chan bool
+	callback       func(ctx context.Context, request *types.Request) (*types.Response, error)
+	once           sync.Once
+	dynamicMapping bool
 }
 
 func (consumer *consumer) ConsumeClaim(session kafka.ConsumerGroupSession, claim kafka.ConsumerGroupClaim) error {
 	for message := range claim.Messages() {
 		if consumer.callback != nil {
-			_, err := consumer.callback(session.Context(), &types.Request{
+			req := &types.Request{
 				Data: message.Value,
-			})
+			}
+			if consumer.dynamicMapping {
+				req.SetChannel(message.Topic)
+			}
+			req.Metadata = consumer.createMetadataString(message)
+			_, err := consumer.callback(session.Context(), req)
 			if err != nil {
 				return err
 			}
@@ -59,6 +68,20 @@ func (consumer *consumer) Setup(kafka.ConsumerGroupSession) error {
 	})
 
 	return nil
+}
+
+func (consumer *consumer) createMetadataString(message *kafka.ConsumerMessage) string {
+	md := map[string]string{}
+	md["timestamp"] = message.Timestamp.String()
+	md["block_timestamp"] = message.BlockTimestamp.String()
+	md["topic"] = message.Topic
+	md["partition"] = fmt.Sprintf("%d", message.Partition)
+	md["offset"] = fmt.Sprintf("%d", message.Offset)
+	str, err := json.MarshalToString(md)
+	if err != nil {
+		return fmt.Sprintf("error parsing msk kafka.ConsumerMessage metadata, %s", err.Error())
+	}
+	return str
 }
 
 func New() *Client {
@@ -111,8 +134,9 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 
 	ready := make(chan bool)
 	c.consumer = consumer{
-		ready:    ready,
-		callback: target.Do,
+		ready:          ready,
+		callback:       target.Do,
+		dynamicMapping: c.opts.dynamicMapping,
 	}
 	go func() {
 		for {

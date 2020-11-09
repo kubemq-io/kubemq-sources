@@ -15,7 +15,6 @@ type options struct {
 	clientId       string
 	qos            int
 }
-
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error

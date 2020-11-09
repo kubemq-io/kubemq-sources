@@ -36,5 +36,12 @@ func Connector() *common.Connector {
 				SetDescription("Set destination").
 				SetMust(true).
 				SetDefault(""),
-		)
+		).AddProperty(
+		common.NewProperty().
+			SetKind("bool").
+			SetName("dynamic_mapping").
+			SetDescription("Set Topic/Channel dynamic mapping").
+			SetMust(true).
+			SetDefault("true"),
+	)
 }

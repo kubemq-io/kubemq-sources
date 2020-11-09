@@ -61,9 +61,10 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"brokers":        "localhost:9092",
-					"topics":         "TestTopicA,TestTopicB",
-					"consumer_group": "test_client",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopicA,TestTopicB",
+					"dynamic_mapping": "false",
+					"consumer_group":  "test_client",
 				},
 			},
 			wantErr: false,
@@ -73,9 +74,10 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"brokers":        "localhost:9090",
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9090",
+					"topics":          "TestTopic",
+					"dynamic_mapping": "false",
+					"consumer_group":  "test_client1",
 				},
 			},
 			wantErr: true,
@@ -84,8 +86,9 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"topics":          "TestTopic",
+					"consumer_group":  "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -94,8 +97,9 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"brokers":        "localhost:9090",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9090",
+					"consumer_group":  "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -104,8 +108,9 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"brokers": "localhost:9092",
-					"topics":  "TestTopic",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopic",
+					"dynamic_mapping": "false",
 				},
 			},
 			wantErr: true,
@@ -141,9 +146,10 @@ func TestClient_Do(t *testing.T) {
 			cfg: config.Spec{
 				Name: "messaging.kafka",
 				Properties: map[string]string{
-					"brokers":        "localhost:9092",
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopic",
+					"consumer_group":  "test_client1",
+					"dynamic_mapping": "false",
 				},
 			},
 
@@ -163,6 +169,7 @@ func TestClient_Do(t *testing.T) {
 				require.Error(t, err)
 				return
 			}
+			require.Nil(t, err)
 			err = c.Start(ctx, tt.middleware)
 			if tt.wantErr {
 				require.Error(t, err)
