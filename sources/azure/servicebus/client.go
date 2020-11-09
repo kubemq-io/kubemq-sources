@@ -94,14 +94,18 @@ func (c *Client) createMetadataString(message *servicebus.Message) string {
 	md["content_type"] = message.ContentType
 	md["correlation_id"] = message.CorrelationID
 	md["delivery_count"] = fmt.Sprintf("%d", message.DeliveryCount)
-	md["session_id"] = *message.SessionID
+	if message.SessionID != nil {
+		md["session_id"] = *message.SessionID
+	}
 	md["group_sequence"] = fmt.Sprintf("%d", message.GroupSequence)
 	md["id"] = message.ID
 	md["label"] = message.Label
 	md["reply_to"] = message.ReplyTo
 	md["to"] = message.To
 	md["time_to_live"] = message.TTL.String()
-	md["lock_token"] = fmt.Sprintf("%d", *message.LockToken)
+	if message.LockToken != nil {
+		md["lock_token"] = fmt.Sprintf("%d", *message.LockToken)
+	}
 	if len(message.UserProperties) > 0 {
 		a, err := json.Marshal(message.UserProperties)
 		if err != nil {
