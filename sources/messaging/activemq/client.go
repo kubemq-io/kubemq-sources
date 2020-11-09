@@ -57,7 +57,9 @@ func (c *Client) createMetadataString(msg *stomp.Message) string {
 	md := map[string]string{}
 	md["destination"] = msg.Destination
 	md["content_type"] = msg.ContentType
-	md["error"] = msg.Err.Error()
+	if msg.Err != nil {
+		md["error"] = msg.Err.Error()
+	}
 	str, err := json.MarshalToString(md)
 	if err != nil {
 		return fmt.Sprintf("error parsing stomp metadata, %s", err.Error())

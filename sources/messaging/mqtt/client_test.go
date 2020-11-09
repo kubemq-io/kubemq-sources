@@ -63,6 +63,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"host":      "localhost:1883",
 					"topic":     "some-queue",
+					"dynamic_mapping":  "false",
 					"username":  "",
 					"password":  "",
 					"client_id": nuid.Next(),
@@ -79,6 +80,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"host":      "localhost:2000",
 					"topic":     "some-queue",
+					"dynamic_mapping":  "false",
 					"username":  "",
 					"password":  "",
 					"client_id": nuid.Next(),
@@ -95,6 +97,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"topic":     "some-queue",
 					"username":  "",
+					"dynamic_mapping":  "false",
 					"password":  "",
 					"client_id": nuid.Next(),
 					"qos":       "0",
@@ -110,6 +113,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"host":      "localhost:1883",
 					"username":  "",
+					"dynamic_mapping":  "false",
 					"password":  "",
 					"client_id": nuid.Next(),
 					"qos":       "0",
@@ -125,6 +129,7 @@ func TestClient_Init(t *testing.T) {
 				Properties: map[string]string{
 					"host":      "localhost:1883",
 					"topic":     "some-queue",
+					"dynamic_mapping":  "false",
 					"username":  "",
 					"password":  "",
 					"client_id": nuid.Next(),
@@ -164,6 +169,7 @@ func TestClient_Do(t *testing.T) {
 				Properties: map[string]string{
 					"host":      "localhost:1883",
 					"topic":     "some-queue",
+					"dynamic_mapping":  "false",
 					"username":  "",
 					"password":  "",
 					"client_id": nuid.Next(),
