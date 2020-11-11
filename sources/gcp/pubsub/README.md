@@ -15,8 +15,8 @@ pubsub source connector configuration properties:
 
 | Properties Key | Required | Description                                | Example                    |
 |:---------------|:---------|:-------------------------------------------|:---------------------------|
-| project_id     | yes      | gcp project_id                             | "<googleurl>/myproject"    |
-| credentials    | yes      | gcp credentials files                      | "<google json credentials" |
+| project_id     | yes      | gcp project_id                             | "googleurl/myproject"    |
+| credentials    | yes      | gcp credentials files                      | "google json credentials" |
 | subscriber_id  | yes      | gcp pubsub queue subscriber id             | "string"          |
 
 
