@@ -32,7 +32,7 @@ func (m *mockMiddleware) Init() {
 		panic(err)
 	}
 	m.client = client
-	m.channelName = "event.gcp.pubsub"
+	m.channelName = "event.ibm.ibmmq"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -114,8 +114,8 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "gcp-pubsub",
-				Kind: "gcp.pubsub",
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
@@ -128,6 +128,86 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: false,
+		},{
+			name: "invalid init - missing host_name",
+			cfg: config.Spec{
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
+				Properties: map[string]string{
+					"queue_manager_name": dat.queueManagerName,
+					"port_number":        dat.listenerPort,
+					"channel_name":       dat.applicationChannelName,
+					"username":           dat.mqUsername,
+					"key_repository":     dat.apiKey,
+					"password":           dat.password,
+					"queue_name":         dat.QueueName,
+				},
+			},
+			wantErr: true,
+		},{
+			name: "invalid init - missing queue_manager_name",
+			cfg: config.Spec{
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
+				Properties: map[string]string{
+					"host_name":          dat.hostname,
+					"port_number":        dat.listenerPort,
+					"channel_name":       dat.applicationChannelName,
+					"username":           dat.mqUsername,
+					"key_repository":     dat.apiKey,
+					"password":           dat.password,
+					"queue_name":         dat.QueueName,
+				},
+			},
+			wantErr: true,
+		},{
+			name: "invalid init - missing channel_name",
+			cfg: config.Spec{
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
+				Properties: map[string]string{
+					"queue_manager_name": dat.queueManagerName,
+					"host_name":          dat.hostname,
+					"port_number":        dat.listenerPort,
+					"username":           dat.mqUsername,
+					"key_repository":     dat.apiKey,
+					"password":           dat.password,
+					"queue_name":         dat.QueueName,
+				},
+			},
+			wantErr: true,
+		},{
+			name: "invalid init - missing username",
+			cfg: config.Spec{
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
+				Properties: map[string]string{
+					"queue_manager_name": dat.queueManagerName,
+					"host_name":          dat.hostname,
+					"port_number":        dat.listenerPort,
+					"channel_name":       dat.applicationChannelName,
+					"key_repository":     dat.apiKey,
+					"password":           dat.password,
+					"queue_name":         dat.QueueName,
+				},
+			},
+			wantErr: true,
+		},{
+			name: "invalid init - missing queue_name",
+			cfg: config.Spec{
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
+				Properties: map[string]string{
+					"queue_manager_name": dat.queueManagerName,
+					"host_name":          dat.hostname,
+					"port_number":        dat.listenerPort,
+					"channel_name":       dat.applicationChannelName,
+					"username":           dat.mqUsername,
+					"key_repository":     dat.apiKey,
+					"password":           dat.password,
+				},
+			},
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -163,8 +243,8 @@ func TestClient_Do(t *testing.T) {
 		{
 			name: "valid pubsub receive",
 			cfg: config.Spec{
-				Name: "gcp-pubsub",
-				Kind: "gcp.pubsub",
+				Name: "ibm-ibmmq",
+				Kind: "ibm.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
