@@ -12,7 +12,6 @@ const (
 	defaultKeyRepository    = ""
 	defaultWaitPullTime     = 100
 	defaultPort             = 1414
-	defaultTransportType    = 0
 	defaultTlsClientAuth    = "NONE"
 )
 

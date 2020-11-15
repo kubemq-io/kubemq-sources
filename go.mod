@@ -16,6 +16,7 @@ require (
 	github.com/go-stomp/stomp v2.0.6+incompatible
 	github.com/json-iterator/go v1.1.10
 	github.com/kubemq-hub/builder v0.5.9
+	github.com/kubemq-hub/ibmmq-sdk v0.0.0-20201112165652-418ebe727e4e
 	github.com/kubemq-io/kubemq-go v1.4.4
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/nats-io/nuid v1.0.1
