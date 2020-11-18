@@ -13,8 +13,8 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/azure/servicebus"
 	"github.com/kubemq-hub/kubemq-sources/sources/gcp/pubsub"
 	"github.com/kubemq-hub/kubemq-sources/sources/http"
-	"github.com/kubemq-hub/kubemq-sources/sources/ibm/ibmmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/ibmmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/mqtt"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
@@ -89,7 +89,7 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
-	case "ibm.ibmmq":
+	case "messaging.ibmmq":
 		target := ibmmq.New()
 		if err := target.Init(ctx, cfg); err != nil {
 			return nil, err
@@ -115,6 +115,7 @@ func Connectors() common.Connectors {
 		mqtt.Connector(),
 		kafka.Connector(),
 		activemq.Connector(),
+		ibmmq.Connector(),
 		// AWS
 		sqs.Connector(),
 		amazonmq.Connector(),
@@ -126,6 +127,6 @@ func Connectors() common.Connectors {
 		eventhubs.Connector(),
 		servicebus.Connector(),
 		//ibm
-		ibmmq.Connector(),
+
 	}
 }

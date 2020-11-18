@@ -6,7 +6,7 @@ import (
 
 func Connector() *common.Connector {
 	return common.NewConnector().
-		SetKind("ibm.ibmmq").
+		SetKind("messaging.ibmmq").
 		SetDescription("IBM-MQ Messaging Target").
 		AddProperty(
 			common.NewProperty().
