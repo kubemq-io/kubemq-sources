@@ -13,6 +13,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/azure/servicebus"
 	"github.com/kubemq-hub/kubemq-sources/sources/gcp/pubsub"
 	"github.com/kubemq-hub/kubemq-sources/sources/http"
+	"github.com/kubemq-hub/kubemq-sources/sources/ibm/ibmmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/activemq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/mqtt"
@@ -88,6 +89,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
+	case "ibm.ibmmq":
+		target := ibmmq.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
 	case "http":
 		source := http.New()
 		if err := source.Init(ctx, cfg); err != nil {
@@ -118,5 +125,7 @@ func Connectors() common.Connectors {
 		// Azure
 		eventhubs.Connector(),
 		servicebus.Connector(),
+		//ibm
+		ibmmq.Connector(),
 	}
 }

@@ -80,7 +80,7 @@ func (m Metadata) MustParseInt(key string) (int, error) {
 		}
 		return int(parsedVal), nil
 	} else {
-		return 0, fmt.Errorf("key %s not foud for int coneversion", val)
+		return 0, fmt.Errorf("key %s not found for int coneversion", val)
 	}
 }
 
@@ -142,7 +142,7 @@ func (m Metadata) MustParseBool(key string) (bool, error) {
 		}
 		return parsedVal, nil
 	} else {
-		return false, fmt.Errorf("key %s not foud for bool coneversion", val)
+		return false, fmt.Errorf("key %s not found for bool coneversion", val)
 	}
 }
 func (m Metadata) MustParseJsonMap(key string) (map[string]string, error) {
