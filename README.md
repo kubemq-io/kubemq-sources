@@ -41,14 +41,15 @@ A list of supported sources is below.
 
 #### Standalone Services
 
-| Category  | Target                                  | Kind                      | Configuration                       | Example                                |
-|:----------|:----------------------------------------|:--------------------------|:------------------------------------|:---------------------------------------|
-| Http      | Http                                    | http               | [Usage](sources/http)               | [Example](examples/http)               |
-| Messaging |                                         |                           |                                     |                                        |
-|           | [Kafka](https://kafka.apache.org/)      | messaging.kafka    | [Usage](sources/messaging/kafka)    | [Example](examples/messaging/kafka)    |
-|           | [RabbitMQ](https://www.rabbitmq.com/)   | messaging.rabbitmq | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
-|           | [MQTT](http://mqtt.org/)                | messaging.mqtt     | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
-|           | [ActiveMQ](http://activemq.apache.org/) | messaging.activemq | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
+| Category  | Target                                                    | Kind                      | Configuration                       | Example                                |
+|:----------|:----------------------------------------------------------|:--------------------------|:------------------------------------|:---------------------------------------|
+| Http      | Http                                                      | http                      | [Usage](sources/http)               | [Example](examples/http)               |
+| Messaging |                                                           |                           |                                     |                                        |
+|           | [Kafka](https://kafka.apache.org/)                        | messaging.kafka           | [Usage](sources/messaging/kafka)    | [Example](examples/messaging/kafka)    |
+|           | [RabbitMQ](https://www.rabbitmq.com/)                     | messaging.rabbitmq        | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
+|           | [MQTT](http://mqtt.org/)                                  | messaging.mqtt            | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
+|           | [ActiveMQ](http://activemq.apache.org/)                   | messaging.activemq        | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
+|           | [IBM-MQ](https://developer.ibm.com/components/ibm-mq)     |        messaging.activemq | [Usage](sources/messaging/ibmmq)    | [Example](examples/messaging/ibmmq)  |
 
 
 #### Google Cloud Platform (GCP)

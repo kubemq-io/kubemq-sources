@@ -32,7 +32,7 @@ func (m *mockMiddleware) Init() {
 		panic(err)
 	}
 	m.client = client
-	m.channelName = "event.ibm.ibmmq"
+	m.channelName = "event.messaging.ibmmq"
 }
 
 func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -114,8 +114,8 @@ func TestClient_Init(t *testing.T) {
 		{
 			name: "init",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
@@ -131,8 +131,8 @@ func TestClient_Init(t *testing.T) {
 		},{
 			name: "invalid init - missing host_name",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"port_number":        dat.listenerPort,
@@ -147,8 +147,8 @@ func TestClient_Init(t *testing.T) {
 		},{
 			name: "invalid init - missing queue_manager_name",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"host_name":          dat.hostname,
 					"port_number":        dat.listenerPort,
@@ -163,8 +163,8 @@ func TestClient_Init(t *testing.T) {
 		},{
 			name: "invalid init - missing channel_name",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
@@ -179,8 +179,8 @@ func TestClient_Init(t *testing.T) {
 		},{
 			name: "invalid init - missing username",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
@@ -195,8 +195,8 @@ func TestClient_Init(t *testing.T) {
 		},{
 			name: "invalid init - missing queue_name",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
@@ -243,8 +243,8 @@ func TestClient_Do(t *testing.T) {
 		{
 			name: "valid pubsub receive",
 			cfg: config.Spec{
-				Name: "ibm-ibmmq",
-				Kind: "ibm.ibmmq",
+				Name: "messaging-ibmmq",
+				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
 					"queue_manager_name": dat.queueManagerName,
 					"host_name":          dat.hostname,
