@@ -40,14 +40,14 @@ bindings:
         address: "kubemq-cluster:50000"
         client_id: "kubemq-query-IBM-MQ-connector"
         auth_token: ""
-        channel: "query.ibm.ibmmq"
+        channel: "query.messaging.ibmmq"
         group:   ""
         auto_reconnect: "true"
         reconnect_interval_seconds: "1"
         max_reconnects: "0"
     Source:
-      kind: ibm.ibmmq
-      name: ibm-ibmmq
+      kind: messaging.ibmmq
+      name: messaging-ibmmq
       properties:
         queue_manager_name: "QM1"
         host_name: "localhost"
