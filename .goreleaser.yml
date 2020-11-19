@@ -1,29 +1,32 @@
-before:
-  hooks:
-    - go mod download
+#before:
+#  hooks:
+#    - go mod download
 builds:
-- env:
-  - CGO_ENABLED=0
-  main: ./main.go
-  goos:
-    - darwin
-    - linux
-    - windows
-  goarch:
-    - 386
-    - amd64
-  ignore:
-    - goos: windows
-      goarch: 386
-    - goos: darwin
-      goarch: 386
-archives:
-- replacements:
-    darwin: Darwin
-    linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
+  - skip: true
+#- env:
+#  - CGO_ENABLED=1
+#  - CXX_FOR_TARGET=i686-w64-mingw32-g++
+#  - CC_FOR_TARGET= i686-w64-mingw32-gcc
+#  main: ./main.go
+#  goos:
+#    - darwin
+#    - linux
+#    - windows
+#  goarch:
+#    - 386
+#    - amd64
+#  ignore:
+#    - goos: windows
+#      goarch: 386
+#    - goos: darwin
+#      goarch: 386
+#archives:
+#- replacements:
+#    darwin: Darwin
+#    linux: Linux
+#    windows: Windows
+#    386: i386
+#    amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
 snapshot:

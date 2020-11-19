@@ -49,7 +49,7 @@ A list of supported sources is below.
 |           | [RabbitMQ](https://www.rabbitmq.com/)                     | messaging.rabbitmq        | [Usage](sources/messaging/rabbitmq) | [Example](examples/messaging/rabbitmq) |
 |           | [MQTT](http://mqtt.org/)                                  | messaging.mqtt            | [Usage](sources/messaging/mqtt)     | [Example](examples/messaging/mqtt)     |
 |           | [ActiveMQ](http://activemq.apache.org/)                   | messaging.activemq        | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
-|           | [IBM-MQ](https://developer.ibm.com/components/ibm-mq)     |        messaging.activemq | [Usage](sources/messaging/ibmmq)    | [Example](examples/messaging/ibmmq)  |
+|           | [IBM-MQ](https://developer.ibm.com/components/ibm-mq)     |        messaging.ibmmq | [Usage](sources/messaging/ibmmq)    | [Example](examples/messaging/ibmmq)  |
 
 
 #### Google Cloud Platform (GCP)
