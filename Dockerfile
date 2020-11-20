@@ -24,7 +24,7 @@ RUN mkdir -p /opt/mqm/lib64
 COPY --from=builder /opt/mqm/lib64 /opt/mqm/lib64
 RUN mkdir /kubemq-connector
 COPY --from=builder $GOPATH/github.com/kubemq-hub/kubemq-sources/kubemq-sources-run ./kubemq-connector
-COPY --from=builder $GOPATH/github.com/kubemq-hub/kubemq-targets/default_config.yaml ./kubemq-connector/config.yaml
+COPY --from=builder $GOPATH/github.com/kubemq-hub/kubemq-sources/default_config.yaml ./kubemq-connector/config.yaml
 RUN chown -R 1001:root  /kubemq-connector && chmod g+rwX  /kubemq-connector
 WORKDIR kubemq-connector
 USER 1001
