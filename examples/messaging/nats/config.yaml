@@ -1,0 +1,23 @@
+bindings:
+  - name: nats
+    source:
+      kind: messaging.nats
+      properties:
+        cert_file: |-
+          -----BEGIN CERTIFICATE-----
+          mycert
+          -----END CERTIFICATE-----
+        cert_key: |-
+          -----BEGIN PRIVATE KEY-----
+          mykey
+          -----END PRIVATE KEY-----
+        dynamic_mapping: "false"
+        subject: foo
+        url: nats://localhost:4222
+    target:
+      kind: kubemq.events
+      properties:
+        address: localhost:50000
+        channel: event.messaging.nats
+        dynamic_mapping: "false"
+    properties: {}

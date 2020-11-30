@@ -17,6 +17,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/ibmmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/kafka"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/mqtt"
+	"github.com/kubemq-hub/kubemq-sources/sources/messaging/nats"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 )
 
@@ -95,6 +96,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return target, nil
+	case "messaging.nats":
+		target := nats.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
 	case "http":
 		source := http.New()
 		if err := source.Init(ctx, cfg); err != nil {
@@ -116,6 +123,7 @@ func Connectors() common.Connectors {
 		kafka.Connector(),
 		activemq.Connector(),
 		ibmmq.Connector(),
+		nats.Connector(),
 		// AWS
 		sqs.Connector(),
 		amazonmq.Connector(),
@@ -126,7 +134,6 @@ func Connectors() common.Connectors {
 		// Azure
 		eventhubs.Connector(),
 		servicebus.Connector(),
-		//ibm
 
 	}
 }
