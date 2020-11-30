@@ -18,7 +18,6 @@ import (
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
-
 type Client struct {
 	name   string
 	opts   options
@@ -58,10 +57,12 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 		c.target = target
 	}
 
-	c.client.Subscribe(c.opts.subject, func(m *nats.Msg) {
+	_, err := c.client.Subscribe(c.opts.subject, func(m *nats.Msg) {
 		go c.processIncomingMessages(ctx, m)
 	})
-
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -87,7 +88,6 @@ func (c *Client) processIncomingMessages(ctx context.Context, msg *nats.Msg) {
 		c.log.Errorf("error processing nats message from :%s , %s", msg.Subject, err.Error())
 	}
 }
-
 
 func (c *Client) Stop() error {
 	c.client.Close()
