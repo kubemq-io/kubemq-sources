@@ -19,6 +19,7 @@ require (
 	github.com/kubemq-hub/ibmmq-sdk v0.3.7
 	github.com/kubemq-io/kubemq-go v1.4.4
 	github.com/labstack/echo/v4 v4.1.17
+	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/nats-io/nats.go v1.10.0
 	github.com/nats-io/nuid v1.0.1
 	github.com/pelletier/go-toml v1.4.0 // indirect
