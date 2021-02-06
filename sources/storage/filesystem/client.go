@@ -23,7 +23,6 @@ type Client struct {
 	waiting    sync.Map
 	inProgress sync.Map
 	completed  sync.Map
-	targets    []middleware.Middleware
 	sendCh     chan *SourceFile
 	logger     *logger.Logger
 	ctx        context.Context
