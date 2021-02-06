@@ -17,19 +17,20 @@ const (
 )
 
 type Service struct {
-	sync.Mutex
-	bindings          map[string]*Binder
+	bindings          sync.Map
 	log               *logger.Logger
 	exporter          *metrics.Exporter
+	bindingStatus     sync.Map
 	currentCtx        context.Context
 	currentCancelFunc context.CancelFunc
+	cfg               *config.Config
 }
 
 func New() (*Service, error) {
 	s := &Service{
-		Mutex:    sync.Mutex{},
-		bindings: make(map[string]*Binder),
-		log:      logger.NewLogger("binding-service"),
+		bindings:      sync.Map{},
+		log:           logger.NewLogger("binding-service"),
+		bindingStatus: sync.Map{},
 	}
 	var err error
 	s.exporter, err = metrics.NewExporter()
@@ -40,12 +41,20 @@ func New() (*Service, error) {
 }
 func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 	s.currentCtx, s.currentCancelFunc = context.WithCancel(ctx)
+	s.cfg = cfg
 	if len(cfg.Bindings) == 0 {
 		return nil
 	}
+	wg := sync.WaitGroup{}
 	for _, bindingCfg := range cfg.Bindings {
+		if bindingCfg.Source.Kind == "http" {
+			wg.Add(1)
+		}
 		go func(ctx context.Context, cfg config.BindingConfig) {
 			err := s.Add(ctx, cfg)
+			if cfg.Source.Kind == "http" {
+				defer wg.Done()
+			}
 			if err == nil {
 				return
 			} else {
@@ -70,48 +79,52 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 		}(s.currentCtx, bindingCfg)
 
 	}
+	wg.Wait()
 	return nil
 
 }
 
 func (s *Service) Stop() {
-	for _, binder := range s.bindings {
+	s.currentCancelFunc()
+	s.bindings.Range(func(key, value interface{}) bool {
+		binder := value.(*Binder)
 		err := s.Remove(binder.name)
 		if err != nil {
 			s.log.Error(err)
 		}
-	}
-	s.currentCancelFunc()
+		return true
+	})
 }
 func (s *Service) Add(ctx context.Context, cfg config.BindingConfig) error {
-	s.Lock()
-	defer s.Unlock()
 	binder := NewBinder()
+	status := newStatus(cfg)
+	s.bindingStatus.Store(cfg.Name, status)
 	err := binder.Init(ctx, cfg, s.exporter)
 	if err != nil {
 		return err
 	}
-
 	err = binder.Start(ctx)
 	if err != nil {
 		return err
 	}
-	s.bindings[cfg.Name] = binder
+	s.bindings.Store(cfg.Name, binder)
+	status.Ready = true
+	s.bindingStatus.Store(cfg.Name, status)
 	return nil
 }
 
 func (s *Service) Remove(name string) error {
-	s.Lock()
-	defer s.Unlock()
-	binder, ok := s.bindings[name]
+	val, ok := s.bindings.Load(name)
 	if !ok {
-		return fmt.Errorf("binding %s no found", name)
+		return fmt.Errorf("binding %s not found", name)
 	}
+	binder := val.(*Binder)
 	err := binder.Stop()
 	if err != nil {
 		return err
 	}
-	delete(s.bindings, name)
+	s.bindings.Delete(name)
+	s.bindingStatus.Delete(name)
 	return nil
 }
 
@@ -124,11 +137,21 @@ func (s *Service) Stats() []*metrics.Report {
 
 func (s *Service) GetHttpHandlers() []*httpsrc.Handler {
 	var list []*httpsrc.Handler
-	s.Lock()
-	defer s.Unlock()
-	for _, binder := range s.bindings {
+	s.bindings.Range(func(key, value interface{}) bool {
+		binder := value.(*Binder)
 		if binder.httpSourceHandler != nil {
 			list = append(list, binder.httpSourceHandler)
+		}
+		return true
+	})
+	return list
+}
+func (s *Service) GetStatus() []*Status {
+	var list []*Status
+	for _, binding := range s.cfg.Bindings {
+		val, ok := s.bindingStatus.Load(binding.Name)
+		if ok {
+			list = append(list, val.(*Status))
 		}
 	}
 	return list

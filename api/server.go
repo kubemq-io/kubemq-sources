@@ -40,10 +40,11 @@ func Start(ctx context.Context, port int, bs *binding.Service) (*Server, error) 
 		return c.String(200, "ready")
 	})
 	s.echoWebServer.GET("/metrics", echo.WrapHandler(s.bindingService.PrometheusHandler()))
-	s.echoWebServer.GET("/stats", func(c echo.Context) error {
-
+	s.echoWebServer.GET("/bindings", func(c echo.Context) error {
+		return c.JSONPretty(200, s.bindingService.GetStatus(), "\t")
+	})
+	s.echoWebServer.GET("/bindings/stats", func(c echo.Context) error {
 		return c.JSONPretty(200, s.bindingService.Stats(), "\t")
-
 	})
 	if err := s.loadHttpHandlers(); err != nil {
 		return nil, err
