@@ -51,7 +51,8 @@ A list of supported sources is below.
 |           | [ActiveMQ](http://activemq.apache.org/)                   | messaging.activemq        | [Usage](sources/messaging/activemq) | [Example](examples/messaging/activemq) |
 |           | [IBM-MQ](https://developer.ibm.com/components/ibm-mq)     | messaging.ibmmq           | [Usage](sources/messaging/ibmmq)    | [Example](examples/messaging/ibmmq)  |
 |           | [Nats](https://nats.io/)                                 |messaging.nats  | [Usage](sources/messaging/nats)     | [Example](examples/messaging/nats)     |
-
+| Storage    |                                                                     |                       |                                      |                                         |
+|            | Filesystem                                                          | storage.filesystem    | [Usage](sources/storage/filesystem)  |                                         |
 
 #### Google Cloud Platform (GCP)
 
@@ -156,7 +157,7 @@ bindings:
 KubeMQ Bridges configuration can be build with --build flag
 
 ```
-./kubemq-bridges --build
+./kubemq-sources --build
 ```
 ### Properties
 

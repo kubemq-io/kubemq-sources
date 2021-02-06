@@ -19,6 +19,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/mqtt"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/nats"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
+	"github.com/kubemq-hub/kubemq-sources/sources/storage/filesystem"
 )
 
 type Source interface {
@@ -108,6 +109,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
+	case "storage.filesystem":
+		source := filesystem.New()
+		if err := source.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return source, nil
 	default:
 		return nil, fmt.Errorf("invalid kind %s for source %s", cfg.Kind, cfg.Name)
 	}
@@ -118,6 +125,7 @@ func Connectors() common.Connectors {
 	return []*common.Connector{
 		// General
 		http.Connector(),
+		filesystem.Connector(),
 		rabbitmq.Connector(),
 		mqtt.Connector(),
 		kafka.Connector(),
@@ -134,6 +142,5 @@ func Connectors() common.Connectors {
 		// Azure
 		eventhubs.Connector(),
 		servicebus.Connector(),
-
 	}
 }

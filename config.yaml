@@ -1,15 +1,16 @@
-apiPort: 8081
+apiPort: 8082
 bindings:
-- name: as
+- name: fs
   source:
-    kind: http
+    kind: storage.filesystem
     properties:
-      dynamic_mapping: "true"
-      methods: get
-      path: /*
+      root: 'd:\test\source-fs'
+      bucket_type: filesystem
+      bucket_name: bucket
+      concurrency: 5
   target:
-    kind: kubemq.events
+    kind: kubemq.queue
     properties:
       address: localhost:50000
-      dynamic_mapping: "true"
+      channel: queue.fs
   properties: {}
