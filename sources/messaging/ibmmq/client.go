@@ -1,3 +1,5 @@
+// +build container
+
 package ibmmq
 
 import (

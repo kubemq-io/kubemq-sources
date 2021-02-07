@@ -18,6 +18,10 @@ const defaultApiPort = 8080
 
 var configFile string
 var logr = logger.NewLogger("config")
+var defaultConfig = &Config{
+	Bindings: []BindingConfig{},
+	ApiPort:  defaultApiPort,
+}
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
@@ -116,11 +120,21 @@ func getConfigFile() (string, error) {
 		return loadedConfigFile, nil
 	}
 }
-
+func createDefaultConfig() (*Config, error) {
+	data, err := yaml.Marshal(defaultConfig)
+	if err != nil {
+		return nil, err
+	}
+	err = ioutil.WriteFile(configFile, data, 0600)
+	if err != nil {
+		return nil, err
+	}
+	return defaultConfig, nil
+}
 func load() (*Config, error) {
 	loadedConfigFile, err := getConfigFile()
 	if err != nil {
-		return nil, fmt.Errorf("error loading configuration, %w", err)
+		return createDefaultConfig()
 	} else {
 		viper.SetConfigFile(loadedConfigFile)
 	}

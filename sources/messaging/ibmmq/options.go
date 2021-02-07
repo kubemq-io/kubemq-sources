@@ -1,3 +1,5 @@
+// +build container
+
 package ibmmq
 
 import (
@@ -26,7 +28,7 @@ type options struct {
 	queueName        string
 	Password         string
 	transportType    int
-	pullDelay       int32
+	pullDelay        int32
 	tlsClientAuth    string
 }
 

@@ -1,4 +1,4 @@
-// +build !container
+// +build container
 
 package sources
 
@@ -93,12 +93,12 @@ func Init(ctx context.Context, cfg config.Spec) (Source, error) {
 			return nil, err
 		}
 		return source, nil
-	//case "messaging.ibmmq":
-	//	target := ibmmq.New()
-	//	if err := target.Init(ctx, cfg); err != nil {
-	//		return nil, err
-	//	}
-	//	return target, nil
+	case "messaging.ibmmq":
+		target := ibmmq.New()
+		if err := target.Init(ctx, cfg); err != nil {
+			return nil, err
+		}
+		return target, nil
 	case "messaging.nats":
 		target := nats.New()
 		if err := target.Init(ctx, cfg); err != nil {

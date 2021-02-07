@@ -1,3 +1,5 @@
+// +build container
+
 package ibmmq
 
 import (
@@ -128,7 +130,7 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: false,
-		},{
+		}, {
 			name: "invalid init - missing host_name",
 			cfg: config.Spec{
 				Name: "messaging-ibmmq",
@@ -144,23 +146,23 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		},{
+		}, {
 			name: "invalid init - missing queue_manager_name",
 			cfg: config.Spec{
 				Name: "messaging-ibmmq",
 				Kind: "messaging.ibmmq",
 				Properties: map[string]string{
-					"host_name":          dat.hostname,
-					"port_number":        dat.listenerPort,
-					"channel_name":       dat.applicationChannelName,
-					"username":           dat.mqUsername,
-					"key_repository":     dat.apiKey,
-					"password":           dat.password,
-					"queue_name":         dat.QueueName,
+					"host_name":      dat.hostname,
+					"port_number":    dat.listenerPort,
+					"channel_name":   dat.applicationChannelName,
+					"username":       dat.mqUsername,
+					"key_repository": dat.apiKey,
+					"password":       dat.password,
+					"queue_name":     dat.QueueName,
 				},
 			},
 			wantErr: true,
-		},{
+		}, {
 			name: "invalid init - missing channel_name",
 			cfg: config.Spec{
 				Name: "messaging-ibmmq",
@@ -176,7 +178,7 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		},{
+		}, {
 			name: "invalid init - missing username",
 			cfg: config.Spec{
 				Name: "messaging-ibmmq",
@@ -192,7 +194,7 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		},{
+		}, {
 			name: "invalid init - missing queue_name",
 			cfg: config.Spec{
 				Name: "messaging-ibmmq",

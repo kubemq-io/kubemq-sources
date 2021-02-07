@@ -21,9 +21,7 @@ import (
 )
 
 var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
+	version = ""
 )
 
 var (
@@ -154,7 +152,7 @@ func main() {
 	}
 	config.SetConfigFile(*configFile)
 	log = logger.NewLogger("main")
-	log.Infof("starting kubemq sources connectors version: %s, commit: %s, date %s", version, commit, date)
+	log.Infof("starting kubemq sources connectors version: %s", version)
 	if err := run(); err != nil {
 		log.Error(err)
 		os.Exit(1)
