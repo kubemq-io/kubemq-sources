@@ -9,8 +9,8 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
-				SetName("root").
-				SetDescription("Set local root directory to scan").
+				SetName("folders").
+				SetDescription("Set local folders directory to scan").
 				SetMust(true),
 		).
 		AddProperty(

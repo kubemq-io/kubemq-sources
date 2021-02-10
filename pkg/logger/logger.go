@@ -7,8 +7,9 @@ import (
 	"go.uber.org/zap"
 )
 
-var zapConfig = zap.Config{
-	Level:             zap.NewAtomicLevelAt(zap.DebugLevel),
+var minLogLevel = zap.InfoLevel
+var defaultZapConfig = zap.Config{
+	Level:             zap.NewAtomicLevelAt(zap.InfoLevel),
 	Development:       false,
 	DisableCaller:     true,
 	DisableStacktrace: true,
@@ -32,6 +33,17 @@ var zapConfig = zap.Config{
 	InitialFields:    nil,
 }
 
+func SetLogLevel(value string) {
+	switch value {
+	case "debug":
+		minLogLevel = zap.DebugLevel
+	case "error":
+		minLogLevel = zap.ErrorLevel
+	default:
+		minLogLevel = zap.InfoLevel
+	}
+}
+
 type Logger struct {
 	*zap.SugaredLogger
 }
@@ -41,7 +53,9 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 }
 
 func NewLogger(name string) *Logger {
-	zapLogger, _ := zapConfig.Build()
+	cfg := defaultZapConfig
+	cfg.Level = zap.NewAtomicLevelAt(minLogLevel)
+	zapLogger, _ := cfg.Build()
 	l := &Logger{
 		SugaredLogger: zapLogger.Sugar().With("source", name),
 	}

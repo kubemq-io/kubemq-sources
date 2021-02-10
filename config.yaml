@@ -1,12 +1,13 @@
 apiPort: 8082
+logLevel: debug
 bindings:
 - name: fs
   source:
     kind: storage.filesystem
     properties:
-      root: 'd:\test\source-fs'
-      bucket_type: filesystem
-      bucket_name: bucket
+      folders: 'd:\test\source-fs,d:\test\source-fs2'
+      bucket_type: minio
+      bucket_name: bucket2
       concurrency: 5
   target:
     kind: kubemq.queue

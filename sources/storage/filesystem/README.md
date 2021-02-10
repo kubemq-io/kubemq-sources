@@ -15,7 +15,7 @@ Filesystem source connector configuration properties:
 
 | Properties Key   | Required | Description                         | Example                                    |
 |:-----------------|:---------|:------------------------------------|:-------------------------------------------|
-| root              | yes      | set root path for file watching   | "c:/file" |
+| folders              | yes      | set list of folders to watch   | "c:/folder1,c:/folder2" |
 | bucket_type            | yes      | set remote target bucket type              | "aws", "gcp", "minio", "filesystem" |
 | bucket_name          | yes      | set remote target bucket/dir name    | "dir1"          |
 | concurrency         | no      | set sending concurrency       | "1"                                 |
@@ -28,9 +28,9 @@ bindings:
   source:
     kind: storage.filesystem
     properties:
-      root: 'd:\test\source'
-      bucket_type: filesystem
-      bucket_name: bucket
+      folders: 'd:\test\source,d:\test\folder2'
+      bucket_type: aws
+      bucket_name: aws_bucket_name
       concurrency: 5
   target:
     kind: kubemq.queue

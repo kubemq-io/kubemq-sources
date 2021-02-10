@@ -19,22 +19,23 @@ const (
 )
 
 type Client struct {
-	opts       options
-	waiting    sync.Map
-	inProgress sync.Map
-	completed  sync.Map
-	sendCh     chan *SourceFile
-	logger     *logger.Logger
-	ctx        context.Context
-	cancelFunc context.CancelFunc
-	absRoot    string
+	opts           options
+	waiting        sync.Map
+	inProgress     sync.Map
+	completed      sync.Map
+	sendCh         chan *SourceFile
+	logger         *logger.Logger
+	ctx            context.Context
+	cancelFunc     context.CancelFunc
+	absRootFolders map[string]string
 }
 
 func New() *Client {
 	return &Client{
-		waiting:    sync.Map{},
-		inProgress: sync.Map{},
-		completed:  sync.Map{},
+		waiting:        sync.Map{},
+		inProgress:     sync.Map{},
+		completed:      sync.Map{},
+		absRootFolders: map[string]string{},
 	}
 }
 func (c *Client) Connector() *common.Connector {
@@ -47,13 +48,18 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	if err != nil {
 		return err
 	}
-	c.absRoot, _ = filepath.Abs(filepath.Clean(c.opts.root))
+	for _, folder := range c.opts.folders {
+		absPath, _ := filepath.Abs(filepath.Clean(folder))
+		c.absRootFolders[absPath] = absPath
+	}
 	return nil
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-	if _, err := os.Stat(c.absRoot); os.IsNotExist(err) {
-		return fmt.Errorf("root %s path is not exist", c.absRoot)
+	for _, folder := range c.absRootFolders {
+		if _, err := os.Stat(folder); os.IsNotExist(err) {
+			return fmt.Errorf("folder %s path is does not exist", folder)
+		}
 	}
 	c.ctx, c.cancelFunc = context.WithCancel(ctx)
 	c.sendCh = make(chan *SourceFile)
@@ -77,7 +83,7 @@ func (c *Client) inPipe(file *SourceFile) bool {
 		return true
 	}
 	if _, ok := c.completed.Load(file.FullPath()); ok {
-		c.logger.Infof("file %s already sent and will be deleted", file.FullPath())
+		c.logger.Debugf("file %s already sent and will be deleted", file.FullPath())
 		if err := file.Delete(); err != nil {
 			c.logger.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
 		}
@@ -85,14 +91,14 @@ func (c *Client) inPipe(file *SourceFile) bool {
 	}
 	return false
 }
-func (c *Client) walk() error {
+func (c *Client) walk(folder string) error {
 	var list []*SourceFile
-	err := filepath.Walk(c.absRoot, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(folder, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		if !info.IsDir() {
-			list = append(list, NewSourceFile(info, path, c.absRoot))
+			list = append(list, NewSourceFile(info, path, folder))
 		}
 		return nil
 	})
@@ -108,7 +114,7 @@ func (c *Client) walk() error {
 		}
 	}
 	if added > 0 {
-		c.logger.Infof("%d new files added to sending waiting list", added)
+		c.logger.Debugf("%d new files added to sending waiting list", added)
 	}
 	return nil
 }
@@ -126,7 +132,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			c.logger.Infof("sending file %s started", file.FileName())
+			c.logger.Debugf("sending file %s started", file.FileName())
 			resp, err := sender.Do(ctx, req)
 			if err != nil {
 				c.logger.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
@@ -147,7 +153,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.completed.Store(file.FullPath(), file)
 			}
 			c.inProgress.Delete(file.FullPath())
-			c.logger.Infof("sending file %s completed", file.FileName())
+			c.logger.Debugf("sending file %s completed", file.FileName())
 		case <-ctx.Done():
 			return
 		}
@@ -157,9 +163,11 @@ func (c *Client) scan(ctx context.Context) {
 	for {
 		select {
 		case <-time.After(pollInterval):
-			err := c.walk()
-			if err != nil {
-				c.logger.Errorf("error during scan files, %s", err.Error())
+			for _, folder := range c.absRootFolders {
+				err := c.walk(folder)
+				if err != nil {
+					c.logger.Errorf("error during scan files in folder %s, %s", folder, err.Error())
+				}
 			}
 		case <-ctx.Done():
 			return

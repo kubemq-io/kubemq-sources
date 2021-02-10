@@ -21,11 +21,13 @@ var logr = logger.NewLogger("config")
 var defaultConfig = &Config{
 	Bindings: []BindingConfig{},
 	ApiPort:  defaultApiPort,
+	LogLevel: "error",
 }
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
 	ApiPort  int             `json:"apiPort"`
+	LogLevel string          `json:"log_level"`
 }
 
 func SetConfigFile(filename string) {
@@ -148,6 +150,7 @@ func load() (*Config, error) {
 		return nil, err
 	}
 	logr.Infof("%d bindings loaded", len(cfg.Bindings))
+	logger.SetLogLevel(cfg.LogLevel)
 	return cfg, err
 }
 
