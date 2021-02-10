@@ -57,19 +57,17 @@ func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Reque
 			SetData(data)
 	case "aws":
 		unixFileName := strings.Replace(filepath.Join(s.FileDir(), s.FileName()), `\`, "/", -1)
-		unixFileName = strings.TrimPrefix(unixFileName, "/")
 		targetRequest = NewTargetsRequest().
 			SetMetadataKeyValue("method", "upload_item").
 			SetMetadataKeyValue("bucket_name", bucketName).
-			SetMetadataKeyValue("item_name", filepath.Join(s.FileDir(), s.FileName())).
+			SetMetadataKeyValue("item_name", strings.TrimPrefix(unixFileName, "/")).
 			SetData(data)
 	case "minio":
 		unixFileName := strings.Replace(filepath.Join(s.FileDir(), s.FileName()), `\`, "/", -1)
-		unixFileName = strings.TrimPrefix(unixFileName, "/")
 		targetRequest = NewTargetsRequest().
 			SetMetadataKeyValue("method", "put").
 			SetMetadataKeyValue("param1", bucketName).
-			SetMetadataKeyValue("param2", unixFileName).
+			SetMetadataKeyValue("param2", strings.TrimPrefix(unixFileName, "/")).
 			SetData(data)
 	case "filesystem":
 		targetRequest = NewTargetsRequest().

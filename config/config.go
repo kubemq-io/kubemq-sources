@@ -21,13 +21,13 @@ var logr = logger.NewLogger("config")
 var defaultConfig = &Config{
 	Bindings: []BindingConfig{},
 	ApiPort:  defaultApiPort,
-	LogLevel: "error",
+	LogLevel: "info",
 }
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
 	ApiPort  int             `json:"apiPort"`
-	LogLevel string          `json:"log_level"`
+	LogLevel string          `json:"logLevel"`
 }
 
 func SetConfigFile(filename string) {
