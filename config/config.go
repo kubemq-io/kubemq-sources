@@ -1,7 +1,9 @@
 package config
 
 import (
+	"crypto/sha256"
 	"encoding/base64"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
@@ -18,6 +20,7 @@ const defaultApiPort = 8080
 
 var configFile string
 var logr = logger.NewLogger("config")
+var lastConf *Config
 var defaultConfig = &Config{
 	Bindings: []BindingConfig{},
 	ApiPort:  defaultApiPort,
@@ -32,6 +35,22 @@ type Config struct {
 
 func SetConfigFile(filename string) {
 	configFile = filename
+}
+func (c *Config) hash() string {
+	b, err := json.Marshal(c)
+	if err != nil {
+		return ""
+	}
+	h := sha256.New()
+	_, _ = h.Write(b)
+	hash := hex.EncodeToString(h.Sum(nil))
+	return hash
+}
+func (c *Config) copy() *Config {
+	b, _ := json.Marshal(c)
+	n := &Config{}
+	_ = json.Unmarshal(b, n)
+	return n
 }
 func (c *Config) Validate() error {
 	if c.ApiPort == 0 {
@@ -162,11 +181,14 @@ func Load(cfgCh chan *Config) (*Config, error) {
 	}
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
-		logr.Info("config file changed, reloading...")
 		cfg, err := load()
 		if err != nil {
 			logr.Errorf("error loading new configuration file: %s", err.Error())
-		} else {
+			return
+		}
+		if cfg.hash() != lastConf.hash() {
+			logr.Info("config file changed, reloading...")
+			lastConf = cfg.copy()
 			cfgCh <- cfg
 		}
 	})

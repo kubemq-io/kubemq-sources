@@ -12,19 +12,25 @@ builds:
     goarch:
       - 386
       - amd64
+      - arm64
+      - arm
+    goarm:
+      - 5
+      - 6
+      - 7
     ignore:
       - goos: windows
         goarch: 386
       - goos: darwin
         goarch: 386
+    ldflags:
+      - "-X 'main.version={{ .Tag }}'"
 archives:
   - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
-    format: zip
+    name_template: "{{ .Binary }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        format: zip
 checksum:
   name_template: 'checksums.txt'
 snapshot:

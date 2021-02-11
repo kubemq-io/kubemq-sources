@@ -15,16 +15,4 @@ bindings:
       address: localhost:50000
       channel: queue.fs
   properties: {}
-- name: http
-  source:
-    kind: http
-    properties:
-      dynamic_mapping: "true"
-      methods: get
-      path: /*
-  target:
-    kind: kubemq.events
-    properties:
-      address: localhost:50000
-      dynamic_mapping: "true"
-  properties: {}
+
