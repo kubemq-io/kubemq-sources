@@ -146,7 +146,8 @@ func createDefaultConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = ioutil.WriteFile(configFile, data, 0600)
+	/* #nosec */
+	err = ioutil.WriteFile(configFile, data, 0644)
 	if err != nil {
 		return nil, err
 	}
