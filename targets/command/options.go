@@ -15,7 +15,6 @@ const (
 type options struct {
 	host           string
 	port           int
-	dynamicMapping bool
 	clientId       string
 	authToken      string
 	channel        string
@@ -29,15 +28,12 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing address value, %w", err)
 	}
-	o.dynamicMapping = cfg.Properties.ParseBool("dynamic_mapping", false)
+	o.channel, err = cfg.Properties.MustParseString("channel")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing channel value, %w", err)
+	}
 	o.authToken = cfg.Properties.ParseString("auth_token", "")
 	o.clientId = cfg.Properties.ParseString("client_id", nuid.Next())
-	if !o.dynamicMapping {
-		o.channel, err = cfg.Properties.MustParseString("channel")
-		if err != nil {
-			return options{}, fmt.Errorf("error parsing channel value, %w", err)
-		}
-	}
 	o.timeoutSeconds, err = cfg.Properties.ParseIntWithRange("timeout_seconds", defaultTimeoutSeconds, 1, math.MaxInt32)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing default timeout seconds value, %w", err)

@@ -16,11 +16,13 @@ Queue target connector configuration properties:
 | Properties Key  | Required | Description                                        | Example                                              |
 |:----------------|:---------|:---------------------------------------------------|:-----------------------------------------------------|
 | address         | yes      | kubemq server address (gRPC interface)             | kubemq-cluster-grpc.kubemq.svc.cluster.local:50000 |
+| channel | yes      | set send request default channel               |          "queue"                                            |
 | client_id       | no       | set client id                                      | "client_id"                                          |
 | auth_token      | no       | set authentication token                           | JWT token                                            |
-| channel | no       | set send request default channel               |          "queue"                                            |
-| dynamic_mapping | no       | set dynamic channel mapping per source               |          "false"                                            |
-
+| expiration_seconds      | no       | set when the message will expire                         | "30"                                    |
+| delay_seconds      | no       | set how long to delay the delivery of the message                           | "10"                      |
+| max_receive_count      | no       | set how many rejects before sending to dead-letter | "3"                                            |
+| dead_letter_queue      | no       | set dead-letter queue for each message             | "queue"                                          |
 
 
 Example:
@@ -46,10 +48,13 @@ bindings:
       name: queue-target 
       properties: 
         address: "kubemq-cluster-grpc.kubemq.svc.cluster.local:50000"
+        channel: "queue.http"
         client_id: "cluster-a-queue-connection"
         auth_token: ""
-        channel: "queue"
-        dynamic_mapping: "false"
-        timeout_seconds: "10"
+        delay_seconds: "10"
+        max_receive_count: "3"
+        expiration_seconds: "30"
+        dead_letter_queue: "dead-queue"
+        
 ```
 

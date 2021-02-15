@@ -76,7 +76,7 @@ func (h *Handler) parseRequest(httpRequest *http.Request) (*types.Request, error
 	}
 	req := types.NewRequest().SetMetadata(string(mdBuff))
 	if h.opts.dynamicMapping {
-		req.SetChannel(strings.TrimPrefix(httpRequest.RequestURI, "/"))
+		req.SetChannel(strings.Replace(httpRequest.URL.Path, "/", ".", -1))
 	}
 	if httpRequest.Body == nil {
 		return req, nil

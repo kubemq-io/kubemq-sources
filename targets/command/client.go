@@ -49,7 +49,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 }
 func (c *Client) getChannel(request *types.Request) string {
 	if request.Channel != "" {
-		return request.Channel
+		return fmt.Sprintf("%s%s", c.opts.channel, request.Channel)
 	}
 	return c.opts.channel
 }

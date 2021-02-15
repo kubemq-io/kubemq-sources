@@ -1,18 +1,29 @@
-apiPort: 8082
-logLevel: debug
+apiPort: 8090
 bindings:
+- name: binding-2
+  source:
+    kind: http
+    properties:
+      dynamic_mapping: "true"
+      methods: post
+      path: /*
+  target:
+    kind: kubemq.queue
+    properties:
+      address: localhost:50000
+      channel: queue
+  properties: {}
 - name: fs
   source:
     kind: storage.filesystem
     properties:
-      folders: 'd:\test\source-fs,d:\test\source-fs2'
-      bucket_type: minio
       bucket_name: bucket2
-      concurrency: 5
+      bucket_type: minio
+      concurrency: "5"
+      folders: d:\test\source-fs,d:\test\source-fs2
   target:
     kind: kubemq.queue
     properties:
       address: localhost:50000
       channel: queue.fs
   properties: {}
-

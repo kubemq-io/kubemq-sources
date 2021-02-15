@@ -86,13 +86,13 @@ The target is a KubeMQ connection which send the data from the sources and route
 KubeMQ Sources supports all of KubeMQ's messaging patterns: Queue, Events, Events-Store, Command, and Query.
 
 
-| Type                                                                              | Kind                | Configuration                           |
-|:----------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
-| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | kubemq.queue        | [Usage](targets/queue/README.md)        |
-| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | kubemq.events       | [Usage](targets/events/README.md)       |
-| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | kubemq.events-store | [Usage](targets/events-store/README.md) |
-| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | kubemq.command      | [Usage](targets/command/README.md)      |
-| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | kubemq.query        | [Usage](targets/query/README.md)        |
+| Type                                                                              | Kind                |  Message Pattern  | Configuration                           |
+|:----------------------------------------------------------------------------------|:--------------------|:---|:----------------------------------------|
+| [Queue](https://docs.kubemq.io/learn/message-patterns/queue)                      | kubemq.queue        |  Queue  | [Usage](targets/queue/README.md)        |
+| [Events](https://docs.kubemq.io/learn/message-patterns/pubsub#events)             | kubemq.events       |  Pub/Sub  | [Usage](targets/events/README.md)       |
+| [Events Store](https://docs.kubemq.io/learn/message-patterns/pubsub#events-store) | kubemq.events-store |  Pub/Sub  | [Usage](targets/events-store/README.md) |
+| [Command](https://docs.kubemq.io/learn/message-patterns/rpc#commands)             | kubemq.command      |  RPC  | [Usage](targets/command/README.md)      |
+| [Query](https://docs.kubemq.io/learn/message-patterns/rpc#queries)                | kubemq.query        |  RPC  | [Usage](targets/query/README.md)        |
 
 ## Installation
 
