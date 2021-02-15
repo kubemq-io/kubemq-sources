@@ -1,0 +1,7 @@
+POST http://localhost:8090/testing/sdaasd/asdasd?asdasdasd=asdas
+
+{
+"type": "something"
+}
+
+###
