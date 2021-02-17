@@ -1,3 +1,19 @@
+name: http-source
+source:
+  kind: http
+  properties:
+    dynamic_mapping: true
+    methods: post
+    path: /*
+target:
+  kind: kubemq.queue
+  properties:
+    address: kubemq-grpc.kubemq:50000
+    channel: queue
+
+
+
+
 apiPort: 8090
 bindings:
 - name: binding-2
