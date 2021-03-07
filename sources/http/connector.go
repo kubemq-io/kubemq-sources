@@ -24,6 +24,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("path").
+				SetTitle("Register Path").
 				SetDescription("http endpoint path").
 				SetMust(true).
 				SetDefault("/*"),
@@ -33,7 +34,7 @@ func Connector() *common.Connector {
 				SetKind("bool").
 				SetName("dynamic_mapping").
 				SetDescription("Set Path/Channel dynamic mapping").
-				SetMust(true).
-				SetDefault("true"),
+				SetMust(false).
+				SetDefault("false"),
 		)
 }

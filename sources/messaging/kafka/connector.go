@@ -16,6 +16,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("brokers").
+				SetTitle("Brokers Address").
 				SetDescription("Set Brokers list").
 				SetMust(true).
 				SetDefault(""),
@@ -40,7 +41,8 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("sasl_username").
-				SetDescription("Set Saal Username").
+				SetTitle("SASL Username").
+				SetDescription("Set SASL Username").
 				SetMust(false).
 				SetDefault(""),
 		).
@@ -48,7 +50,8 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("sasl_password").
-				SetDescription("Set Saal Password").
+				SetTitle("SASL Password").
+				SetDescription("Set SASL Password").
 				SetMust(false).
 				SetDefault(""),
 		).

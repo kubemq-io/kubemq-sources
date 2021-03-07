@@ -76,6 +76,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("max_number_of_messages").
+				SetTitle("Max Messages").
 				SetDescription("Set Max Number of Messages").
 				SetMust(false).
 				SetDefault("1").
@@ -86,6 +87,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("wait_time_seconds").
+				SetTitle("Wait time (seconds)").
 				SetDescription("Set Wait Time Second").
 				SetMust(false).
 				SetDefault("0").

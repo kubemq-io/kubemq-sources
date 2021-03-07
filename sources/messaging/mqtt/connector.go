@@ -9,7 +9,7 @@ func Connector() *common.Connector {
 		SetName("MQTT").
 		SetProvider("").
 		SetCategory("Messaging").
-		SetTags("pub/sub","iot").
+		SetTags("pub/sub", "iot").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
@@ -53,6 +53,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("client_id").
+				SetTitle("Client ID").
 				SetDescription("Set client ID").
 				SetMust(false).
 				SetDefault(""),
@@ -61,6 +62,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("qos").
+				SetTitle("QOS Level").
 				SetDescription("Set QoS level").
 				SetMust(false).
 				SetDefault("0").

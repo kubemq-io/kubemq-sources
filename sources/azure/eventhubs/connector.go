@@ -17,6 +17,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("end_point").
+				SetTitle("Endpoint Address").
 				SetDescription("Set EventHubs end point").
 				SetMust(true).
 				SetDefault(""),
@@ -25,6 +26,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("shared_access_key_name").
+				SetTitle("Access Key Name").
 				SetDescription("Set EventHubs shared access key name").
 				SetMust(true).
 				SetDefault(""),
@@ -33,6 +35,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("shared_access_key").
+				SetTitle("Access Key").
 				SetDescription("Set EventHubs shared access key").
 				SetMust(true).
 				SetDefault(""),
@@ -49,6 +52,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("partition_id").
+				SetTitle("Partition ID").
 				SetDescription("Set EventHubs partition id").
 				SetMust(true).
 				SetDefault(""),
@@ -72,6 +76,7 @@ func Connector() *common.Connector {
 					common.NewProperty().
 						SetKind("int").
 						SetName("time_stamp").
+						SetTitle("Timestamp").
 						SetDescription("Set timestamp to collect events from (RFC3339)").
 						SetMust(true).
 						SetDefault("").

@@ -14,6 +14,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
+				SetTitle("Host Address").
 				SetDescription("Set ActiveMQ Host connection").
 				SetMust(true),
 		).

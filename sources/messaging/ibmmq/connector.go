@@ -24,6 +24,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host_name").
+				SetTitle("Hostname").
 				SetDescription("Set IBM-MQ host name").
 				SetMust(true).
 				SetDefault(""),
@@ -64,6 +65,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("tls_client_auth").
+				SetTitle("TLS Client Auth").
 				SetDescription("Set IBM-MQ tls_client_auth").
 				SetDefault("NONE").
 				SetMust(false),
@@ -72,10 +74,11 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("int").
 				SetName("port_number").
+				SetTitle("Port").
 				SetDescription("Set IBM-MQ server port_number").
 				SetDefault("1414").
-				SetMax(10000).
-				SetMin(0).
+				SetMax(65535).
+				SetMin(1).
 				SetMust(false),
 		).
 		AddProperty(

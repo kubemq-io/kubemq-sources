@@ -16,6 +16,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("project_id").
+				SetTitle("Project ID").
 				SetDescription("Set Project Id").
 				SetMust(true),
 		).
@@ -23,6 +24,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("subscriber_id").
+				SetTitle("Subscriber ID").
 				SetDescription("Set Subscriber Id").
 				SetMust(true).
 				SetDefault(""),
@@ -31,6 +33,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("multilines").
 				SetName("credentials").
+				SetTitle("Json Credentials").
 				SetDescription("Set gcp Credentials").
 				SetMust(true).
 				SetDefault(""),

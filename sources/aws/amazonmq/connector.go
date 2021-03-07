@@ -14,8 +14,10 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("host").
+				SetTitle("Host Address").
 				SetDescription("Set AmazonMQ host").
 				SetMust(true),
+
 		).
 		AddProperty(
 			common.NewProperty().

@@ -11,11 +11,12 @@ func Connector() *common.Connector {
 		SetName("NATS").
 		SetProvider("").
 		SetCategory("Messaging").
-		SetTags("queue","pub/sub").
+		SetTags("queue", "pub/sub").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
 				SetName("url").
+				SetTitle("URL Address").
 				SetDescription("Set nats url connection").
 				SetMust(true),
 		).
@@ -55,6 +56,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("bool").
 				SetName("tls").
+				SetTitle("TLS").
 				SetDescription("Set if use tls").
 				SetMust(false).
 				SetDefault("false"),
@@ -71,6 +73,7 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("condition").
 				SetName("tls").
+				SetTitle("TLS").
 				SetOptions([]string{"true", "false"}).
 				SetDescription("Set tls conditions").
 				SetMust(true).
@@ -79,12 +82,14 @@ func Connector() *common.Connector {
 					common.NewProperty().
 						SetKind("multilines").
 						SetName("cert_key").
+						SetTitle("Certificate Key").
 						SetDescription("Set certificate key").
 						SetMust(false).
 						SetDefault(""),
 					common.NewProperty().
 						SetKind("multilines").
 						SetName("cert_file").
+						SetTitle("Certificate File").
 						SetDescription("Set certificate file").
 						SetMust(false).
 						SetDefault(""),
