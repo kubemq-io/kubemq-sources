@@ -9,6 +9,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("aws.sqs").
 		SetDescription("AWS SQS source properties").
+		SetName("SQS").
+		SetProvider("AWS").
+		SetCategory("Messaging").
+		SetTags("queue","cloud","managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

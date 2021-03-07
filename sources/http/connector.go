@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("http").
 		SetDescription("HTTP/REST source properties").
+		SetName("HTTP").
+		SetProvider("").
+		SetCategory("General").
+		SetTags("rest","api").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

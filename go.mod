@@ -15,7 +15,7 @@ require (
 	github.com/go-resty/resty/v2 v2.3.0 // indirect
 	github.com/go-stomp/stomp v2.1.2+incompatible
 	github.com/json-iterator/go v1.1.10
-	github.com/kubemq-hub/builder v0.6.2
+	github.com/kubemq-hub/builder v0.7.2
 	github.com/kubemq-hub/ibmmq-sdk v0.3.8
 	github.com/kubemq-io/kubemq-go v1.4.7
 	github.com/labstack/echo/v4 v4.1.17

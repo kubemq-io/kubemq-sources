@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("messaging.nats").
 		SetDescription("nats source properties").
+		SetName("NATS").
+		SetProvider("").
+		SetCategory("Messaging").
+		SetTags("queue","pub/sub").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

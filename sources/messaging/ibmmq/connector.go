@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("messaging.ibmmq").
 		SetDescription("IBM-MQ Messaging Target").
+		SetName("IBM MQ").
+		SetProvider("").
+		SetCategory("Messaging").
+		SetTags("queue","streaming").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

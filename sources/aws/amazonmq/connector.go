@@ -6,6 +6,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("aws.amazonmq").
 		SetDescription("AWS AmazonMQ source properties").
+		SetName("AmazonMQ").
+		SetProvider("AWS").
+		SetCategory("Messaging").
+		SetTags("queue","pub/sub","cloud","managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

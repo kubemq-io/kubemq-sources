@@ -6,6 +6,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("storage.filesystem").
 		SetDescription("Local filesystem properties").
+		SetName("File System").
+		SetProvider("").
+		SetCategory("Storage").
+		SetTags("s3","minio").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

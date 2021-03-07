@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("messaging.kafka").
 		SetDescription("Kafka source properties").
+		SetName("Kafka").
+		SetProvider("").
+		SetCategory("Messaging").
+		SetTags("pub/sub","streaming").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

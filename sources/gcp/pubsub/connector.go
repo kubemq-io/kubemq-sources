@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("gcp.pubsub").
 		SetDescription("AWS Pubsub source properties").
+		SetName("PubSub").
+		SetProvider("GCP").
+		SetCategory("Messaging").
+		SetTags("streaming","cloud","managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

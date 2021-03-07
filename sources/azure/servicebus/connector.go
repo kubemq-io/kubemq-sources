@@ -8,6 +8,10 @@ func Connector() *common.Connector {
 	return common.NewConnector().
 		SetKind("azure.servicebus").
 		SetDescription("Azure ServiceBus Source").
+		SetName("ServiceBus").
+		SetProvider("Azure").
+		SetCategory("Messaging").
+		SetTags("queue","pub/sub","cloud","managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
