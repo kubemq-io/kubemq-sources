@@ -13,10 +13,10 @@ func Connector() *common.Connector {
 			common.NewProperty().
 				SetKind("string").
 				SetName("address").
-				SetTitle("KubeMQ Address").
+				SetTitle("KubeMQ gRPC Service Address").
 				SetDescription("Set Kubemq grpc endpoint address").
 				SetMust(true).
-				SetDefault("kubemq-cluster-grpc:50000").
+				SetDefault("kubemq-cluster-grpc.kubemq:50000").
 				SetLoadedOptions("kubemq-address"),
 		).
 		AddProperty(

@@ -1,45 +1,15 @@
-name: http-source
-source:
-  kind: http
-  properties:
-    dynamic_mapping: true
-    methods: post
-    path: /*
-target:
-  kind: kubemq.queue
-  properties:
-    address: kubemq-grpc.kubemq:50000
-    channel: queue
-
-
-
-
-apiPort: 8090
+apiPort: 0
 bindings:
-- name: binding-2
+- name: source-1
+  properties: {}
   source:
     kind: http
     properties:
-      dynamic_mapping: "true"
       methods: post
       path: /*
   target:
     kind: kubemq.queue
     properties:
-      address: localhost:50000
-      channel: queue
-  properties: {}
-- name: fs
-  source:
-    kind: storage.filesystem
-    properties:
-      bucket_name: bucket2
-      bucket_type: minio
-      concurrency: "5"
-      folders: d:\test\source-fs,d:\test\source-fs2
-  target:
-    kind: kubemq.queue
-    properties:
-      address: localhost:50000
-      channel: queue.fs
-  properties: {}
+      address: kubemq-cluster-grpc.kubemq:50000
+      channel: q1
+logLevel: ""

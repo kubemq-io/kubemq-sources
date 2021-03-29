@@ -10,7 +10,7 @@ WORKDIR $GOPATH/github.com/kubemq-hub/kubemq-sources
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -tags container -a -mod=vendor -installsuffix cgo -ldflags="-w -s -X main.version=$VERSION" -o kubemq-sources-run .
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 MAINTAINER KubeMQ info@kubemq.io
-LABEL name="KubeMQ Target Connectors" \
+LABEL name="KubeMQ Sources Connectors" \
       maintainer="info@kubemq.io" \
       vendor="kubemq.io" \
       version="0.5.0" \
