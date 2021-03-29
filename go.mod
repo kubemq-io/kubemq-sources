@@ -1,9 +1,9 @@
 module github.com/kubemq-hub/kubemq-sources
 
-go 1.16
+go 1.14
 
 require (
-	cloud.google.com/go/pubsub v1.9.1
+	cloud.google.com/go/pubsub v1.10.1
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.2
 	github.com/Azure/azure-service-bus-go v0.10.6
 	github.com/Shopify/sarama v1.27.2
@@ -31,7 +31,7 @@ require (
 	github.com/stretchr/testify v1.6.1
 	go.uber.org/atomic v1.7.0
 	go.uber.org/zap v1.16.0
-	google.golang.org/api v0.36.0
+	google.golang.org/api v0.40.0
 	gopkg.in/yaml.v2 v2.3.0
 )
 
