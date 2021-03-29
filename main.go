@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"github.com/ghodss/yaml"
 	"github.com/kubemq-hub/builder/connector/common"
-	connectorSources "github.com/kubemq-hub/builder/connector/sources"
 	"github.com/kubemq-hub/kubemq-sources/api"
 	"github.com/kubemq-hub/kubemq-sources/binding"
 	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/pkg/browser"
+	"github.com/kubemq-hub/kubemq-sources/pkg/builder"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/sources"
 
@@ -28,6 +29,7 @@ var (
 	log              *logger.Logger
 	generateManifest = flag.Bool("manifest", false, "generate source connectors manifest")
 	build            = flag.Bool("build", false, "build sources configuration")
+	buildUrl         = flag.String("get", "", "get config file from url")
 	configFile       = flag.String("config", "config.yaml", "set config file name")
 )
 
@@ -47,29 +49,25 @@ func saveManifest() error {
 		SetTargetConnectors(targetConnectors).
 		Save()
 }
-func loadCfgBindings() []*common.Binding {
-	file, err := ioutil.ReadFile("./config.yaml")
+func downloadUrl() error {
+	c, err := builder.GetBuildManifest(*buildUrl)
 	if err != nil {
-		return nil
-	}
-	list := &common.Bindings{}
-	err = yaml.Unmarshal(file, list)
-	if err != nil {
-		return nil
-	}
-	return list.Bindings
-}
-
-func buildConfig() error {
-	var err error
-	var bindingsYaml []byte
-	loadedOptions := common.NewDefaultOptions().Add("kubemq-address", []string{"localhost:50000", "Other"})
-	if bindingsYaml, err = connectorSources.NewSource("kubemq-sources", loadCfgBindings(), loadedOptions, nil).
-		SetManifestFile("./sources-manifest.json").
-		Render(); err != nil {
 		return err
 	}
-	return ioutil.WriteFile("./config.yaml", bindingsYaml, 0644)
+	cfg := &config.Config{}
+	err = yaml.Unmarshal([]byte(c.Spec.Config), &cfg)
+	if err != nil {
+		return err
+	}
+	data, err := yaml.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile("config.yaml", data, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 func run() error {
 	var gracefulShutdown = make(chan os.Signal, 1)
@@ -144,7 +142,16 @@ func main() {
 		os.Exit(0)
 	}
 	if *build {
-		err := buildConfig()
+		err := browser.OpenURL("https://build.kubemq.io/#/sources")
+		if err != nil {
+			log.Error(err)
+			os.Exit(1)
+		} else {
+			os.Exit(0)
+		}
+	}
+	if *buildUrl != "" {
+		err := downloadUrl()
 		if err != nil {
 			log.Error(err)
 			os.Exit(1)
