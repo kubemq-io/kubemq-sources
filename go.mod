@@ -12,7 +12,7 @@ require (
 	github.com/fortytw2/leaktest v1.3.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-resty/resty/v2 v2.3.0 // indirect
+	github.com/go-resty/resty/v2 v2.3.0
 	github.com/go-stomp/stomp v2.1.2+incompatible
 	github.com/json-iterator/go v1.1.10
 	github.com/kubemq-hub/builder v0.7.2
@@ -32,6 +32,7 @@ require (
 	go.uber.org/atomic v1.7.0
 	go.uber.org/zap v1.16.0
 	google.golang.org/api v0.36.0
+	gopkg.in/yaml.v2 v2.3.0
 )
 
 //replace github.com/kubemq-hub/builder => ../builder
