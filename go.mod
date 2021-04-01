@@ -7,7 +7,7 @@ require (
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.2
 	github.com/Azure/azure-service-bus-go v0.10.6
 	github.com/Shopify/sarama v1.27.2
-	github.com/aws/aws-sdk-go v1.37.6
+	github.com/aws/aws-sdk-go v1.38.10
 	github.com/eclipse/paho.mqtt.golang v1.3.2
 	github.com/fortytw2/leaktest v1.3.0
 	github.com/fsnotify/fsnotify v1.4.9
