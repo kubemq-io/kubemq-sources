@@ -8,7 +8,7 @@ require (
 	github.com/Azure/azure-service-bus-go v0.10.6
 	github.com/Shopify/sarama v1.27.2
 	github.com/aws/aws-sdk-go v1.37.6
-	github.com/eclipse/paho.mqtt.golang v1.3.2
+	github.com/eclipse/paho.mqtt.golang v1.3.3
 	github.com/fortytw2/leaktest v1.3.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/ghodss/yaml v1.0.0
