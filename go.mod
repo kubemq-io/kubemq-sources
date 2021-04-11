@@ -8,7 +8,7 @@ require (
 	github.com/Azure/azure-service-bus-go v0.10.6
 	github.com/Shopify/sarama v1.27.2
 	github.com/aws/aws-sdk-go v1.37.6
-	github.com/eclipse/paho.mqtt.golang v1.3.2
+	github.com/eclipse/paho.mqtt.golang v1.3.3
 	github.com/fortytw2/leaktest v1.3.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/ghodss/yaml v1.0.0
@@ -18,7 +18,7 @@ require (
 	github.com/kubemq-hub/builder v0.7.2
 	github.com/kubemq-hub/ibmmq-sdk v0.3.8
 	github.com/kubemq-io/kubemq-go v1.4.7
-	github.com/labstack/echo/v4 v4.1.17
+	github.com/labstack/echo/v4 v4.2.1
 	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/nats-io/nats.go v1.10.0
 	github.com/nats-io/nuid v1.0.1
