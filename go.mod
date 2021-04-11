@@ -17,7 +17,7 @@ require (
 	github.com/json-iterator/go v1.1.10
 	github.com/kubemq-hub/builder v0.7.2
 	github.com/kubemq-hub/ibmmq-sdk v0.3.8
-	github.com/kubemq-io/kubemq-go v1.4.7
+	github.com/kubemq-io/kubemq-go v1.5.0
 	github.com/labstack/echo/v4 v4.2.1
 	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/nats-io/nats.go v1.10.0

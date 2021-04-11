@@ -69,10 +69,17 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	md["redelivered"] = fmt.Sprintf("%t", msg.Redelivered)
 	md["exchange"] = msg.Exchange
 	md["routing_key"] = msg.RoutingKey
+	md["content_type"] =msg.ContentType
+	md["content_encoding"] =msg.ContentEncoding
+	md["routing_key"] =msg.RoutingKey
 
+	headers,err:=json.MarshalToString(msg.Headers)
+	if err==nil {
+		md["headers"]=headers
+	}
 	str, err := json.MarshalToString(md)
 	if err != nil {
-		return fmt.Sprintf("error parsing mqtt metadata, %s", err.Error())
+		return fmt.Sprintf("error parsing rabbitmq metadata, %s", err.Error())
 	}
 	return str
 }
