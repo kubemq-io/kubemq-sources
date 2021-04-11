@@ -4,7 +4,7 @@ version: '3'
 
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v0.5.12
+  VERSION: v0.5.13
 tasks:
   default:
     cmds:

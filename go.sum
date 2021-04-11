@@ -348,8 +348,8 @@ github.com/kubemq-hub/builder v0.7.2 h1:h+EvB4Yx4z+YYV9zAYNTniyYAAelWEl1+T9MtnOl
 github.com/kubemq-hub/builder v0.7.2/go.mod h1:13YdFANeN6qmwv4FsB9n7ZLi/9GaTWjCTLzHSJXTm8w=
 github.com/kubemq-hub/ibmmq-sdk v0.3.8 h1:oO7OnzyAYD+4vZT9eKNEDwvQ461i63VXLjvsNkYS1tM=
 github.com/kubemq-hub/ibmmq-sdk v0.3.8/go.mod h1:/3HIHzeCULskG7xzucTHnw2NyxzM8Krtajtzz+9JEjw=
-github.com/kubemq-io/kubemq-go v1.4.7 h1:bKkeG3pS7u0qLovcYL5tyQgOMdUYT2Dsiwju7hprDfc=
-github.com/kubemq-io/kubemq-go v1.4.7/go.mod h1:thzfdoeKENeeDu7q5azM56x3LNdlYr1Opzoi8x/XgJQ=
+github.com/kubemq-io/kubemq-go v1.5.0 h1:APjMztE6MvHZjVFpf/C0NBARCtITFmQodeNmK+WvT1Y=
+github.com/kubemq-io/kubemq-go v1.5.0/go.mod h1:thzfdoeKENeeDu7q5azM56x3LNdlYr1Opzoi8x/XgJQ=
 github.com/kubemq-io/protobuf v1.1.0 h1:MaNkRULq/wlU9o9jwx6HORtz2RngpudmxShQ+86CqcU=
 github.com/kubemq-io/protobuf v1.1.0/go.mod h1:WdYSkchIYDxFu2qLBjHY9ma+6tglnERShgGk9MEGW/k=
 github.com/labstack/echo/v4 v4.2.1 h1:LF5Iq7t/jrtUuSutNuiEWtB5eiHfZ5gSe2pcu5exjQw=
