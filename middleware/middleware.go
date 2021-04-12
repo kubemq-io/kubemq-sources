@@ -34,14 +34,30 @@ func Log(log *LogMiddleware) MiddlewareFunc {
 				}
 				log.Infof("request: %s, response: %s, error:%+v", reqStr, resStr, err)
 			case "info":
+				reqStr := ""
+				if request != nil {
+					reqStr = request.Metadata
+				}
+				resStr := ""
+				if result != nil {
+					resStr = result.Metadata
+				}
 				if err != nil {
-					log.Errorf("error processing request: %s", err.Error())
+					log.Errorf("error processing request: %s, response: %s, error:%s", reqStr, resStr, err.Error())
 				} else {
-					log.Infof("request processed with successful response")
+					log.Infof("successful processing request: %s, response: %s",reqStr, resStr)
 				}
 			case "error":
+				reqStr := ""
+				if request != nil {
+					reqStr = request.Metadata
+				}
+				resStr := ""
+				if result != nil {
+					resStr = result.Metadata
+				}
 				if err != nil {
-					log.Errorf("error processing request: %s", err.Error())
+					log.Errorf("error processing request: %s, response: %s, error:%s", reqStr, resStr, err.Error())
 				}
 			}
 			return result, err
