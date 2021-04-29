@@ -27,10 +27,8 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing queue name, %w", err)
 	}
-	o.dynamicMapping, err = cfg.Properties.MustParseBool("dynamic_mapping")
-	if err != nil {
-		return options{}, fmt.Errorf("error parsing dynamic mapping, %w", err)
-	}
+	o.dynamicMapping = cfg.Properties.ParseBool("dynamic_mapping",false)
+
 	o.consumer = cfg.Properties.ParseString("consumer", nuid.Next())
 	o.requeueOnError = cfg.Properties.ParseBool("requeue_on_error", false)
 	o.autoAck = cfg.Properties.ParseBool("auto_ack", false)
