@@ -131,9 +131,7 @@ func (c *Client) walk(folder string) error {
 	}
 	return nil
 }
-func (c *Client) getFileMetadata(file *SourceFile) {
 
-}
 func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 	for {
 		select {

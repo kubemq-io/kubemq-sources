@@ -2,12 +2,27 @@ package logger
 
 import (
 	"fmt"
-	"go.uber.org/zap/zapcore"
-
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 var minLogLevel = zap.InfoLevel
+
+//var core = initCore()
+
+//func initCore() zapcore.Core {
+//	return zapcore.NewCore(
+//		zapcore.NewJSONEncoder(defaultZapConfig.EncoderConfig),
+//		zapcore.AddSync(&LogRotator{
+//			Ctx:        context.Background(),
+//			Filename:   filepath.Join("/logs/", ".log"),
+//			MaxSize:    100, // megabytes
+//			MaxBackups: 3,
+//			MaxAge:     28, //days
+//		}),
+//		minLogLevel)
+//}
+
 var defaultZapConfig = zap.Config{
 	Level:             zap.NewAtomicLevelAt(zap.InfoLevel),
 	Development:       false,
@@ -42,6 +57,7 @@ func SetLogLevel(value string) {
 	default:
 		minLogLevel = zap.InfoLevel
 	}
+	//core = initCore()
 }
 
 type Logger struct {
@@ -55,6 +71,7 @@ func (l *Logger) Printf(format string, v ...interface{}) {
 func NewLogger(name string) *Logger {
 	cfg := defaultZapConfig
 	cfg.Level = zap.NewAtomicLevelAt(minLogLevel)
+	//zapLogger := zap.New(core)
 	zapLogger, _ := cfg.Build()
 	l := &Logger{
 		SugaredLogger: zapLogger.Sugar().With("source", name),
