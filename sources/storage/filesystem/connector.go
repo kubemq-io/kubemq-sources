@@ -39,6 +39,15 @@ func Connector() *common.Connector {
 		).
 		AddProperty(
 			common.NewProperty().
+				SetKind("string").
+				SetName("backup_folder").
+				SetTitle("Set Backup Folder").
+				SetDescription("Set backup folder after sending files").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
 				SetKind("int").
 				SetName("concurrency").
 				SetDescription("Set execution concurrency").

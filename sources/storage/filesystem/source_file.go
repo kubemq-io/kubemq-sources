@@ -3,6 +3,7 @@ package filesystem
 import (
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/types"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -10,16 +11,18 @@ import (
 )
 
 type SourceFile struct {
-	Info os.FileInfo
-	Path string
-	Root string
+	Info     os.FileInfo
+	Path     string
+	Root     string
+	MovePath string
 }
 
-func NewSourceFile(info os.FileInfo, path string, root string) *SourceFile {
+func NewSourceFile(info os.FileInfo, path string, root string, movePath string) *SourceFile {
 	return &SourceFile{
-		Info: info,
-		Path: path,
-		Root: root,
+		Info:     info,
+		Path:     path,
+		Root:     root,
+		MovePath: movePath,
 	}
 }
 func (s *SourceFile) FullPath() string {
@@ -34,13 +37,29 @@ func (s *SourceFile) FileDir() string {
 func (s *SourceFile) FileName() string {
 	return s.Info.Name()
 }
+func (s *SourceFile) Metadata() string {
+	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Info.Size())
+}
 func (s *SourceFile) Load() ([]byte, error) {
 	return ioutil.ReadFile(s.FullPath())
 }
 
+func (s *SourceFile) Do() error {
+	if s.MovePath != "" {
+		newFileName := strings.Replace(s.FullPath(), s.Root, s.MovePath, 1)
+		if err := movefile(s.FullPath(), newFileName); err != nil {
+			return err
+		}
+		return nil
+	} else {
+		return os.Remove(s.FullPath())
+	}
+
+}
 func (s *SourceFile) Delete() error {
 	return os.Remove(s.FullPath())
 }
+
 func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Request, error) {
 	data, err := s.Load()
 	if err != nil {
@@ -80,4 +99,48 @@ func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Reque
 	}
 
 	return types.NewRequest().SetData(targetRequest.MarshalBinary()), nil
+}
+
+func movefile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return fmt.Errorf("couldn't open source file: %s", err)
+	}
+	si, err := os.Stat(src)
+	if err != nil {
+		return fmt.Errorf("stat error: %s", err)
+	}
+
+	err = os.MkdirAll(filepath.Dir(dst), si.Mode())
+	if err != nil {
+		return err
+	}
+	out, err := os.Create(dst)
+	if err != nil {
+		_ = in.Close()
+		return fmt.Errorf("couldn't open dest file: %s", err)
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, in)
+	_ = in.Close()
+	if err != nil {
+		return fmt.Errorf("writing to output file failed: %s", err)
+	}
+
+	err = out.Sync()
+	if err != nil {
+		return fmt.Errorf("sync error: %s", err)
+	}
+
+	err = os.Chmod(dst, si.Mode())
+	if err != nil {
+		return fmt.Errorf("chmod error: %s", err)
+	}
+
+	err = os.Remove(src)
+	if err != nil {
+		return fmt.Errorf("failed removing original file: %s", err)
+	}
+	return nil
 }

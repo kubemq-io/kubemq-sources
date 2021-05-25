@@ -58,7 +58,20 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
 	for _, folder := range c.absRootFolders {
 		if _, err := os.Stat(folder); os.IsNotExist(err) {
-			return fmt.Errorf("folder %s path is does not exist", folder)
+			return fmt.Errorf("folder %s path does not exist", folder)
+		}
+	}
+	if c.opts.backupFolder != "" {
+		if _, err := os.Stat(c.opts.backupFolder); os.IsNotExist(err) {
+			err = os.MkdirAll(c.opts.backupFolder, 0660)
+			if err != nil {
+				return err
+			}
+		}
+		for _, source := range c.absRootFolders {
+			if source == c.opts.backupFolder {
+				return fmt.Errorf("move folder %s path cannot be source folder match (recursive)", c.opts.backupFolder)
+			}
 		}
 	}
 	c.ctx, c.cancelFunc = context.WithCancel(ctx)
@@ -98,7 +111,7 @@ func (c *Client) walk(folder string) error {
 			return err
 		}
 		if !info.IsDir() {
-			list = append(list, NewSourceFile(info, path, folder))
+			list = append(list, NewSourceFile(info, path, folder, c.opts.backupFolder))
 		}
 		return nil
 	})
@@ -118,7 +131,9 @@ func (c *Client) walk(folder string) error {
 	}
 	return nil
 }
+func (c *Client) getFileMetadata(file *SourceFile) {
 
+}
 func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 	for {
 		select {
@@ -132,7 +147,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			c.logger.Debugf("sending file %s started", file.FileName())
+			c.logger.Infof("sending file %s started ", file.Metadata())
 			resp, err := sender.Do(ctx, req)
 			if err != nil {
 				c.logger.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
@@ -146,14 +161,15 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			if err := file.Delete(); err != nil {
-				c.logger.Errorf("error during delete a file %s, %s,file will be resend", file.FileName(), err.Error())
+			if err := file.Do(); err != nil {
+				c.logger.Errorf("error during delete/moving a file %s, %s,file will be resend", file.FileName(), err.Error())
 				c.waiting.Store(file.FullPath(), file)
 			} else {
 				c.completed.Store(file.FullPath(), file)
 			}
 			c.inProgress.Delete(file.FullPath())
-			c.logger.Debugf("sending file %s completed", file.FileName())
+
+			c.logger.Infof("sending file %s completed: ", file.Metadata())
 		case <-ctx.Done():
 			return
 		}

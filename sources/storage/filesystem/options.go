@@ -13,10 +13,11 @@ var bucketTypeMap = map[string]string{
 }
 
 type options struct {
-	folders     []string
-	concurrency int
-	bucketType  string
-	bucketName  string
+	folders      []string
+	concurrency  int
+	bucketType   string
+	bucketName   string
+	backupFolder string
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -34,6 +35,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing bucket_name, %w", err)
 	}
+	o.backupFolder = cfg.Properties.ParseString("backup_folder", "")
 	o.concurrency, err = cfg.Properties.ParseIntWithRange("concurrency", 1, 1, 1024)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing concurrency")

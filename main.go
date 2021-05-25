@@ -13,7 +13,6 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/pkg/builder"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/sources"
-
 	"github.com/kubemq-hub/kubemq-sources/targets"
 	"io/ioutil"
 	"os"
@@ -129,6 +128,7 @@ func run() error {
 		}
 	}
 }
+
 func main() {
 	log = logger.NewLogger("main")
 	flag.Parse()

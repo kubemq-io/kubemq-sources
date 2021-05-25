@@ -19,6 +19,7 @@ Filesystem source connector configuration properties:
 | bucket_type            | yes      | set remote target bucket type              | "aws", "gcp", "minio", "filesystem" |
 | bucket_name          | yes      | set remote target bucket/dir name    | "dir1"          |
 | concurrency         | no      | set sending concurrency       | "1"                                 |
+| backup_folder         | no      | set backup folder for files after send     | "1"                                 |
 
 Example:
 
@@ -32,6 +33,7 @@ bindings:
       bucket_type: aws
       bucket_name: aws_bucket_name
       concurrency: 5
+      backup_folder: 'd:\backup'
   target:
     kind: kubemq.queue
     properties:

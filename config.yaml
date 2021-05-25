@@ -1,15 +1,17 @@
-apiPort: 0
+apiPort: 8081
 bindings:
 - name: source-1
   properties: {}
   source:
-    kind: http
+    kind: storage.filesystem
     properties:
-      methods: post
-      path: /*
+      bucket_name: kubemq-targets
+      bucket_type: aws
+      folders: e:\demo\s3
+      backup_folder: e:\demo\backup\dir1\dir2
   target:
     kind: kubemq.queue
     properties:
-      address: kubemq-cluster-grpc.kubemq:50000
-      channel: q1
+      address: localhost:50000
+      channel: s3
 logLevel: ""
