@@ -1,0 +1,67 @@
+{"level":"INFO","time":"2021-05-29T14:54:27.547+0300","msg":"starting kubemq sources connectors version: ","source":"main"}
+{"level":"INFO","time":"2021-05-29T14:54:27.563+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:54:27.564+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:54:27.565+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:54:27.566+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:54:27.566+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"ERROR","time":"2021-05-29T14:55:55.544+0300","msg":"rpc error: code = Canceled desc = grpc: the client connection is closing","source":"binding-service"}
+{"level":"INFO","time":"2021-05-29T14:57:20.691+0300","msg":"starting kubemq sources connectors version: ","source":"main"}
+{"level":"INFO","time":"2021-05-29T14:57:20.705+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:57:20.706+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:20.706+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:20.707+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:20.707+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:34.422+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:57:34.422+0300","msg":"config file changed, reloading...","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:57:34.423+0300","msg":"binding: source-1, stopped successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:34.424+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:57:34.426+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:34.427+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:34.427+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:34.428+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:35.447+0300","msg":"binding: source-1, stopped successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:38.729+0300","msg":"starting kubemq sources connectors version: ","source":"main"}
+{"level":"INFO","time":"2021-05-29T14:57:38.743+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:57:38.744+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:38.744+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:38.745+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:57:38.745+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"ERROR","time":"2021-05-29T14:58:40.665+0300","msg":"rpc error: code = Canceled desc = grpc: the client connection is closing","source":"binding-service"}
+{"level":"INFO","time":"2021-05-29T14:58:45.288+0300","msg":"starting kubemq sources connectors version: ","source":"main"}
+{"level":"INFO","time":"2021-05-29T14:58:45.303+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:58:45.304+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:58:45.304+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:58:45.305+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:58:45.305+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:58:48.476+0300","msg":"binding: source-1, stopped successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:01.176+0300","msg":"starting kubemq sources connectors version: ","source":"main"}
+{"level":"INFO","time":"2021-05-29T14:59:01.190+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:59:01.191+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:01.191+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:01.191+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:01.192+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:11.164+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:59:11.164+0300","msg":"config file changed, reloading...","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:59:11.164+0300","msg":"binding: source-1, stopped successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:11.165+0300","msg":"binding: source-1 target: initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:11.165+0300","msg":"binding: source-1, source: , initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:11.165+0300","msg":"binding: source-1, initialized successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:11.165+0300","msg":"1 bindings loaded","source":"config"}
+{"level":"INFO","time":"2021-05-29T14:59:11.165+0300","msg":"binding: source-1, started successfully","source":"source-1"}
+{"level":"INFO","time":"2021-05-29T14:59:12.195+0300","msg":"binding: source-1, stopped successfully","source":"source-1"}
+2021-05-29T17:25:55.517+0300	INFO	starting kubemq sources connectors version: 	{"source": "main"}
+2021-05-29T17:25:55.531+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-05-29T17:25:55.532+0300	INFO	binding: source-1 target: initialized successfully	{"source": "source-1"}
+2021-05-29T17:25:55.533+0300	INFO	binding: source-1 source initialized successfully	{"source": "source-1"}
+2021-05-29T17:25:55.533+0300	INFO	binding: source-1, initialized successfully	{"source": "source-1"}
+2021-05-29T17:25:55.534+0300	INFO	binding: source-1, started successfully	{"source": "source-1"}
+2021-05-29T17:27:11.083+0300	INFO	sending file file: e:\demo\s3\kubemq-introduction - sdk (1).png, size: 323985 bytes started 	{"source": "source-1"}
+2021-05-29T17:27:11.131+0300	INFO	sending file file: e:\demo\s3\kubemq-introduction - sdk (1).png, size: 323985 bytes completed: 	{"source": "source-1"}
+2021-05-29T17:27:11.138+0300	INFO	sending file file: e:\demo\s3\kubemq.png, size: 25049 bytes started 	{"source": "source-1"}
+2021-05-29T17:27:11.155+0300	INFO	sending file file: e:\demo\s3\kubemq.png, size: 25049 bytes completed: 	{"source": "source-1"}
+2021-05-29T17:27:11.162+0300	INFO	sending file file: e:\demo\s3\kubemqctl.png, size: 5144 bytes started 	{"source": "source-1"}
+2021-05-29T17:27:11.170+0300	INFO	sending file file: e:\demo\s3\kubemqctl.png, size: 5144 bytes completed: 	{"source": "source-1"}
+2021-05-29T17:27:11.179+0300	INFO	sending file file: e:\demo\s3\kubernetes.png, size: 4580 bytes started 	{"source": "source-1"}
+2021-05-29T17:27:11.188+0300	INFO	sending file file: e:\demo\s3\kubernetes.png, size: 4580 bytes completed: 	{"source": "source-1"}
+2021-05-29T17:27:52.515+0300	ERROR	rpc error: code = Canceled desc = grpc: the client connection is closing	{"source": "binding-service"}
+2021-05-29T17:29:27.207+0300	INFO	generated manifest.json completed	{"source": "main"}
