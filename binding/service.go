@@ -135,8 +135,8 @@ func (s *Service) Stats() []*metrics.Report {
 	return s.exporter.Store.List()
 }
 
-func (s *Service) GetHttpHandlers() []*httpsrc.Handler {
-	var list []*httpsrc.Handler
+func (s *Service) GetHttpHandlers() []*httpsrc.Client {
+	var list []*httpsrc.Client
 	s.bindings.Range(func(key, value interface{}) bool {
 		binder := value.(*Binder)
 		if binder.httpSourceHandler != nil {

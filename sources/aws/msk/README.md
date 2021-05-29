@@ -7,7 +7,7 @@ The following are required to run the msk target connector:
 
 - kubemq cluster
 - active msk cluster
-- kubemq-target-connectors deployment
+- kubemq-sources deployment
 
 ## Configuration
 

@@ -24,7 +24,7 @@ type Client struct {
 	inProgress     sync.Map
 	completed      sync.Map
 	sendCh         chan *SourceFile
-	logger         *logger.Logger
+	log            *logger.Logger
 	ctx            context.Context
 	cancelFunc     context.CancelFunc
 	absRootFolders map[string]string
@@ -41,8 +41,11 @@ func New() *Client {
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
-func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
-	c.logger = logger.NewLogger(cfg.Name)
+func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+	c.log = log
+	if c.log == nil {
+		c.log = logger.NewLogger(cfg.Kind)
+	}
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {
@@ -80,6 +83,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	for i := 0; i < c.opts.concurrency; i++ {
 		go c.senderFunc(c.ctx, target)
 	}
+	c.log.Debugf("adasdasd")
 	go c.send(c.ctx)
 	return nil
 }
@@ -96,9 +100,9 @@ func (c *Client) inPipe(file *SourceFile) bool {
 		return true
 	}
 	if _, ok := c.completed.Load(file.FullPath()); ok {
-		c.logger.Debugf("file %s already sent and will be deleted", file.FullPath())
+		c.log.Debugf("file %s already sent and will be deleted", file.FullPath())
 		if err := file.Delete(); err != nil {
-			c.logger.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+			c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
 		}
 		return true
 	}
@@ -127,7 +131,7 @@ func (c *Client) walk(folder string) error {
 		}
 	}
 	if added > 0 {
-		c.logger.Debugf("%d new files added to sending waiting list", added)
+		c.log.Debugf("%d new files added to sending waiting list", added)
 	}
 	return nil
 }
@@ -140,34 +144,34 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 			c.waiting.Delete(file.FullPath())
 			req, err := file.Request(c.opts.bucketType, c.opts.bucketName)
 			if err != nil {
-				c.logger.Errorf("error during creating file requests %s, %s", file.FullPath(), err.Error())
+				c.log.Errorf("error during creating file requests %s, %s", file.FullPath(), err.Error())
 				c.waiting.Store(file.FullPath(), file)
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			c.logger.Infof("sending file %s started ", file.Metadata())
+			c.log.Infof("sending file %s started ", file.Metadata())
 			resp, err := sender.Do(ctx, req)
 			if err != nil {
-				c.logger.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
+				c.log.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
 				c.waiting.Store(file.FullPath(), file)
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
 			if resp.IsError {
-				c.logger.Errorf("error on sending file %s response, %s", file.FileName(), resp.Error)
+				c.log.Errorf("error on sending file %s response, %s", file.FileName(), resp.Error)
 				c.waiting.Store(file.FullPath(), file)
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
 			if err := file.Do(); err != nil {
-				c.logger.Errorf("error during delete/moving a file %s, %s,file will be resend", file.FileName(), err.Error())
+				c.log.Errorf("error during delete/moving a file %s, %s,file will be resend", file.FileName(), err.Error())
 				c.waiting.Store(file.FullPath(), file)
 			} else {
 				c.completed.Store(file.FullPath(), file)
 			}
 			c.inProgress.Delete(file.FullPath())
 
-			c.logger.Infof("sending file %s completed: ", file.Metadata())
+			c.log.Infof("sending file %s completed: ", file.Metadata())
 		case <-ctx.Done():
 			return
 		}
@@ -180,7 +184,7 @@ func (c *Client) scan(ctx context.Context) {
 			for _, folder := range c.absRootFolders {
 				err := c.walk(folder)
 				if err != nil {
-					c.logger.Errorf("error during scan files in folder %s, %s", folder, err.Error())
+					c.log.Errorf("error during scan files in folder %s, %s", folder, err.Error())
 				}
 			}
 		case <-ctx.Done():

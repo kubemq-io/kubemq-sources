@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
 	"time"
 )
 
 type Client struct {
+	log    *logger.Logger
 	opts   options
 	client *kubemq.Client
 }
@@ -23,7 +25,12 @@ func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+	c.log = log
+	if c.log == nil {
+		c.log = logger.NewLogger(cfg.Kind)
+	}
+
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {

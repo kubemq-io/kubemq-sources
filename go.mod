@@ -17,7 +17,7 @@ require (
 	github.com/json-iterator/go v1.1.10
 	github.com/kubemq-hub/builder v0.7.2
 	github.com/kubemq-hub/ibmmq-sdk v0.3.8
-	github.com/kubemq-io/kubemq-go v1.5.0
+	github.com/kubemq-io/kubemq-go v1.7.0
 	github.com/labstack/echo/v4 v4.2.1
 	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/nats-io/nats.go v1.10.0
@@ -25,7 +25,6 @@ require (
 	github.com/pelletier/go-toml v1.4.0 // indirect
 	github.com/prometheus/client_golang v1.7.1
 	github.com/smartystreets/assertions v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.6.1

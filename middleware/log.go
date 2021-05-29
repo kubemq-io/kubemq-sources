@@ -28,13 +28,13 @@ type LogMiddleware struct {
 }
 
 func NewLogMiddleware(name string, meta types.Metadata) (*LogMiddleware, error) {
-	lm := &LogMiddleware{
-		minLevel: LogLevelTypeNoLog,
-		Logger:   logger.NewLogger(name),
-	}
 	level, err := meta.ParseStringMap("log_level", logLevelMap)
 	if err != nil {
 		return nil, fmt.Errorf("invalid log level value, %w", err)
+	}
+	lm := &LogMiddleware{
+		minLevel: LogLevelTypeNoLog,
+		Logger:   logger.NewLogger(name, level),
 	}
 	switch level {
 	case "debug":

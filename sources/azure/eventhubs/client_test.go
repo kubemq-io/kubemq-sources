@@ -184,7 +184,7 @@ func TestClient_Init(t *testing.T) {
 			defer cancel()
 			c := New()
 
-			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
+			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantSetErr %v", err, tt.wantErr)
 				return
 			}
@@ -228,7 +228,7 @@ func TestClient_Do(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), tt.timeToWait)
 			defer cancel()
 			c := New()
-			err := c.Init(ctx, tt.cfg)
+			err := c.Init(ctx, tt.cfg, nil)
 			require.NoError(t, err)
 			err = c.Start(ctx, tt.middleware)
 			defer func() {

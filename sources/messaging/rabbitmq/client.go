@@ -15,7 +15,6 @@ import (
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
-	name    string
 	opts    options
 	channel *amqp.Channel
 	log     *logger.Logger
@@ -31,9 +30,11 @@ func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
-	c.name = cfg.Name
-	c.log = logger.NewLogger(cfg.Name)
+func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+	c.log = log
+	if c.log == nil {
+		c.log = logger.NewLogger(cfg.Kind)
+	}
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {
@@ -51,7 +52,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
-	func (c *Client) createMetadataString(msg amqp.Delivery) string {
+func (c *Client) createMetadataString(msg amqp.Delivery) string {
 	md := map[string]string{}
 	md["delivery_mode"] = fmt.Sprintf("%d", msg.DeliveryMode)
 	md["priority"] = fmt.Sprintf("%d", msg.Priority)
@@ -69,13 +70,13 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
 	md["redelivered"] = fmt.Sprintf("%t", msg.Redelivered)
 	md["exchange"] = msg.Exchange
 	md["routing_key"] = msg.RoutingKey
-	md["content_type"] =msg.ContentType
-	md["content_encoding"] =msg.ContentEncoding
-	md["routing_key"] =msg.RoutingKey
+	md["content_type"] = msg.ContentType
+	md["content_encoding"] = msg.ContentEncoding
+	md["routing_key"] = msg.RoutingKey
 
-	headers,err:=json.MarshalToString(msg.Headers)
-	if err==nil {
-		md["headers"]=headers
+	headers, err := json.MarshalToString(msg.Headers)
+	if err == nil {
+		md["headers"] = headers
 	}
 	str, err := json.MarshalToString(md)
 	if err != nil {

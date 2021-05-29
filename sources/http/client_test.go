@@ -44,7 +44,7 @@ func TestHandler_ServeHTTP_POST(t *testing.T) {
 			"methods": "post",
 			"path":    "/",
 		},
-	})
+	}, nil)
 	err := h.Start(ctx, &mockTarget{})
 	require.NoError(t, err)
 	defer func() {
@@ -72,8 +72,7 @@ func TestHandler_ServeHTTP_GET(t *testing.T) {
 			"methods": "get",
 			"path":    "/",
 		},
-	},
-	)
+	}, nil)
 	err := h.Start(context.Background(), &mockTarget{})
 	require.NoError(t, err)
 	defer func() {
@@ -99,8 +98,7 @@ func TestHandler_ServeHTTP_TargetError(t *testing.T) {
 			"methods": "get",
 			"path":    "/",
 		},
-	},
-	)
+	}, nil)
 	err := h.Start(context.Background(), &mockTarget{
 		setTargetErr:    fmt.Errorf("error"),
 		setExecutionErr: nil,
@@ -132,8 +130,7 @@ func TestHandler_ServeHTTP_ExecutionError(t *testing.T) {
 			"methods": "get",
 			"path":    "/",
 		},
-	},
-	)
+	}, nil)
 	err := h.Start(context.Background(), &mockTarget{
 		setTargetErr:    nil,
 		setExecutionErr: fmt.Errorf("error"),
@@ -201,7 +198,7 @@ func TestClient_Init(t *testing.T) {
 			defer cancel()
 			c := New()
 
-			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
+			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

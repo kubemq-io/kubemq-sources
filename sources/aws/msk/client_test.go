@@ -61,9 +61,9 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"brokers":        "localhost:9092",
-					"topics":         "TestTopicA,TestTopicB",
-					"consumer_group": "test_client",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopicA,TestTopicB",
+					"consumer_group":  "test_client",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -74,9 +74,9 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"brokers":        "localhost:9090",
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9090",
+					"topics":          "TestTopic",
+					"consumer_group":  "test_client1",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -86,8 +86,8 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"topics":          "TestTopic",
+					"consumer_group":  "test_client1",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -97,8 +97,8 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"brokers":        "localhost:9090",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9090",
+					"consumer_group":  "test_client1",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -108,8 +108,8 @@ func TestClient_Init(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"brokers": "localhost:9092",
-					"topics":  "TestTopic",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopic",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -122,7 +122,7 @@ func TestClient_Init(t *testing.T) {
 			defer cancel()
 			c := New()
 
-			if err := c.Init(ctx, tt.cfg); (err != nil) != tt.wantErr {
+			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantExecErr %v", err, tt.wantErr)
 				return
 			}
@@ -146,9 +146,9 @@ func TestClient_Do(t *testing.T) {
 			cfg: config.Spec{
 				Name: "aws.msk",
 				Properties: map[string]string{
-					"brokers":        "localhost:9092",
-					"topics":         "TestTopic",
-					"consumer_group": "test_client1",
+					"brokers":         "localhost:9092",
+					"topics":          "TestTopic",
+					"consumer_group":  "test_client1",
 					"dynamic_mapping": "false",
 				},
 			},
@@ -164,7 +164,7 @@ func TestClient_Do(t *testing.T) {
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
 			c := New()
-			err := c.Init(ctx, tt.cfg)
+			err := c.Init(ctx, tt.cfg, nil)
 			if tt.wantErr {
 				require.Error(t, err)
 				return

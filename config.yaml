@@ -1,4 +1,3 @@
-apiPort: 8081
 bindings:
 - name: source-1
   properties: {}
@@ -14,4 +13,4 @@ bindings:
     properties:
       address: localhost:50000
       channel: s3
-logLevel: ""
+

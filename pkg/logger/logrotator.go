@@ -20,6 +20,7 @@ const (
 	compressSuffix   = ".gz"
 	defaultMaxSize   = 100
 )
+
 var (
 	ErrMismatchPrefix    = errors.New("mismatched prefix")
 	ErrMismatchExtention = errors.New("mismatched extension")
@@ -145,6 +146,9 @@ func (l *LogRotator) Write(p []byte) (n int, err error) {
 	l.size += int64(n)
 
 	return n, err
+}
+func (l *LogRotator) Sync() error {
+	return nil
 }
 
 // Close implements io.Closer, and closes the current logfile.

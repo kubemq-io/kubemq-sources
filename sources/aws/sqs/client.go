@@ -19,7 +19,6 @@ import (
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
-	name   string
 	opts   options
 	log    *logger.Logger
 	client *sqs.SQS
@@ -63,16 +62,16 @@ func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Spec) error {
-	c.name = cfg.Name
-
-	c.log = logger.NewLogger(c.name)
+func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+	c.log = log
+	if c.log == nil {
+		c.log = logger.NewLogger(cfg.Kind)
+	}
 	var err error
 	c.opts, err = parseOptions(cfg)
 	if err != nil {
 		return err
 	}
-
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(c.opts.region),
 		Credentials: credentials.NewStaticCredentials(c.opts.awsKey, c.opts.awsSecretKey, c.opts.token),

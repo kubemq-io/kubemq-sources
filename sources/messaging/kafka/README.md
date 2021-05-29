@@ -7,7 +7,7 @@ The following are required to run the redis target connector:
 
 - kubemq cluster
 - kafka TODO version
-- kubemq-target-connectors deployment
+- kubemq-sources deployment
 
 ## Configuration
 
