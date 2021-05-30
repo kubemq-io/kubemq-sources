@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 )
 
+var ServiceLog = NewServiceLogger()
 var core = initCore()
 var encoderConfig = zapcore.EncoderConfig{
 	TimeKey:        "time",
@@ -26,23 +27,26 @@ var encoderConfig = zapcore.EncoderConfig{
 }
 
 func initCore() zapcore.Core {
+
 	var w zapcore.WriteSyncer
 	std, _, _ := zap.Open("stderr")
 	if global.EnableLogFile {
+		path, _ := os.Executable()
+
 		err := os.MkdirAll("./logs", 0660)
 		if err != nil {
 			panic(err.Error())
 		}
 		logR := &LogRotator{
 			Ctx:        context.Background(),
-			Filename:   filepath.Join("./logs/kubemq-sources.log"),
+			Filename:   filepath.Join(filepath.Dir(path), "/logs/kubemq-sources.log"),
 			MaxSize:    100, // megabytes
 			MaxBackups: 3,
 			MaxAge:     28, //days
 		}
-		w = zap.CombineWriteSyncers(std, logR)
+		w = zap.CombineWriteSyncers(std, logR, ServiceLog)
 	} else {
-		w = zap.CombineWriteSyncers(std)
+		w = zap.CombineWriteSyncers(std, ServiceLog)
 	}
 	enc := zapcore.NewJSONEncoder(encoderConfig)
 	if global.LoggerType == "console" {

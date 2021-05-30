@@ -26,6 +26,12 @@ tasks:
       - go mod tidy
       - go mod vendor
       - go build -o "{{.BINARY_NAME}}.exe" -ldflags "-X main.version={{.VERSION}}"
+  build_container:
+    env:
+      GOOS: '{{OS}}'
+      GOARCH: '{{ARCH}}'
+    cmds:
+      - go build -tags container -o  "{{.BINARY_NAME}}.exe" -ldflags "-X main.version={{.VERSION}}"
   docker:
     env:
       GOOS: linux
@@ -39,6 +45,9 @@ tasks:
     cmds:
       - docker push kubemq/{{.BINARY_NAME}}:{{.VERSION}}
       - docker push kubemq/{{.BINARY_NAME}}:latest
+  run_docker:
+    cmds:
+      - docker run -it --rm kubemq/{{.BINARY_NAME}}:latest
   update-manifest:
     cmds:
       - task: build

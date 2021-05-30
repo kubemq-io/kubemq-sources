@@ -14,6 +14,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -155,11 +156,15 @@ func createDefaultConfig() (*Config, error) {
 	return defaultConfig, nil
 }
 func load() (*Config, error) {
+	path, err := os.Executable()
+	if err != nil {
+		return nil, err
+	}
 	loadedConfigFile, err := getConfigFile()
 	if err != nil {
 		return createDefaultConfig()
 	} else {
-		viper.SetConfigFile(loadedConfigFile)
+		viper.SetConfigFile(filepath.Join(filepath.Dir(path), loadedConfigFile))
 	}
 	err = viper.ReadInConfig()
 	if err != nil {
@@ -175,7 +180,11 @@ func load() (*Config, error) {
 }
 
 func Load(cfgCh chan *Config) (*Config, error) {
-	viper.AddConfigPath("./")
+	path, err := os.Executable()
+	if err != nil {
+		return nil, err
+	}
+	viper.AddConfigPath(filepath.Dir(path))
 	cfg, err := load()
 	if err != nil {
 		return nil, err

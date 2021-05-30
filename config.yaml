@@ -12,5 +12,4 @@ bindings:
     kind: kubemq.queue
     properties:
       address: localhost:50000
-      channel: rabbit
-
+      channel: s3

@@ -1,3 +1,5 @@
+// +build !container
+
 package main
 
 import (
@@ -26,10 +28,13 @@ var (
 
 var (
 	log              *logger.Logger
-	generateManifest = flag.Bool("manifest", false, "generate source connectors manifest")
+	generateManifest = flag.Bool("manifest", false, "generate sources connectors manifest")
 	build            = flag.Bool("build", false, "build sources configuration")
 	buildUrl         = flag.String("get", "", "get config file from url")
 	configFile       = flag.String("config", "config.yaml", "set config file name")
+	svcFlag          = flag.String("service", "", "control the kubemq-sources service")
+	svcUsername      = flag.String("username", "", "kubemq-sources service username")
+	svcPassword      = flag.String("password", "", "kubemq-sources service password")
 )
 
 func saveManifest() error {
@@ -68,7 +73,7 @@ func downloadUrl() error {
 	}
 	return nil
 }
-func run() error {
+func runInteractive(serviceExit chan bool) error {
 	var gracefulShutdown = make(chan os.Signal, 1)
 	signal.Notify(gracefulShutdown, syscall.SIGTERM)
 	signal.Notify(gracefulShutdown, syscall.SIGINT)
@@ -103,7 +108,6 @@ func run() error {
 			err = newConfig.Validate()
 			if err != nil {
 				return fmt.Errorf("error on validation new config file: %s", err.Error())
-
 			}
 			bindingsService.Stop()
 			err = bindingsService.Start(ctx, newConfig)
@@ -125,13 +129,14 @@ func run() error {
 			_ = apiServer.Stop()
 			bindingsService.Stop()
 			return nil
+		case <-serviceExit:
+			_ = apiServer.Stop()
+			bindingsService.Stop()
+			return nil
 		}
 	}
 }
-
-func main() {
-	log = logger.NewLogger("main")
-	flag.Parse()
+func preRun() {
 	if *generateManifest {
 		err := saveManifest()
 		if err != nil {
@@ -157,12 +162,17 @@ func main() {
 			os.Exit(1)
 		}
 	}
+}
+
+func main() {
+	log = logger.NewLogger("kubemq-sources")
+	flag.Parse()
 	config.SetConfigFile(*configFile)
-	log = logger.NewLogger("main")
-	log.Infof("starting kubemq sources connectors version: %s", version)
-	if err := run(); err != nil {
+	app := newAppService()
+	if err := app.init(*svcFlag, *svcUsername, *svcPassword); err != nil {
 		log.Error(err)
 		os.Exit(1)
+	} else {
+		os.Exit(0)
 	}
-
 }

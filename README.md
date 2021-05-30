@@ -122,6 +122,53 @@ Running KubeMQ Sources
 ./kubemq-sources --config config.yaml
 ```
 
+### Windows Service
+
+1. Download the Windows version from KubeMQ Sources Releases. Once downloaded, the binary can be installed from anywhere.
+2. Create config.yaml configuration file and save it to the same location of the Windows binary.
+
+
+#### Service Installation
+
+Run:
+```bash
+kubemq-sources.exe --service install
+```
+
+#### Service Installation With Username and Password
+
+Run:
+```bash
+kubemq-sources.exe --service install --username {your-username} --password {your-password}
+```
+
+#### Service UnInstall
+
+```bash
+kubemq-sources.exe --service uninstall
+```
+
+#### Service Start
+
+```bash
+kubemq-sources.exe --service start
+```
+
+
+#### Service Stop
+
+```bash
+kubemq-sources.exe --service stop
+```
+
+#### Service Restart
+
+```bash
+kubemq-sources.exe --service restart
+```
+
+**NOTE**: When running under Windows service, all logs will be emitted to Windows Events Logs.
+
 
 ## Configuration
 
