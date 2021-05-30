@@ -176,13 +176,18 @@ kubemq-sources.exe --service restart
 
 ## Configuration
 
+### Build Wizard
+
+KubeMQ Bridges configuration can be build with Build and Deploy tool [https://build.kubemq.io/#/sources](https://build.kubemq.io/#/sources)
+
+
 ### Structure
 
 Config file structure:
 
 ```yaml
 
-apiPort: 8080 # kubemq sources api and health end-point port
+apiPort: 8083 # kubemq sources api and health end-point port
 bindings:
   - name: clusters-sources # unique binding name
     properties: # Bindings properties such middleware configurations
@@ -203,13 +208,7 @@ bindings:
       properties: # a set of key/value settings per each target kind
         - .....
 ```
-### Build Wizard
 
-KubeMQ Bridges configuration can be build with Build and Deploy tool [https://build.kubemq.io/#/sources](https://build.kubemq.io/#/sources)
-
-```
-
-```
 ### Properties
 
 In bindings configuration, KubeMQ Sources support properties setting for each pair of source and target bindings.
