@@ -144,12 +144,14 @@ kubemq-sources.exe --service install --username {your-username} --password {your
 
 #### Service UnInstall
 
+Run:
 ```bash
 kubemq-sources.exe --service uninstall
 ```
 
 #### Service Start
 
+Run:
 ```bash
 kubemq-sources.exe --service start
 ```
@@ -157,12 +159,14 @@ kubemq-sources.exe --service start
 
 #### Service Stop
 
+Run:
 ```bash
 kubemq-sources.exe --service stop
 ```
 
 #### Service Restart
 
+Run:
 ```bash
 kubemq-sources.exe --service restart
 ```
