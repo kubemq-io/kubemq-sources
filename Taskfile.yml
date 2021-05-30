@@ -39,7 +39,7 @@ tasks:
     cmds:
       - go mod tidy
       - go mod vendor
-      - docker build --build-arg VERSION={{.VERSION}} . -t kubemq/{{.BINARY_NAME}}:{{.VERSION}}
+      - DOCKER_BUILDKIT=0  docker build --build-arg VERSION={{.VERSION}} . -t kubemq/{{.BINARY_NAME}}:{{.VERSION}}
       - docker tag kubemq/{{.BINARY_NAME}}:{{.VERSION}} kubemq/{{.BINARY_NAME}}:latest
   push:
     cmds:
