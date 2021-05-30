@@ -205,10 +205,10 @@ bindings:
 ```
 ### Build Wizard
 
-KubeMQ Bridges configuration can be build with --build flag
+KubeMQ Bridges configuration can be build with Build and Deploy tool [https://build.kubemq.io/#/sources](https://build.kubemq.io/#/sources)
 
 ```
-./kubemq-sources --build
+
 ```
 ### Properties
 
