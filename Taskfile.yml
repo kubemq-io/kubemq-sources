@@ -57,6 +57,9 @@ tasks:
       - git add -A
       - git commit -a -m "release {{.VERSION}}"
       - git push origin master
+  goreleaser:
+    cmds:
+      - goreleaser --snapshot --skip-publish --rm-dist
   tag:
     cmds:
       - git tag -a {{.VERSION}} -m {{.VERSION}}

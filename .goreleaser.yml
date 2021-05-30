@@ -4,7 +4,7 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-    main: ./main.go
+
     goos:
       - darwin
       - linux
@@ -21,6 +21,12 @@ builds:
     ignore:
       - goos: windows
         goarch: 386
+      - goos: windows
+        goarch: arm_5
+      - goos: windows
+        goarch: arm_6
+      - goos: windows
+        goarch: arm_7
       - goos: darwin
         goarch: 386
     ldflags:
