@@ -365,3 +365,4 @@
 2021-05-30T14:39:52.000+0300	INFO	service command uninstall completed	{"source": "main"}
 2021-05-30T14:43:42.113+0300	INFO	kubemq sources connectors stopped	{"source": "main"}
 2021-05-30T15:31:01.259+0300	INFO	generated manifest.json completed	{"source": "kubemq-sources"}
+2021-05-30T15:51:27.649+0300	INFO	generated manifest.json completed	{"source": "kubemq-sources"}
