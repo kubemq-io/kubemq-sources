@@ -1,15 +1,42 @@
 bindings:
-- name: source-1
-  properties: {}
-  source:
-    kind: storage.filesystem
-    properties:
-      bucket_name: kubemq-targets
-      bucket_type: aws
-      folders: e:\demo\s3
-      backup_folder: e:\demo\backup\dir1\dir2
-  target:
-    kind: kubemq.queue
-    properties:
-      address: localhost:50000
-      channel: s3
+  - id: uer1li907z85blct
+    name: api-redis
+    properties: {}
+    source:
+      kind: http
+      properties:
+        methods: post
+        path: /redis
+    target:
+      kind: kubemq.query
+      properties:
+        address: localhost:50000
+        channel: redis
+  - id: uer1li907z85blct
+    name: api-postgres
+    properties: {
+       log_level: debug
+    }
+    source:
+      kind: http
+      properties:
+        methods: post
+        path: /*
+    target:
+      kind: kubemq.query
+      properties:
+        address: localhost:50000
+        channel: postgres
+  - id: uer1li907z85blct
+    name: api-elastic
+    properties: {}
+    source:
+      kind: http
+      properties:
+        methods: post
+        path: /elastic
+    target:
+      kind: kubemq.query
+      properties:
+        address: localhost:50000
+        channel: elastic

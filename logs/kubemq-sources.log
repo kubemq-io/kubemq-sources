@@ -366,3 +366,161 @@
 2021-05-30T14:43:42.113+0300	INFO	kubemq sources connectors stopped	{"source": "main"}
 2021-05-30T15:31:01.259+0300	INFO	generated manifest.json completed	{"source": "kubemq-sources"}
 2021-05-30T15:51:27.649+0300	INFO	generated manifest.json completed	{"source": "kubemq-sources"}
+2021-05-31T10:17:07.181+0300	INFO	starting kubemq sources connectors version: v1.0.1	{"source": "kubemq-sources"}
+2021-05-31T10:17:07.207+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:17:07.213+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:17:07.214+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:17:07.214+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:17:07.214+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:18:27.482+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:18:27.483+0300	INFO	config file changed, reloading...	{"source": "config"}
+2021-05-31T10:18:27.483+0300	INFO	binding: api-redis, stopped successfully	{"source": "api-redis"}
+2021-05-31T10:18:27.483+0300	ERROR	rpc error: code = Canceled desc = grpc: the client connection is closing	{"source": "binding-service"}
+2021-05-31T10:18:27.483+0300	ERROR	rpc error: code = Canceled desc = grpc: the client connection is closing	{"source": "binding-service"}
+2021-05-31T10:18:27.484+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:27.484+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:27.484+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:27.484+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:27.484+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:18:27.485+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:18:27.485+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:27.486+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:18:57.171+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:18:59.393+0300	INFO	starting kubemq sources connectors version: v1.0.1	{"source": "kubemq-sources"}
+2021-05-31T10:18:59.408+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:59.410+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:18:59.411+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:59.412+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:18:59.412+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:18:59.412+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:18:59.412+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:18:59.413+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:19:09.232+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:19:09.233+0300	INFO	config file changed, reloading...	{"source": "config"}
+2021-05-31T10:19:09.233+0300	INFO	binding: api-redis, stopped successfully	{"source": "api-redis"}
+2021-05-31T10:19:09.233+0300	ERROR	rpc error: code = Canceled desc = grpc: the client connection is closing	{"source": "binding-service"}
+2021-05-31T10:19:09.233+0300	ERROR	rpc error: code = Canceled desc = grpc: the client connection is closing	{"source": "binding-service"}
+2021-05-31T10:19:09.234+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:19:09.235+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:19:09.235+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:19:09.234+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:19:09.234+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:19:09.235+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:19:09.235+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:19:09.235+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:19:09.238+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:19:09.236+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:19:09.239+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:19:09.239+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:19:09.240+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:19:44.570+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:21:31.288+0300	INFO	starting kubemq sources connectors version: v1.0.1	{"source": "kubemq-sources"}
+2021-05-31T10:21:31.303+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:21:31.304+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:21:31.304+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:21:31.304+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:21:31.304+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:21:31.304+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:21:31.305+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:21:31.306+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:21:50.633+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:23:07.449+0300	INFO	starting kubemq sources connectors version: v1.0.1	{"source": "kubemq-sources"}
+2021-05-31T10:23:07.466+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:23:07.467+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:23:07.468+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:23:07.468+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:23:07.468+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:23:07.468+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:23:07.468+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:23:07.469+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:23:07.469+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:23:07.469+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:23:07.470+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:23:07.469+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:23:07.470+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:23:49.799+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:24:10.809+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-05-31T10:24:10.824+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:24:10.826+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:10.826+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:10.827+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:10.827+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:10.827+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:10.827+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:10.828+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:10.828+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:24:10.827+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:10.828+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:24:10.828+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:10.829+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:24:16.607+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:24:24.914+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-05-31T10:24:24.930+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:24:24.930+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:24.930+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:24.930+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:24.931+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:24.931+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:24:24.932+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:24:24.931+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:24.931+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:24.933+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:24:24.933+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:24:24.933+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:24:24.933+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:24:45.646+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:25:14.550+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-05-31T10:25:14.566+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:25:14.568+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:25:14.568+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:25:14.569+0300	INFO	binding: api-postgres source initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:25:14.569+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:25:14.569+0300	INFO	binding: api-redis source initialized successfully	{"source": "api-redis"}
+2021-05-31T10:25:14.570+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:25:14.570+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:25:14.570+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:25:14.570+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:25:14.570+0300	INFO	binding: api-elastic source initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:25:14.571+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:25:14.571+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:28:28.259+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:28:35.998+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-05-31T10:28:36.014+0300	INFO	3 bindings loaded	{"source": "config"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-postgres target: initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-elastic target: initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-redis target: initialized successfully	{"source": "api-redis"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-postgres, source: , initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-elastic, source: , initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:28:36.017+0300	INFO	binding: api-elastic, initialized successfully	{"source": "api-elastic"}
+2021-05-31T10:28:36.016+0300	INFO	binding: api-redis, source: , initialized successfully	{"source": "api-redis"}
+2021-05-31T10:28:36.017+0300	INFO	binding: api-postgres, initialized successfully	{"source": "api-postgres"}
+2021-05-31T10:28:36.017+0300	INFO	binding: api-postgres, started successfully	{"source": "api-postgres"}
+2021-05-31T10:28:36.017+0300	INFO	binding: api-elastic, started successfully	{"source": "api-elastic"}
+2021-05-31T10:28:36.017+0300	INFO	binding: api-redis, initialized successfully	{"source": "api-redis"}
+2021-05-31T10:28:36.018+0300	INFO	binding: api-redis, started successfully	{"source": "api-redis"}
+2021-05-31T10:28:40.945+0300	INFO	request: {"metadata":"POST /postgres HTTP/1.1\r\nHost: localhost:8083\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nCache-Control: no-cache\r\nConnection: keep-alive\r\nContent-Length: 534\r\nContent-Type: text/plain\r\nPostman-Token: d64e9474-a1b8-4263-9462-bce9fdd2da7d\r\nUser-Agent: PostmanRuntime/7.26.8\r\n\r\n","data":"ew0KICAibWV0YWRhdGEiOiB7DQogICAgIm1ldGhvZCI6ICJ0cmFuc2FjdGlvbiINCiAgfSwNCiAgImRhdGEiOiAiQ1VSU1QxQWdWRUZDVEVVZ1NVWWdSVmhKVTFSVElIQnZjM1E3Q2drZ0lDQWdJQ0FnUTFKRlFWUkZJRlJCUWt4RklIQnZjM1FnS0FvSklDQWdJQ0FnSUNBZ1NVUWdjMlZ5YVdGc0xBb0pJQ0FnSUNBZ0lDQWdWRWxVVEVVZ2RtRnlZMmhoY2lnME1Da3NDZ2tnSUNBZ0lDQWdJQ0JEVDA1VVJVNVVJSFpoY21Ob1lYSW9NalUxS1N3S0NTQWdJQ0FnSUNBZ0lFTlBUbE5VVWtGSlRsUWdjR3RmY0c5emRDQlFVa2xOUVZKWklFdEZXU2hKUkNrS0NTQWdJQ0FnSUNBcE93b0pJQ0FnSUNBZ0lFbE9VMFZTVkNCSlRsUlBJSEJ2YzNRb1NVUXNWRWxVVEVVc1EwOU9WRVZPVkNrZ1ZrRk1WVVZUQ2drZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ2d4TEU1VlRFd3NKME52Ym5SbGJuUWdUMjVsSnlrc0Nna2dJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNneUxDZFVhWFJzWlNCVWQyOG5MQ2REYjI1MFpXNTBJRlIzYnljcE93PT0iDQp9","channel":""}, response: {"metadata":"","data":"eyJtZXRhZGF0YSI6eyJyZXN1bHQiOiJvayJ9LCJkYXRhIjpudWxsLCJpc19lcnJvciI6ZmFsc2UsImVycm9yIjoiIn0=","is_error":false,"error":""}, error:<nil>	{"source": "api-postgres"}
+2021-05-31T10:28:48.955+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-05-31T10:29:50.994+0300	INFO	generated manifest.json completed	{"source": "kubemq-sources"}

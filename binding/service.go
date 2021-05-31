@@ -140,6 +140,7 @@ func (s *Service) GetHttpHandlers() []*httpsrc.Client {
 	s.bindings.Range(func(key, value interface{}) bool {
 		binder := value.(*Binder)
 		if binder.httpSourceHandler != nil {
+
 			list = append(list, binder.httpSourceHandler)
 		}
 		return true
