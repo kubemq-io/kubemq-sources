@@ -82,3 +82,6 @@ func (r *Request) String() string {
 	}
 	return str
 }
+func (r *Request) Unmarshal(data []byte) error {
+	return json.Unmarshal(data, r)
+}

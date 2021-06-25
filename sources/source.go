@@ -23,6 +23,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/nats"
 	"github.com/kubemq-hub/kubemq-sources/sources/messaging/rabbitmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/storage/filesystem"
+	"github.com/kubemq-hub/kubemq-sources/sources/storage/minio"
 )
 
 type Source interface {
@@ -114,6 +115,12 @@ func Init(ctx context.Context, cfg config.Spec, logger *logger.Logger) (Source, 
 		return source, nil
 	case "storage.filesystem":
 		source := filesystem.New()
+		if err := source.Init(ctx, cfg, logger); err != nil {
+			return nil, err
+		}
+		return source, nil
+	case "storage.minio":
+		source := minio.New()
 		if err := source.Init(ctx, cfg, logger); err != nil {
 			return nil, err
 		}

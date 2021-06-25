@@ -1,0 +1,68 @@
+package minio
+
+import (
+	"fmt"
+	"github.com/kubemq-hub/kubemq-sources/config"
+	"strings"
+)
+
+var bucketTypeMap = map[string]string{
+	"aws":        "aws",
+	"gcp":        "gcp",
+	"minio":      "minio",
+	"filesystem": "filesystem",
+}
+
+type options struct {
+	endpoint        string
+	useSSL          bool
+	accessKeyId     string
+	secretAccessKey string
+	folders         []string
+	concurrency     int
+	targetType      string
+	bucketName      string
+	scanInterval    int
+}
+
+func parseOptions(cfg config.Spec) (options, error) {
+	o := options{}
+	var err error
+	o.endpoint, err = cfg.Properties.MustParseString("endpoint")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing endpoint, %w", err)
+	}
+	o.useSSL = cfg.Properties.ParseBool("use_ssl", true)
+	o.accessKeyId, err = cfg.Properties.MustParseEnv("access_key_id", "ACCESS_KEY_ID", "")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing access key id, %w", err)
+	}
+	o.secretAccessKey, err = cfg.Properties.MustParseEnv("secret_access_key", "SECRET_ACCESS_KEY", "")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing secret access key, %w", err)
+	}
+	o.folders, err = cfg.Properties.MustParseStringList("folders")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing folders, %w", err)
+	}
+	o.targetType, err = cfg.Properties.ParseStringMap("target_type", bucketTypeMap)
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing target_type, %w", err)
+	}
+	o.bucketName, err = cfg.Properties.MustParseString("bucket_name")
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing bucket_name, %w", err)
+	}
+	o.concurrency, err = cfg.Properties.ParseIntWithRange("concurrency", 1, 1, 1024)
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing concurrency")
+	}
+	o.scanInterval, err = cfg.Properties.ParseIntWithRange("scan_interval", 5, 1, 3600*365)
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing scan_interval")
+	}
+	return o, nil
+}
+func unixNormalize(in string) string {
+	return strings.Replace(in, `\`, "/", -1)
+}

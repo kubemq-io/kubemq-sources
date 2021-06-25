@@ -20,6 +20,7 @@ Filesystem source connector configuration properties:
 | bucket_name          | yes      | set remote target bucket/dir name    | "dir1"          |
 | concurrency         | no      | set sending concurrency       | "1"                                 |
 | backup_folder         | no      | set backup folder for files after send     | "1"                                 |
+| scan_interval     | no       | set filesystem scan interval in sec | "5"                                 |
 
 Example:
 
@@ -32,8 +33,9 @@ bindings:
       folders: 'd:\test\source,d:\test\folder2'
       bucket_type: aws
       bucket_name: aws_bucket_name
-      concurrency: 5
+      concurrency: 1
       backup_folder: 'd:\backup'
+      scan_interval: 5
   target:
     kind: kubemq.queue
     properties:

@@ -23,8 +23,8 @@ func Connector() *common.Connector {
 				SetKind("string").
 				SetName("bucket_type").
 				SetTitle("Sync Target Type").
-				SetOptions([]string{"aws", "gcp", "minio", "filesystem"}).
-				SetDescription("Set remote target bucket type").
+				SetOptions([]string{"aws", "gcp", "minio", "filesystem", "hdfs", "azure"}).
+				SetDescription("Set remote target type").
 				SetMust(true).
 				SetDefault("aws"),
 		).
@@ -53,5 +53,13 @@ func Connector() *common.Connector {
 				SetDescription("Set execution concurrency").
 				SetMust(false).
 				SetDefault("1"),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("int").
+				SetName("scan_interval").
+				SetDescription("Set scan interval in seconds").
+				SetMust(false).
+				SetDefault("5"),
 		)
 }

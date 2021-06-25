@@ -14,10 +14,6 @@ import (
 	"time"
 )
 
-const (
-	pollInterval = 5 * time.Second
-)
-
 type Client struct {
 	opts           options
 	waiting        sync.Map
@@ -83,7 +79,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	for i := 0; i < c.opts.concurrency; i++ {
 		go c.senderFunc(c.ctx, target)
 	}
-	c.log.Debugf("adasdasd")
 	go c.send(c.ctx)
 	return nil
 }
@@ -180,7 +175,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 func (c *Client) scan(ctx context.Context) {
 	for {
 		select {
-		case <-time.After(pollInterval):
+		case <-time.After(time.Duration(c.opts.scanInterval) * time.Second):
 			for _, folder := range c.absRootFolders {
 				err := c.walk(folder)
 				if err != nil {

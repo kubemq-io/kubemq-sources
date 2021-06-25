@@ -9,6 +9,8 @@ var bucketTypeMap = map[string]string{
 	"aws":        "aws",
 	"gcp":        "gcp",
 	"minio":      "minio",
+	"hdfs":       "hdfs",
+	"azure":      "azure",
 	"filesystem": "filesystem",
 }
 
@@ -18,6 +20,7 @@ type options struct {
 	bucketType   string
 	bucketName   string
 	backupFolder string
+	scanInterval int
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -39,6 +42,10 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.concurrency, err = cfg.Properties.ParseIntWithRange("concurrency", 1, 1, 1024)
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing concurrency")
+	}
+	o.scanInterval, err = cfg.Properties.ParseIntWithRange("scan_interval", 5, 1, 3600*365)
+	if err != nil {
+		return options{}, fmt.Errorf("error parsing scan_interval")
 	}
 	return o, nil
 }

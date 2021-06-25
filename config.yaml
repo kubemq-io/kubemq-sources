@@ -1,42 +1,20 @@
 bindings:
-  - id: uer1li907z85blct
-    name: api-redis
+  - name: minio
+    source:
+      kind: storage.minio
+      properties:
+        endpoint: "localhost:9000"
+        use_ssl: "false"
+        access_key_id: "minio"
+        secret_access_key: "minio123"
+        folders: '/'
+        target_type: filesystem
+        bucket_name: bucket2
+        concurrency: 5
+        scan_interval: 2
+    target:
+      kind: kubemq.queue
+      properties:
+        address: localhost:50000
+        channel: queue.minio
     properties: {}
-    source:
-      kind: http
-      properties:
-        methods: post
-        path: /redis
-    target:
-      kind: kubemq.query
-      properties:
-        address: localhost:50000
-        channel: redis
-  - id: uer1li907z85blct
-    name: api-postgres
-    properties: {
-       log_level: debug
-    }
-    source:
-      kind: http
-      properties:
-        methods: post
-        path: /*
-    target:
-      kind: kubemq.query
-      properties:
-        address: localhost:50000
-        channel: postgres
-  - id: uer1li907z85blct
-    name: api-elastic
-    properties: {}
-    source:
-      kind: http
-      properties:
-        methods: post
-        path: /elastic
-    target:
-      kind: kubemq.query
-      properties:
-        address: localhost:50000
-        channel: elastic

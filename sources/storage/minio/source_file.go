@@ -1,67 +1,94 @@
-package filesystem
+package minio
 
 import (
+	"context"
 	"fmt"
 	"github.com/kubemq-hub/kubemq-sources/types"
-	"io"
+	"github.com/minio/minio-go/v7"
 	"io/ioutil"
-	"os"
 	"path/filepath"
 	"strings"
 )
 
 type SourceFile struct {
-	Info     os.FileInfo
-	Path     string
-	Root     string
-	MovePath string
+	Object minio.ObjectInfo
+	Bucket string
+	client *minio.Client
 }
 
-func NewSourceFile(info os.FileInfo, path string, root string, movePath string) *SourceFile {
+func NewSourceFile(c *minio.Client, bucket string, obj minio.ObjectInfo) *SourceFile {
 	return &SourceFile{
-		Info:     info,
-		Path:     path,
-		Root:     root,
-		MovePath: movePath,
+		Object: obj,
+		Bucket: bucket,
+		client: c,
 	}
 }
+
 func (s *SourceFile) FullPath() string {
-	p, _ := filepath.Abs(s.Path)
-	return filepath.Clean(p)
+	return fmt.Sprintf("%s/%s", s.Bucket, s.Object.Key)
 }
 func (s *SourceFile) FileDir() string {
-	dir, _ := filepath.Split(s.Path)
-	fileDir := strings.Replace(filepath.Clean(dir), filepath.Clean(s.Root), "", -1)
-	return fileDir
-}
-func (s *SourceFile) FileName() string {
-	return s.Info.Name()
-}
-func (s *SourceFile) Metadata() string {
-	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Info.Size())
-}
-func (s *SourceFile) Load() ([]byte, error) {
-	return ioutil.ReadFile(s.FullPath())
-}
-
-func (s *SourceFile) Do() error {
-	if s.MovePath != "" {
-		newFileName := strings.Replace(s.FullPath(), s.Root, s.MovePath, 1)
-		if err := movefile(s.FullPath(), newFileName); err != nil {
-			return err
-		}
-		return nil
-	} else {
-		return os.Remove(s.FullPath())
+	parts := strings.Split(s.Object.Key, "/")
+	if len(parts) < 2 {
+		return ""
+	}
+	pathSize := len(parts) - 2
+	if pathSize == 0 {
+		return parts[0]
 	}
 
+	return strings.Join(parts[:pathSize], "/")
 }
-func (s *SourceFile) Delete() error {
-	return os.Remove(s.FullPath())
+func (s *SourceFile) RootDir() string {
+	parts := strings.Split(s.Object.Key, "/")
+	if len(parts) < 2 {
+		return ""
+	}
+	return parts[0]
+}
+func (s *SourceFile) FileName() string {
+	parts := strings.Split(s.Object.Key, "/")
+	if len(parts) == 0 {
+		return ""
+	}
+	return parts[len(parts)-1]
+}
+func (s *SourceFile) Metadata() string {
+	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Object.Size)
+}
+func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
+	object, err := s.client.GetObject(ctx, s.Bucket, s.Object.Key, minio.GetObjectOptions{})
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = object.Close()
+	}()
+	data, err := ioutil.ReadAll(object)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }
 
-func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Request, error) {
-	data, err := s.Load()
+func (s *SourceFile) Do(ctx context.Context) error {
+	return s.Delete(ctx)
+}
+func (s *SourceFile) Delete(ctx context.Context) error {
+	err := s.client.RemoveObject(ctx, s.Bucket, s.Object.Key, minio.RemoveObjectOptions{
+		GovernanceBypass: false,
+		VersionID:        "",
+		Internal:         minio.AdvancedRemoveOptions{},
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SourceFile) Request(ctx context.Context, bucketType string, bucketName string) (*types.Request, error) {
+	data, err := s.Load(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -110,48 +137,4 @@ func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Reque
 	}
 
 	return types.NewRequest().SetData(targetRequest.MarshalBinary()), nil
-}
-
-func movefile(src, dst string) error {
-	in, err := os.Open(src)
-	if err != nil {
-		return fmt.Errorf("couldn't open source file: %s", err)
-	}
-	si, err := os.Stat(src)
-	if err != nil {
-		return fmt.Errorf("stat error: %s", err)
-	}
-
-	err = os.MkdirAll(filepath.Dir(dst), si.Mode())
-	if err != nil {
-		return err
-	}
-	out, err := os.Create(dst)
-	if err != nil {
-		_ = in.Close()
-		return fmt.Errorf("couldn't open dest file: %s", err)
-	}
-	defer out.Close()
-
-	_, err = io.Copy(out, in)
-	_ = in.Close()
-	if err != nil {
-		return fmt.Errorf("writing to output file failed: %s", err)
-	}
-
-	err = out.Sync()
-	if err != nil {
-		return fmt.Errorf("sync error: %s", err)
-	}
-
-	err = os.Chmod(dst, si.Mode())
-	if err != nil {
-		return fmt.Errorf("chmod error: %s", err)
-	}
-
-	err = os.Remove(src)
-	if err != nil {
-		return fmt.Errorf("failed removing original file: %s", err)
-	}
-	return nil
 }

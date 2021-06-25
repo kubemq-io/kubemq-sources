@@ -3,6 +3,7 @@ package types
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -202,4 +203,17 @@ func (m Metadata) MustParseStringList(key string) ([]string, error) {
 	} else {
 		return nil, fmt.Errorf("value of key %s cannot be empty", key)
 	}
+}
+func (m Metadata) MustParseEnv(key, envVar, defaultValue string) (string, error) {
+	envValue := os.Getenv(envVar)
+	if envValue != "" {
+		return envValue, nil
+	}
+	if val, ok := m[key]; ok && val != "" {
+		return val, nil
+	}
+	if defaultValue != "" {
+		return defaultValue, nil
+	}
+	return "", fmt.Errorf("cannot extract key %s from environment variable", key)
 }
