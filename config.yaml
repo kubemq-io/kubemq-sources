@@ -3,8 +3,7 @@ bindings:
     source:
       kind: aws.s3
       properties:
-        aws_key: "AKIAQIC5NYH6IYHDDGOF"
-        aws_secret_key: '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'
+
         region: "us-east-1"
         token: ""
         folders: '/'
