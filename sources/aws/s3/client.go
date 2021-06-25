@@ -1,13 +1,17 @@
-package minio
+package s3
 
 import (
 	"context"
+	"fmt"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/middleware"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	"sync"
 	"time"
 )
@@ -15,7 +19,8 @@ import (
 type Client struct {
 	log         *logger.Logger
 	opts        options
-	s3Client    *minio.Client
+	client      *s3.S3
+	downloader  *s3manager.Downloader
 	waiting     sync.Map
 	inProgress  sync.Map
 	completed   sync.Map
@@ -47,17 +52,26 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 	if err != nil {
 		return err
 	}
-	c.s3Client, err = minio.New(c.opts.endpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(c.opts.accessKeyId, c.opts.secretAccessKey, ""),
-		Secure: c.opts.useSSL,
+	sess, err := session.NewSession(&aws.Config{
+		Region:      aws.String(c.opts.region),
+		Credentials: credentials.NewStaticCredentials(c.opts.awsKey, c.opts.awsSecretKey, c.opts.token),
 	})
 	if err != nil {
 		return err
 	}
+
+	svc := s3.New(sess)
+	c.client = svc
+	c.downloader = s3manager.NewDownloader(sess)
 	for _, folder := range c.opts.folders {
 		unixFolder := unixNormalize(folder)
 		c.scanFolders[unixFolder] = unixFolder
 	}
+	list, err := c.client.ListBuckets(&s3.ListBucketsInput{})
+	if err != nil {
+		return err
+	}
+	fmt.Println(list.Buckets)
 	return nil
 }
 
@@ -94,12 +108,17 @@ func (c *Client) inPipe(ctx context.Context, file *SourceFile) bool {
 //
 func (c *Client) walk(ctx context.Context) error {
 	var list []*SourceFile
-	var objects []minio.ObjectInfo
-	for object := range c.s3Client.ListObjects(ctx, c.opts.bucketName, minio.ListObjectsOptions{Recursive: true}) {
+	objList, err := c.client.ListObjectsV2WithContext(ctx, &s3.ListObjectsV2Input{Bucket: aws.String(c.opts.bucketName)})
+	if err != nil {
+		return err
+	}
+	var objects []*s3.Object
+	for _, object := range objList.Contents {
 		objects = append(objects, object)
 	}
+
 	for _, object := range objects {
-		srcFile := NewSourceFile(c.s3Client, c.opts.bucketName, object)
+		srcFile := NewSourceFile(c.client, c.downloader, c.opts.bucketName, object)
 		_, ok := c.scanFolders["/"]
 		if ok {
 			list = append(list, srcFile)

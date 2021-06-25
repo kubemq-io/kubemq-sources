@@ -14,6 +14,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-resty/resty/v2 v2.3.0
 	github.com/go-stomp/stomp v2.1.2+incompatible
+	github.com/google/uuid v1.1.2
 	github.com/json-iterator/go v1.1.10
 	github.com/kardianos/service v1.2.0
 	github.com/kubemq-hub/builder v0.7.2

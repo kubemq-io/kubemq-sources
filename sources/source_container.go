@@ -11,6 +11,7 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/amazonmq"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/msk"
+	"github.com/kubemq-hub/kubemq-sources/sources/aws/s3"
 	"github.com/kubemq-hub/kubemq-sources/sources/aws/sqs"
 	"github.com/kubemq-hub/kubemq-sources/sources/azure/eventhubs"
 	"github.com/kubemq-hub/kubemq-sources/sources/azure/servicebus"
@@ -76,6 +77,12 @@ func Init(ctx context.Context, cfg config.Spec, log *logger.Logger) (Source, err
 			return nil, err
 		}
 		return source, nil
+	case "aws.s3":
+		source := s3.New()
+		if err := source.Init(ctx, cfg, logger); err != nil {
+			return nil, err
+		}
+		return source, nil
 	case "gcp.pubsub":
 		source := pubsub.New()
 		if err := source.Init(ctx, cfg, log); err != nil {
@@ -129,6 +136,7 @@ func Connectors() common.Connectors {
 		// General
 		http.Connector(),
 		filesystem.Connector(),
+		minio.Connector(),
 		rabbitmq.Connector(),
 		mqtt.Connector(),
 		kafka.Connector(),
@@ -139,6 +147,7 @@ func Connectors() common.Connectors {
 		sqs.Connector(),
 		amazonmq.Connector(),
 		msk.Connector(),
+		s3.Connector(),
 		// GCP
 		pubsub.Connector(),
 

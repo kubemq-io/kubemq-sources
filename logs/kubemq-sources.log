@@ -19882,3 +19882,1117 @@
 2021-06-25T12:23:25.878+0300	INFO	sending file file: bucket2/app1/node_modules/rxjs/internal/Notification.js.map, size: 2139 bytes started 	{"source": "minio"}
 2021-06-25T12:23:25.881+0300	INFO	sending file file: bucket2/app1/node_modules/core-js/modules/esnext.iterator.find.js, size: 533 bytes started 	{"source": "minio"}
 2021-06-25T12:23:25.893+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-06-25T13:15:46.301+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-06-25T13:15:46.318+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:15:46.319+0300	INFO	binding: minio target: initialized successfully	{"source": "minio"}
+2021-06-25T13:15:46.320+0300	INFO	binding: minio, source: , initialized successfully	{"source": "minio"}
+2021-06-25T13:15:46.320+0300	INFO	binding: minio, initialized successfully	{"source": "minio"}
+2021-06-25T13:15:46.320+0300	INFO	binding: minio, started successfully	{"source": "minio"}
+2021-06-25T13:15:49.658+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554fe8), size: 824640043488 bytes started 	{"source": "minio"}
+2021-06-25T13:15:49.837+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554268), size: 824640042984 bytes started 	{"source": "minio"}
+2021-06-25T13:15:50.445+0300	INFO	sending file file: bucket2/%!s(*string=0xc0005558e8), size: 824640043824 bytes started 	{"source": "minio"}
+2021-06-25T13:15:50.876+0300	INFO	sending file file: bucket2/%!s(*string=0xc000555d68), size: 824640043992 bytes started 	{"source": "minio"}
+2021-06-25T13:15:51.242+0300	INFO	sending file file: bucket2/%!s(*string=0xc00055af88), size: 824640044664 bytes started 	{"source": "minio"}
+2021-06-25T13:15:52.001+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.001+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.001+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.001+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.003+0300	ERROR	error during sending file fish1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.001+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.002+0300	ERROR	error during sending file rabbit.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.002+0300	ERROR	error during sending file fish2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.002+0300	ERROR	error during sending file dog2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.003+0300	ERROR	error during sending file cat1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.185+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554b68), size: 824640043320 bytes started 	{"source": "minio"}
+2021-06-25T13:15:52.185+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.186+0300	ERROR	error during sending file dog1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.639+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107948), AccessDenied: Access Denied
+	status code: 403, request id: 32V2WFV4V6WXGDXB, host id: vYLg83j5w3u6ucTwlRKx72+0m7Tdso0Dvrasv+E8Lhnzrfql+OBsA+f+ZigSHRdBdITAGzUcyWo=	{"source": "minio"}
+2021-06-25T13:15:52.664+0300	INFO	sending file file: bucket2/%!s(*string=0xc00055a688), size: 824640044328 bytes started 	{"source": "minio"}
+2021-06-25T13:15:52.665+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.665+0300	ERROR	error during sending file monkey1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.820+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00055a208), AccessDenied: Access Denied
+	status code: 403, request id: Q3RREJBBAAGYS4ZZ, host id: UNH/n1dYneXHX7jDZet4nCUO5Ml9RA3FS0DXIdp87rbS18efGq4ZAq+okR/kKvea9dvNZrIgyyc=	{"source": "minio"}
+2021-06-25T13:15:52.970+0300	INFO	sending file file: bucket2/%!s(*string=0xc000107dc8), size: 824640042816 bytes started 	{"source": "minio"}
+2021-06-25T13:15:52.970+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.970+0300	ERROR	error during sending file bear1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:52.973+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00055ab08), AccessDenied: Access Denied
+	status code: 403, request id: Q3RV5N15A5YZA5GJ, host id: CCC0k6VRMxRN8KK6D6XQQNkHDJABV3MfUvVC6bkR/hFUQcwAs1TlHWAPtEUjDHZukt1JSsN5uq4=	{"source": "minio"}
+2021-06-25T13:15:53.129+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0001074c8), AccessDenied: Access Denied
+	status code: 403, request id: Q3RZHFMVCQXKGTWW, host id: wAfo4D24WeF372cpmTt9mOEttEG7VUEeYravvJ9ngvur62WLdsjrxknqaNsYPdnkSuva0eg+tWI=	{"source": "minio"}
+2021-06-25T13:15:53.637+0300	INFO	sending file file: bucket2/%!s(*string=0xc0005546e8), size: 824640043152 bytes started 	{"source": "minio"}
+2021-06-25T13:15:54.149+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0000bcfe8), AccessDenied: Access Denied
+	status code: 403, request id: BYPEYE8QS3975M4B, host id: yfn08tixzQeBjKTPmlL0g2zl2Ukd45NpyagQmwx+HG0DB6bmZPDn8pA5mLDAGZuw4qZM0HzT/8s=	{"source": "minio"}
+2021-06-25T13:15:54.222+0300	INFO	sending file file: bucket2/%!s(*string=0xc000555468), size: 824640043656 bytes started 	{"source": "minio"}
+2021-06-25T13:15:54.465+0300	INFO	sending file file: bucket2/%!s(*string=0xc0006f0208), size: 824640857920 bytes started 	{"source": "minio"}
+2021-06-25T13:15:54.548+0300	INFO	sending file file: bucket2/%!s(*string=0xc00055b408), size: 824640044832 bytes started 	{"source": "minio"}
+2021-06-25T13:15:55.797+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.797+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.797+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.797+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.798+0300	ERROR	error during sending file dog3.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.799+0300	ERROR	error during sending file cat2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.799+0300	ERROR	error during sending file dog3.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.801+0300	ERROR	error during sending file tree2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.972+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001e8e68), size: 824633953176 bytes started 	{"source": "minio"}
+2021-06-25T13:15:55.973+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.973+0300	ERROR	error during sending file cat1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:55.999+0300	INFO	sending file file: bucket2/%!s(*string=0xc0005558e8), size: 824640043824 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.000+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.000+0300	ERROR	error during sending file fish1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.142+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554b68), size: 824640043320 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.142+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.143+0300	ERROR	error during sending file dog1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.153+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0001074c8), AccessDenied: Access Denied
+	status code: 403, request id: 0FP44B1578XMXV8N, host id: TIJ+dDHLce49gtV/gDED9qe2v+pKtvqcaAcZG2GCApxiM+6q1M7fLjrabEjRKq0chvyI//qDhCE=	{"source": "minio"}
+2021-06-25T13:15:56.266+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00055ab08), AccessDenied: Access Denied
+	status code: 403, request id: 0FP2RQMHZR6AXWG9, host id: 6UWBpDz4dLCFZflNzLQU1S/grRSxQDArzl3MyNni812LV+MFSbenIBYfvmhtQp6ygIe4hEkUyuQ=	{"source": "minio"}
+2021-06-25T13:15:56.460+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bd7c8), size: 824640858928 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.461+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.461+0300	ERROR	error during sending file rabbit.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.470+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bddc8), size: 824640859096 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.471+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.471+0300	ERROR	error during sending file tree2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.475+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0001e8028), AccessDenied: Access Denied
+	status code: 403, request id: 0FPD34SM5A2TAWJ0, host id: tl7mGiKQjVlngvk5FabG+1O6MbLqgYqqDLYN1JpkndQ0t2tOH0CEfpCz8jmEuk+dbHDsa2MSbo4=	{"source": "minio"}
+2021-06-25T13:15:56.506+0300	INFO	sending file file: bucket2/%!s(*string=0xc000297d08), size: 824633955064 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.506+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.507+0300	ERROR	error during sending file rabbit.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.625+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554fe8), size: 824640043488 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.625+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.625+0300	ERROR	error during sending file dog2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.640+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00055a208), AccessDenied: Access Denied
+	status code: 403, request id: 0FP08QH0VQMNTGQH, host id: Ajkh3iwtWCe4QgaIUnqFyCGTBXiFrb7f4d0NKbOUI/FYN+A5VVEYzJUnEeMwpqKVvboUOHgjmI8=	{"source": "minio"}
+2021-06-25T13:15:56.741+0300	INFO	sending file file: bucket2/%!s(*string=0xc0006f10a8), size: 824640858088 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.741+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.741+0300	ERROR	error during sending file fish1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.774+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001e9768), size: 824633953528 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.775+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.775+0300	ERROR	error during sending file dog1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.914+0300	INFO	sending file file: bucket2/%!s(*string=0xc000706ec8), size: 824640857232 bytes started 	{"source": "minio"}
+2021-06-25T13:15:56.914+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:56.914+0300	ERROR	error during sending file cat1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.294+0300	INFO	sending file file: bucket2/%!s(*string=0xc000107dc8), size: 824640042816 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.294+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.294+0300	ERROR	error during sending file bear1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.368+0300	INFO	sending file file: bucket2/%!s(*string=0xc000706a48), size: 824640856984 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.368+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.368+0300	ERROR	error during sending file bear1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.447+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000297888), AccessDenied: Access Denied
+	status code: 403, request id: ES67488MGNR7GRX1, host id: QxespMYn7GVp18t6Kag5V1HuOv6NmhPJ9HBNM6Kn5+c/kG1z2+BibgixctKxw/rRGhBejwiaLLE=	{"source": "minio"}
+2021-06-25T13:15:57.519+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007077c8), size: 824640857584 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.520+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.520+0300	ERROR	error during sending file dog1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.531+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001e92e8), size: 824633953344 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.531+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.531+0300	ERROR	error during sending file cat2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.625+0300	INFO	sending file file: bucket2/%!s(*string=0xc0006f1528), size: 824640858256 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.625+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.625+0300	ERROR	error during sending file fish2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.680+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000296f88), AccessDenied: Access Denied
+	status code: 403, request id: ES61AKA13E1VSNVG, host id: pWYTcDXjydgqG9msvR9AnWYJTrnR2PVLqli7kMQlklcVX7SHN4oLqQyYru9onOatCCd5VhBFFbc=	{"source": "minio"}
+2021-06-25T13:15:57.749+0300	INFO	sending file file: bucket2/%!s(*string=0xc0006f1fa8), size: 824640858592 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.749+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.749+0300	ERROR	error during sending file monkey1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.787+0300	INFO	sending file file: bucket2/%!s(*string=0xc000297408), size: 824633954728 bytes started 	{"source": "minio"}
+2021-06-25T13:15:57.787+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.788+0300	ERROR	error during sending file monkey1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:57.902+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0007065c8), AccessDenied: Access Denied
+	status code: 403, request id: G5APHYHSB0ZHA6N9, host id: jVhEL0HzA/6H/LRGRZhr56+jc1oKdfr43wlx05TJ9S+WPfipcVkpnMXbGJ4/CHB6mbSh65cIe7s=	{"source": "minio"}
+2021-06-25T13:15:58.023+0300	INFO	sending file file: bucket2/%!s(*string=0xc000555d68), size: 824640043992 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.023+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:58.024+0300	ERROR	error during sending file fish2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:58.058+0300	INFO	sending file file: bucket2/%!s(*string=0xc000707c48), size: 824640857752 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.059+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:58.059+0300	ERROR	error during sending file dog2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:15:58.090+0300	INFO	sending file file: bucket2/%!s(*string=0xc00055af88), size: 824640044664 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.195+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0006f1b28), AccessDenied: Access Denied
+	status code: 403, request id: G5AHT9DQMN9EX694, host id: MSMNLpK0M7dQGgU1eR3A1+WKYsJQzXxh6YzVwAk4dElCm07+/NdNtd9l+RRh/00h0ljRCnqBlDM=	{"source": "minio"}
+2021-06-25T13:15:58.212+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0001e8568), AccessDenied: Access Denied
+	status code: 403, request id: G5AYH4ZHMAR95YTM, host id: /4+pyDROv5xmbp5EFRFaDoyzBZokFj/gNvTJ8wWfcIWBbf/QWMAqQxe/Rydeo8d0P7pFeJapQ3A=	{"source": "minio"}
+2021-06-25T13:15:58.242+0300	INFO	sending file file: bucket2/%!s(*string=0xc000296148), size: 824633953880 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.319+0300	INFO	sending file file: bucket2/%!s(*string=0xc000707348), size: 824640857416 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.374+0300	INFO	sending file file: bucket2/%!s(*string=0xc00055a688), size: 824640044328 bytes started 	{"source": "minio"}
+2021-06-25T13:15:58.435+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107948), AccessDenied: Access Denied
+	status code: 403, request id: G5AJ8SSWQEH5938B, host id: bPGJa4bIJ9XUq3HXYv9MIYTzphYdhxlxQdRFU6QC3Sa0I7N6Di6Km0tLgIqhIgDpA9iqV0mafzQ=	{"source": "minio"}
+2021-06-25T13:15:58.585+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00055be28), AccessDenied: Access Denied
+	status code: 403, request id: G5AZCT164E6P2F1T, host id: Gx8jqSYTOdd4aHkLUMuJXcLex6QakH9MFoL46vHIgmg4aarnL3cfyIottP7iKbrN6uuxcdOL9IU=	{"source": "minio"}
+2021-06-25T13:15:58.741+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001e89e8), size: 824633953008 bytes started 	{"source": "minio"}
+2021-06-25T13:16:00.410+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.410+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.410+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.410+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.410+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.414+0300	ERROR	error during sending file bear1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.411+0300	ERROR	error during sending file rabbit.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.411+0300	ERROR	error during sending file monkey1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.411+0300	ERROR	error during sending file cat2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.412+0300	ERROR	error during sending file dog3.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.566+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001e9be8), size: 824633953696 bytes started 	{"source": "minio"}
+2021-06-25T13:16:00.566+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.567+0300	ERROR	error during sending file dog2.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.865+0300	INFO	sending file file: bucket2/%!s(*string=0xc000554268), size: 824640042984 bytes started 	{"source": "minio"}
+2021-06-25T13:16:00.865+0300	ERROR	retry 0 failed, error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:00.865+0300	ERROR	error during sending file cat1.png, All attempts fail:
+#1: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp [::1]:50000: connectex: No connection could be made because the target machine actively refused it."	{"source": "minio"}
+2021-06-25T13:16:01.308+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:16:01.309+0300	INFO	config file changed, reloading...	{"source": "config"}
+2021-06-25T13:16:01.310+0300	INFO	binding: minio, stopped successfully	{"source": "minio"}
+2021-06-25T13:16:01.310+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000296b08), RequestCanceled: request context canceled
+caused by: context canceled	{"source": "minio"}
+2021-06-25T13:16:01.310+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0002965c8), RequestCanceled: request context canceled
+caused by: context canceled	{"source": "minio"}
+2021-06-25T13:16:01.310+0300	INFO	binding: s3 target: initialized successfully	{"source": "s3"}
+2021-06-25T13:16:01.311+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:16:01.311+0300	INFO	binding: s3, source: , initialized successfully	{"source": "s3"}
+2021-06-25T13:16:01.311+0300	INFO	binding: s3, initialized successfully	{"source": "s3"}
+2021-06-25T13:16:01.311+0300	INFO	binding: s3, started successfully	{"source": "s3"}
+2021-06-25T13:16:01.311+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000c02268), RequestCanceled: request context canceled
+caused by: context canceled	{"source": "minio"}
+2021-06-25T13:16:03.508+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-06-25T13:16:21.711+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-06-25T13:16:21.726+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:16:21.728+0300	INFO	binding: s3 target: initialized successfully	{"source": "s3"}
+2021-06-25T13:16:21.729+0300	INFO	binding: s3, source: , initialized successfully	{"source": "s3"}
+2021-06-25T13:16:21.729+0300	INFO	binding: s3, initialized successfully	{"source": "s3"}
+2021-06-25T13:16:21.729+0300	INFO	binding: s3, started successfully	{"source": "s3"}
+2021-06-25T13:16:25.346+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078b168), AccessDenied: Access Denied
+	status code: 403, request id: F4EFDZFVVA9QXJXM, host id: g2gT9gwmJfhhw44O63YtvGu4F+FWv8u/vbTrkVvsgxopSGpUFZQ3NUkNAJhXpkv0C+EOagtQUaw=	{"source": "s3"}
+2021-06-25T13:16:25.346+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107888), AccessDenied: Access Denied
+	status code: 403, request id: F4EEB6VVDCR9AKW1, host id: JcGCGq07ZC7/X7JQIAiQG2hRtUnsM36Smupg1BbP/UYSPfT60yzyAb7R61/qz6ttYx5a4gwu+0s=	{"source": "s3"}
+2021-06-25T13:16:25.501+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107d08), AccessDenied: Access Denied
+	status code: 403, request id: F4EBWXA1Y66NW5VK, host id: o/whJa7YkyuKRTJrQlZ+5gVRJCcPcuvvt65gFATu0DIMcgdNLR1xg87hE3DoBG+KSxwSmjD1HsA=	{"source": "s3"}
+2021-06-25T13:16:25.636+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes started 	{"source": "s3"}
+2021-06-25T13:16:25.676+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes started 	{"source": "s3"}
+2021-06-25T13:16:25.721+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes started 	{"source": "s3"}
+2021-06-25T13:16:25.794+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: PWC74H98Z24JGJ20, host id: IZYIVy0RU209rTGlUR2EfWipo5nPbAYhfr8jvXlgxhmGJh9LzlxmZAO10m+GPmQAL8FiuC9dvBI=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:25.794+0300	INFO	sending file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:25.861+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: PWC41XXZB2Z33K78, host id: mNpHN/BMd2zlaPCotRTt35jKOBAwRN5aEzc94lrZB92TxQtCywVXQ2FsxucrG3Po2eawiKNAW+E=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:25.861+0300	INFO	sending file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:25.892+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: PWCAPF3H0H7ZZ1XX, host id: oiEXkqoMcWsjfu34m87zUT+2keZCGofi8NOSihJI6c7HLAnZwwpRZ3UrvqDljk3ap4WS2/nwul8=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:25.892+0300	INFO	sending file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:26.363+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.366+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.512+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.548+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: PWC5ZDJE7KZKVPJS, host id: vB9/pDlbT3RjhMXbvHS//k3n6WE4Y5DkUiB0WsLaXSdwGrVsBMID/ywJVBHJFE3vWdpRbAj0Fuc=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:26.548+0300	INFO	sending file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:26.608+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: PWCCDNSDQD5SKR41, host id: BR/LDDxvYFEOwsYH3bJAy2vYFqTxjCevRMteAzpBUa4qmikmljbf6rOjkYEqFXK6LsbJwhLpaD4=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:26.608+0300	INFO	sending file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:26.693+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: PWC0M0AJDF79F57E, host id: wOHUYHxKAKgLfWA6OmnqaBTLUToa+pbmzvbWXC/wYMiI8MBXPQ4TITlm5V4u0tFVTi9gCqn9ofU=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:26.694+0300	INFO	sending file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:26.771+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.815+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.850+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes started 	{"source": "s3"}
+2021-06-25T13:16:26.949+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 0H5J7GQ1494QGM86, host id: DK2ooI+7EdXInYqBmjXEiOzlI01p6rB+4iFcA3bD1Xj0qSl27gB+wJNgB1qY0Xvk5rbvf9H0XCo=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:26.949+0300	INFO	sending file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:26.977+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: 0H5Y5Q0158F6F6MG, host id: le8Mu7KgQhg1jok8OPHBCJke8SG0BYn6hrclsNbjU2J1czzHL2RvxrFFADUBoH4BIls5wNVIQ8A=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:26.977+0300	INFO	sending file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:27.002+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:27.008+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 0H5H8WDQVN2D980B, host id: hpj701NqRILio4kswbdaCeIFTaJSNWC2nWxgujremzJWOWuLU+WLU0UBXnmXqfiY/M4Tvo+n9IA=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:27.008+0300	INFO	sending file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:27.043+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078ba68), size: 824635022992 bytes started 	{"source": "s3"}
+2021-06-25T13:16:27.098+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078a868), AccessDenied: Access Denied
+	status code: 403, request id: 0H5VGES8SN7GK9RG, host id: Pkhu150TgIjU1g9r4hkPzs1wCTZpRgdB/dLtLMvCm//6EK2bV/+Qtuq4inTU4WeuebdGF0iFyg0=	{"source": "s3"}
+2021-06-25T13:16:27.244+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 0H5RVE6HEFPWJME6, host id: sdbctiVzNXBHCjodXBTpAH/f4Pwh5ji4mpAhnVzcotx7mxOFtM5RjtPI/DdQGSoc3HamlsiG2Mw=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:27.244+0300	INFO	sending file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:27.590+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: 0H5GTAC5WVKHREJQ, host id: l4jH0eikSgYQYjOY5rNyZj/+cwi0mFpv5ioivTnuucRKhcFHkLy8yXaoL5FDL3YoTDD78X4csus=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:27.590+0300	INFO	sending file: bucket2/%!s(*string=0xc00078ba68), size: 824635022992 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:28.125+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0004fb708), AccessDenied: Access Denied
+	status code: 403, request id: ZJ4VJ7T38GA1G8ZC, host id: OSus+T+2e1qyn29gVTL3w2AXhRmtYBDY2W8DZdtj6txTdWHlNqZkX4YPAdtqBQCESxiPeuWabaw=	{"source": "s3"}
+2021-06-25T13:16:28.292+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107888), AccessDenied: Access Denied
+	status code: 403, request id: ZJ4JSZG9VHX418GE, host id: bmQKFdNtd7orFuXKTSF9i0JOeGKDe2xFoPD6mzrRKuLHzwqzWyIEYK5VmSJ9nPZqGI/FMeigz4o=	{"source": "s3"}
+2021-06-25T13:16:28.392+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3dc8), size: 824639358024 bytes started 	{"source": "s3"}
+2021-06-25T13:16:28.461+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107d08), AccessDenied: Access Denied
+	status code: 403, request id: ZJ4Y3SMMRMRNW66Q, host id: LBcMkv5msqpixGeahMYG0ljxQj/+HXpYzyxf7OeLlVen8TWOZXSF+LGkTNJv6ikziAnK3R/SAtU=	{"source": "s3"}
+2021-06-25T13:16:28.544+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b34c8), size: 824639357624 bytes started 	{"source": "s3"}
+2021-06-25T13:16:28.715+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: ZJ4X3J51DEE989DX, host id: TpwktawkrVirhyRgO3QfsWOIJu3HZBIz3+WnLFhezOdu/JKaF8JAh56nT28b+vM9fmlO0vHE9xI=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:28.715+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b34c8), size: 824639357624 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:28.724+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: ZJ4SF3DF87JB5S5B, host id: I6KR0dn5v1CfQhIRLtB5Mqe1X9QYfrcdzBfIflMle9ksEka8npNAdqwyuOKFVLa1Y4bxS4M6Lgg=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:28.725+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3dc8), size: 824639358024 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:28.921+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000787c48), AccessDenied: Access Denied
+	status code: 403, request id: 4JVHB63FKGSMP0Z1, host id: 43lLp7fhMD5pNeONPPZ+ZgwkXrk6wiWvTzi4y3kBD5XV2xEK69vzjD8qSsvWmOTaOmFygUqEtS0=	{"source": "s3"}
+2021-06-25T13:16:29.009+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.077+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fa508), size: 824639358272 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.089+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fbc48), size: 824639359112 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.159+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVHYD93504Y6D6H, host id: GrLXScrRCPUJsxp846N9+8k4UBGhGnolUX6930clZoFCgb6rf1Fzg6CgYRENu8HtWSZU6ymXPKk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.159+0300	INFO	sending file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.240+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVV09BRXB5MQY8Z, host id: 7as+Ic67Qp1+uHyDHsgVN8eTBfkcc/UUyST3mKdras/Isieq3KnHS4wE2rfTrT5fFveL/CR/OMk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.240+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fa508), size: 824639358272 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.301+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVQW49PSBMBEPGJ, host id: IdgPqvz13SI8PgXVOO9nhTqcybkiRuuePbPVrtlIjD694Ywkg/4XS44gUjIkPshxSjY+YfR16ys=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.302+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fbc48), size: 824639359112 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.381+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fb288), size: 824639358776 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.445+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.548+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.554+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVNQY632YDPP8XK, host id: twnHyrr6N01JJQpDjr7huZoqY/xUH4/GA6/SBxlqlEqSuJmpTB+Io9iNoUujx93HB7RVA+qAPYM=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.554+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fb288), size: 824639358776 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.606+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.635+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVXVCN2V3PSA798, host id: vk5ff3YIZ8GUKzBB8XZ+rLhJ1gnMZ0eNcDe7vy87YCJtQB0S+dBQ53K2MxDzQG7hbFgwFJliT7Y=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.635+0300	INFO	sending file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.725+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVY5FFW4524RGS1, host id: q+1d1pRrz0mKPi3IfspuqBTctrHLND3EKfuhUVWCtzcENmNiN5s8BYrEKGdtlzl80splQwiI6Nk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.725+0300	INFO	sending file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.762+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4JVYGCT4CQ5WZ244, host id: wG928Y3yOMh2myLHGGXEOg6QijFRCBw3sPux8TN9A/Vs14+6URcq22WGRgA1TiqmL+E56LnqxHA=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:29.762+0300	INFO	sending file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:29.866+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3048), size: 824639357440 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.888+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3948), size: 824639357824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:29.970+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fa988), size: 824639358440 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.051+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T5BA14RKEEWMKQJ, host id: 5En/2N2K2XcVKA64Luq5Fu+rtgUPFBHULMrFn2Tqf8JUHDrWVTNl/Inc1FMYsKGU+V5LfAeowk8=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.051+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3048), size: 824639357440 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.052+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T50N6DC9M5RG50D, host id: nIugC5dOfmQyoqjPLbSsCbMVSRQMhF65UmPa6ITIU6JvD/FaAz7/cbWI8Tt28kc76Ib5cn85um4=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.052+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3948), size: 824639357824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.159+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T5B3P4DJV4J6180, host id: X4gS5pU0wxGSorNcVGpCx0Wuvr5oKqUQzJMzdru7MFSTgK7u/+P7hTS22G0OqqGOodB4xm17uCI=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.160+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fa988), size: 824639358440 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.328+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0007b2208), AccessDenied: Access Denied
+	status code: 403, request id: 4T51ACJ01ZEVE9CQ, host id: fQr88wxQGfVsd/F82YzjzL64xIhMe9B0MuaVgI7OkvN8pLndE60cY2mUtVzPJMvaKOkzriepl1M=	{"source": "s3"}
+2021-06-25T13:16:30.365+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.372+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.504+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b2748), size: 824639357088 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.517+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.548+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T51JS0GKPS66FVN, host id: s30KLNwj96XLTM89DZCLz6zsjbvzrsXqq89A6eLCaBeeEUGXoXBMJSnf9Z3jl4yTiCEz4AxxGRM=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.549+0300	INFO	sending file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.626+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T5FCYCWV2VTXZBA, host id: Hq9eIQNFYuv8zsaWA+ReOv+TiK1s2z6HgaxV/Em06ca646N8n1axGUIOtgetMRLaKRwz5ZzS1oM=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.627+0300	INFO	sending file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.638+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bc388), size: 824639359280 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.684+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T59TPN7S3KF5W0Z, host id: Zd0AWpP58fQzYsrI9GSkBxlRf2bzW3zlRZ1TIvcL/LjE40Fsz/1uXQwux2cboV/kkHiahwLvwyk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.684+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b2748), size: 824639357088 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.711+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b2bc8), size: 824639357256 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.761+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 4T5470V7XY6HA7P0, host id: YsRlmtPSWBE6WOmDiWt0jXpMBds66tnPw7YJUnqgups/oMFduCpFrTJkswQeZ9tjucVCHKUGkzc=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.762+0300	INFO	sending file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:30.777+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078b168), AccessDenied: Access Denied
+	status code: 403, request id: 4T55YM8RXZ81YKCQ, host id: rJ02zjLojtr5IilOS6LcgYWV3oPOJKfB6LRBSxhD8VBliIl5EUln3szSbZBTgqJjjeEQDJpECVY=	{"source": "s3"}
+2021-06-25T13:16:30.843+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes started 	{"source": "s3"}
+2021-06-25T13:16:30.889+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: SV9RN47V3AVVB1J8, host id: h8/GhRYC2u/mS9wmUxDkXlaj/KrsVHQqXs9opX3UYXgETjUAewNL00e23tcL/74x5LNVptcbSV0=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:30.890+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b2bc8), size: 824639357256 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:31.047+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes started 	{"source": "s3"}
+2021-06-25T13:16:31.076+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes started 	{"source": "s3"}
+2021-06-25T13:16:31.132+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: SV9NECJ0Q0M42DZP, host id: MxrpvEXdAHk9wuN1sh+yrKPvFr36BnOegx8BVovpuorROnsZw1X0loGvqp6NOcAKNJW9M7RY+OQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:31.132+0300	INFO	sending file: bucket2/%!s(*string=0xc0000bc388), size: 824639359280 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:31.139+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: SV9MVMCRMBY0FG9T, host id: PPA2DaUqsJ5pEcjJHYHILcvBDBTWe9DUzQlgU+oeMKl0mJQeiTQ5Mw7k0XbbpGuNBb8bnbURX5o=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:31.139+0300	INFO	sending file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:31.267+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: SV9JKB6J4ZYPKD3M, host id: tkF37EhYdY366Ed8M5e12iloQ0GVJVDySYUxqmwcu3cRFIeVa8+sipZUa4BS8xIuvfJ2pGwVhrk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:31.267+0300	INFO	sending file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:31.277+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078a868), AccessDenied: Access Denied
+	status code: 403, request id: SV9HH06KFKPQMHDX, host id: HOEV7gTYUWStzSixtQnCnQLk7bG/8N4JxvUru2kfXrYbM0dJiIht3N/1SI6PQOuQGQ+VSUp7o3Y=	{"source": "s3"}
+2021-06-25T13:16:31.301+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: SV9GW12CNVKMNJXQ, host id: cCkbRcYzKFRnqUK+tgkIPcoWz/6WltvsbnLshT1iIFV4T5IyYgGQtTqJ6u4dvfExIeHEJmiBCHw=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:31.302+0300	INFO	sending file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:31.304+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0004fae08), AccessDenied: Access Denied
+	status code: 403, request id: SV9NNX1KP4SNRTWW, host id: qcl0pbEjJpAmPXgWWNQp04C8rVLzpSSzgPohNHriMEBHVHSuAxaT3snyX9lBg5b3Y2oIM7WPtLE=	{"source": "s3"}
+2021-06-25T13:16:31.926+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078ba68), size: 824635022992 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.309+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bd7c8), size: 824636520656 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.461+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bd168), size: 824636520488 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.461+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3048), size: 824639357440 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.604+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: J1D4XTQDQVQVVBR1, host id: nDpGKTFura15ciefBlBIYwrr96RNjAonlde7WjfLwIqMQedbaCWso21MVxgBW6/rykYH0Ow/Jvc=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:32.604+0300	INFO	sending file: bucket2/%!s(*string=0xc00078ba68), size: 824635022992 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:32.617+0300	INFO	sending file file: bucket2/%!s(*string=0xc0010af708), size: 824636520152 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.748+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: J1D98G85FM0T6MFB, host id: cVW8YVAy6jkyibn+X3MRHhYqg/NwwYcgiHWRYbo1kuowyUDNhyijVLkJqzZ5pVBjUMkHAI2rjoM=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:32.748+0300	INFO	sending file: bucket2/%!s(*string=0xc0000bd7c8), size: 824636520656 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:32.771+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: J1D5P779WQVNDJ44, host id: zUdbxFLDVxzGWKHtr5LuJBv0Ihwc6xyclCGzvpzlijFiBSuVeur4gSL4PCSngCovH30fsjJKTgw=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:32.771+0300	INFO	sending file: bucket2/%!s(*string=0xc0000bd168), size: 824636520488 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:32.827+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 5BGPW9YJ0HF13XN6, host id: Z0//Q2CW8Jb2cR1PWHMWe6gNsqmPHnmYQvelUVSSlfxfttnDYdzcUR9EljXkWVE4kVO1potsHMU=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:32.827+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3048), size: 824639357440 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:32.879+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0004fbb88), AccessDenied: Access Denied
+	status code: 403, request id: 5BGP92SBXTPPH4XD, host id: TvktoWLOnpffDZwhmowpKYYpVRfoXCyO3CfDohnPVNBGFTEYS9yIW+2pTqKpHUs3wfi8InrccZs=	{"source": "s3"}
+2021-06-25T13:16:32.897+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000787c48), AccessDenied: Access Denied
+	status code: 403, request id: 5BGSYS5DZ423TVBZ, host id: iWmIwnZZ7oIxk+GiFeJfAvVojDszevu8TpK2OXLbOCM2tO+JMTZWIp6jsaNQxT2jOhvwNpR9Dk4=	{"source": "s3"}
+2021-06-25T13:16:32.952+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5BGSVCY0HPJFSPR0, host id: 1E0e7fMcXs0W51OZL+3Tqtzz/BEu6cnaJzpFd8JW/XLCVOpVXQGUhs1eL1ER0YaByUpWa9TQF8U=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:32.952+0300	INFO	sending file: bucket2/%!s(*string=0xc0010af708), size: 824636520152 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:32.957+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes started 	{"source": "s3"}
+2021-06-25T13:16:32.978+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078b168), AccessDenied: Access Denied
+	status code: 403, request id: 5BGP0FS3BK860A5M, host id: h8DEdWljTXLSVz6STN5kux5GGuKfTYI6+Qlp+OzRfiXaWL/cjYB95jw3zW4ZN0M+x5d6tH2nMY4=	{"source": "s3"}
+2021-06-25T13:16:33.047+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0007b2208), AccessDenied: Access Denied
+	status code: 403, request id: 5BGVWTP3DZ9RBWDQ, host id: PeJF4lsBlfYOLSKFLazkQm0hNeKfXrhJlICwZ+5VxhkrOUHoSjahrQr90y36QH4wcRenJqWHCgQ=	{"source": "s3"}
+2021-06-25T13:16:33.053+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fa508), size: 824639358272 bytes started 	{"source": "s3"}
+2021-06-25T13:16:33.099+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0001068c8), AccessDenied: Access Denied
+	status code: 403, request id: 5BGHCP7E5M4AV7HC, host id: GaxX2XuebWcKNcg0rxyQX5iVBdPVaXcW50mjlb6r5+FEQdJUfOVuLflZD/efsQUuO4xIoURHkk0=	{"source": "s3"}
+2021-06-25T13:16:33.123+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5BGZY741D88555A6, host id: Ou/e/QUgFDCdVBIYtWxafEM+quPwmSyqlszZ0Qt3znsTGH1rj8waQyKBbWnaj4qQeC/Wk95jfjk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:33.123+0300	INFO	sending file: bucket2/%!s(*string=0xc000812328), size: 824635020832 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:33.209+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5BGS9PM8ZQV2J0JP, host id: n/ZEfMPSyDQrOSH+7F+Dqz7qVglMI/UipFMLYa0F3RWRAa6G7muSRBFQ9vFAAvu0efGOZzQ/CwY=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:33.210+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fa508), size: 824639358272 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:33.249+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107888), AccessDenied: Access Denied
+	status code: 403, request id: 5BGMESMKKHC507HF, host id: CssG+zf4ggp8j+cY+BvG0eOkeu3P6iR3iaerdXAgEqASoV/VRU5R7BgyHmxXQ7PFOy/NVCkpzsM=	{"source": "s3"}
+2021-06-25T13:16:33.362+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0004fae08), AccessDenied: Access Denied
+	status code: 403, request id: 5BGM30BS1RXPPSB8, host id: Z4DlQW6Uc3Io/7sXsspEEGYIoiMFtnFI0QESFqIktkCtT6j29j5OUrQwDI8T+eIuGpIZtXQOfow=	{"source": "s3"}
+2021-06-25T13:16:33.437+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fbc48), size: 824639359112 bytes started 	{"source": "s3"}
+2021-06-25T13:16:33.650+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 5BGJ9CSPJEX7AYDC, host id: 8DUMLUfY2BCnJ9ez2DF5ttXuI4LWdkFY3IRC+nCsGMvHIAHrHF5XomRZ/yz4EAx9bo1H+JXJcrQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:33.650+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fbc48), size: 824639359112 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:33.813+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0010aee08), AccessDenied: Access Denied
+	status code: 403, request id: 40VCNWAZFA3EAMSB, host id: FWXrZwaFDVp3itnXX/y4z+avGxsmZFaLVl5dlUdWYHrX3KBSch8XH3dOwMYWYQZsi40YeEmWEmY=	{"source": "s3"}
+2021-06-25T13:16:33.978+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.119+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fa1a8), size: 824636036216 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.146+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 40VDS4S0S7J2MPC1, host id: GmH4HEraGGYh5E3iNb4/Ok/F59DoTaeGl0HtvoeX7X2LrZ6pcqpusv5sxwLg8KcxmDOOyrUy0wQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.146+0300	INFO	sending file file: bucket2/%!s(*string=0xc000106e08), size: 824636521832 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.146+0300	INFO	sending file: bucket2/%!s(*string=0xc00078ace8), size: 824635022488 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.282+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 40VAMQ25HA84MZRM, host id: wVZ7Tp/SrtOV/0O3OsxNMv/ugtUpdyPmvgZVhTjLw4L5W9lp0VDQ7WWGeOaDmOFvO3b+7DpPq5c=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.282+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fa1a8), size: 824636036216 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.310+0300	INFO	sending file file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.373+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 40V40K2530DC8XQA, host id: OtV40EwdIkNUvP506rVz7B7DfSwTYUnQGvJG8xhFB5tLsD1MJcZTkkZ672JQrHf+Ro/IDOcsfco=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.373+0300	INFO	sending file: bucket2/%!s(*string=0xc000106e08), size: 824636521832 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.452+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0007b2b08), AccessDenied: Access Denied
+	status code: 403, request id: 40V7ZFP4W45VK18R, host id: 3VHkfXkEdzIJS/og5q7kC7SNy6RnUFwY+AyUpdfsJkGgOi+1wdWw/bDIGm3UfCiwSPO9UhBOhDA=	{"source": "s3"}
+2021-06-25T13:16:34.511+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 40V6J2Q98HWXEE5Y, host id: YXiNPGdbqClrT6zmHnC4foun7xPfSaWxbdO1F+HzebauJ63rAo4FgGze6rvuVJm8Db7HAtdjFtg=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.511+0300	INFO	sending file: bucket2/%!s(*string=0xc000812c28), size: 824635021280 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.513+0300	INFO	sending file file: bucket2/%!s(*string=0xc0005d23e8), size: 824636036632 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.611+0300	INFO	sending file file: bucket2/%!s(*string=0xc000648c28), size: 824636520992 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.664+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000649768), AccessDenied: Access Denied
+	status code: 403, request id: 40V1FJ98KKHMAHMJ, host id: X6/Gkrlh3WKGOAcDWa0IMf2whI2CLtO0BcwcOeiJ7q7xcnP9E32cjU8/swgkuQITuOg3ys0gn5k=	{"source": "s3"}
+2021-06-25T13:16:34.667+0300	INFO	sending file file: bucket2/%!s(*string=0xc00051ec88), size: 824636034784 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.686+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3dc8), size: 824639358024 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.728+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 40VCEG0M22FYR1CS, host id: h4odKw2QUVrJUXYDfgo8nRSAx6YiF05dVkbFDvEV9pzuHna4Co0abEx2YkGzi0tx6yBavzfpHNk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.728+0300	INFO	sending file: bucket2/%!s(*string=0xc0005d23e8), size: 824636036632 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.777+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 40V1YAS3KKBG3GSF, host id: C1zZw9MMAwSkTsnPcoG1Z0/VPXRlApeR12Jrmqds0Lr2XdaWHw61I6cE7ipCbs57+9e9Htek1b4=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.777+0300	INFO	sending file: bucket2/%!s(*string=0xc000648c28), size: 824636520992 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.819+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: T0W31CA7F6G4V3H0, host id: dyiCi0+R4XKtufEZu7iud14btSXCD7F6Yldm2RnbrChNshzzr4ivH7+PEp+mNQd0tQqfo33i2DY=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.819+0300	INFO	sending file: bucket2/%!s(*string=0xc00051ec88), size: 824636034784 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.881+0300	INFO	sending file file: bucket2/%!s(*string=0xc0002bb828), size: 824636034200 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.913+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: T0WARDPX271DKQMQ, host id: lyeLHWrx99Nw65yFm7oXDjK7NN0THBb/26pXIbur4g2mz/RgmUDjKFNwjSddUCVs9qtLVIpXBks=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:34.913+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3dc8), size: 824639358024 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:34.933+0300	INFO	sending file file: bucket2/%!s(*string=0xc00051e748), size: 824636034616 bytes started 	{"source": "s3"}
+2021-06-25T13:16:34.968+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0002ba808), AccessDenied: Access Denied
+	status code: 403, request id: T0W1V29KJ4Q0RMDE, host id: ZqsLw6ut95Laitg6Jm6Ys4ndnc5PoyL04hes+7uGYAXr9V9HRC2+D0T5+V89PV1K3x/zTcOkr0M=	{"source": "s3"}
+2021-06-25T13:16:35.019+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.034+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: T0W1ZZ451Z3WY18Q, host id: eNEw271pATMlLmJRI8sVne1eG7pDN4eXFTPaCfcS16qGTzYIgDzpbQQDQXc1qfuli/wgawQbYBE=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.035+0300	INFO	sending file: bucket2/%!s(*string=0xc0002bb828), size: 824636034200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.082+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: T0WBFMJBW5AWJDJ4, host id: N/szBiRvCidJaMFiHwtjfg3slZNVl85v8885pIdsyY5P69NqBS/oRqdqwIviXg4eoFj3QP40fLA=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.082+0300	INFO	sending file: bucket2/%!s(*string=0xc00051e748), size: 824636034616 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.091+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fb288), size: 824639358776 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.257+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: T0W0E4M24PQHGD9Q, host id: eQbALbiVa5bKzpYmRhUVJKguOGWcaojHsFNRoQuUte3J2ggdzd/tIUGqYBzvGNXvN+LYnTR8hOo=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.257+0300	INFO	sending file: bucket2/%!s(*string=0xc0008139a8), size: 824635021816 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.301+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: T0WFYXM0NASBVS32, host id: VfBJrzYhpdC3mBv+6+k4HQFu1Oafif7W+AnGpF3XL9Y2djbp++/dOUNZQTd/P4XHRcopu6JIvCA=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.301+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fb288), size: 824639358776 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.335+0300	INFO	sending file file: bucket2/%!s(*string=0xc00051f108), size: 824636034952 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.453+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0010ae928), AccessDenied: Access Denied
+	status code: 403, request id: T0WCDSW7RG6D6DF0, host id: aSHrKxUNGWwNoJXXe+Izb9ApY8cu71o7VZyDnZKswee4tkNd8wJAL1x3aM/YOt38aS+QNFFLjlU=	{"source": "s3"}
+2021-06-25T13:16:35.485+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0004fb708), AccessDenied: Access Denied
+	status code: 403, request id: T0WBAPY924CSM0WR, host id: hlPzjp0CGzfaFbgWLPLn5p12aXrp7wMhSuhmaLunpNb+934LDvjp4BBtxSZPvueLwdRb4qPp5Ws=	{"source": "s3"}
+2021-06-25T13:16:35.581+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: T0WBBFY3GZ85HYV4, host id: AKqWlRdxIQNdZhWOkzqDgz5TBl+lGhETGG/vpyPhdH259bWSrhTxicVZL/4OQ4UMjYyWXsaAjtc=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.581+0300	INFO	sending file: bucket2/%!s(*string=0xc00051f108), size: 824636034952 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.621+0300	INFO	sending file file: bucket2/%!s(*string=0xc0002bb3a8), size: 824636033984 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.646+0300	INFO	sending file file: bucket2/%!s(*string=0xc00051f588), size: 824636035136 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.757+0300	INFO	sending file file: bucket2/%!s(*string=0xc0010afb88), size: 824636520320 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.791+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: T0WBWMVPZXDV8X2Q, host id: viSaO1BHRvfm+m7hlquksnfXmPxEQd/LQ9TfBXbUQVesUJIjlHG2/1mTXie4B6GC/Pm1YVvnk+U=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.791+0300	INFO	sending file: bucket2/%!s(*string=0xc0002bb3a8), size: 824636033984 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.822+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: CR2FFQXK3CFE4A2V, host id: x2ukDmMuXca7SvULqbIfcwCaDKztKf8ntosx1ZTyRLAnR2paenT3/mdE+qgA+kqAsTVXV3AprIs=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.822+0300	INFO	sending file: bucket2/%!s(*string=0xc00051f588), size: 824636035136 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.949+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: CR24Y4AK876WVPAG, host id: 8SydEyt4/JKUbAdxPMr97RgqzZf3avu5B/z4OGr/D8rygwN4AQnnU8Mm4gIan1/opkfaXzryU8U=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:35.949+0300	INFO	sending file: bucket2/%!s(*string=0xc0010afb88), size: 824636520320 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:35.965+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bdd08), size: 824636520824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:35.999+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.186+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: CR22HQJ8MME361PR, host id: mOZ+aJuDzn9+Bzd8DLBTq9jOaaA1zLIxUrGcQtg7+5ryhoujTfUQP6vrAjVncYlcS8li7Z6mvdc=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:36.186+0300	INFO	sending file: bucket2/%!s(*string=0xc0000bdd08), size: 824636520824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:36.239+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: CR22EWQ4TSG9JJ6J, host id: Vov/LWCcFD+WLiBTER/2pQ5HhVdEB7t0GuM90GSlahYqNflAxo3RcxzMbDJdVDil4804i2WoBqQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:36.239+0300	INFO	sending file: bucket2/%!s(*string=0xc00078b5e8), size: 824635022824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:36.269+0300	INFO	sending file file: bucket2/%!s(*string=0xc0005d2868), size: 824636036816 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.276+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.348+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc0002bad48), AccessDenied: Access Denied
+	status code: 403, request id: CR2D4JHHMSJ2M5FX, host id: dg0JbGSEE+BegQ2PDbpTJFeCB3+9BAkQzlrEQzGgGNQLfBxCNzcFBdDt1wVlh6njV97cCPmz5vk=	{"source": "s3"}
+2021-06-25T13:16:36.400+0300	INFO	sending file file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.457+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: CR205MH5AVQKND7J, host id: kO7WLvBwJWKFOFvEVPWfdES8FJjL28tB4qFGuez+oi1mfFIa9Fy0dWAE0UzNid2gjzxJBmbBu/c=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:36.458+0300	INFO	sending file: bucket2/%!s(*string=0xc000813528), size: 824635021648 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:36.529+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b2bc8), size: 824639357256 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.607+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: CR23QAK757AJNBM2, host id: EMiLlgvFfCDqCkRVLObLspzr27XtxSZsxczZmLd28/zua6kfjEhyWnX/UZvJLG9VzblcCQdnndY=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:36.607+0300	INFO	sending file: bucket2/%!s(*string=0xc00078a3e8), size: 824635022152 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:36.613+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b3948), size: 824639357824 bytes started 	{"source": "s3"}
+2021-06-25T13:16:36.766+0300	INFO	sending file file: bucket2/%!s(*string=0xc0002bbd08), size: 824636034400 bytes started 	{"source": "s3"}
+2021-06-25T13:16:37.018+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MEPWYN463CG148E, host id: xrMDXmTMfWetg7KdDK3Agrzhde82C0uJ9AUpu/jFOZ3be2Aw7WWysykOGUQ2ZAQkUIAQz6/VSZY=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.018+0300	INFO	sending file: bucket2/%!s(*string=0xc0005d2868), size: 824636036816 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.032+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MEMBFP039TBHXGP, host id: 8eRbBo/N0PjlJa1mJjuhRz/JPEVgOMrVBUi/QOW1wSBFCwqaFlghWSLm2JgTKDqb9cIZ0CjSv34=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.032+0300	INFO	sending file: bucket2/%!s(*string=0xc0002bbd08), size: 824636034400 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.162+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MENH5Z0XV3P7VWD, host id: BSmK7Bqhg9DMusooK5i5Y+1iCi/GwXBRco9oIUHraXUlaVfkvoRdsTgP6wI3pEfQIn2eMIo+UMQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.163+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b3948), size: 824639357824 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.181+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MEQE4KEQXXQK8YJ, host id: /yRCq9YdDMQCxVmE2oa8AKhix70PGqOBun8y65rBtQl+N3c9kBYvs2xZr8spz13gMGdNL6LOKBs=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.181+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b2bc8), size: 824639357256 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.317+0300	INFO	sending file file: bucket2/%!s(*string=0xc0010af288), size: 824636519984 bytes started 	{"source": "s3"}
+2021-06-25T13:16:37.339+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b34c8), size: 824639357624 bytes started 	{"source": "s3"}
+2021-06-25T13:16:37.475+0300	INFO	sending file file: bucket2/%!s(*string=0xc0004fa988), size: 824639358440 bytes started 	{"source": "s3"}
+2021-06-25T13:16:37.559+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MENBH1QWVHRV5M0, host id: nYTMvqmwiIIrM8PyLaipCVMxOgf1cGnaora5GDo6gE8P7iUH1dlT2/5odqcXLlJMYNtwK+j6yVs=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.560+0300	INFO	sending file: bucket2/%!s(*string=0xc0010af288), size: 824636519984 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.563+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MEH481784W55W2Y, host id: aBv8hEXPRe4Lza5KkCoMV65xVK3C4gc/CwNsvgZdISLJfFu6meFb1INOoi3SheFY3p9smFrxico=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.563+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b34c8), size: 824639357624 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.647+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: 3MES4JYC5YNXQXK8, host id: Ylcm5z2J1RRQIPZOSV+UnBR5QLKtciP10UYg1cCj28Abx1qb5YbJWJ0mozmbExv7TnyjLgsHl6M=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:37.648+0300	INFO	sending file: bucket2/%!s(*string=0xc0004fa988), size: 824639358440 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:37.707+0300	INFO	sending file file: bucket2/%!s(*string=0xc0001073a8), size: 824636522000 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.131+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.215+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: H8FKCGXRDM4DBQYF, host id: 5H7oh+zOAFT9eZuIAmadN6QhHuRk572D7UUAbOcYLcZCquhQmGrXu7AGUJ3yK4RqYkOKBZDkhUs=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.216+0300	INFO	sending file: bucket2/%!s(*string=0xc0001073a8), size: 824636522000 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.282+0300	INFO	sending file file: bucket2/%!s(*string=0xc0007b2748), size: 824639357088 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.373+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: H8FHBYXGR6P1YK4T, host id: mRpAx2bvuONKqJzil07Py6d7zhbQPKpmPqOZYSzrK4Ltl9XF6RStqJqBFb4SKBYHjVsgeQNIinw=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.373+0300	INFO	sending file: bucket2/%!s(*string=0xc0008127a8), size: 824635021016 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.444+0300	INFO	sending file file: bucket2/%!s(*string=0xc00051fc48), size: 824636035624 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.479+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: H8FSKKZF60NGY4A7, host id: nBvxRW+wTxlRgPc3qyC+Gwi9sn0kkwjv7Be0ucSxyUEN9gm7WB9umCs7CkUFdpv488iAnSe3lBw=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.479+0300	INFO	sending file: bucket2/%!s(*string=0xc0007b2748), size: 824639357088 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.527+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc000107d08), AccessDenied: Access Denied
+	status code: 403, request id: H8FRDB4BXGNF88TE, host id: gIupXAijdWknEjVga++gMkRfxbQKfdbFUBeCTq//NIAK/epp9ggTq6TxAwY9oJA7lldITzb6kIo=	{"source": "s3"}
+2021-06-25T13:16:38.618+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: H8FXVPPYDATQK6XJ, host id: L9VT4fcjPn0GjZ2qU4EJ31Q/7JL0RA5rUODcwzwh5de2NwjyNhzN+5t0OzBXtW/OupBqmG7HkV4=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.618+0300	INFO	sending file: bucket2/%!s(*string=0xc00051fc48), size: 824636035624 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.634+0300	INFO	sending file file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.780+0300	INFO	sending file file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.785+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: H8FMBKSKC38JG0AT, host id: l0qDZywebaPM1s87H2pT5P7XrdZz/PgsC1eDM7yoFodlJIpPuo+PcexMMqCGG0S3IqbPiskBsLM=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.786+0300	INFO	sending file: bucket2/%!s(*string=0xc0008130a8), size: 824635021464 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.810+0300	INFO	sending file file: bucket2/%!s(*string=0xc0006492e8), size: 824636521160 bytes started 	{"source": "s3"}
+2021-06-25T13:16:38.934+0300	ERROR	error during creating file requests bucket2/%!s(*string=0xc00078a868), AccessDenied: Access Denied
+	status code: 403, request id: DG3PZEKX9KYFTE88, host id: UAM+3+LI2cKzRvxDypa0dYfVWvbgXR1Dkl4pwchMLJOXCOMfUsXKQ2nLAr1yMYoXNOvDeaLlZVo=	{"source": "s3"}
+2021-06-25T13:16:38.939+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: DG3VQNKJ4Q3X39KW, host id: jInPmpe65GJtw01Oilh1a8FMh+6j05FduHyTQBkTePnro8/XjS8HlkW3k3hSF8BawKVCmCa+msk=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.940+0300	INFO	sending file: bucket2/%!s(*string=0xc000813e28), size: 824635021984 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:38.985+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: DG3JX729FV2E6SY5, host id: BXBmUWe5Zbk3N2tbT7BEKWXsIJbSfFGVUtgD+MHeKOIlR3fYSNBuKCa54DhW0Os5SU9BopErxOU=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:38.985+0300	INFO	sending file: bucket2/%!s(*string=0xc0006492e8), size: 824636521160 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:39.121+0300	INFO	sending file file: bucket2/%!s(*string=0xc0000bc388), size: 824639359280 bytes started 	{"source": "s3"}
+2021-06-25T13:16:39.255+0300	INFO	sending file file: bucket2/%!s(*string=0xc000649c48), size: 824636521496 bytes started 	{"source": "s3"}
+2021-06-25T13:16:39.457+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: DG3XT6HWX0GTXRHJ, host id: RAsWzyMo3dx+1OGgdsOojWgu9DrbxSkmszOm0v3NP4XDQ5+jw61+oixd+esuT79m3UVib4/N0NA=,file will be resend	{"source": "s3"}
+2021-06-25T13:16:39.457+0300	INFO	sending file: bucket2/%!s(*string=0xc000649c48), size: 824636521496 bytes completed: 	{"source": "s3"}
+2021-06-25T13:16:39.580+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-06-25T13:20:05.146+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-06-25T13:20:05.163+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:20:05.165+0300	INFO	binding: s3 target: initialized successfully	{"source": "s3"}
+2021-06-25T13:20:05.167+0300	INFO	binding: s3, source: , initialized successfully	{"source": "s3"}
+2021-06-25T13:20:05.167+0300	INFO	binding: s3, initialized successfully	{"source": "s3"}
+2021-06-25T13:20:05.167+0300	INFO	binding: s3, started successfully	{"source": "s3"}
+2021-06-25T13:20:08.353+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: 87JVAGJCE31SXN73, host id: X4Z/bU5kIBQZvNIyHGkAxMMte0v4BUIETAX2uiJ4hxCo8SrthDJ80EjCRwHAPpH9Bs2Q8xXD9Cw=	{"source": "s3"}
+2021-06-25T13:20:08.804+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: 87JNASY6BPKM56X9, host id: mTsUVKdzu9HU8sep7T5VFFpp5riBxMIgmhE/wMZqIlCJXDqJoL2zY9YsOpa/Z98ICw36K+k3Dvc=	{"source": "s3"}
+2021-06-25T13:20:09.340+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:09.362+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:09.518+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: BTM2C38XGABPB184, host id: 36qoLmMv515N+VIn8F7CIg3AkOudUSieVzSArSqrkQsjvFlS1LNZgZQkwEYY5ydbX94zGYIr4dg=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:09.518+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:09.532+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: BTM718MJGZF8EF8D, host id: 0e7RV7tg2CImmLXeVffCxWAJVepf9dhM24vFisxApMhHCLxawbNhCvWNgIxxjYloEajKwBoDYjg=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:09.532+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:09.550+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:09.684+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: BTM790D26JPH32XV, host id: 2jYhKOKMF+4JzhJ/jok5qgEOt3ae5ljs7NHe0RCbXqBLyQmG0XKnO84NIYgT1qoGd859RI5h2Cw=	{"source": "s3"}
+2021-06-25T13:20:09.694+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:09.720+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: BTM3CJFKY9T19DXR, host id: Bw9GnjJfHBASSz1zVwVKgblSqZXrF58HC1s9QHjCVs7MSvL/OvKp4f7GP0KF6LCehQq2IsGBAMc=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:09.721+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:09.865+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7Z6W7D0AKWWN8H, host id: 2ZJQ7eDeVQqCWJ3FgmGM00fRTOZjfbAOdIm6FqvQTCkPronfrE1eFGXEh5nOzNsAkts0AjMXpI8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:09.865+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:09.884+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:09.989+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.034+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.041+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7WQQ3EPYRPQ5MM, host id: NpZ6jPlimj4nR4FvJlZY8LDGpV2XVRKoyp0gyl58hF23VQHvjsNoZ3ftiXN8EA7A5fCETX29++U=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.041+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.162+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7P1PA9PTFZN2Q9, host id: /JuvfADZSRVbGrMNM0ftS/iRgq/TjRU+kTz3CwyPOTYwYLUmJYgNg6csoCM3/e2swvg+qXG31wU=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.162+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.261+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7JGZZWRTGGH9AK, host id: IzaZay/pBwzvX6oqdNVnS9lZ27O5p+AbTAm9V1XQ4/KydOcwg4vw7ulI3MQDck7X/Ays0Ct0yEo=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.261+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.291+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.313+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: ED7H94DK3W51Q00C, host id: R5UX68b2BGIjtsk770jH9qD1o48uz/UV7fKhcQT0NFor+Dt5FQfFv3idOwLnl9JGjI+erIFqtw0=	{"source": "s3"}
+2021-06-25T13:20:10.353+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.434+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.520+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:10.581+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7RXDJ5KBVP6HCP, host id: 8gEWLYsbQPz17V3g8K3ei4bBU+hWvmxQoYXrj/T5EskNNWoS8eVe8wpJ7tstjfS7/4CUr4Q1BoA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.582+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.613+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: ED7NRRD10YV1QCDP, host id: UmX4WVUiycQuYH60Kt7WB2cqXKvnMbRRE8VB0BqRO4pi4CGKHUu1EaMQPcbt0DuWfVOWllmJLhg=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.614+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.824+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: AADVB1YCC7AGRWMD, host id: J1/+8hpeGtV6PIctDCDyu7O/J8+V4ox0ZZjTnbwKzNE/mS9GKS6r8Ywf6Wt+gsVEqmmreS6iwM8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.824+0300	INFO	sending file: bucket2/tree2.png, size: 824641648208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:10.891+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: AADH05YA0XBJK5FD, host id: AAuD2HvSGw+JuKbXCWrlXZ7GaO3wRC4MFG+O9P5fByIzkW8IjUDJyn52qZjflriNmbdAsjbQZTY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:10.891+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:11.432+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:11.581+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:11.594+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:11.747+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: AADZV8R1HB35EZZK, host id: h8UvKULq6seV/9ehXxp6d/qqvywKMHrZkxK4645cuBSf6dS7ovPHxmiDyN7Da996mT7B80uoYwc=	{"source": "s3"}
+2021-06-25T13:20:11.898+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: WKC73RJTC7QQMXWV, host id: GNMy0FlXp87uy6xPrS0r9yXdvXzrPxEe6NpZl8FRc6VSgP8mIoEslC9Y6g/lhsCfu73SGTKCjTY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:11.898+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:11.939+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: WKC5QFD7J1JVPAHC, host id: avu0411kXyiBlDP23Zo0z4DcP7AYWgyBPVQpbPlt+6BLFP1VUpAEvcUS9K5LFs+i7RoIY/QE+mI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:11.940+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:11.941+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: WKC8KZSY8NK2DZYG, host id: CGIm/xmIpPcmN7h1A3AXpfS3AUii9r2LUa8QSh8Jd26+tOSlDQb5/ZNt1xGe48H4gyiKQ2ojqwE=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:11.941+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:12.093+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: WKCBNWT5XDA2QS93, host id: lg6fw2QzmvTisyq6ugzk8t3riNw852YW2ZvP17S8jDj15+d8wAUIE5CSUSYW0GGl0CzUk4kSgWs=	{"source": "s3"}
+2021-06-25T13:20:12.206+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:12.343+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:12.419+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: WKC5NMAMSAZG6FRK, host id: 8R1tcPLAbRx7MwjaJ9Cx/huzNMFUvn+UlOo/SX+dF/2gbcPNCxywAuOhLVnnBD/o7ItVxPH06BI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:12.420+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:12.422+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:12.510+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: WKCA70DEKCC54HQ8, host id: 2yl43kkPFTvxRPo8E55/JDJpsRGowLhLInz08ipj8Ryfkzk5Sa8UzlZxcpjAfzXOpxBAw+iA0j4=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:12.510+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:12.572+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: WKC423XA9S25SBN5, host id: gRFICqqcmAXCBTsxJeX1mEW58/f+mINojI+ymL2wMW1IoAsQ+nrP3Xl2UsPjfo2NsnCSSXvIB9I=	{"source": "s3"}
+2021-06-25T13:20:12.580+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: WKC6DV19MNR3EC5A, host id: ieAC13zJOr8uBYqHJ9JXoMyb6geqvji5evfZwRmaMRc+MiIkSua+Lb0SzKmV/zuDgZNafDzZUOw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:12.580+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:12.732+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: WKC2A9189K6711Y0, host id: uqxFr79Hlr887PCSVnTEEXM9pU9Ub/zzpTM+Rjn2HGFl56Ubc9Clr7XF7rW8d7ug7VJo0XDrZiE=	{"source": "s3"}
+2021-06-25T13:20:12.886+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:12.893+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:13.068+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: N4MFY5MTNM7REQBG, host id: RXCOFdSYIahnP7ng9Jdbfx6M6C6nvGGjcjhCjHzBE6Y/XbURh392/Z4ti4Rf66/wm/5kkItO6ZQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:13.069+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:13.105+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: N4MAZ6NH6SN7XZ9W, host id: RkuXEao9Hw5f+fV3GnaJOx+1nh+8rGkFAcVZRHWC5Z/dqAebs1DDULbdjKDZgGFPsd3wRF8xItU=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:13.105+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:13.124+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:13.301+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: N4MDR3SR39QY367N, host id: ybMZs1oKwIhukB6kGo2RRe9MqeazqHc1E4gfVCLIeo7CQ++EkEd6rRkW7u2bYC3GdMZKcrDsgNY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:13.302+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:13.616+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:13.828+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: 2FQKPZVQGJ70WFCY, host id: DWCksV78jhW7HLCQMK6LWuq3SGMyhOto+ym2j/XOEGpAReTQjbdUwe7rjpvHdqHWKePZFmgM+Fs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:13.828+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:13.913+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: 2FQNXPJRAACH2AHY, host id: CeJpz7GpjX27UbXl7f8JaZEtl9yIGfykon+Zu3gbfDL2uw1Uf2xkTAwlO8Hb6nSHKuM02KZ1LQA=	{"source": "s3"}
+2021-06-25T13:20:13.983+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: 2FQRJHFGS4NBW658, host id: DfBUoiqlD/VHuvQKxv/UPLL55xj17yxMVu9AetZNl1NEAM6vZtBSudHZtVTscpFZ3ipM3fAjxe8=	{"source": "s3"}
+2021-06-25T13:20:14.231+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.383+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.410+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 2FQKXJYTH638F392, host id: IVzHt5MW/P2QpykzzCnMOFpwlgO7eNEgUMZl0BbPoSm8zMEY7mTAhNo/4Z6M7GE0KPKKEX4WCPs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:14.410+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:14.503+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.558+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: 2FQHJ4ZHMTD8N1Z2, host id: 967ycoq4r6GU043L1XxnYIFZmaQyPZywVkfg6krNlA+QjLpPFpVeZiGR5HPKCoJ4K/erxqTVW5c=	{"source": "s3"}
+2021-06-25T13:20:14.699+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: 2FQY4M8GV5S2RX44, host id: 2f7MIGhNaqBnzxbAk7TIgDnuzrATzHYkDitOHp8ei9uXPzNzAHpkKDPAYTbpB+r5QBrD2IIdCVw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:14.699+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:14.719+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.784+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.866+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:14.933+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THJHHEBCPVWT6XK, host id: syS/yt0Z2E9g3QfhKrLU4TZqjD0P2t+thzZQqRsRLFoeXOq5FFiI+0X4H88u9XFVCAo89K/8dZk=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:14.933+0300	INFO	sending file: bucket2/tree2.png, size: 824641648208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:14.945+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THT16TYK6963JQ5, host id: 8r3LqeY6EJzCUav4PEz/H6pmxAoDeMB/e8Kr9J3xYg0WxlICTXrhZ13cxUlGjk1LmL6JzrWDXhA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:14.945+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.022+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THRZQ44QX6V4Y4Y, host id: cnzS01O29jG16b0ccYeMIrylRNHq9NgLTj5WarY2oWwWgHFidxXLA3H8NaDa/wemjwDndZo5+TQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:15.022+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.076+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THPXE59Z6CH3RA1, host id: ZE/iybt4fcpSU6AHmByNN9hk8xSvH45X3OWcYYY+VEIQBjR6shNpTvtBL5cW8iilhXIFxFVbdJs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:15.076+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.101+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: 5THYKEXWMF4XV48H, host id: 5cFhIKS/Dcp69BoyMsyZ70Fk4LaJvr43/E5Gjcgpp884OffIL8CkmlWaTEteuhCqhtkLlnwfspQ=	{"source": "s3"}
+2021-06-25T13:20:15.188+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:15.238+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:15.352+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THJFBZY63WVK0AP, host id: FIaFC9R/riDj3YSMPxb6Nlsa1qj/znfO7MxakOdodPeH3ntvJ/Ghg6nbOYZc1GaLTUOTxyCBt2k=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:15.352+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.392+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:15.413+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THSS4YDRY3VPA7H, host id: iHa9fS9dO4L2IaofAJ5xPRqwp3UyqWKStxr5QC+isspFtEM67vAR9uaRgGPTyYfNPPKsdR1+YyM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:15.414+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.566+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: 5THT5CAZA64SXH31, host id: Y9uOq8ExdFMQJWEsFmPE0pdiaATqGNpOgpSKXgUsOlUb7oSmk9eJED6P0WgBnEISd/N5n/nhiIM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:15.566+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:15.898+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.102+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 8ETN1PDRA8G7SFYE, host id: OVk9AKs5piQ74FzOYm/p1JAIDlJYZQRH901xPpa76qku3FMHCrzsSrcSHCuJZ0iLrw7eD5AXpaQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:16.103+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:16.255+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: 8ETN46AGK3EAC28E, host id: eA/gHNqyFCnLlBpAp5bJ0xaO1ZfwHCnEOtKIjf4AjsJy5ktRpqEZgg9jYaHfy1HILl6hxLHn/L4=	{"source": "s3"}
+2021-06-25T13:20:16.257+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.404+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: 8ETJNX04TS8BBX9N, host id: RbYGYWnnIAeNNrvyQr4Kt/UMTKffOAPgIPk7zYSQzmKa5Ec7joBxhYbCM+5rgWjgYe8i+Dz2PQc=	{"source": "s3"}
+2021-06-25T13:20:16.415+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.572+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.703+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.714+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: 8ETQWSRXW8PWQ35X, host id: IASMYUVXdzKgXPA+HI8aAVGD9rKCHq2XIIfaH/076h2aKZtugnB2yksJvpq20GyT2j4G/7f67yo=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:16.714+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:16.749+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: 8ETJA17703RX0454, host id: zYcqG5gZQmcm+qfoKCsbYC/PccsKArX5Aa2qIu1SJH7uyUGEEZXqAZPDjvoYMK6UyjFFBkllAFg=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:16.749+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:16.780+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: 8ETZ4KX2ZR49GAGH, host id: ytxsBhSqwhB5kORlkFTDNjl3nffrLlGYwZuuUV1f6KIIezWGP7MtWJ/XqS2tzezclPIBuX02RtU=	{"source": "s3"}
+2021-06-25T13:20:16.814+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: D574N3KWB96PYEE0, host id: dS5SEQJKrHRSurP5nEpRKIA8tkBtjulMuvvIgcnyEJum3qTB7ZEMnZAexk/DPLJyTudC+GyboNA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:16.815+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:16.872+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: D57B8R9KMHYT45TR, host id: ysA8485U/PsByLmzduVF38DkoYFznAeXttQhB86NSmwTtYSt+r1nnauiao22xS6BIQ2l+iqeNMc=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:16.872+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:16.885+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:16.930+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: D577X1SFF8V03TSB, host id: abOqNDh8V6ACYzMryuVTDllDVOUL113FdbgwGOZKNH0iZ7955Tbij2XGmJIdrQkG2mAREkz53SM=	{"source": "s3"}
+2021-06-25T13:20:17.080+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:17.114+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: D575S4DPENN79ZYJ, host id: RKcavtGW+5955hzDvD52q75vBNWmTS6cw2q6s6Vz1j22aHzp1uBd3gRxQDf95upOGEE5Fxv2ETM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:17.114+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:17.256+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: D5710EQ56F81XSP9, host id: rXnGZvGYvNlxtHE+z0e6Ygt6HT3TuLQ59Ry03/8EEQsCVkD5VoR6EhQM4VNVH+tvMY7N16YGgXQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:17.256+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:17.604+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:17.610+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:17.716+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:17.776+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: D57EK4AR0EKE1HZS, host id: oSdMYWW4aZTUB2l0LT0mfueS3z6xh1OtQC9Oaf+zzI64G1RBTqbuYAwkWfIeKM2ozrQ28n8OhD4=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:17.776+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:17.791+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: D3HH7A2RA4SSQ9XM, host id: 8GC5iWPeFtyumWDKLBWd19IBtB01Bt6Shvs26qw4Hgoom+FdYacf/Jj/r8Rt1zd/AY/QMq0EfA0=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:17.791+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:17.879+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: D3HXSY2BPCCARR15, host id: pAJUOxnV0OI0FCn2rdH1Ykmgdotjz0DJpNzXM85VaSXl9hnr7jP51+YhSHWoY2sgBHCcxDao8GQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:17.879+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:18.280+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: D3HRHEZSRJZNDRKQ, host id: gic+2CGycu5wezgnE15VFy560ZKghUKiZQ26HBj9cWQkTpiN/ZCXpXaTX+YAbWQ2TUf8NH0X3xY=	{"source": "s3"}
+2021-06-25T13:20:18.758+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: D3HG5P6KNN6X95EZ, host id: u5DwJuYkfoAEWWx6FCdI+FryUtJec/jC4o92tFJ2RbxxCBb0W8F8/LyFS8IPI4G68fde1XIg5Yk=	{"source": "s3"}
+2021-06-25T13:20:18.938+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.090+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.112+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: H6S3SMC45EA1FEWB, host id: HZiTacOwPHFkypkAeMAbqZTuLSUzderZXBl5Ouesqz/lOealUbsu0ElE3mwY56j+L9RrJCHcdbY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.113+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.145+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.288+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: H6S3GD1M5VXVT2QE, host id: 5nU6qpS2WGUOsLIVQIZIYdN5Sq4AYHPu15QjwqzFjWFsWzDzigEU9EnhfbFs6sGu+1rvWSHo2Rc=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.288+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.321+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: H6SDAJZG95SMDRQY, host id: AfvcGix5DhwbHI8dcrS0SiEV3645tZN+7bWWY8ZkWfs8pWl5yh0UCcPfpkm0Bm//kRsVUh2f4V0=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.321+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.407+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.431+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.459+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: H6S06B2WAZH0A04W, host id: pZUPqEZ1BrppiZo6FTuf9tdm4Fdc3ZQMm9g6uYZwyPA1P/emh8KCf0OWxIixIk8Q2gQtqQ3RYVY=	{"source": "s3"}
+2021-06-25T13:20:19.557+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: H6S7BKNBG62AZERK, host id: YYyz8C7/fSQR7kHzpTXi2OYNQiwl6VfQzh148zDKEmjLGDz2R/6ZYclbBv70yLtbYA7fsgmr+Gw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.558+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.615+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.659+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: H6S4MY8S8HHTHHWV, host id: TEiwIeG1Uusgc+alReNCChPXIITPpbJf8EFW/E/OhpPjUYk4RAMpoo9UfgeFYScH88VBAMvpqzw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.659+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.774+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.783+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: H6S1WA4JFDXMZ0NY, host id: SUz+M5KtP80brSIfZjUIwj6grfn8Vk/mmiPRcPcspA1DVKd7FUMkNuVon1ZSXvZ9IHlX80plzwg=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:19.783+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:19.838+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.864+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:19.926+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: H6SD3HHWHPF4MP73, host id: ihdvQllweIgRAawc8oDYHNZMTvsVpqO1hIW8ygt9o2KTk2ES57CG+adw5NKF1aUnTVcgxrBcK9I=	{"source": "s3"}
+2021-06-25T13:20:19.939+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:20.002+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: AQSR9V5K2QW4A33K, host id: +YZBHdyIYVDSqpFtlqNsFs2bZcKnLF3wZ/01ym1B64Y1+gpNtt5GZMCR8yPhe0VR0fnaROLsT/Q=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:20.002+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:20.073+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: AQSMTD93JGF2DBAK, host id: iwljSGAJs6GJBr3MUkxpbfHAZlaBYNNjHypoOtO0IuswhnYcJVFI1SnIGVGj9p2im/rP3tQtNCo=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:20.073+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:20.121+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: AQSMA94F3240TF3B, host id: WIPB8Rw4NCFCOijIJxi4Qir9M1Jk4IYBOS7cnL8/26EOiBK6AzbOU09VOcQLuqf01bb6U5OPaaM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:20.121+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:20.364+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:20.507+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: AQSXJXD4VY46S9H3, host id: Di5yD5QVs7aWH6oEaG+yfncfVaF35xUaVRZIUN/9N9rehBtNBp8wTB0LYBJg5nUVzFVdnXX8Vz8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:20.507+0300	INFO	sending file: bucket2/tree2.png, size: 824641648208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:20.575+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: AQSVNVEPZ1K1RMNZ, host id: ewEYPCjKhw754wt7LihSun8iXFT2hemKFMlFbUHOHNlXPIsxDBa2LJG/PmY9yv74cAsHvOLX+W0=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:20.576+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:21.101+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:21.127+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:21.254+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: MPSMCSJ514JPFK9X, host id: 9DAI6kXDNTj3O1WWkLnfepNv1aei5dp5ZX6sJltmHPp2x0fCBDKSUUivAxKqbbVBBYQxslyEq5A=	{"source": "s3"}
+2021-06-25T13:20:21.298+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:21.413+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:21.561+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: MPSMV694CV43M7J4, host id: Z2s7JvwoQBGg08peV6LZHPcB0t7n47msoLONBVpOhybGD0eZXIkIVSECpc6BtI58fKiiLtYeIAI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:21.562+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:21.600+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: MPSPVK9JB5KYEMF6, host id: yiLe/VfIKpxvYcTesyDcWxdg1UnLrmWv86rTPerD7F3WQBB4GstBBpMpqdVyimQHbPXcq7GXvmI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:21.600+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:21.620+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: MPSGDG9AMJ9QFFF5, host id: JumBKmmMuNcWogbY17V4b3iDqqsCI3fdEyBcL49EHB3q2ek/38+6Ue2+tQe5GwbyULR7P/9Cb5s=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:21.620+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:21.643+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: MPSSHQ07DFJQDENA, host id: wmZ7tZlhteqj2Rv00aAGRKj8wqIutzFxKDdb7ZnZMh1uwI8X7+up52wPx157LUec/nZTwhAxIzI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:21.644+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:21.716+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: MPSVCF0AK528WXCT, host id: iZYshLsXBT85G4zk1QbkJq3qjt/wxbjS9v9Gket9ngXxSpbzgJBDdtGn4fmr1JhTHcB0hGWiN/Y=	{"source": "s3"}
+2021-06-25T13:20:21.813+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: QH70E49CTVVKYCRW, host id: IOUagGCjpYCvBNxYqtmp+ijOYOlNpSkt+7YKSLU4WQkllMcmTox89fkH61Q3720KSi2iLafciUA=	{"source": "s3"}
+2021-06-25T13:20:22.320+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:22.365+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:22.497+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: QH7385TGA3HFNHX4, host id: EB+t9JDmbectN5ioHrBNsYqynLYT/GjO4SQlhtqd0dswYBB0AU2IC2T+dKJR7o+yDryeqvAHPMQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:22.498+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:22.539+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: QH74P2H56AHBCRQW, host id: ZdTzy4qXfXGJ8VHSmR/RtntopbRAbIwTIu1mHiS1ShFxBBRu5EIBTly2tWS45slP9X64QeLiW2s=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:22.539+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:22.702+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:22.801+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:22.868+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:22.868+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: GEJSTDA2C30H6PHB, host id: J/xHxGd8EVEKJAU52DPzmIFLeeOPZJISMk0/iUXJnpm7CRMYRUu+pJBcQXZt2S4eKgDZcoxFbuI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:22.869+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:22.953+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: GEJV6X68SPPX62JD, host id: PigEklRJlJF4AMJ7vznG1P+wVmCDvZz5XQqMMZvNz44Y9QK29rz9Zw+1f+pP+hRk+gwgqlSwcHw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:22.953+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:22.983+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:23.043+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: GEJWNM4FMDCY3MDX, host id: EnctlWk4xve4ZtCQFmD9Pyt4UpscLdyG5rxxrV8kbLl7kJAXMuWLQ7sMJhZu4SKPXJy99MWwtmw=	{"source": "s3"}
+2021-06-25T13:20:23.096+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: GEJSTPB95XNE5EZ6, host id: UQRX/00FVRAdjU+qLBd8ajHgWKYd4Oe4KmQqRLBN/A+Z5MLozStPCbhKDedI2s8tMOJ458GjsEI=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:23.096+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:23.157+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: GEJR13F33G9PZ00P, host id: dmlNvoMEaRq8hI3C6MtvIA/5kFFwtps9l5v/iZPv97yESqyUgxvWfknnF4jlgARxfHjCab7lHls=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:23.157+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:23.764+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:24.042+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:24.203+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: AQAFFQN6PJK3QRR1, host id: h0wMmsxtP7Dt71wXFDut7rrmz1D75tN0evzg3vaW8I6ZrTzNREV6aZwIMTi1GprnnF+Ivc6tSOg=	{"source": "s3"}
+2021-06-25T13:20:24.376+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: AQADFDWF5XC2J73P, host id: JCLyO6qUpC34HYDr7CUvD2f6wCx3/COa26X1xTNLLgXNadaGvmnyZ3c4LHhWduk360eg3I3Lcuc=	{"source": "s3"}
+2021-06-25T13:20:24.470+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: AQA8G1C4W4YDF3G0, host id: +GM5OMPT60uAnGRx4kZNg+JataMeq+nzXdwkfhksns7ToOC2xUxMFP6rer+PgTik1kwuNaKlv/o=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:24.470+0300	INFO	sending file: bucket2/tree2.png, size: 824641648208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:24.549+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:24.728+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: AQA3JRG3SQJS8D8R, host id: BR29HzGnTzkxWKuT6KIb79XL2XIyknRjnt4vDvQ6HhIrVsxY3/u+OuT+uim2ITTTWb3vIx8NRSM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:24.728+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:24.753+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: AQA9N7QH3E9Q6JRH, host id: G0yY+vzKgQ7+j50XWE+W1p1HG+8xnphLF1RJRNPJ1/3qmVOMExU33bkGx+sUNXsDkqor3K8zmKw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:24.753+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:24.767+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:24.883+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:24.915+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: RQNECJK9AVR1WAE1, host id: Gqqwbbvv50A6O+fB69vTA7mhxuqm3K7O5YzImc0SDLf0PHgB1t2pyhdERAGopN7jM7/m/3FWpaA=	{"source": "s3"}
+2021-06-25T13:20:24.919+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: RQN37FJVF9EK64PJ, host id: hfbzX20Rtye+bGgfPyT1xNhyQ/vdSwUmCzXZk2RUBdLHNu888EDWfozsi4qtMGvTnmezYL/y27A=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:24.919+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.072+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: RQNBX2AY84Z7QR8C, host id: veiRYSfa3lZMfgar/XusjfUNNI1sb6dDr3UY+V7ePPjpJKw2353P9CLNbKyRij2woMo5ZiKBeFQ=	{"source": "s3"}
+2021-06-25T13:20:25.095+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: RQN3MWYB09K9N17D, host id: 2LRVxbxEC+MDh6wX8OsNlVCb5D4xXF/zL2uTmDQGtD4gvdndXDqJZHUk0ocUAP/sruPiQPGghEs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:25.095+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.190+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:25.364+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: RQN8J0HVC52WRCJM, host id: JJdsTzdEHARcsNMtSqAdAap7Q1BGQtTisD1DOEmunnxxYJTsOo7vNcIg1097s6OHK1VL2PqnbIo=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:25.365+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.388+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:25.540+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:25.544+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: RQN0N8Z1KX6T4MD1, host id: h06jui0FZvA8S0X89BGYT/4N5jWl/iK2tJWbRE4+eJNSX1y1yc2UJAWnQ5Te81LSqkPRGhNj5DA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:25.544+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.638+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:25.692+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: RQN28YK54JBGNXNP, host id: aUpJD6ZTL4VZN34NZTmtB1PoJXTfK++OMbugAIbx/KOgcVh0xROwYgYy0DHYzHrdj/gvYvLVXK0=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:25.693+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.812+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: HJHQFJN5WN75G1QA, host id: uX6fKUM6eo3ILVG9hY+43rhtX3E8QmSP/JZjQ4t/JOuM2+nQUJauxwZHFA1GeThZuJ1MaOIwJpA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:25.812+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:25.978+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:26.095+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:26.169+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: HJHHA9ACR5S4GCTG, host id: YYKxXyY/oUi5VkP/eQu9TaY1F767Qdu3bxNLuhx/RImdLu/tyka7wLGiKQYXnnHnnCeXIW8tAEE=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:26.170+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:26.314+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: HJHVRSHA15PPF9BV, host id: egfi/iG8QCqPHNWpPFpVRvwk/50mg++meFC/n1cVo5c+kaOP95QruWbLIOHF0tHNY+mhQF0jktw=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:26.314+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:26.543+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:26.712+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: HJHRBEJCFH95T22F, host id: ZvmAliQaslRQmV4cB655dqFMLZjV3JgkA5gton08e8MrUU+obSwBw/AuwDMtKJTJy8QBRAR3d1w=	{"source": "s3"}
+2021-06-25T13:20:26.883+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:26.959+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:27.042+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: SERZ0TDSC8KVQAAK, host id: Xvnj81TkUtmNQCQlzD7gami4/uKCGA1muj6culIrRW5ppSnkzgMhe+yDPq1lDfl2qlUqZMlB6o8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.042+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:27.101+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: SERPQXXTNN5AT73R, host id: BYe6ZV4F+p0GoWvc0RbH/SBaquvRB8tn/NSUs3+SM6E6mxTWdt2gbYscQoVLHktNahFUitZZaBA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.102+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:27.130+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: SERMSSZEK7F6YB6A, host id: XqUYnpQJATZ2qDEYvrGBH/N9kgERrlABu2sTGE+6nIO28TP7tIRsmqr4JrIGrI2FUeGR2Vo7zPs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.130+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:27.194+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: SERNVDA8SBM71YZN, host id: KtmvMWzJOHq3HGZ5deaiySJcv+ol6kRHWC3g+ME277OsjkQRl7ixUpszebK2EQJwOO/olA8Yf6M=	{"source": "s3"}
+2021-06-25T13:20:27.370+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: SERTHEKFQTN7EE41, host id: CfwLpvtuyHE8Ko2VUnPFZACEzkIg+UYxWqH6nDfrQ18XbQZgjexlzdCl3tGYDdSDoWcfcMX4fQY=	{"source": "s3"}
+2021-06-25T13:20:27.430+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:27.596+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: SERWC89JYWTQSYYS, host id: OM8wy0d0CERXQfslgUUH4SiZJHZBBSNgPXTo0nwtbs8NLec1sKED2dqq9cyJ+HVsyxUCSlWen0I=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.596+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:27.675+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:27.757+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:27.757+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:27.903+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: EQ0A2KK4VZSXGWR1, host id: OXtbzDAPxyMavVMyyhLHwQoEQKbwI7e2vISyKsZrLmfTV/HqA0TqUf6NiV1H38TmNL8WF8O4JWc=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.903+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:27.998+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: EQ0FJR9H845DCNTB, host id: G8eoM5JJ2af+krk6dX8nyLFljT/7OHOyIqT3FKlEvLPYpubhcIPoECjtdeW50Wp664qUoxY4DYA=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:27.998+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:28.062+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: EQ06ZD6GNMM5E3X7, host id: O/vCfv2lSt7B5ixXQxUWXY9zqejYoK42QlJvswj9aSrWG+Q18BbziDLd0xCQDlzejgdfIGI1uos=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:28.062+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:28.114+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:28.226+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: EQ0D5KCM23MW7MH7, host id: 0rr6mPTkcOst1e1gGP6VvajsoRxcJS7wCShFf5A3d/yApunXJ5kdxHZH4ceEH7YBgL2lvVIspqs=	{"source": "s3"}
+2021-06-25T13:20:28.265+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: EQ0DGH2N2S753JFB, host id: zc/P5ACj9o1IjUeZRCaAUB+CdzQCFLTdn1IvQupFV4tlfiXp/CiUoQWzDLOb3sgVL4mev1Gzu6o=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:28.265+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:28.367+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:28.574+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: EQ01GM97HF6X3X3P, host id: kn3zX6g6GBt4FZ/zEy8xJnq0wlPcZV3mE0tdf6MewF1lb17cKO4eHllmE2LDvJ5+YyzlwvTub3U=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:28.574+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:28.733+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:28.899+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: Z9DQAZCXW92932P9, host id: XfH7rKFfhMS1QOIDQ1z5AplfgfNfi7BMWyjyXOt+2npqB/7loURkdkFtBTo9YpnzKrOUXd1Ib5s=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:28.899+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:29.243+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:29.405+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: Z9DZXAGKSYH1JMQW, host id: wPpDcqv7nXba002TOqqohFzlGIvPn+27Ln8tC8NY6IEEkBEnAqt8KhwPLWpCb3Q+8uzevcq781A=	{"source": "s3"}
+2021-06-25T13:20:29.456+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:29.574+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:29.603+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: Z9DR6ZNH3BT0SWP7, host id: F3zyYqUANVv40uN3GWT3jL9DjJzMsH6Qxm60W4gnh8Z5OipSsqhTtbAr89BMs59nTN1YF23hXd8=	{"source": "s3"}
+2021-06-25T13:20:29.745+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: Z9DHG7GNS56MP0GH, host id: yZLAvpqRAafwRIpc4NG6e67w8cgJFODBHXZ6zJIqI7addl5ovgVXux26seoWt5z5matp2GcTvfQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:29.745+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:29.762+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:29.769+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: Z9DZTHMK80NKGYWP, host id: ilW4cRjmE9yExne0oxXf35vXZDUTLEVMf+at5egIn3aMKpiRUhWWsHDZcYMfQo9xfX9VpfYwzDU=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:29.770+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:29.898+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:29.922+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: GBGDXRXH6ESD3JTN, host id: l8+NPY3s1lLk4sY84P37R0u8MMvXd0B+RqYNrp1ATu1mdDNXITeFR7uNUufLaywAzosv1DwSRi8=	{"source": "s3"}
+2021-06-25T13:20:29.980+0300	ERROR	error during delete/moving a file tree2.png, AccessDenied: Access Denied
+	status code: 403, request id: GBG9JY4WTTXGTRWB, host id: KpHnl51S9WLRzTW+ZSWqHb6jH+7MnZWp+tyWDVAV+fr1nQ2olJ//7GoZmOZ9YIdNrt2yYy+6yWs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:29.981+0300	INFO	sending file: bucket2/tree2.png, size: 824641648208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.007+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: GBGBZY3MC1CYBRFG, host id: 9Sr1/fTozPV4+yZnUmdEDasWVYb4Z068vSnIvq/GkJptnAuJGVUGYJQTTvCxkqbomhPLG3/ILKM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:30.007+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.092+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:30.097+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: GBG6X4S87J22ZJPW, host id: 7gtwPJyS3F8ga6ErWZztFW7NZNvqlRgJJ3a1673fqnnEFY5uYv+hZm02GyuZA+g750YAwUp7UNc=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:30.097+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.240+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: GBG37E4E27ZGNF7F, host id: Dsvl1mAlpv8R5ZTKZgTdvfo5DVJpweS4oJA+Bl87lUdCpmI9pYW6atS8Cp3l7xPxbe9E1V8U5KQ=	{"source": "s3"}
+2021-06-25T13:20:30.336+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: GBG9M6WJCCN3YAJG, host id: KsY+aQTR2qeCofkiqTBqldSvkvvlhaFbPu0W4r0/ryZW7sKd8/tockO2tbIxkQ2pxknCFKIs7sM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:30.336+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.395+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:30.548+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: GBG45D3EXDC24H23, host id: VkIc+wBzzAr2T5xeHWB0Y2NPcCf1uSBydbDcdTniC10jvIleX/fZpp/9A94rSXlNf+zH31LIsnY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:30.549+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.551+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:30.733+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: GBG58Z53TTRVPVKE, host id: VxJpSul+a3iCXw9zzkV3/uFqIVpCzoCHFhYIXKrlhkcHK8ehF4D/NZk0ZlwQJ6gb8XlkyZKv1ww=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:30.734+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:30.869+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:30.915+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:31.052+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 1JCVH9V63FDNRZ9W, host id: jpHwLsLIxDxuujhp31QJ7lM32siY5BxE6QXrE+4TI8j0+tKonaj6/tzXmDT5UREs2FaMqv0Q9Tk=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:31.052+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:31.138+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 1JCGQ3X4YR0BW81M, host id: /d4z85SM4i3hfZGGvs47qDeOyH3QLxc/aDlOZimzEfxXQPSexJlVGMjnAUvZn3t6WmTbB9JmsJM=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:31.138+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:31.183+0300	INFO	sending file file: bucket2/fish1.png, size: 824641647200 bytes started 	{"source": "s3"}
+2021-06-25T13:20:31.348+0300	ERROR	error during delete/moving a file fish1.png, AccessDenied: Access Denied
+	status code: 403, request id: 1JCPBVM20WWMKF25, host id: NOCknCnV/mlZVSrGgNu6euxMk5IdHTL/voedV21FezhCBOmrwcurth42uXjRYKGcZjCNJahRyfE=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:31.348+0300	INFO	sending file: bucket2/fish1.png, size: 824641647200 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:31.507+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: 1JCPRJ03PDVC86VJ, host id: HYrms+pgKo0to4MAzj+0STKm38yH87xxSqUtdCxpSNpBAPRi32cv9gxqh8qKZ5ppETDgabDy71U=	{"source": "s3"}
+2021-06-25T13:20:32.031+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: 82TW4EAG8FPNS3V5, host id: tGX/AQyTUK1hLZjX2+Z/a6YTDA8Me6EkEfR6H4DnaBi+CWiBprcEyxYvvjJ1fyE3lAsejiZjcac=	{"source": "s3"}
+2021-06-25T13:20:32.219+0300	INFO	sending file file: bucket2/monkey1.png, size: 824641647704 bytes started 	{"source": "s3"}
+2021-06-25T13:20:32.348+0300	INFO	sending file file: bucket2/dog1.png, size: 824641646696 bytes started 	{"source": "s3"}
+2021-06-25T13:20:32.382+0300	ERROR	error during delete/moving a file monkey1.png, AccessDenied: Access Denied
+	status code: 403, request id: 82TNGBMJRFZCSDG4, host id: KccpbEVWg9PNVMqXTB5AsdQwyT7lHspBdlTY9cntZ6w11kDa64qiNwk22v9+WY/6CWr2A+vdRt8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:32.382+0300	INFO	sending file: bucket2/monkey1.png, size: 824641647704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:32.501+0300	ERROR	error during delete/moving a file dog1.png, AccessDenied: Access Denied
+	status code: 403, request id: 82TTNTMKPCYKZ9G3, host id: g5Ye93RuVQ9zQkLWB3A5bhmCV5rLCa5hXhCJnwfYwg+/kHY5TvGW/av6DSawPNWyAOnPgAQ/ddY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:32.502+0300	INFO	sending file: bucket2/dog1.png, size: 824641646696 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:32.529+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: 82TNZ7ZS6RHT9TT8, host id: CJfgFfZuB6AhlZ/CHbw92uo9gL2AMowNLfcgOoxP7PCEnCYEp7qOJ7ATueInhZP+pYdFNolR4H0=	{"source": "s3"}
+2021-06-25T13:20:32.639+0300	INFO	sending file file: bucket2/dog3.png, size: 824641647032 bytes started 	{"source": "s3"}
+2021-06-25T13:20:32.677+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: 82TRYFG3MW0M11J3, host id: Bjwy9m3FlxybNsJHmG1bAZ7PTCdDmPyTlNrbGAyOEhPjvQRMnbhN6bB2J0lJI7mVk/kOQGOcaRY=	{"source": "s3"}
+2021-06-25T13:20:32.830+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:32.835+0300	INFO	sending file file: bucket2/bear1.png, size: 824641646192 bytes started 	{"source": "s3"}
+2021-06-25T13:20:32.880+0300	ERROR	error during delete/moving a file dog3.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2H95Y1QE141SEN, host id: hhqr9Of/4hM2q70lK8Vxj4f13kJL6FnyketZikrfaqaTVuTOkr3r0xKzV7yJRehuSZUknpYYofk=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:32.880+0300	INFO	sending file: bucket2/dog3.png, size: 824641647032 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.000+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2TKGAR42E0CVR0, host id: MWP8vFeFjC0wHDijjm+SlSB0APnC7U1GtnY1c+SOkdWCJvSEeGCkG6YAEHxlckfUXmGvnZK7SEQ=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:33.000+0300	INFO	sending file: bucket2/bear1.png, size: 824641646192 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.001+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2STB7HX9ZPZX0C, host id: qQMM/NnJFrt/k1ci8YRIJjnbRjZwgnsaKD7n02IzZQ0HHEP/yeGH+DHsSKxUJFXC7CwIUOhBAHs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:33.001+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.154+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:33.305+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2Z3X9R3QN6TBTA, host id: oB9szrf0Psa+fM1+6NV70U+UxG46VaAwrLauh/VFNOb6tRAmvrHgp1uILI7uLjj4AufUtUts5L8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:33.305+0300	INFO	sending file: bucket2/dog2.png, size: 824641646864 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.325+0300	INFO	sending file file: bucket2/fish2.png, size: 824641647368 bytes started 	{"source": "s3"}
+2021-06-25T13:20:33.513+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2XZ1P96QSF7XP1, host id: qozuIZkAOZ3yOx6SlgicjlQA2Jp526b80mEgz1fbVMIKzjOAKjAYWyNMijubt4PXLGcSAJEQRig=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:33.513+0300	INFO	sending file: bucket2/fish2.png, size: 824641647368 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.537+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:33.752+0300	ERROR	error during delete/moving a file rabbit.png, AccessDenied: Access Denied
+	status code: 403, request id: 2A2PMNQQFYZETQFV, host id: DWqi7Y62Ez3ql7bimZ2rFCmAlCLNklYQf8lfvxOK3uCLpvSWGib/2kyDg8JWqXP9lFRljOP8OdY=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:33.752+0300	INFO	sending file: bucket2/rabbit.png, size: 824641648040 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:33.840+0300	INFO	sending file file: bucket2/cat2.png, size: 824641646528 bytes started 	{"source": "s3"}
+2021-06-25T13:20:34.031+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: VYHW8MZY72YANMXS, host id: yWbhmT3FGiqhoipAYe1zel8zUEzQc/s7iG7jZjlq8t1xct5Ms1bhzAMnwQeK6CBZ8Q8pIVQ8tLs=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:34.031+0300	INFO	sending file: bucket2/cat2.png, size: 824641646528 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:34.068+0300	INFO	sending file file: bucket2/tree2.png, size: 824641648208 bytes started 	{"source": "s3"}
+2021-06-25T13:20:34.166+0300	INFO	sending file file: bucket2/cat1.png, size: 824641646360 bytes started 	{"source": "s3"}
+2021-06-25T13:20:34.196+0300	ERROR	error during creating file requests bucket2/GL_test_20210427.csv, AccessDenied: Access Denied
+	status code: 403, request id: VYHZ448QZ3E4FZB9, host id: ZyqMJ1nTvkDMSAVr8KEBltPB3E9dm6MqnMCN9hmRCKNmBC8eDAjfz+eN8coFxJOm7GyHfJY4ppk=	{"source": "s3"}
+2021-06-25T13:20:34.317+0300	INFO	sending file file: bucket2/dog2.png, size: 824641646864 bytes started 	{"source": "s3"}
+2021-06-25T13:20:34.357+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: VYHQX4VKM4BTQTE4, host id: uCaoOJ/ScWSSUypQTBw0GfyhaV2QVnRBxMX8tH0g5l4GFlfTRBD26AxIdNdMaovUNvFkOBwUue8=,file will be resend	{"source": "s3"}
+2021-06-25T13:20:34.357+0300	INFO	sending file: bucket2/cat1.png, size: 824641646360 bytes completed: 	{"source": "s3"}
+2021-06-25T13:20:34.388+0300	INFO	sending file file: bucket2/rabbit.png, size: 824641648040 bytes started 	{"source": "s3"}
+2021-06-25T13:20:34.456+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-06-25T13:28:31.824+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-06-25T13:28:31.841+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:28:31.842+0300	INFO	binding: s3 target: initialized successfully	{"source": "s3"}
+2021-06-25T13:28:32.633+0300	INFO	binding: s3, source: , initialized successfully	{"source": "s3"}
+2021-06-25T13:28:32.634+0300	INFO	binding: s3, initialized successfully	{"source": "s3"}
+2021-06-25T13:28:32.634+0300	INFO	binding: s3, started successfully	{"source": "s3"}
+2021-06-25T13:28:36.260+0300	ERROR	error during creating file requests bucket2/TESTE6.txt, AccessDenied: Access Denied
+	status code: 403, request id: C056Q9SQJP9FCW8D, host id: 8w68/KGrwxulQ3KA74Z0maWSaxajBA7Y7wsMxPKFHqg1I1ztpgfk/irMIt8tC+vcLg6YMvpj5bk=	{"source": "s3"}
+2021-06-25T13:28:36.544+0300	INFO	sending file file: bucket2/cat1.png, size: 824639639704 bytes started 	{"source": "s3"}
+2021-06-25T13:28:36.702+0300	ERROR	error during delete/moving a file cat1.png, AccessDenied: Access Denied
+	status code: 403, request id: C05499VTRX2XRCR5, host id: lisl317ay9N0/J7+q71HZH9TjeLrYhF5GOn6S20hS1Lc+EWgrSsiZ+UaeqXOp2QlY6CZEEW1iPY=,file will be resend	{"source": "s3"}
+2021-06-25T13:28:36.702+0300	INFO	sending file: bucket2/cat1.png, size: 824639639704 bytes completed: 	{"source": "s3"}
+2021-06-25T13:28:36.844+0300	INFO	sending file file: bucket2/cat2.png, size: 824639639872 bytes started 	{"source": "s3"}
+2021-06-25T13:28:36.853+0300	ERROR	error during creating file requests bucket2/incidents20210429102823.zip, AccessDenied: Access Denied
+	status code: 403, request id: ARKN2EASMT8705YM, host id: K79oNRNnk8Jyjy6oakcKJCv586Tm+jiFTydrDUxTVOtYqCYN5Uvyaw/TGv9WiTwd1xl/l9x5T5s=	{"source": "s3"}
+2021-06-25T13:28:36.868+0300	INFO	sending file file: bucket2/bear1.png, size: 824639639536 bytes started 	{"source": "s3"}
+2021-06-25T13:28:37.032+0300	ERROR	error during delete/moving a file cat2.png, AccessDenied: Access Denied
+	status code: 403, request id: ARKZVRZ2AXDK610Z, host id: AjnZ0MQLDxh143mNUYpTd1FbV0H47WNkBokR7C6xql2PdY11JdFhS08b6ikICmkjstQUgIkLWZ0=,file will be resend	{"source": "s3"}
+2021-06-25T13:28:37.032+0300	INFO	sending file: bucket2/cat2.png, size: 824639639872 bytes completed: 	{"source": "s3"}
+2021-06-25T13:28:37.185+0300	INFO	sending file file: bucket2/dog2.png, size: 824639640208 bytes started 	{"source": "s3"}
+2021-06-25T13:28:37.192+0300	ERROR	error during delete/moving a file bear1.png, AccessDenied: Access Denied
+	status code: 403, request id: ARKVMMVVY9WT8JYE, host id: mtfuRgHquUX9430Jx4JB/kIgAx//qCkVwvp2sdjlxWDm9ZxUWyadTjSLjdSSOSF3LZefvvtG9KY=,file will be resend	{"source": "s3"}
+2021-06-25T13:28:37.192+0300	INFO	sending file: bucket2/bear1.png, size: 824639639536 bytes completed: 	{"source": "s3"}
+2021-06-25T13:28:37.337+0300	ERROR	error during delete/moving a file dog2.png, AccessDenied: Access Denied
+	status code: 403, request id: ARKXPHS2D0BJMAKH, host id: i+Cbb8eXpJLZ7aMvVJ0EXQNII2m7MP165LRTmvT1Wc0RQF9zGHsCUQVGcs/2gpmjRLmMH2AwozU=,file will be resend	{"source": "s3"}
+2021-06-25T13:28:37.337+0300	INFO	sending file: bucket2/dog2.png, size: 824639640208 bytes completed: 	{"source": "s3"}
+2021-06-25T13:28:37.365+0300	ERROR	error during creating file requests bucket2/poc.html, AccessDenied: Access Denied
+	status code: 403, request id: ARKQZK3NZ9SHX95K, host id: MNYyQvtpHR2SABOe5RhaAeWDrUuf42509v0bAu9z+lid6Pjnp6nxheUMPfw6lxjCJs54lVN7r64=	{"source": "s3"}
+2021-06-25T13:28:37.377+0300	INFO	sending file file: bucket2/fish2.png, size: 824639640712 bytes started 	{"source": "s3"}
+2021-06-25T13:28:37.490+0300	INFO	sending file file: bucket2/dog1.png, size: 824639640040 bytes started 	{"source": "s3"}
+2021-06-25T13:28:37.552+0300	ERROR	error during delete/moving a file fish2.png, AccessDenied: Access Denied
+	status code: 403, request id: ARKH3JW7JA3JJVPA, host id: n+9FpGJVmd9aSPhor7fQIYYvtO9jPyft0oboCMLItsAFQrOk6xgnnViQ2Vkx3XDIfTsm0o3Yc6M=,file will be resend	{"source": "s3"}
+2021-06-25T13:28:37.552+0300	INFO	sending file: bucket2/fish2.png, size: 824639640712 bytes completed: 	{"source": "s3"}
+2021-06-25T13:28:37.555+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}
+2021-06-25T13:32:46.886+0300	INFO	starting kubemq sources connectors version: 	{"source": "kubemq-sources"}
+2021-06-25T13:32:46.904+0300	INFO	1 bindings loaded	{"source": "config"}
+2021-06-25T13:32:46.906+0300	INFO	binding: s3 target: initialized successfully	{"source": "s3"}
+2021-06-25T13:32:47.667+0300	INFO	binding: s3, source: , initialized successfully	{"source": "s3"}
+2021-06-25T13:32:47.667+0300	INFO	binding: s3, initialized successfully	{"source": "s3"}
+2021-06-25T13:32:47.667+0300	INFO	binding: s3, started successfully	{"source": "s3"}
+2021-06-25T13:32:49.227+0300	INFO	kubemq sources connectors stopped	{"source": "kubemq-sources"}

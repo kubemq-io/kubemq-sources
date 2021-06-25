@@ -1,4 +1,4 @@
-package minio
+package s3
 
 import (
 	"fmt"
@@ -16,33 +16,36 @@ var bucketTypeMap = map[string]string{
 }
 
 type options struct {
-	endpoint        string
-	useSSL          bool
-	accessKeyId     string
-	secretAccessKey string
-	folders         []string
-	concurrency     int
-	targetType      string
-	bucketName      string
-	scanInterval    int
+	awsKey       string
+	awsSecretKey string
+	region       string
+	token        string
+	folders      []string
+	concurrency  int
+	targetType   string
+	bucketName   string
+	scanInterval int
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error
-	o.endpoint, err = cfg.Properties.MustParseString("endpoint")
+	o.awsKey, err = cfg.Properties.MustParseString("aws_key")
 	if err != nil {
-		return options{}, fmt.Errorf("error parsing endpoint, %w", err)
+		return options{}, fmt.Errorf("error parsing aws_key , %w", err)
 	}
-	o.useSSL = cfg.Properties.ParseBool("use_ssl", true)
-	o.accessKeyId, err = cfg.Properties.MustParseEnv("access_key_id", "ACCESS_KEY_ID", "")
+
+	o.awsSecretKey, err = cfg.Properties.MustParseString("aws_secret_key")
 	if err != nil {
-		return options{}, fmt.Errorf("error parsing access key id, %w", err)
+		return options{}, fmt.Errorf("error parsing aws_secret_key , %w", err)
 	}
-	o.secretAccessKey, err = cfg.Properties.MustParseEnv("secret_access_key", "SECRET_ACCESS_KEY", "")
+
+	o.region, err = cfg.Properties.MustParseString("region")
 	if err != nil {
-		return options{}, fmt.Errorf("error parsing secret access key, %w", err)
+		return options{}, fmt.Errorf("error parsing region , %w", err)
 	}
+
+	o.token = cfg.Properties.ParseString("token", "")
 	o.folders, err = cfg.Properties.MustParseStringList("folders")
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing folders, %w", err)
