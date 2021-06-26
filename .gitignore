@@ -17,3 +17,4 @@ vendor/
 # vendor/
 go.sum
 credentials/
+config.yaml
