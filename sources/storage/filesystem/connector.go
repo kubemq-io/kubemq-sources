@@ -23,7 +23,7 @@ func Connector() *common.Connector {
 				SetKind("string").
 				SetName("bucket_type").
 				SetTitle("Sync Target Type").
-				SetOptions([]string{"aws", "gcp", "minio", "filesystem", "hdfs", "azure"}).
+				SetOptions([]string{"aws", "gcp", "minio", "filesystem", "hdfs", "azure", "pass-through"}).
 				SetDescription("Set remote target type").
 				SetMust(true).
 				SetDefault("aws"),

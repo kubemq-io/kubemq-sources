@@ -41,7 +41,7 @@ func initCore() zapcore.Core {
 			Ctx:        context.Background(),
 			Filename:   filepath.Join(filepath.Dir(path), "/logs/kubemq-sources.log"),
 			MaxSize:    100, // megabytes
-			MaxBackups: 3,
+			MaxBackups: 5,
 			MaxAge:     28, //days
 		}
 		w = zap.CombineWriteSyncers(std, logR, ServiceLog)

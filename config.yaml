@@ -1,5 +1,5 @@
 bindings:
-  - name: s3
+  - name: s3.down
     source:
       kind: aws.s3
       properties:
@@ -8,12 +8,26 @@ bindings:
         token: ""
         folders: '/'
         target_type: filesystem
-        bucket_name: bucket2
+        bucket_name: kubemq-targets
         concurrency: 5
         scan_interval: 2
     target:
       kind: kubemq.queue
       properties:
         address: localhost:50000
-        channel: queue.minio
+        channel: queue.s3.down
+  - name: s3.up
+    source:
+      kind: storage.filesystem
+      properties:
+        folders: 'd:\sync\up'
+        bucket_type: aws
+        bucket_name: kubemq-targets
+        concurrency: 5
+        scan_interval: 2
+    target:
+      kind: kubemq.queue
+      properties:
+        address: localhost:50000
+        channel: queue.s3.up
     properties: {}

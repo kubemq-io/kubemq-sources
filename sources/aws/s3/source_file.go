@@ -16,6 +16,7 @@ type SourceFile struct {
 	Bucket     string
 	downloader *s3manager.Downloader
 	client     *s3.S3
+	hash       string
 }
 
 func NewSourceFile(c *s3.S3, downloader *s3manager.Downloader, bucket string, obj *s3.Object) *SourceFile {
@@ -36,12 +37,10 @@ func (s *SourceFile) FileDir() string {
 	if len(parts) < 2 {
 		return ""
 	}
-	pathSize := len(parts) - 2
-	if pathSize == 0 {
+	if len(parts) == 2 {
 		return parts[0]
 	}
-
-	return strings.Join(parts[:pathSize], "/")
+	return strings.Join(parts[:len(parts)-1], "/")
 }
 func (s *SourceFile) RootDir() string {
 	parts := strings.Split(*s.Object.Key, "/")
@@ -58,7 +57,12 @@ func (s *SourceFile) FileName() string {
 	return parts[len(parts)-1]
 }
 func (s *SourceFile) Metadata() string {
-	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Object.Size)
+	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), *s.Object.Size)
+}
+
+func (s *SourceFile) Hash() string {
+	return *s.Object.ETag
+
 }
 func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
 	requestInput := s3.GetObjectInput{
@@ -108,6 +112,11 @@ func (s *SourceFile) Request(ctx context.Context, bucketType string, bucketName 
 			SetMetadataKeyValue("bucket", bucketName).
 			SetMetadataKeyValue("object", s.FileName()).
 			SetMetadataKeyValue("path", strings.Replace(s.FileDir(), `\`, "/", -1)).
+			SetData(data)
+	case "pass-through":
+		targetRequest = NewTargetsRequest().
+			SetMetadataKeyValue("path", s.FileDir()).
+			SetMetadataKeyValue("filename", s.FileName()).
 			SetData(data)
 	case "aws":
 		unixFileName := strings.Replace(filepath.Join(s.FileDir(), s.FileName()), `\`, "/", -1)

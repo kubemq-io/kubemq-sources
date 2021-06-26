@@ -94,12 +94,17 @@ func (c *Client) inPipe(file *SourceFile) bool {
 	if _, ok := c.inProgress.Load(file.FullPath()); ok {
 		return true
 	}
-	if _, ok := c.completed.Load(file.FullPath()); ok {
-		c.log.Debugf("file %s already sent and will be deleted", file.FullPath())
-		if err := file.Delete(); err != nil {
-			c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+	if val, ok := c.completed.Load(file.FullPath()); ok {
+		current := val.(*SourceFile)
+		if current.Hash() == file.Hash() {
+			c.log.Infof("file %s already sent and will be deleted", file.FullPath())
+			if err := file.Delete(); err != nil {
+				c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+			}
+			return true
+		} else {
+			c.log.Infof("file %s already sent but a new content has been detected, resending", file.FullPath())
 		}
-		return true
 	}
 	return false
 }
@@ -144,7 +149,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			c.log.Infof("sending file %s started ", file.Metadata())
+			c.log.Infof("sending %s started ", file.Metadata())
 			resp, err := sender.Do(ctx, req)
 			if err != nil {
 				c.log.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
@@ -166,7 +171,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 			}
 			c.inProgress.Delete(file.FullPath())
 
-			c.log.Infof("sending file %s completed: ", file.Metadata())
+			c.log.Infof("sending %s completed", file.Metadata())
 		case <-ctx.Done():
 			return
 		}

@@ -43,7 +43,9 @@ func (s *SourceFile) Metadata() string {
 func (s *SourceFile) Load() ([]byte, error) {
 	return ioutil.ReadFile(s.FullPath())
 }
-
+func (s *SourceFile) Hash() string {
+	return fmt.Sprintf("%d", s.Info.ModTime().UnixNano())
+}
 func (s *SourceFile) Do() error {
 	if s.MovePath != "" {
 		newFileName := strings.Replace(s.FullPath(), s.Root, s.MovePath, 1)
@@ -73,6 +75,11 @@ func (s *SourceFile) Request(bucketType string, bucketName string) (*types.Reque
 			SetMetadataKeyValue("bucket", bucketName).
 			SetMetadataKeyValue("object", s.FileName()).
 			SetMetadataKeyValue("path", strings.Replace(s.FileDir(), `\`, "/", -1)).
+			SetData(data)
+	case "pass-through":
+		targetRequest = NewTargetsRequest().
+			SetMetadataKeyValue("path", s.FileDir()).
+			SetMetadataKeyValue("filename", s.FileName()).
 			SetData(data)
 	case "aws":
 		unixFileName := strings.Replace(filepath.Join(s.FileDir(), s.FileName()), `\`, "/", -1)

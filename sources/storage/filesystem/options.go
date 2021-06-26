@@ -6,12 +6,13 @@ import (
 )
 
 var bucketTypeMap = map[string]string{
-	"aws":        "aws",
-	"gcp":        "gcp",
-	"minio":      "minio",
-	"hdfs":       "hdfs",
-	"azure":      "azure",
-	"filesystem": "filesystem",
+	"aws":          "aws",
+	"gcp":          "gcp",
+	"minio":        "minio",
+	"hdfs":         "hdfs",
+	"azure":        "azure",
+	"filesystem":   "filesystem",
+	"pass-through": "pass-through",
 }
 
 type options struct {

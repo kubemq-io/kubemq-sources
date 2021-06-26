@@ -162,7 +162,7 @@ func load() (*Config, error) {
 	}
 	loadedConfigFile, err := getConfigFile()
 	if err != nil {
-		return createDefaultConfig()
+		return nil, err
 	} else {
 		viper.SetConfigFile(filepath.Join(filepath.Dir(path), loadedConfigFile))
 	}

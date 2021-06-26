@@ -81,12 +81,17 @@ func (c *Client) inPipe(ctx context.Context, file *SourceFile) bool {
 	if _, ok := c.inProgress.Load(file.FullPath()); ok {
 		return true
 	}
-	if _, ok := c.completed.Load(file.FullPath()); ok {
-		c.log.Debugf("file %s already sent and will be deleted", file.FullPath())
-		if err := file.Delete(ctx); err != nil {
-			c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+	if val, ok := c.completed.Load(file.FullPath()); ok {
+		current := val.(*SourceFile)
+		if current.Hash() == file.Hash() {
+			c.log.Infof("file %s already sent and will be deleted", file.FullPath())
+			if err := file.Delete(ctx); err != nil {
+				c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+			}
+			return true
+		} else {
+			c.log.Infof("file %s already sent but a new content has been detected, resending", file.FullPath())
 		}
-		return true
 	}
 	return false
 }

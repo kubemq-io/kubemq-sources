@@ -67,12 +67,17 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 		unixFolder := unixNormalize(folder)
 		c.scanFolders[unixFolder] = unixFolder
 	}
-	list, err := c.client.ListBuckets(&s3.ListBucketsInput{})
+	buckets, err := c.client.ListBuckets(&s3.ListBucketsInput{})
 	if err != nil {
 		return err
 	}
-	fmt.Println(list.Buckets)
-	return nil
+	for _, bucket := range buckets.Buckets {
+		if *bucket.Name == c.opts.bucketName {
+			return nil
+		}
+	}
+
+	return fmt.Errorf("scanned bucket name not found")
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
@@ -95,12 +100,17 @@ func (c *Client) inPipe(ctx context.Context, file *SourceFile) bool {
 	if _, ok := c.inProgress.Load(file.FullPath()); ok {
 		return true
 	}
-	if _, ok := c.completed.Load(file.FullPath()); ok {
-		c.log.Debugf("file %s already sent and will be deleted", file.FullPath())
-		if err := file.Delete(ctx); err != nil {
-			c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+	if val, ok := c.completed.Load(file.FullPath()); ok {
+		current := val.(*SourceFile)
+		if current.Hash() == file.Hash() {
+			c.log.Infof("file %s already sent and will be deleted", file.FullPath())
+			if err := file.Delete(ctx); err != nil {
+				c.log.Errorf("error during delete a file %s,%s, will try again", file.FullPath(), err.Error())
+			}
+			return true
+		} else {
+			c.log.Infof("file %s already sent but a new content has been detected, resending", file.FullPath())
 		}
-		return true
 	}
 	return false
 }
@@ -156,7 +166,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 				c.inProgress.Delete(file.FullPath())
 				continue
 			}
-			c.log.Infof("sending file %s started ", file.Metadata())
+			c.log.Infof("sending %s started ", file.Metadata())
 			resp, err := sender.Do(ctx, req)
 			if err != nil {
 				c.log.Errorf("error during sending file %s, %s", file.FileName(), err.Error())
