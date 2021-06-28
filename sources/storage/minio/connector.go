@@ -36,7 +36,7 @@ func Connector() *common.Connector {
 				SetName("access_key_id").
 				SetTitle("Access Key ID").
 				SetDescription("Set Minio access key id").
-				SetMust(false).
+				SetMust(true).
 				SetDefault(""),
 		).
 		AddProperty(
@@ -45,7 +45,7 @@ func Connector() *common.Connector {
 				SetName("secret_access_key").
 				SetTitle("Access Key Secret").
 				SetDescription("Set Minio secret access key").
-				SetMust(false).
+				SetMust(true).
 				SetDefault(""),
 		).
 		AddProperty(

@@ -35,24 +35,15 @@ func Connector() *common.Connector {
 				SetDescription("Set S3 aws region").
 				SetMust(true).
 				SetDefault(""),
-		).
-		AddProperty(
-			common.NewProperty().
-				SetKind("string").
-				SetName("token").
-				SetDescription("Set S3 token").
-				SetMust(false).
-				SetDefault(""),
-		).
-		AddProperty(
-			common.NewProperty().
-				SetKind("string").
-				SetName("bucket_name").
-				SetTitle("Bucket Source").
-				SetDescription("Set remote target bucket/dir name").
-				SetMust(true).
-				SetDefault(""),
-		).
+		).AddProperty(
+		common.NewProperty().
+			SetKind("string").
+			SetName("bucket_name").
+			SetTitle("Bucket Source").
+			SetDescription("Set remote target bucket/dir name").
+			SetMust(true).
+			SetDefault(""),
+	).
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
@@ -74,6 +65,15 @@ func Connector() *common.Connector {
 		).
 		AddProperty(
 			common.NewProperty().
+				SetKind("string").
+				SetName("token").
+				SetDescription("Set S3 token").
+				SetMust(false).
+				SetDefault(""),
+		).
+
+		AddProperty(
+			common.NewProperty().
 				SetKind("int").
 				SetName("concurrency").
 				SetDescription("Set execution concurrency").
@@ -88,5 +88,4 @@ func Connector() *common.Connector {
 				SetMust(false).
 				SetDefault("5"),
 		)
-
 }
