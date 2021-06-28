@@ -20,7 +20,7 @@ Minio source connector configuration properties:
 | access_key_id     | yes      | set access key id               | "minio"                             |
 | secret_access_key | yes      | set secret access key           | "minio123"                          |
 | folders           | yes      | set list of folders to watch    | "/"          |
-| target_type       | yes      | set remote target sync type     | "aws", "gcp", "minio", "filesystem" |
+| target_type       | yes      | set remote target sync type     | "aws", "gcp", "minio", "filesystem","hdfs","azure","pass-through" |
 | bucket_name       | yes      | set source bucket               | "bucket"                            |
 | concurrency       | no       | set sending concurrency         | "1"                                 |
 | scan_interval     | no       | set bucket scan interval in sec | "5"                                 |

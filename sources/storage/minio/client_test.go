@@ -269,6 +269,7 @@ func TestClient_Flow(t *testing.T) {
 	}
 
 	err = c.Start(ctx, mock)
+	require.NoError(t, err)
 	err = testClient.Put(ctx, bucket, "folder1/file1.txt", []byte("data"))
 	require.NoError(t, err)
 	err = testClient.Put(ctx, bucket, "folder2/sub1/sub2/file2.txt", []byte("data"))

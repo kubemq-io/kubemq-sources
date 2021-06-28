@@ -53,6 +53,7 @@ A list of supported sources is below.
 |           | [Nats](https://nats.io/)                                 |messaging.nats  | [Usage](sources/messaging/nats)     | [Example](examples/messaging/nats)     |
 | Storage    |                                                                     |                       |                                      |                                         |
 |            | Filesystem                                                          | storage.filesystem    | [Usage](sources/storage/filesystem)  |                                         |
+|            | Minio                                                          | storage.minio    | [Usage](sources/storage/minio)  |                                         |
 
 #### Google Cloud Platform (GCP)
 
@@ -69,6 +70,8 @@ A list of supported sources is below.
 |            | [AmazonMQ](https://aws.amazon.com/amazon-mq/)                  |aws.amazonmq                     | [Usage](sources/aws/amazonmq)           | [Example](examples/aws/amazonmq)           |
 |            | [msk](https://aws.amazon.com/msk/)                             |aws.msk                          | [Usage](sources/aws/msk)                | [Example](examples/aws/msk)                |
 |            | [SQS](https://aws.amazon.com/sqs/)                             |aws.sqs                          | [Usage](sources/aws/sqs)                | [Example](examples/aws/sqs)                |
+| Storage    |                                                                     |                       |                                      |                                         |
+|            | S3                                                          | aws.s3    | [Usage](sources/aws/s3)  |                                         |
 
 #### Microsoft Azure
 

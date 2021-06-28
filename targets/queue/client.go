@@ -7,13 +7,14 @@ import (
 	"github.com/kubemq-hub/kubemq-sources/config"
 	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
 	"github.com/kubemq-hub/kubemq-sources/types"
-	"github.com/kubemq-io/kubemq-go"
+
+	"github.com/kubemq-io/kubemq-go/queues_stream"
 )
 
 type Client struct {
 	log    *logger.Logger
 	opts   options
-	client *kubemq.Client
+	client *queues_stream.QueuesStreamClient
 }
 
 func New() *Client {
@@ -35,13 +36,16 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 	if err != nil {
 		return err
 	}
-	c.client, err = kubemq.NewClient(ctx,
-		kubemq.WithAddress(c.opts.host, c.opts.port),
-		kubemq.WithClientId(c.opts.clientId),
-		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
-		kubemq.WithAuthToken(c.opts.authToken),
-		// making sure that this stays false in order the http source will work correctly
-		kubemq.WithCheckConnection(false),
+	c.client, err = queues_stream.NewQueuesStreamClient(ctx,
+		queues_stream.WithAddress(c.opts.host, c.opts.port),
+		queues_stream.WithClientId(c.opts.clientId),
+		queues_stream.WithCheckConnection(true),
+		queues_stream.WithAutoReconnect(true),
+		queues_stream.WithAuthToken(c.opts.authToken),
+		queues_stream.WithConnectionNotificationFunc(
+			func(msg string) {
+				c.log.Infof(msg)
+			}),
 	)
 	if err != nil {
 		return err
@@ -62,7 +66,7 @@ func (c *Client) getChannel(request *types.Request) string {
 	return c.opts.channel
 }
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
-	queueMessage := c.client.NewQueueMessage().
+	queueMessage := queues_stream.NewQueueMessage().
 		SetChannel(c.getChannel(request)).
 		SetMetadata(request.Metadata).
 		SetBody(request.Data).
@@ -70,12 +74,14 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 		SetPolicyExpirationSeconds(c.opts.expirationSeconds).
 		SetPolicyMaxReceiveCount(c.opts.maxReceiveCount).
 		SetPolicyMaxReceiveQueue(c.opts.deadLetterQueue)
-	result, err := queueMessage.Send(ctx)
+	result, err := c.client.Send(ctx, queueMessage)
 	if err != nil {
 		return nil, err
 	}
-	if result.IsError {
-		return nil, fmt.Errorf(result.Error)
+	if len(result.Results) > 0 {
+		if result.Results[0].IsError {
+			return nil, fmt.Errorf(result.Results[0].Error)
+		}
 	}
 	return types.NewResponse(), nil
 }

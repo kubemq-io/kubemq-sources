@@ -123,9 +123,7 @@ func (c *Client) walk(ctx context.Context) error {
 		return err
 	}
 	var objects []*s3.Object
-	for _, object := range objList.Contents {
-		objects = append(objects, object)
-	}
+	objects = append(objects, objList.Contents...)
 
 	for _, object := range objects {
 		srcFile := NewSourceFile(c.client, c.downloader, c.opts.bucketName, object)

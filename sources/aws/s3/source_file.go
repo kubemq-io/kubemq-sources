@@ -16,7 +16,6 @@ type SourceFile struct {
 	Bucket     string
 	downloader *s3manager.Downloader
 	client     *s3.S3
-	hash       string
 }
 
 func NewSourceFile(c *s3.S3, downloader *s3manager.Downloader, bucket string, obj *s3.Object) *SourceFile {

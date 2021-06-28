@@ -23,11 +23,6 @@ const defaultApiPort = global.DefaultApiPort
 var configFile string
 var logr = logger.NewLogger("config")
 var lastConf *Config
-var defaultConfig = &Config{
-	Bindings: []BindingConfig{},
-	ApiPort:  defaultApiPort,
-	LogLevel: "info",
-}
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
@@ -143,18 +138,7 @@ func getConfigFile() (string, error) {
 		return loadedConfigFile, nil
 	}
 }
-func createDefaultConfig() (*Config, error) {
-	data, err := yaml.Marshal(defaultConfig)
-	if err != nil {
-		return nil, err
-	}
-	/* #nosec */
-	err = ioutil.WriteFile(configFile, data, 0644)
-	if err != nil {
-		return nil, err
-	}
-	return defaultConfig, nil
-}
+
 func load() (*Config, error) {
 	path, err := os.Executable()
 	if err != nil {

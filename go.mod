@@ -19,7 +19,7 @@ require (
 	github.com/kardianos/service v1.2.0
 	github.com/kubemq-hub/builder v0.7.2
 	github.com/kubemq-hub/ibmmq-sdk v0.3.8
-	github.com/kubemq-io/kubemq-go v1.7.0
+	github.com/kubemq-io/kubemq-go v1.7.2
 	github.com/labstack/echo/v4 v4.2.1
 	github.com/minio/minio-go/v7 v7.0.11
 	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
@@ -36,3 +36,6 @@ require (
 )
 
 //replace github.com/kubemq-hub/builder => ../builder
+//replace (
+//	github.com/kubemq-io/kubemq-go => ../../kubemq/kubemq-go
+//)
