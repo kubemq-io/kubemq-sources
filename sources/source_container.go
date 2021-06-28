@@ -128,7 +128,7 @@ func Init(ctx context.Context, cfg config.Spec, log *logger.Logger) (Source, err
 		return source, nil
 	case "storage.minio":
 		source := minio.New()
-		if err := source.Init(ctx, cfg, logger); err != nil {
+		if err := source.Init(ctx, cfg, log); err != nil {
 			return nil, err
 		}
 		return source, nil
