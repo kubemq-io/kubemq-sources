@@ -1,3 +1,4 @@
+//go:build !container
 // +build !container
 
 package main
@@ -8,14 +9,14 @@ import (
 	"fmt"
 	"github.com/ghodss/yaml"
 	"github.com/kubemq-hub/builder/connector/common"
-	"github.com/kubemq-hub/kubemq-sources/api"
-	"github.com/kubemq-hub/kubemq-sources/binding"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/pkg/browser"
-	"github.com/kubemq-hub/kubemq-sources/pkg/builder"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/sources"
-	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-io/kubemq-sources/api"
+	"github.com/kubemq-io/kubemq-sources/binding"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/pkg/browser"
+	"github.com/kubemq-io/kubemq-sources/pkg/builder"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/sources"
+	"github.com/kubemq-io/kubemq-sources/targets"
 	"io/ioutil"
 	"os"
 	"os/signal"

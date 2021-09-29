@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"context"
-	"github.com/kubemq-hub/kubemq-sources/pkg/retry"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/pkg/retry"
+	"github.com/kubemq-io/kubemq-sources/types"
 )
 
 type Middleware interface {
@@ -45,7 +45,7 @@ func Log(log *LogMiddleware) MiddlewareFunc {
 				if err != nil {
 					log.Errorf("error processing request: %s, response: %s, error:%s", reqStr, resStr, err.Error())
 				} else {
-					log.Infof("successful processing request: %s, response: %s",reqStr, resStr)
+					log.Infof("successful processing request: %s, response: %s", reqStr, resStr)
 				}
 			case "error":
 				reqStr := ""

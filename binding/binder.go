@@ -3,13 +3,13 @@ package binding
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/pkg/metrics"
-	"github.com/kubemq-hub/kubemq-sources/sources"
-	"github.com/kubemq-hub/kubemq-sources/sources/http"
-	"github.com/kubemq-hub/kubemq-sources/targets"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/pkg/metrics"
+	"github.com/kubemq-io/kubemq-sources/sources"
+	"github.com/kubemq-io/kubemq-sources/sources/http"
+	"github.com/kubemq-io/kubemq-sources/targets"
 )
 
 type Binder struct {

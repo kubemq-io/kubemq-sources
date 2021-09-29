@@ -3,7 +3,7 @@ package eventhubs
 import (
 	"fmt"
 	"github.com/Azure/azure-event-hubs-go/v3"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"time"
 )
 
@@ -42,7 +42,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 		return options{}, fmt.Errorf("error parsing entity_path , %w", err)
 	}
 	receiveType := cfg.Properties.ParseString("receive_type", defaultReceiveType)
-	
+
 	switch receiveType {
 	case "latest_offset":
 		o.receiveType = eventhub.ReceiveWithLatestOffset()
@@ -81,7 +81,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 		startingOffset := cfg.Properties.ParseString("starting_offset", defaultOffset)
 		o.receiveType = eventhub.ReceiveWithStartingOffset(startingOffset)
 	}
-	
+
 	o.connectionString = fmt.Sprintf("Endpoint=%s;SharedAccessKeyName=%s;SharedAccessKey=%s;EntityPath=%s", endPoint, sharedAccessKeyName, sharedAccessKey, entityPath)
 	return o, nil
 }

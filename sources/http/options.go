@@ -2,7 +2,7 @@ package http
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 type options struct {
@@ -23,6 +23,6 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return options{}, fmt.Errorf("error parsing path value, %w", err)
 	}
-	o.dynamicMapping = cfg.Properties.ParseBool("dynamic_mapping",false)
+	o.dynamicMapping = cfg.Properties.ParseBool("dynamic_mapping", false)
 	return o, nil
 }

@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/binding"
+	"github.com/kubemq-io/kubemq-sources/binding"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"strings"

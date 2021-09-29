@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/pkg/ratelimit"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"math"
 )
 

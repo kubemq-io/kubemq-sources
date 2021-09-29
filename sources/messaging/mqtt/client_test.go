@@ -3,10 +3,10 @@ package mqtt
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"testing"

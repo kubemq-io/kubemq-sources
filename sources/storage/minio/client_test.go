@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/google/uuid"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/minio/minio-go/v7"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"

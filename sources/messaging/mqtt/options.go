@@ -2,7 +2,7 @@ package mqtt
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/nats-io/nuid"
 )
 
@@ -15,6 +15,7 @@ type options struct {
 	clientId       string
 	qos            int
 }
+
 func parseOptions(cfg config.Spec) (options, error) {
 	o := options{}
 	var err error

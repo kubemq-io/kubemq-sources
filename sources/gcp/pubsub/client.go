@@ -6,10 +6,10 @@ import (
 	"fmt"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"google.golang.org/api/option"
 )
 

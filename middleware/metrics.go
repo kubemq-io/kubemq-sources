@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/pkg/metrics"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/pkg/metrics"
 )
 
 type MetricsMiddleware struct {

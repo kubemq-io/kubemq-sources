@@ -1,7 +1,7 @@
 package events_store
 
 import (
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

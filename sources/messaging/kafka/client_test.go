@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/stretchr/testify/require"
 )
 

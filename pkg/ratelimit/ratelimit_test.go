@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kubemq-hub/kubemq-sources/pkg/ratelimit"
-	"github.com/kubemq-hub/kubemq-sources/pkg/ratelimit/internal/clock"
+	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit"
+	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit/internal/clock"
 	"go.uber.org/atomic"
 
 	"github.com/stretchr/testify/assert"

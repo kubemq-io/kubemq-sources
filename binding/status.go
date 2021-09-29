@@ -2,7 +2,7 @@ package binding
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 type Status struct {

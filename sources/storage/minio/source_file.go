@@ -3,7 +3,7 @@ package minio
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/minio/minio-go/v7"
 	"io/ioutil"
 	"path/filepath"

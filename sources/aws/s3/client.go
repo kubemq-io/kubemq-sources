@@ -9,9 +9,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/kubemq-hub/builder/connector/common"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"sync"
 	"time"
 )

@@ -1,3 +1,4 @@
+//go:build container
 // +build container
 
 package ibmmq
@@ -9,10 +10,10 @@ import (
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/ibmmq-sdk/mq-golang-jms20/jms20subset"
 	"github.com/kubemq-hub/ibmmq-sdk/mq-golang-jms20/mqjms"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/types"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary

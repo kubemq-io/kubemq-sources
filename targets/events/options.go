@@ -2,7 +2,7 @@ package events
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/nats-io/nuid"
 )
 

@@ -2,15 +2,15 @@ package kafka
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 type options struct {
-	brokers       []string
-	topics        []string
-	consumerGroup string
-	saslUsername  string
-	saslPassword  string
+	brokers        []string
+	topics         []string
+	consumerGroup  string
+	saslUsername   string
+	saslPassword   string
 	dynamicMapping bool
 }
 

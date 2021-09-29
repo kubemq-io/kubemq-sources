@@ -1,10 +1,11 @@
+//go:build container
 // +build container
 
 package ibmmq
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/config"
 	"math"
 )
 

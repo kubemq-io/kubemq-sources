@@ -2,7 +2,7 @@ package filesystem
 
 import (
 	"fmt"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"io"
 	"io/ioutil"
 	"os"

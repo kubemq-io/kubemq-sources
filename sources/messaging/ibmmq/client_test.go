@@ -1,3 +1,4 @@
+//go:build container
 // +build container
 
 package ibmmq
@@ -6,10 +7,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/fortytw2/leaktest"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/middleware"
-	"github.com/kubemq-hub/kubemq-sources/types"
 	"github.com/kubemq-io/kubemq-go"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"

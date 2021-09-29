@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 	"github.com/kubemq-hub/builder/connector/common"
-	"github.com/kubemq-hub/kubemq-sources/config"
-	"github.com/kubemq-hub/kubemq-sources/pkg/logger"
-	"github.com/kubemq-hub/kubemq-sources/targets/command"
-	"github.com/kubemq-hub/kubemq-sources/targets/events"
-	event_store "github.com/kubemq-hub/kubemq-sources/targets/events-store"
-	"github.com/kubemq-hub/kubemq-sources/targets/query"
-	"github.com/kubemq-hub/kubemq-sources/targets/queue"
-	"github.com/kubemq-hub/kubemq-sources/types"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/kubemq-io/kubemq-sources/targets/command"
+	"github.com/kubemq-io/kubemq-sources/targets/events"
+	event_store "github.com/kubemq-io/kubemq-sources/targets/events-store"
+	"github.com/kubemq-io/kubemq-sources/targets/query"
+	"github.com/kubemq-io/kubemq-sources/targets/queue"
+	"github.com/kubemq-io/kubemq-sources/types"
 )
 
 type Target interface {
