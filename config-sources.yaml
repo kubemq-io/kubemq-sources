@@ -1,0 +1,34 @@
+bindings:
+  - name: s3.down
+    source:
+      kind: aws.s3
+      properties:
+        aws_key: your aws key
+        aws_secret_key: your aws secrete
+        region: your zone
+        token: ""
+        folders: '/'
+        target_type: filesystem
+        bucket_name: your bucket name
+        concurrency: 5
+        scan_interval: 2
+    target:
+      kind: kubemq.queue
+      properties:
+        address: localhost:50000
+        channel: queue.s3.down
+  - name: s3.up
+    source:
+      kind: storage.filesystem
+      properties:
+        folders: 'd:\sync\up'
+        bucket_type: aws
+        bucket_name: your bucket name
+        concurrency: 5
+        scan_interval: 2
+    target:
+      kind: kubemq.queue
+      properties:
+        address: localhost:50000
+        channel: queue.s3.up
+    properties: {}
