@@ -56,7 +56,7 @@ func (c *Client) createMetadataString(msg *pubsub.Message) string {
 		if err != nil {
 			return fmt.Sprintf("error parsing Attributes, %s", err.Error())
 		}
-		md["attributes"] = fmt.Sprintf("%s", a)
+		md["attributes"] = string(a)
 	}
 	md["publish_time"] = msg.PublishTime.String()
 	if msg.DeliveryAttempt != nil {

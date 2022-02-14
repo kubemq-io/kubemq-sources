@@ -56,7 +56,7 @@ func (c *Client) createMetadataString(event *eventhub.Event) string {
 		if err != nil {
 			return fmt.Sprintf("error parsing Properties, %s", err.Error())
 		}
-		md["properties"] = fmt.Sprintf("%s", a)
+		md["properties"] = string(a)
 	}
 	md["id"] = event.ID
 	str, err := json.MarshalToString(md)

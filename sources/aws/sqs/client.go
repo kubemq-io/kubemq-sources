@@ -41,14 +41,14 @@ func (c *Client) createMetadataString(msg *sqs.Message) string {
 		if err != nil {
 			return fmt.Sprintf("error parsing MessageAttributes, %s", err.Error())
 		}
-		md["message_attributes"] = fmt.Sprintf("%s", ma)
+		md["message_attributes"] = string(ma)
 	}
 	if len(msg.Attributes) > 0 {
 		a, err := json.Marshal(msg.Attributes)
 		if err != nil {
 			return fmt.Sprintf("error parsing Attributes, %s", err.Error())
 		}
-		md["attributes"] = fmt.Sprintf("%s", a)
+		md["attributes"] = string(a)
 	}
 	md["receipt_handler"] = *msg.ReceiptHandle
 	str, err := json.MarshalToString(md)

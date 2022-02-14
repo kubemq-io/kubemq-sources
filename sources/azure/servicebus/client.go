@@ -113,7 +113,7 @@ func (c *Client) createMetadataString(message *servicebus.Message) string {
 		if err != nil {
 			return fmt.Sprintf("error parsing UserProperties, %s", err.Error())
 		}
-		md["user_properties"] = fmt.Sprintf("%s", a)
+		md["user_properties"] = string(a)
 	}
 	md["format"] = fmt.Sprintf("%d", message.Format)
 	str, err := json.MarshalToString(md)

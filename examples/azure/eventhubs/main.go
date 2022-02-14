@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	eventhub "github.com/Azure/azure-event-hubs-go/v3"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
@@ -16,7 +15,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	connectionString := fmt.Sprintf("%s", dat)
+	connectionString := string(dat)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	client, err := kubemq.NewClient(context.Background(),

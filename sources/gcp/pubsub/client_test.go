@@ -67,12 +67,12 @@ func getTestStructure() (*testStructure, error) {
 	if err != nil {
 		return nil, err
 	}
-	t.credentials = fmt.Sprintf("%s", dat)
+	t.credentials = string(dat)
 	dat, err = ioutil.ReadFile("./../../../credentials/subscriberID.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.subscriberID = fmt.Sprintf("%s", dat)
+	t.subscriberID = string(dat)
 	return t, nil
 }
 

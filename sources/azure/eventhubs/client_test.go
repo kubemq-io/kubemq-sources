@@ -74,17 +74,17 @@ func getTestStructure() (*testStructure, error) {
 	if err != nil {
 		return nil, err
 	}
-	t.sharedAccessKeyName = fmt.Sprintf("%s", dat)
+	t.sharedAccessKeyName = string(dat)
 	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/sharedAccessKey.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.sharedAccessKey = fmt.Sprintf("%s", dat)
+	t.sharedAccessKey = string(dat)
 	dat, err = ioutil.ReadFile("./../../../credentials/azure/eventhubs/entityPath.txt")
 	if err != nil {
 		return nil, err
 	}
-	t.entityPath = fmt.Sprintf("%s", dat)
+	t.entityPath = string(dat)
 
 	return t, nil
 }
