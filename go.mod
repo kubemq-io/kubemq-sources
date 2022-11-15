@@ -22,16 +22,16 @@ require (
 	github.com/kubemq-io/kubemq-go v1.7.6
 	github.com/labstack/echo/v4 v4.9.1
 	github.com/minio/minio-go/v7 v7.0.43
-	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
-	github.com/nats-io/nats.go v1.19.0
+	github.com/nats-io/nats-server/v2 v2.7.2 // indirect
+	github.com/nats-io/nats.go v1.20.0
 	github.com/nats-io/nuid v1.0.1
-	github.com/prometheus/client_golang v1.13.1
-	github.com/spf13/viper v1.13.0
+	github.com/prometheus/client_golang v1.14.0
+	github.com/spf13/viper v1.14.0
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/atomic v1.10.0
 	go.uber.org/zap v1.23.0
-	google.golang.org/api v0.102.0
+	google.golang.org/api v0.103.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
