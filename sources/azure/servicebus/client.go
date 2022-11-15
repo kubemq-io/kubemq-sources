@@ -3,6 +3,7 @@ package servicebus
 import (
 	"context"
 	"fmt"
+
 	"github.com/Azure/azure-service-bus-go"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
@@ -23,11 +24,12 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {

@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-go"
 )
 
@@ -28,20 +29,23 @@ func (r *Response) SetData(value []byte) *Response {
 	r.Data = value
 	return r
 }
+
 func (r *Response) SetError(err error) *Response {
 	r.IsError = true
 	r.Error = err.Error()
 	return r
 }
+
 func (r *Response) MarshalBinary() []byte {
 	data, _ := json.Marshal(r)
 	return data
 }
+
 func (r *Response) ToEvent() *kubemq.Event {
 	return kubemq.NewEvent().
 		SetBody(r.MarshalBinary())
-
 }
+
 func (r *Response) ToEventStore() *kubemq.EventStore {
 	return kubemq.NewEventStore().
 		SetBody(r.MarshalBinary())
@@ -63,14 +67,17 @@ func (r *Response) ToQueueMessage() *kubemq.QueueMessage {
 	return kubemq.NewQueueMessage().
 		SetBody(r.MarshalBinary())
 }
+
 func (r *Response) ToResponse() *kubemq.Response {
 	return kubemq.NewResponse().
 		SetMetadata(r.Metadata).
 		SetBody(r.Data)
 }
+
 func (r *Response) Size() float64 {
 	return float64(len(r.Data))
 }
+
 func (r *Response) String() string {
 	str, err := json.MarshalToString(r)
 	if err != nil {
@@ -78,6 +85,7 @@ func (r *Response) String() string {
 	}
 	return str
 }
+
 func parseResponse(meta string, body []byte, errText string) (*Response, error) {
 	res := NewResponse()
 	if errText != "" {
@@ -89,18 +97,23 @@ func parseResponse(meta string, body []byte, errText string) (*Response, error) 
 
 		nil
 }
+
 func ParseResponseFromEvent(event *kubemq.Event) (*Response, error) {
 	return parseResponse(event.Metadata, event.Body, "")
 }
+
 func ParseResponseFromEventReceive(event *kubemq.EventStoreReceive) (*Response, error) {
 	return parseResponse(event.Metadata, event.Body, "")
 }
+
 func ParseResponseFromCommandResponse(resp *kubemq.CommandResponse) (*Response, error) {
 	return parseResponse("", nil, resp.Error)
 }
+
 func ParseResponseFromQueryResponse(resp *kubemq.QueryResponse) (*Response, error) {
 	return parseResponse(resp.Metadata, resp.Body, resp.Error)
 }
+
 func ParseResponseFromQueueMessage(resp *kubemq.QueueMessage) (*Response, error) {
 	return parseResponse(resp.Metadata, resp.Body, "")
 }

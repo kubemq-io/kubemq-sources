@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"crypto/tls"
+	"log"
+	"time"
+
 	"github.com/go-stomp/stomp"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
-	"log"
-	"time"
 )
 
 func main() {
@@ -18,7 +19,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,7 +45,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 
 	netConn, err := tls.Dial("tcp", "localhost:61614", &tls.Config{})

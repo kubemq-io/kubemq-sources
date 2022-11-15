@@ -3,6 +3,7 @@ package targets
 import (
 	"context"
 	"fmt"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
@@ -22,7 +23,6 @@ type Target interface {
 }
 
 func Init(ctx context.Context, cfg config.Spec, log *logger.Logger) (Target, error) {
-
 	switch cfg.Kind {
 	case "kubemq.command":
 		target := command.New()
@@ -58,7 +58,6 @@ func Init(ctx context.Context, cfg config.Spec, log *logger.Logger) (Target, err
 	default:
 		return nil, fmt.Errorf("invalid kind %s for target %s", cfg.Kind, cfg.Name)
 	}
-
 }
 
 func Connectors() common.Connectors {

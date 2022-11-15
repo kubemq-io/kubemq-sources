@@ -2,9 +2,10 @@ package builder
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/go-resty/resty/v2"
 	"gopkg.in/yaml.v2"
-	"strings"
 )
 
 type ConnectorConfig struct {
@@ -21,7 +22,6 @@ type ConnectorConfig struct {
 }
 
 func GetBuildManifest(url string) (*ConnectorConfig, error) {
-
 	resp, err := resty.New().NewRequest().Get(url)
 	if err != nil {
 		return nil, err
@@ -49,5 +49,4 @@ func parseConnectorConfig(manifest string) (*ConnectorConfig, error) {
 	default:
 		return nil, fmt.Errorf("config is not a connector")
 	}
-
 }

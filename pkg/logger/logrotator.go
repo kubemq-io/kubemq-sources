@@ -51,7 +51,7 @@ var _ io.WriteCloser = (*LogRotator)(nil)
 // `/var/log/foo/server.log`, a backup created at 6:30pm on Nov 11 2016 would
 // use the filename `/var/log/foo/server-2016-11-04T18-30-00.000.log`
 //
-// Cleaning Up Old Log Files
+// # Cleaning Up Old Log Files
 //
 // Whenever a new logfile gets created, old log files may be deleted.  The most
 // recent files according to the encoded timestamp will be retained, up to a
@@ -147,6 +147,7 @@ func (l *LogRotator) Write(p []byte) (n int, err error) {
 
 	return n, err
 }
+
 func (l *LogRotator) Sync() error {
 	return nil
 }
@@ -196,13 +197,13 @@ func (l *LogRotator) rotate() error {
 // openNew opens a new log file for writing, moving any old log file out of the
 // way.  This methods assumes the file has already been closed.
 func (l *LogRotator) openNew() error {
-	err := os.MkdirAll(l.dir(), 0744)
+	err := os.MkdirAll(l.dir(), 0o744)
 	if err != nil {
 		return fmt.Errorf("can't make directories for new logfile: %s", err)
 	}
 
 	name := l.filename()
-	mode := os.FileMode(0644)
+	mode := os.FileMode(0o644)
 	info, err := os_Stat(name)
 	if err == nil {
 		// Copy the mode off the old logfile.
@@ -267,7 +268,7 @@ func (l *LogRotator) openExistingOrNew(writeLen int) error {
 		return l.rotate()
 	}
 
-	file, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0o644)
 	if err != nil {
 		// if we fail to open the old log file for some reason, just ignore
 		// it and open a new log file.

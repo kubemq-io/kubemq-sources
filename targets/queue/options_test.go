@@ -1,13 +1,13 @@
 package queue
 
 import (
+	"testing"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestOptions_parseOptions(t *testing.T) {
-
 	tests := []struct {
 		name     string
 		cfg      config.Spec
@@ -123,10 +123,8 @@ func TestOptions_parseOptions(t *testing.T) {
 			gotOpts, err := parseOptions(tt.cfg)
 			if tt.wantErr {
 				require.Error(t, err)
-
 			} else {
 				require.NoError(t, err)
-
 			}
 			require.EqualValues(t, tt.wantOpts, gotOpts)
 		})

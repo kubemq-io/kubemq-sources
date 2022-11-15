@@ -3,6 +3,8 @@ package activemq
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/go-stomp/stomp"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
@@ -10,7 +12,6 @@ import (
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"time"
 )
 
 const (
@@ -29,6 +30,7 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
@@ -100,7 +102,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 				return
 			}
 		}
-
 	}()
 
 	select {

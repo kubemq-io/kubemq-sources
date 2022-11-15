@@ -2,6 +2,7 @@ package nats
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 )
 

@@ -3,14 +3,14 @@ package query
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/stretchr/testify/require"
-	"testing"
-
-	"time"
 )
 
 type mockQueryReceiver struct {
@@ -55,12 +55,12 @@ func (m *mockQueryReceiver) run(ctx context.Context, t *testing.T) error {
 			case <-ctx.Done():
 				return
 			}
-
 		}
 	}()
 	time.Sleep(time.Second)
 	return nil
 }
+
 func TestClient_Do(t *testing.T) {
 	tests := []struct {
 		name         string
@@ -168,7 +168,6 @@ func TestClient_Do(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec

@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"context"
+
 	"github.com/kubemq-io/kubemq-sources/pkg/retry"
 	"github.com/kubemq-io/kubemq-sources/types"
 )
@@ -64,6 +65,7 @@ func Log(log *LogMiddleware) MiddlewareFunc {
 		})
 	}
 }
+
 func RateLimiter(rl *RateLimitMiddleware) MiddlewareFunc {
 	return func(df Middleware) Middleware {
 		return DoFunc(func(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -89,6 +91,7 @@ func Retry(r *RetryMiddleware) MiddlewareFunc {
 		})
 	}
 }
+
 func Metric(m *MetricsMiddleware) MiddlewareFunc {
 	return func(df Middleware) Middleware {
 		return DoFunc(func(ctx context.Context, request *types.Request) (*types.Response, error) {
@@ -110,6 +113,7 @@ func Metric(m *MetricsMiddleware) MiddlewareFunc {
 		})
 	}
 }
+
 func Chain(md Middleware, list ...MiddlewareFunc) Middleware {
 	chain := md
 	for _, middleware := range list {

@@ -2,8 +2,9 @@ package s3
 
 import (
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/config"
 	"strings"
+
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 var bucketTypeMap = map[string]string{
@@ -69,6 +70,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	}
 	return o, nil
 }
+
 func unixNormalize(in string) string {
 	return strings.Replace(in, `\`, "/", -1)
 }

@@ -1,13 +1,13 @@
 package command
 
 import (
+	"testing"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestOptions_parseOptions(t *testing.T) {
-
 	tests := []struct {
 		name     string
 		cfg      config.Spec

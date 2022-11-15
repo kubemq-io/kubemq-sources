@@ -3,10 +3,11 @@ package msk
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-io/kubemq-go"
-	"github.com/nats-io/nuid"
 	"testing"
 	"time"
+
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/middleware"
@@ -20,13 +21,11 @@ type mockMiddleware struct {
 }
 
 func (m *mockMiddleware) Init() {
-
 	client, err := kubemq.NewClient(context.Background(),
 		kubemq.WithAddress("localhost", 50000),
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		panic(err)
 	}
@@ -50,7 +49,6 @@ func (m *mockMiddleware) Do(ctx context.Context, request *types.Request) (*types
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec
@@ -81,7 +79,8 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		}, {
+		},
+		{
 			name: "invalid init - missing brokers ",
 			cfg: config.Spec{
 				Name: "aws.msk",
@@ -92,7 +91,8 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		}, {
+		},
+		{
 			name: "invalid init - missing topics ",
 			cfg: config.Spec{
 				Name: "aws.msk",
@@ -103,7 +103,8 @@ func TestClient_Init(t *testing.T) {
 				},
 			},
 			wantErr: true,
-		}, {
+		},
+		{
 			name: "invalid init - missing consumer_group ",
 			cfg: config.Spec{
 				Name: "aws.msk",
@@ -126,7 +127,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantExecErr %v", err, tt.wantErr)
 				return
 			}
-
 		})
 	}
 }
@@ -179,8 +179,6 @@ func TestClient_Do(t *testing.T) {
 			err = c.Stop()
 			require.Nil(t, err)
 			time.Sleep(time.Duration(15) * time.Second)
-
 		})
-
 	}
 }

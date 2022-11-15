@@ -3,6 +3,7 @@ package binding
 import (
 	"context"
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
@@ -24,6 +25,7 @@ type Binder struct {
 func NewBinder() *Binder {
 	return &Binder{}
 }
+
 func (b *Binder) buildMiddleware(cfg config.BindingConfig, exporter *metrics.Exporter, log *middleware.LogMiddleware) (middleware.Middleware, error) {
 	retry, err := middleware.NewRetryMiddleware(cfg.Properties, b.log)
 	if err != nil {
@@ -40,6 +42,7 @@ func (b *Binder) buildMiddleware(cfg config.BindingConfig, exporter *metrics.Exp
 	md := middleware.Chain(b.target, middleware.RateLimiter(rateLimiter), middleware.Retry(retry), middleware.Metric(met), middleware.Log(log))
 	return md, nil
 }
+
 func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *metrics.Exporter) error {
 	b.name = cfg.Name
 	log, err := middleware.NewLogMiddleware(cfg.Name, cfg.Properties)
@@ -86,6 +89,7 @@ func (b *Binder) Start(ctx context.Context) error {
 	b.log.Infof("binding: %s, started successfully", b.name)
 	return nil
 }
+
 func (b *Binder) Stop() error {
 	err := b.source.Stop()
 	if err != nil {

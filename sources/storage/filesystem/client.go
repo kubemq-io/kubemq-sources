@@ -3,15 +3,15 @@ package filesystem
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-hub/builder/connector/common"
-	"github.com/kubemq-io/kubemq-sources/config"
-	"github.com/kubemq-io/kubemq-sources/middleware"
-	"github.com/kubemq-io/kubemq-sources/pkg/logger"
-
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
+
+	"github.com/kubemq-hub/builder/connector/common"
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/middleware"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 )
 
 type Client struct {
@@ -34,9 +34,11 @@ func New() *Client {
 		absRootFolders: map[string]string{},
 	}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
@@ -62,7 +64,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	}
 	if c.opts.backupFolder != "" {
 		if _, err := os.Stat(c.opts.backupFolder); os.IsNotExist(err) {
-			err = os.MkdirAll(c.opts.backupFolder, 0660)
+			err = os.MkdirAll(c.opts.backupFolder, 0o660)
 			if err != nil {
 				return err
 			}
@@ -82,11 +84,13 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	go c.send(c.ctx)
 	return nil
 }
+
 func (c *Client) Stop() error {
 	c.cancelFunc()
 	c.waiting = sync.Map{}
 	return nil
 }
+
 func (c *Client) inPipe(file *SourceFile) bool {
 	if _, ok := c.waiting.Load(file.FullPath()); ok {
 		return true
@@ -108,6 +112,7 @@ func (c *Client) inPipe(file *SourceFile) bool {
 	}
 	return false
 }
+
 func (c *Client) walk(folder string) error {
 	var list []*SourceFile
 	err := filepath.Walk(folder, func(path string, info os.FileInfo, err error) error {
@@ -119,7 +124,6 @@ func (c *Client) walk(folder string) error {
 		}
 		return nil
 	})
-
 	if err != nil {
 		return err
 	}
@@ -177,6 +181,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 		}
 	}
 }
+
 func (c *Client) scan(ctx context.Context) {
 	for {
 		select {
@@ -192,6 +197,7 @@ func (c *Client) scan(ctx context.Context) {
 		}
 	}
 }
+
 func (c *Client) send(ctx context.Context) {
 	for {
 		select {

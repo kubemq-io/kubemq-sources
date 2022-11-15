@@ -3,37 +3,39 @@ package logger
 import (
 	"context"
 	"fmt"
+	"os"
+	"path/filepath"
+
 	"github.com/kubemq-io/kubemq-sources/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"os"
-	"path/filepath"
 )
 
-var ServiceLog = NewServiceLogger()
-var core = initCore()
-var encoderConfig = zapcore.EncoderConfig{
-	TimeKey:        "time",
-	LevelKey:       "level",
-	NameKey:        "name",
-	CallerKey:      "caller",
-	MessageKey:     "msg",
-	StacktraceKey:  "stack",
-	LineEnding:     zapcore.DefaultLineEnding,
-	EncodeLevel:    zapcore.CapitalLevelEncoder,
-	EncodeTime:     zapcore.ISO8601TimeEncoder,
-	EncodeDuration: zapcore.StringDurationEncoder,
-	EncodeCaller:   zapcore.FullCallerEncoder,
-}
+var (
+	ServiceLog    = NewServiceLogger()
+	core          = initCore()
+	encoderConfig = zapcore.EncoderConfig{
+		TimeKey:        "time",
+		LevelKey:       "level",
+		NameKey:        "name",
+		CallerKey:      "caller",
+		MessageKey:     "msg",
+		StacktraceKey:  "stack",
+		LineEnding:     zapcore.DefaultLineEnding,
+		EncodeLevel:    zapcore.CapitalLevelEncoder,
+		EncodeTime:     zapcore.ISO8601TimeEncoder,
+		EncodeDuration: zapcore.StringDurationEncoder,
+		EncodeCaller:   zapcore.FullCallerEncoder,
+	}
+)
 
 func initCore() zapcore.Core {
-
 	var w zapcore.WriteSyncer
 	std, _, _ := zap.Open("stderr")
 	if global.EnableLogFile {
 		path, _ := os.Executable()
 
-		err := os.MkdirAll("./logs", 0660)
+		err := os.MkdirAll("./logs", 0o660)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -42,7 +44,7 @@ func initCore() zapcore.Core {
 			Filename:   filepath.Join(filepath.Dir(path), "/logs/kubemq-sources.log"),
 			MaxSize:    100, // megabytes
 			MaxBackups: 5,
-			MaxAge:     28, //days
+			MaxAge:     28, // days
 		}
 		w = zap.CombineWriteSyncers(std, logR, ServiceLog)
 	} else {
@@ -98,6 +100,7 @@ func (l *Logger) Tracef(format string, v ...interface{}) {
 	str := fmt.Sprintf(format, v...)
 	l.Debug(str)
 }
+
 func (l *Logger) Fatalf(format string, v ...interface{}) {
 	str := fmt.Sprintf(format, v...)
 	l.DPanicf(str)

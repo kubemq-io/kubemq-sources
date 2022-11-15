@@ -1,8 +1,9 @@
 package command
 
 import (
-	"github.com/kubemq-hub/builder/connector/common"
 	"math"
+
+	"github.com/kubemq-hub/builder/connector/common"
 )
 
 func Connector() *common.Connector {

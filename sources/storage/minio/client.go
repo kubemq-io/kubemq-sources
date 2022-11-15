@@ -2,14 +2,15 @@ package minio
 
 import (
 	"context"
+	"sync"
+	"time"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"sync"
-	"time"
 )
 
 type Client struct {
@@ -33,9 +34,11 @@ func New() *Client {
 		scanFolders: map[string]string{},
 	}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
@@ -73,7 +76,6 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	return nil
 }
 
-//
 func (c *Client) inPipe(ctx context.Context, file *SourceFile) bool {
 	if _, ok := c.waiting.Load(file.FullPath()); ok {
 		return true
@@ -96,7 +98,6 @@ func (c *Client) inPipe(ctx context.Context, file *SourceFile) bool {
 	return false
 }
 
-//
 func (c *Client) walk(ctx context.Context) error {
 	var list []*SourceFile
 	var objects []minio.ObjectInfo
@@ -128,7 +129,6 @@ func (c *Client) walk(ctx context.Context) error {
 	return nil
 }
 
-//
 func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 	for {
 		select {
@@ -170,6 +170,7 @@ func (c *Client) senderFunc(ctx context.Context, sender middleware.Middleware) {
 		}
 	}
 }
+
 func (c *Client) scan(ctx context.Context) {
 	for {
 		select {
@@ -183,6 +184,7 @@ func (c *Client) scan(ctx context.Context) {
 		}
 	}
 }
+
 func (c *Client) send(ctx context.Context) {
 	for {
 		select {

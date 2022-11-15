@@ -3,14 +3,14 @@ package command
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/stretchr/testify/require"
-	"testing"
-
-	"time"
 )
 
 type mockCommandReceiver struct {
@@ -52,7 +52,6 @@ func (m *mockCommandReceiver) run(ctx context.Context, t *testing.T) error {
 			case <-ctx.Done():
 				return
 			}
-
 		}
 	}()
 	time.Sleep(time.Second)
@@ -162,7 +161,6 @@ func TestClient_Do(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec
@@ -205,7 +203,6 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-
 		})
 	}
 }

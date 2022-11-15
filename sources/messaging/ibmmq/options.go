@@ -5,8 +5,9 @@ package ibmmq
 
 import (
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/config"
 	"math"
+
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 const (

@@ -2,6 +2,7 @@ package amazonmq
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 )
 

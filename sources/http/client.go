@@ -2,15 +2,16 @@ package http
 
 import (
 	"context"
+	"io/ioutil"
+	"net/http"
+	"net/http/httputil"
+	"strings"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
 	targetMiddleware "github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"io/ioutil"
-	"net/http"
-	"net/http/httputil"
-	"strings"
 )
 
 type Client struct {
@@ -27,7 +28,6 @@ func (c *Client) Connector() *common.Connector {
 
 func New() *Client {
 	return &Client{}
-
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
@@ -69,8 +69,8 @@ func (c *Client) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(200)
 	_, _ = w.Write(resp.Data)
-
 }
+
 func (c *Client) Stop() error {
 	return nil
 }

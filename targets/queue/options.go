@@ -2,9 +2,10 @@ package queue
 
 import (
 	"fmt"
+	"math"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/nats-io/nuid"
-	"math"
 )
 
 const (

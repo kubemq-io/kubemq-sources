@@ -3,11 +3,12 @@ package api
 import (
 	"context"
 	"fmt"
+	"strings"
+	"time"
+
 	"github.com/kubemq-io/kubemq-sources/binding"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"strings"
-	"time"
 )
 
 type Server struct {
@@ -32,9 +33,7 @@ func Start(ctx context.Context, port int, bs *binding.Service) (*Server, error) 
 	s.echoWebServer.Use(middleware.CORS())
 
 	s.echoWebServer.GET("/health", func(c echo.Context) error {
-
 		return c.String(200, "ok")
-
 	})
 	s.echoWebServer.GET("/ready", func(c echo.Context) error {
 		return c.String(200, "ready")

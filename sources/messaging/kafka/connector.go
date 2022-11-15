@@ -11,7 +11,7 @@ func Connector() *common.Connector {
 		SetName("Kafka").
 		SetProvider("").
 		SetCategory("Messaging").
-		SetTags("pub/sub","streaming").
+		SetTags("pub/sub", "streaming").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
@@ -56,11 +56,51 @@ func Connector() *common.Connector {
 				SetDefault(""),
 		).
 		AddProperty(
-		common.NewProperty().
-			SetKind("bool").
-			SetName("dynamic_mapping").
-			SetDescription("Set Topic/Channel dynamic mapping").
-			SetMust(true).
-			SetDefault("true"),
-	)
+			common.NewProperty().
+				SetKind("string").
+				SetName("saslMechanism").
+				SetDescription("Set SASL Mechanism").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("string").
+				SetName("securityProtocol").
+				SetDescription("Set Security Protocol").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("multilines").
+				SetName("ca_cert").
+				SetDescription("Set TLS CA Certificate").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("multilines").
+				SetName("client_certificate").
+				SetDescription("Set TLS Client PEM data").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("multilines").
+				SetName("client_key").
+				SetDescription("Set TLS Client Key PEM data").
+				SetMust(false).
+				SetDefault(""),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("bool").
+				SetName("dynamic_mapping").
+				SetDescription("Set Topic/Channel dynamic mapping").
+				SetMust(true).
+				SetDefault("true"),
+		)
 }

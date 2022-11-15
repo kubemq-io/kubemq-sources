@@ -1,8 +1,9 @@
 package eventhubs
 
 import (
-	"github.com/kubemq-hub/builder/connector/common"
 	"math"
+
+	"github.com/kubemq-hub/builder/connector/common"
 )
 
 func Connector() *common.Connector {
@@ -12,7 +13,7 @@ func Connector() *common.Connector {
 		SetName("EventsHub").
 		SetProvider("Azure").
 		SetCategory("Messaging").
-		SetTags("events","iot","cloud","managed").
+		SetTags("events", "iot", "cloud", "managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

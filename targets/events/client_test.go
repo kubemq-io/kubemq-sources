@@ -3,14 +3,14 @@ package events
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/stretchr/testify/require"
-	"testing"
-
-	"time"
 )
 
 type mockEventReceiver struct {
@@ -45,7 +45,6 @@ func (m *mockEventReceiver) run(ctx context.Context) (*kubemq.Event, error) {
 	case <-time.After(m.timeout):
 		return nil, fmt.Errorf("timeout")
 	}
-
 }
 
 func TestClient_Do(t *testing.T) {
@@ -119,7 +118,6 @@ func TestClient_Do(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec

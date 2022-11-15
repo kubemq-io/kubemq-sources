@@ -71,7 +71,6 @@ func Connector() *common.Connector {
 				SetMust(false).
 				SetDefault(""),
 		).
-
 		AddProperty(
 			common.NewProperty().
 				SetKind("int").

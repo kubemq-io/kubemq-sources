@@ -9,7 +9,7 @@ func Connector() *common.Connector {
 		SetName("AmazonMQ").
 		SetProvider("AWS").
 		SetCategory("Messaging").
-		SetTags("queue","pub/sub","cloud","managed").
+		SetTags("queue", "pub/sub", "cloud", "managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
@@ -17,7 +17,6 @@ func Connector() *common.Connector {
 				SetTitle("Host Address").
 				SetDescription("Set AmazonMQ host").
 				SetMust(true),
-
 		).
 		AddProperty(
 			common.NewProperty().

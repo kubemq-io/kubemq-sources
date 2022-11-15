@@ -2,6 +2,7 @@ package binding
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 )
 
@@ -18,6 +19,7 @@ type Status struct {
 func getTargetConnection(properties map[string]string) string {
 	return fmt.Sprintf("%s/%s", properties["address"], properties["channel"])
 }
+
 func newStatus(cfg config.BindingConfig) *Status {
 	return &Status{
 		Binding:          cfg.Name,

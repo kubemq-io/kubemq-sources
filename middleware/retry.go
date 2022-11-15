@@ -2,11 +2,12 @@ package middleware
 
 import (
 	"fmt"
+	"math"
+	"time"
+
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/pkg/retry"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"math"
-	"time"
 )
 
 var delayTypeMap = map[string]string{

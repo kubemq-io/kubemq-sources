@@ -3,6 +3,7 @@ package eventhubs
 import (
 	"context"
 	"fmt"
+
 	"github.com/Azure/azure-event-hubs-go/v3"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
@@ -23,13 +24,13 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
-func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 
+func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)

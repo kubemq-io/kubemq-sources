@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/config"
-	"github.com/kubemq-io/kubemq-sources/types"
-	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/kubemq-io/kubemq-sources/config"
+	"github.com/kubemq-io/kubemq-sources/types"
+	"github.com/stretchr/testify/require"
 )
 
 type mockTarget struct {
@@ -85,6 +86,7 @@ func TestHandler_ServeHTTP_GET(t *testing.T) {
 	handler.ServeHTTP(rr, req)
 	require.Equal(t, 200, rr.Code)
 }
+
 func TestHandler_ServeHTTP_TargetError(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -151,7 +153,6 @@ func TestHandler_ServeHTTP_ExecutionError(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec

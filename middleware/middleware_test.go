@@ -3,14 +3,15 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"math"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/pkg/metrics"
 	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/stretchr/testify/require"
-	"math"
-	"testing"
-	"time"
 )
 
 type mockTarget struct {
@@ -114,7 +115,6 @@ func TestClient_RateLimiter(t *testing.T) {
 			}
 		done:
 			require.LessOrEqual(t, tt.mock.executed, tt.wantMaxExecution)
-
 		})
 	}
 }
@@ -318,10 +318,10 @@ func TestClient_Retry(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, resp)
 			}
-
 		})
 	}
 }
+
 func TestClient_Metric(t *testing.T) {
 	exporter, err := metrics.NewExporter()
 	require.NoError(t, err)
@@ -425,8 +425,8 @@ func TestClient_Metric(t *testing.T) {
 		})
 	}
 }
-func TestClient_Log(t *testing.T) {
 
+func TestClient_Log(t *testing.T) {
 	tests := []struct {
 		name    string
 		mock    *mockTarget
@@ -533,6 +533,7 @@ func TestClient_Log(t *testing.T) {
 		})
 	}
 }
+
 func TestClient_Chain(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

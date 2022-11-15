@@ -3,6 +3,8 @@ package mqtt
 import (
 	"context"
 	"fmt"
+	"time"
+
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
@@ -10,7 +12,6 @@ import (
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"time"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -29,12 +30,12 @@ type Client struct {
 func New() *Client {
 	return &Client{}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
-
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -84,6 +85,7 @@ func (c *Client) createMetadataString(msg mqtt.Message) string {
 	}
 	return str
 }
+
 func (c *Client) processIncomingMessages(ctx context.Context, msg mqtt.Message) {
 	req := types.NewRequest().
 		SetMetadata(c.createMetadataString(msg)).
@@ -96,6 +98,7 @@ func (c *Client) processIncomingMessages(ctx context.Context, msg mqtt.Message) 
 		c.log.Errorf("error processing mqtt message %d , %s", msg.MessageID(), err.Error())
 	}
 }
+
 func (c *Client) Stop() error {
 	c.client.Disconnect(250)
 	return nil

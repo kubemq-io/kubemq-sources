@@ -2,18 +2,23 @@ package rabbitmq
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/nats-io/nuid"
 )
 
 type options struct {
-	url            string
-	dynamicMapping bool
-	queue          string
-	consumer       string
-	requeueOnError bool
-	autoAck        bool
-	exclusive      bool
+	url               string
+	dynamicMapping    bool
+	queue             string
+	consumer          string
+	requeueOnError    bool
+	autoAck           bool
+	exclusive         bool
+	clientCertificate string
+	clientKey         string
+	caCert            string
+	insecure          bool
 }
 
 func parseOptions(cfg config.Spec) (options, error) {
@@ -33,5 +38,9 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.requeueOnError = cfg.Properties.ParseBool("requeue_on_error", false)
 	o.autoAck = cfg.Properties.ParseBool("auto_ack", false)
 	o.exclusive = cfg.Properties.ParseBool("exclusive", false)
+	o.caCert = cfg.Properties.ParseString("ca_cert", "")
+	o.clientCertificate = cfg.Properties.ParseString("client_certificate", "")
+	o.clientKey = cfg.Properties.ParseString("client_key", "")
+	o.insecure = cfg.Properties.ParseBool("insecure", false)
 	return o, nil
 }

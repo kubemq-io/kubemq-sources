@@ -1,3 +1,4 @@
+//go:build !linux && !windows && !darwin && !openbsd
 // +build !linux,!windows,!darwin,!openbsd
 
 package browser

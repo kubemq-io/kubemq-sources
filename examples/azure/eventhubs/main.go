@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	eventhub "github.com/Azure/azure-event-hubs-go/v3"
-	"github.com/kubemq-io/kubemq-go"
-	"github.com/nats-io/nuid"
 	"io/ioutil"
 	"log"
 	"time"
+
+	eventhub "github.com/Azure/azure-event-hubs-go/v3"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 )
 
 func main() {
@@ -23,7 +24,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,7 +50,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 	eventHubClient, err := eventhub.NewHubFromConnectionString(connectionString)
 	event := &eventhub.Event{

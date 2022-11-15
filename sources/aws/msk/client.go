@@ -4,9 +4,10 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"sync"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
-	"sync"
 
 	kafka "github.com/Shopify/sarama"
 	"github.com/kubemq-io/kubemq-sources/config"
@@ -86,12 +87,12 @@ func (consumer *consumer) createMetadataString(message *kafka.ConsumerMessage) s
 func New() *Client {
 	return &Client{}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
-
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -127,7 +128,6 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
 	if target == nil {
 		return fmt.Errorf("invalid target received, cannot be nil")
 	}
@@ -162,7 +162,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	return nil
 }
 
-//see https://github.com/Shopify/sarama/issues/1321
+// see https://github.com/Shopify/sarama/issues/1321
 func (c *Client) Stop() error {
 	c.cancel()
 	if c.cg != nil {

@@ -21,9 +21,10 @@
 package ratelimit
 
 import (
-	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit/internal/clock"
 	"sync"
 	"time"
+
+	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit/internal/clock"
 )
 
 type mutexLimiter struct {

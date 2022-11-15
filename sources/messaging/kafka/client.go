@@ -3,10 +3,12 @@ package kafka
 import (
 	"context"
 	"crypto/tls"
+	"crypto/x509"
 	"fmt"
+	"sync"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
-	"sync"
 
 	kafka "github.com/Shopify/sarama"
 	"github.com/kubemq-io/kubemq-sources/config"
@@ -72,12 +74,12 @@ func (consumer *consumer) Setup(kafka.ConsumerGroupSession) error {
 func New() *Client {
 	return &Client{}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
-
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -91,19 +93,38 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 
 	kc := kafka.NewConfig()
 	kc.Version = kafka.V2_0_0_0
+	isSSL, isSASL := c.opts.parseSecurityProtocol()
 
-	if c.opts.saslUsername != "" {
-		kc.Net.SASL.Enable = true
+	if isSASL {
+		kc.Net.SASL.Enable = isSASL
 		kc.Net.SASL.User = c.opts.saslUsername
 		kc.Net.SASL.Password = c.opts.saslPassword
-
+		kc.Net.SASL.Mechanism = c.opts.parseASLMechanism()
+	}
+	if isSSL {
 		kc.Net.TLS.Enable = true
-		kc.Net.TLS.Config = &tls.Config{
-			ClientAuth: 0,
+		tlsCfg := &tls.Config{
+			InsecureSkipVerify: c.opts.insecure,
 		}
+		if c.opts.cacert != "" {
+			caCertPool := x509.NewCertPool()
+			if !caCertPool.AppendCertsFromPEM([]byte(c.opts.cacert)) {
+				return fmt.Errorf("error loading Root CA Cert")
+			}
+			tlsCfg.RootCAs = caCertPool
+			c.log.Infof("TLS CA Cert Loaded for Kafka Connection")
+		}
+		if c.opts.clientCert != "" && c.opts.clientKey != "" {
+			cert, err := tls.X509KeyPair([]byte(c.opts.clientCert), []byte(c.opts.clientKey))
+			if err != nil {
+				return fmt.Errorf("error loading tls client key pair, %s", err.Error())
+			}
+			tlsCfg.Certificates = []tls.Certificate{cert}
+			c.log.Infof("TLS Client Key Pair Loaded for Kafka Connection")
+		}
+		kc.Net.TLS.Config = tlsCfg
 	}
 	c.config = kc
-
 	c.cg, err = kafka.NewConsumerGroup(c.opts.brokers, c.consumerGroup, kc)
 	if err != nil {
 		return err
@@ -127,7 +148,6 @@ func (consumer *consumer) createMetadataString(message *kafka.ConsumerMessage) s
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
 	if target == nil {
 		return fmt.Errorf("invalid target received, cannot be nil")
 	}
@@ -162,7 +182,7 @@ func (c *Client) Start(ctx context.Context, target middleware.Middleware) error 
 	return nil
 }
 
-//see https://github.com/Shopify/sarama/issues/1321
+// see https://github.com/Shopify/sarama/issues/1321
 func (c *Client) Stop() error {
 	c.cancel()
 	if c.cg != nil {

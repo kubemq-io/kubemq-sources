@@ -21,11 +21,11 @@
 package ratelimit // import "go.uber.org/ratelimit"
 
 import (
+	"sync/atomic"
 	"time"
+	"unsafe"
 
 	"github.com/kubemq-io/kubemq-sources/pkg/ratelimit/internal/clock"
-	"sync/atomic"
-	"unsafe"
 )
 
 // Note: This file is inspired by:

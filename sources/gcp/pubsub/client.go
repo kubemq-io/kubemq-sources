@@ -1,9 +1,11 @@
 package pubsub
 
 import (
-	"cloud.google.com/go/pubsub"
 	"context"
 	"fmt"
+
+	"cloud.google.com/go/pubsub"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
@@ -23,8 +25,8 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
@@ -71,10 +73,9 @@ func (c *Client) createMetadataString(msg *pubsub.Message) string {
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
+	receivedMessage := make(chan *pubsub.Message, 1)
 
-	var receivedMessage = make(chan *pubsub.Message, 1)
-
-	var errCh = make(chan error, 1)
+	errCh := make(chan error, 1)
 
 	sub := c.client.Subscription(c.opts.subscriberID)
 

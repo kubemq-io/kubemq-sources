@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"io/ioutil"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/google/uuid"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/minio/minio-go/v7"
 	"github.com/stretchr/testify/require"
-	"io/ioutil"
-	"testing"
-	"time"
 )
 
 type mockTarget struct {
@@ -35,7 +36,6 @@ type minioTestClient struct {
 
 func (c *minioTestClient) MakeBucket(ctx context.Context, name string) error {
 	bucketOptions := minio.MakeBucketOptions{
-
 		ObjectLocking: false,
 	}
 	err := c.client.MakeBucket(ctx, name, bucketOptions)
@@ -59,8 +59,8 @@ func (c *minioTestClient) ListObjects(ctx context.Context, bucket string) ([]min
 		objects = append(objects, object)
 	}
 	return objects, nil
-
 }
+
 func (c *minioTestClient) Get(ctx context.Context, bucket, name string) ([]byte, error) {
 	object, err := c.client.GetObject(ctx, bucket, name, minio.GetObjectOptions{})
 	if err != nil {
@@ -75,6 +75,7 @@ func (c *minioTestClient) Get(ctx context.Context, bucket, name string) ([]byte,
 	}
 	return data, nil
 }
+
 func (c *minioTestClient) Put(ctx context.Context, bucket, name string, value []byte) error {
 	r := bytes.NewReader(value)
 	_, err := c.client.PutObject(ctx, bucket, name, r, int64(r.Len()), minio.PutObjectOptions{
@@ -85,6 +86,7 @@ func (c *minioTestClient) Put(ctx context.Context, bucket, name string, value []
 	}
 	return nil
 }
+
 func (c *minioTestClient) Remove(ctx context.Context, bucket, name string) error {
 	err := c.client.RemoveObject(ctx, bucket, name, minio.RemoveObjectOptions{
 		GovernanceBypass: false,
@@ -96,6 +98,7 @@ func (c *minioTestClient) Remove(ctx context.Context, bucket, name string) error
 	}
 	return nil
 }
+
 func TestClient_Init(t *testing.T) {
 	tests := []struct {
 		name    string
@@ -232,10 +235,10 @@ func TestClient_Init(t *testing.T) {
 				t.Errorf("Init() error = %v, wantPutErr %v", err, tt.wantErr)
 				return
 			}
-
 		})
 	}
 }
+
 func TestClient_Flow(t *testing.T) {
 	bucket := uuid.New().String()
 	cfg := config.Spec{

@@ -1,8 +1,9 @@
 package sqs
 
 import (
-	"github.com/kubemq-hub/builder/connector/common"
 	"math"
+
+	"github.com/kubemq-hub/builder/connector/common"
 )
 
 func Connector() *common.Connector {
@@ -12,7 +13,7 @@ func Connector() *common.Connector {
 		SetName("SQS").
 		SetProvider("AWS").
 		SetCategory("Messaging").
-		SetTags("queue","cloud","managed").
+		SetTags("queue", "cloud", "managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
@@ -94,5 +95,4 @@ func Connector() *common.Connector {
 				SetMin(0).
 				SetMax(math.MaxInt32),
 		)
-
 }

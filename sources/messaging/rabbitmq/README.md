@@ -23,7 +23,9 @@ RabbitMQ source connector configuration properties:
 | requeue_on_error | bool     | set requeue on error property       | "false"                                    |
 | auto_ack         | bool     | set auto_ack property               | "false"                                    |
 | exclusive        | bool     | set exclusive property              | "false"                                    |
-
+| ca_cert            | no       | SSL CA certificate                          | pem certificate value                                         |
+| client_certificate | no       | SSL Client certificate (mMTL)               | pem certificate value                                         |
+| client_key         | no       | SSL Client Key (mTLS)                       | pem key value                                                 |
 
 Example:
 

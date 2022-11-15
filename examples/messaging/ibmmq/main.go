@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/kubemq-hub/ibmmq-sdk/mq-golang-jms20/mqjms"
-	"github.com/kubemq-io/kubemq-go"
-	"github.com/nats-io/nuid"
 	"io/ioutil"
 	"log"
 	"time"
+
+	"github.com/kubemq-hub/ibmmq-sdk/mq-golang-jms20/mqjms"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 )
 
 type testStructure struct {
@@ -75,7 +76,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -102,19 +102,18 @@ func main() {
 				return
 			}
 		}
-
 	}()
 
 	cf := mqjms.ConnectionFactoryImpl{
-		QMName:           dat.queueManagerName,
-		Hostname:         dat.hostname,
-		PortNumber:       1414,
-		ChannelName:      dat.applicationChannelName,
-		UserName:         dat.mqUsername,
-		TransportType:    0,
-		TLSClientAuth:    "NONE",
-		KeyRepository:    "",
-		Password:         dat.password,
+		QMName:        dat.queueManagerName,
+		Hostname:      dat.hostname,
+		PortNumber:    1414,
+		ChannelName:   dat.applicationChannelName,
+		UserName:      dat.mqUsername,
+		TransportType: 0,
+		TLSClientAuth: "NONE",
+		KeyRepository: "",
+		Password:      dat.password,
 
 		CertificateLabel: "",
 	}

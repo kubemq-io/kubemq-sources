@@ -11,6 +11,7 @@ func NewStore() *Store {
 		store: sync.Map{},
 	}
 }
+
 func (s *Store) Add(report *Report) {
 	val, ok := s.store.Load(report.Key)
 	if ok {

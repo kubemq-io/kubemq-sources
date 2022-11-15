@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	servicebus "github.com/Azure/azure-service-bus-go"
-	"github.com/kubemq-io/kubemq-go"
-	"github.com/nats-io/nuid"
 	"io/ioutil"
 	"log"
 	"time"
+
+	servicebus "github.com/Azure/azure-service-bus-go"
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 )
 
 func main() {
@@ -23,7 +24,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,7 +50,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 	ns, err := servicebus.NewNamespace(servicebus.NamespaceWithConnectionString(connectionString))
 	if err != nil {

@@ -3,12 +3,13 @@ package s3
 import (
 	"context"
 	"fmt"
+	"path/filepath"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"path/filepath"
-	"strings"
 )
 
 type SourceFile struct {
@@ -30,8 +31,8 @@ func NewSourceFile(c *s3.S3, downloader *s3manager.Downloader, bucket string, ob
 func (s *SourceFile) FullPath() string {
 	return fmt.Sprintf("%s/%s", s.Bucket, *s.Object.Key)
 }
-func (s *SourceFile) FileDir() string {
 
+func (s *SourceFile) FileDir() string {
 	parts := strings.Split(*s.Object.Key, "/")
 	if len(parts) < 2 {
 		return ""
@@ -41,6 +42,7 @@ func (s *SourceFile) FileDir() string {
 	}
 	return strings.Join(parts[:len(parts)-1], "/")
 }
+
 func (s *SourceFile) RootDir() string {
 	parts := strings.Split(*s.Object.Key, "/")
 	if len(parts) < 2 {
@@ -48,6 +50,7 @@ func (s *SourceFile) RootDir() string {
 	}
 	return parts[0]
 }
+
 func (s *SourceFile) FileName() string {
 	parts := strings.Split(*s.Object.Key, "/")
 	if len(parts) == 0 {
@@ -55,14 +58,15 @@ func (s *SourceFile) FileName() string {
 	}
 	return parts[len(parts)-1]
 }
+
 func (s *SourceFile) Metadata() string {
 	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), *s.Object.Size)
 }
 
 func (s *SourceFile) Hash() string {
 	return *s.Object.ETag
-
 }
+
 func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
 	requestInput := s3.GetObjectInput{
 		Bucket: aws.String(s.Bucket),
@@ -80,6 +84,7 @@ func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
 func (s *SourceFile) Do(ctx context.Context) error {
 	return s.Delete(ctx)
 }
+
 func (s *SourceFile) Delete(ctx context.Context) error {
 	_, err := s.client.DeleteObjectWithContext(ctx, &s3.DeleteObjectInput{
 		Bucket: aws.String(s.Bucket),

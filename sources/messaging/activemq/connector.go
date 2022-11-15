@@ -9,7 +9,7 @@ func Connector() *common.Connector {
 		SetName("ActiveMQ").
 		SetProvider("").
 		SetCategory("Messaging").
-		SetTags("queue","streaming").
+		SetTags("queue", "streaming").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

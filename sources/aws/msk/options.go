@@ -2,6 +2,7 @@ package msk
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 )
 

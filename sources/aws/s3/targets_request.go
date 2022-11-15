@@ -21,6 +21,7 @@ func (r *TargetsRequest) SetMetadata(value TargetsMetadata) *TargetsRequest {
 	r.Metadata = value
 	return r
 }
+
 func (r *TargetsRequest) SetMetadataKeyValue(key, value string) *TargetsRequest {
 	r.Metadata.Set(key, value)
 	return r
@@ -30,6 +31,7 @@ func (r *TargetsRequest) SetData(value []byte) *TargetsRequest {
 	r.Data = value
 	return r
 }
+
 func (r *TargetsRequest) Size() float64 {
 	return float64(len(r.Data))
 }

@@ -6,6 +6,7 @@ package ibmmq
 import (
 	"context"
 	"fmt"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-hub/ibmmq-sdk/mq-golang-jms20/jms20subset"
@@ -29,7 +30,6 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
 
 func (c *Client) Connector() *common.Connector {
@@ -37,7 +37,6 @@ func (c *Client) Connector() *common.Connector {
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
-
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -85,7 +84,6 @@ func (c *Client) createMetadataString(msg jms20subset.Message) string {
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
 	go func() {
 		for {
 			select {

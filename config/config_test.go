@@ -7,7 +7,6 @@ import (
 )
 
 func TestConfig_Validate(t *testing.T) {
-
 	tests := []struct {
 		name     string
 		Bindings []BindingConfig
@@ -25,7 +24,6 @@ func TestConfig_Validate(t *testing.T) {
 					},
 
 					Target: Spec{
-
 						Name:       "target-1",
 						Kind:       "target-1",
 						Properties: nil,
@@ -50,7 +48,6 @@ func TestConfig_Validate(t *testing.T) {
 					},
 
 					Target: Spec{
-
 						Name:       "target-1",
 						Kind:       "target-1",
 						Properties: nil,
@@ -70,7 +67,6 @@ func TestConfig_Validate(t *testing.T) {
 					},
 
 					Target: Spec{
-
 						Name:       "target-1",
 						Kind:       "target-1",
 						Properties: nil,
@@ -115,7 +111,6 @@ func TestConfig_Validate(t *testing.T) {
 }
 
 func TestLoad_Env_Yaml(t *testing.T) {
-
 	tests := []struct {
 		name      string
 		cfgString string
@@ -147,7 +142,6 @@ bindings:
 						},
 
 						Target: Spec{
-
 							Name:       "target-1",
 							Kind:       "target-1",
 							Properties: nil,

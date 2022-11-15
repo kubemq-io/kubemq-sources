@@ -11,7 +11,7 @@ func Connector() *common.Connector {
 		SetName("ServiceBus").
 		SetProvider("Azure").
 		SetCategory("Messaging").
-		SetTags("queue","pub/sub","cloud","managed").
+		SetTags("queue", "pub/sub", "cloud", "managed").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

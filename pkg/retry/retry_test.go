@@ -2,10 +2,9 @@ package retry
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 	"time"
-
-	"fmt"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -42,7 +41,6 @@ func TestDoFirstOk(t *testing.T) {
 	)
 	assert.NoError(t, err)
 	assert.Equal(t, uint(0), retrySum, "no retry")
-
 }
 
 func TestRetryIf(t *testing.T) {
@@ -69,7 +67,6 @@ func TestRetryIf(t *testing.T) {
 #3: special`
 	assert.Equal(t, expectedErrorFormat, err.Error(), "retry error format")
 	assert.Equal(t, uint(2), retryCount, "right count of retry")
-
 }
 
 func TestDefaultSleep(t *testing.T) {

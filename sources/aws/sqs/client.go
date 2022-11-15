@@ -3,6 +3,8 @@ package sqs
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -13,7 +15,6 @@ import (
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"time"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -87,7 +88,6 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
-
 	if target == nil {
 		return fmt.Errorf("invalid target received, cannot be nil")
 	} else {

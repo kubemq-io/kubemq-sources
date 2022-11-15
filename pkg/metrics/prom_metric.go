@@ -26,5 +26,4 @@ func (c *promCounterMetric) add(value float64, labels prometheus.Labels) {
 	if value > 0 {
 		c.metric.With(labels).Add(value)
 	}
-
 }

@@ -6,23 +6,26 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/fsnotify/fsnotify"
-	"github.com/ghodss/yaml"
-	"github.com/kubemq-io/kubemq-sources/global"
-	"github.com/kubemq-io/kubemq-sources/pkg/logger"
-	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/fsnotify/fsnotify"
+	"github.com/ghodss/yaml"
+	"github.com/kubemq-io/kubemq-sources/global"
+	"github.com/kubemq-io/kubemq-sources/pkg/logger"
+	"github.com/spf13/viper"
 )
 
 const defaultApiPort = global.DefaultApiPort
 
-var configFile string
-var logr = logger.NewLogger("config")
-var lastConf *Config
+var (
+	configFile string
+	logr       = logger.NewLogger("config")
+	lastConf   *Config
+)
 
 type Config struct {
 	Bindings []BindingConfig `json:"bindings"`
@@ -33,6 +36,7 @@ type Config struct {
 func SetConfigFile(filename string) {
 	configFile = filename
 }
+
 func (c *Config) hash() string {
 	b, err := json.Marshal(c)
 	if err != nil {
@@ -43,12 +47,14 @@ func (c *Config) hash() string {
 	hash := hex.EncodeToString(h.Sum(nil))
 	return hash
 }
+
 func (c *Config) copy() *Config {
 	b, _ := json.Marshal(c)
 	n := &Config{}
 	_ = json.Unmarshal(b, n)
 	return n
 }
+
 func (c *Config) Validate() error {
 	if c.ApiPort == 0 {
 		c.ApiPort = defaultApiPort
@@ -66,6 +72,7 @@ func (c *Config) Validate() error {
 	}
 	return nil
 }
+
 func getConfigFormat(in []byte) (string, error) {
 	c := &Config{}
 	yamlErr := yaml.Unmarshal(in, c)
@@ -79,6 +86,7 @@ func getConfigFormat(in []byte) (string, error) {
 
 	return "", fmt.Errorf("yaml parsing error: %s, json parsing error: %s", yamlErr.Error(), jsonErr.Error())
 }
+
 func decodeBase64(in string) string {
 	// base64 string cannot contain space so this is indication of base64 string
 	if !strings.Contains(in, " ") {
@@ -91,6 +99,7 @@ func decodeBase64(in string) string {
 	}
 	return in
 }
+
 func getConfigDataFromLocalFile(filename string) (string, error) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -115,7 +124,7 @@ func getConfigDataFromEnv() (string, error) {
 			return "", err
 		}
 		/* #nosec */
-		err = ioutil.WriteFile("./config."+fileExt, []byte(envConfigData), 0644)
+		err = ioutil.WriteFile("./config."+fileExt, []byte(envConfigData), 0o644)
 		if err != nil {
 			return "", fmt.Errorf("cannot save environment config file")
 		}
@@ -123,6 +132,7 @@ func getConfigDataFromEnv() (string, error) {
 	}
 	return "", fmt.Errorf("no config data from environment variable")
 }
+
 func getConfigFile() (string, error) {
 	if configFile != "" {
 		loadedConfigFile, err := getConfigDataFromLocalFile(configFile)

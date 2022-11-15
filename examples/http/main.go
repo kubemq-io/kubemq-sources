@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"context"
-	"github.com/kubemq-io/kubemq-go"
-	"github.com/nats-io/nuid"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/kubemq-io/kubemq-go"
+	"github.com/nats-io/nuid"
 )
 
 func main() {
@@ -18,7 +19,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,7 +45,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 
 	time.Sleep(time.Second)

@@ -2,15 +2,16 @@ package main
 
 import (
 	"context"
+	"io/ioutil"
+	"log"
+	"time"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
-	"io/ioutil"
-	"log"
-	"time"
 )
 
 func main() {
@@ -42,7 +43,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,7 +69,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(region),

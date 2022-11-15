@@ -6,6 +6,8 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
+	"time"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
@@ -13,7 +15,6 @@ import (
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/nats-io/nats.go"
-	"time"
 )
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -34,7 +35,6 @@ func (c *Client) Connector() *common.Connector {
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
-
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -78,6 +78,7 @@ func (c *Client) createMetadataString(msg *nats.Msg) string {
 	}
 	return str
 }
+
 func (c *Client) processIncomingMessages(ctx context.Context, msg *nats.Msg) {
 	req := types.NewRequest().
 		SetMetadata(c.createMetadataString(msg)).

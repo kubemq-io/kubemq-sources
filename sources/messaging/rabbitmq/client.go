@@ -2,7 +2,11 @@ package rabbitmq
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
+	"strings"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
@@ -15,19 +19,74 @@ import (
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type Client struct {
-	opts    options
-	channel *amqp.Channel
-	log     *logger.Logger
-	conn    *amqp.Connection
-	ctx     context.Context
-	cancel  context.CancelFunc
+	opts        options
+	channel     *amqp.Channel
+	log         *logger.Logger
+	conn        *amqp.Connection
+	ctx         context.Context
+	cancel      context.CancelFunc
+	isConnected bool
 }
 
 func New() *Client {
 	return &Client{}
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
+}
+
+func (c *Client) getTLSConfig() (*tls.Config, error) {
+	tlsCfg := &tls.Config{
+		InsecureSkipVerify: c.opts.insecure,
+	}
+
+	if c.opts.caCert != "" {
+		caCertPool := x509.NewCertPool()
+		if !caCertPool.AppendCertsFromPEM([]byte(c.opts.caCert)) {
+			return nil, fmt.Errorf("error loading Root CA Cert")
+		}
+		tlsCfg.RootCAs = caCertPool
+		c.log.Infof("TLS CA Cert Loaded for RabbitMQ Connection")
+	}
+	if c.opts.clientCertificate != "" && c.opts.clientKey != "" {
+		cert, err := tls.X509KeyPair([]byte(c.opts.clientCertificate), []byte(c.opts.clientKey))
+		if err != nil {
+			return nil, fmt.Errorf("error loading tls client key pair, %s", err.Error())
+		}
+		tlsCfg.Certificates = []tls.Certificate{cert}
+		c.log.Infof("TLS Client Key Pair Loaded for RabbitMQ Connection")
+
+	}
+	return tlsCfg, nil
+}
+
+func (c *Client) connect() error {
+	if strings.HasPrefix(c.opts.url, "amqps://") {
+		tlsCfg, err := c.getTLSConfig()
+		if err != nil {
+			return err
+		}
+		c.conn, err = amqp.DialTLS(c.opts.url, tlsCfg)
+		if err != nil {
+			return fmt.Errorf("error dialing rabbitmq, %w", err)
+		}
+
+	} else {
+		var err error
+		c.conn, err = amqp.Dial(c.opts.url)
+		if err != nil {
+			return fmt.Errorf("error dialing rabbitmq, %w", err)
+		}
+	}
+	var err error
+	c.channel, err = c.conn.Channel()
+	if err != nil {
+		_ = c.conn.Close()
+		return fmt.Errorf("error getting rabbitmq channel, %w", err)
+	}
+	c.isConnected = true
+	return nil
 }
 
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
@@ -40,18 +99,13 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 	if err != nil {
 		return err
 	}
-	c.conn, err = amqp.Dial(c.opts.url)
-	if err != nil {
-		return fmt.Errorf("error dialing rabbitmq, %w", err)
-	}
-	c.channel, err = c.conn.Channel()
-	if err != nil {
-		_ = c.conn.Close()
-		return fmt.Errorf("error getting rabbitmq channel, %w", err)
+	if err := c.connect(); err != nil {
+		return err
 	}
 	c.ctx, c.cancel = context.WithCancel(ctx)
 	return nil
 }
+
 func (c *Client) createMetadataString(msg amqp.Delivery) string {
 	md := map[string]string{}
 	md["delivery_mode"] = fmt.Sprintf("%d", msg.DeliveryMode)
@@ -84,7 +138,13 @@ func (c *Client) createMetadataString(msg amqp.Delivery) string {
 	}
 	return str
 }
+
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
+	if !c.isConnected {
+		if err := c.connect(); err != nil {
+			return err
+		}
+	}
 	deliveries, err := c.channel.Consume(
 		c.opts.queue,
 		c.opts.consumer,

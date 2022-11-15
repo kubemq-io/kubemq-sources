@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
+	"log"
+	"time"
+
 	kafka "github.com/Shopify/sarama"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/nats-io/nuid"
-	"log"
-	"time"
 )
 
 func main() {
@@ -17,7 +18,6 @@ func main() {
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,7 +44,6 @@ func main() {
 				return
 			}
 		}
-
 	}()
 
 	kc := kafka.NewConfig()

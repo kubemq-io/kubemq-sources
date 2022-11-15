@@ -17,6 +17,7 @@ func (m TargetsMetadata) String() string {
 	}
 	return string(str)
 }
+
 func (m TargetsMetadata) Set(key, value string) TargetsMetadata {
 	m[key] = value
 	return m

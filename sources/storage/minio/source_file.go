@@ -3,11 +3,12 @@ package minio
 import (
 	"context"
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/types"
-	"github.com/minio/minio-go/v7"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+
+	"github.com/kubemq-io/kubemq-sources/types"
+	"github.com/minio/minio-go/v7"
 )
 
 type SourceFile struct {
@@ -27,6 +28,7 @@ func NewSourceFile(c *minio.Client, bucket string, obj minio.ObjectInfo) *Source
 func (s *SourceFile) FullPath() string {
 	return fmt.Sprintf("%s/%s", s.Bucket, s.Object.Key)
 }
+
 func (s *SourceFile) FileDir() string {
 	parts := strings.Split(s.Object.Key, "/")
 	if len(parts) < 2 {
@@ -37,6 +39,7 @@ func (s *SourceFile) FileDir() string {
 	}
 	return strings.Join(parts[:len(parts)-1], "/")
 }
+
 func (s *SourceFile) RootDir() string {
 	parts := strings.Split(s.Object.Key, "/")
 	if len(parts) < 2 {
@@ -44,6 +47,7 @@ func (s *SourceFile) RootDir() string {
 	}
 	return parts[0]
 }
+
 func (s *SourceFile) FileName() string {
 	parts := strings.Split(s.Object.Key, "/")
 	if len(parts) == 0 {
@@ -51,13 +55,15 @@ func (s *SourceFile) FileName() string {
 	}
 	return parts[len(parts)-1]
 }
+
 func (s *SourceFile) Metadata() string {
 	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Object.Size)
 }
+
 func (s *SourceFile) Hash() string {
 	return s.Object.ETag
-
 }
+
 func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
 	object, err := s.client.GetObject(ctx, s.Bucket, s.Object.Key, minio.GetObjectOptions{})
 	if err != nil {
@@ -77,6 +83,7 @@ func (s *SourceFile) Load(ctx context.Context) ([]byte, error) {
 func (s *SourceFile) Do(ctx context.Context) error {
 	return s.Delete(ctx)
 }
+
 func (s *SourceFile) Delete(ctx context.Context) error {
 	err := s.client.RemoveObject(ctx, s.Bucket, s.Object.Key, minio.RemoveObjectOptions{
 		GovernanceBypass: false,

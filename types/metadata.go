@@ -13,6 +13,7 @@ type Metadata map[string]string
 func NewMetadata() Metadata {
 	return map[string]string{}
 }
+
 func UnmarshallMetadata(meta string) (Metadata, error) {
 	if meta == "" {
 		return NewMetadata(), nil
@@ -24,6 +25,7 @@ func UnmarshallMetadata(meta string) (Metadata, error) {
 	}
 	return m, nil
 }
+
 func (m Metadata) String() string {
 	str, err := json.MarshalToString(&m)
 	if err != nil {
@@ -31,16 +33,17 @@ func (m Metadata) String() string {
 	}
 	return str
 }
+
 func (m Metadata) Set(key, value string) Metadata {
 	m[key] = value
 	return m
 }
+
 func (m Metadata) Get(key string) string {
 	return m[key]
 }
 
 func (m Metadata) ParseString(key, defaultValue string) string {
-
 	if val, ok := m[key]; ok && val != "" {
 		return val
 	} else {
@@ -73,7 +76,6 @@ func (m Metadata) MustNotParseString(key string, conflictValueName string) (stri
 }
 
 func (m Metadata) MustParseInt(key string) (int, error) {
-
 	if val, ok := m[key]; ok && val != "" {
 		parsedVal, err := strconv.ParseInt(val, 10, 32)
 		if err != nil {
@@ -97,6 +99,7 @@ func (m Metadata) ParseInt(key string, defaultValue int) int {
 		return defaultValue
 	}
 }
+
 func (m Metadata) ParseIntWithRange(key string, defaultValue, min, max int) (int, error) {
 	val := m.ParseInt(key, defaultValue)
 	if val < min {
@@ -134,8 +137,8 @@ func (m Metadata) ParseBool(key string, defaultValue bool) bool {
 		return defaultValue
 	}
 }
-func (m Metadata) MustParseBool(key string) (bool, error) {
 
+func (m Metadata) MustParseBool(key string) (bool, error) {
 	if val, ok := m[key]; ok && val != "" {
 		parsedVal, err := strconv.ParseBool(val)
 		if err != nil {
@@ -146,6 +149,7 @@ func (m Metadata) MustParseBool(key string) (bool, error) {
 		return false, fmt.Errorf("key %s not found for bool coneversion", val)
 	}
 }
+
 func (m Metadata) MustParseJsonMap(key string) (map[string]string, error) {
 	if val, ok := m[key]; ok && val != "" {
 		if val == "" {
@@ -193,6 +197,7 @@ func (m Metadata) MustParseAddress(key, defaultValue string) (string, int, error
 	}
 	return host, port, nil
 }
+
 func (m Metadata) MustParseStringList(key string) ([]string, error) {
 	if val, ok := m[key]; ok && val != "" {
 		list := strings.Split(val, ",")
@@ -204,6 +209,7 @@ func (m Metadata) MustParseStringList(key string) ([]string, error) {
 		return nil, fmt.Errorf("value of key %s cannot be empty", key)
 	}
 }
+
 func (m Metadata) MustParseEnv(key, envVar, defaultValue string) (string, error) {
 	envValue := os.Getenv(envVar)
 	if envValue != "" {

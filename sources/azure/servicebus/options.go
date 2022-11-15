@@ -2,6 +2,7 @@ package servicebus
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 )
 

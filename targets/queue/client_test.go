@@ -2,15 +2,15 @@ package queue
 
 import (
 	"context"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/nats-io/nuid"
 
 	"github.com/stretchr/testify/require"
-	"testing"
-
-	"time"
 )
 
 type mockQueueReceiver struct {
@@ -142,7 +142,6 @@ func TestClient_Do(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec

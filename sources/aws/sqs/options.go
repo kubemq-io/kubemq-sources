@@ -2,8 +2,9 @@ package sqs
 
 import (
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/config"
 	"time"
+
+	"github.com/kubemq-io/kubemq-sources/config"
 )
 
 const (

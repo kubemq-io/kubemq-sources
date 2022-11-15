@@ -3,6 +3,7 @@ package queue
 import (
 	"context"
 	"fmt"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
@@ -19,8 +20,8 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
@@ -53,18 +54,21 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 
 	return nil
 }
+
 func (c *Client) Stop() error {
 	if c.client != nil {
 		return c.client.Close()
 	}
 	return nil
 }
+
 func (c *Client) getChannel(request *types.Request) string {
 	if request.Channel != "" {
 		return fmt.Sprintf("%s%s", c.opts.channel, request.Channel)
 	}
 	return c.opts.channel
 }
+
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 	queueMessage := queues_stream.NewQueueMessage().
 		SetChannel(c.getChannel(request)).

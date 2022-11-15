@@ -7,18 +7,17 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/kubemq-io/kubemq-sources/api"
 	"github.com/kubemq-io/kubemq-sources/binding"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
-var (
-	version = ""
-)
+var version = ""
 
 var (
 	log        *logger.Logger
@@ -26,7 +25,7 @@ var (
 )
 
 func run() error {
-	var gracefulShutdown = make(chan os.Signal, 1)
+	gracefulShutdown := make(chan os.Signal, 1)
 	signal.Notify(gracefulShutdown, syscall.SIGTERM)
 	signal.Notify(gracefulShutdown, syscall.SIGINT)
 	signal.Notify(gracefulShutdown, syscall.SIGQUIT)
@@ -60,7 +59,6 @@ func run() error {
 			err = newConfig.Validate()
 			if err != nil {
 				return fmt.Errorf("error on validation new config file: %s", err.Error())
-
 			}
 			bindingsService.Stop()
 			err = bindingsService.Start(ctx, newConfig)
@@ -95,5 +93,4 @@ func main() {
 		log.Error(err)
 		os.Exit(1)
 	}
-
 }

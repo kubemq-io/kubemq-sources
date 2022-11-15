@@ -3,15 +3,16 @@ package nats
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/middleware"
 	"github.com/kubemq-io/kubemq-sources/types"
 	"github.com/nats-io/nuid"
 	"github.com/stretchr/testify/require"
-	"io/ioutil"
-	"testing"
-	"time"
 )
 
 type mockMiddleware struct {
@@ -20,13 +21,11 @@ type mockMiddleware struct {
 }
 
 func (m *mockMiddleware) Init() {
-
 	client, err := kubemq.NewClient(context.Background(),
 		kubemq.WithAddress("localhost", 50000),
 		kubemq.WithClientId(nuid.Next()),
 		kubemq.WithCheckConnection(true),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC))
-
 	if err != nil {
 		panic(err)
 	}
@@ -188,7 +187,6 @@ func TestClient_Init(t *testing.T) {
 			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 			}
-
 		})
 	}
 }

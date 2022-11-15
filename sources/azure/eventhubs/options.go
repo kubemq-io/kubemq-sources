@@ -2,9 +2,10 @@ package eventhubs
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/Azure/azure-event-hubs-go/v3"
 	"github.com/kubemq-io/kubemq-sources/config"
-	"time"
 )
 
 const (

@@ -4,9 +4,10 @@
 package main
 
 import (
+	"os"
+
 	"github.com/kardianos/service"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
-	"os"
 )
 
 type appService struct {
@@ -22,6 +23,7 @@ func newAppService() *appService {
 	}
 	return a
 }
+
 func (a *appService) init(action, username, password string) error {
 	options := make(service.KeyValue)
 	options["Restart"] = "on-success"
@@ -67,6 +69,7 @@ func (a *appService) init(action, username, password string) error {
 	err = srv.Run()
 	return err
 }
+
 func (a *appService) Start(s service.Service) error {
 	if service.Interactive() {
 		preRun()

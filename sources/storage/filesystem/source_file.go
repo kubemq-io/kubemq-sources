@@ -2,12 +2,13 @@ package filesystem
 
 import (
 	"fmt"
-	"github.com/kubemq-io/kubemq-sources/types"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/kubemq-io/kubemq-sources/types"
 )
 
 type SourceFile struct {
@@ -25,27 +26,34 @@ func NewSourceFile(info os.FileInfo, path string, root string, movePath string) 
 		MovePath: movePath,
 	}
 }
+
 func (s *SourceFile) FullPath() string {
 	p, _ := filepath.Abs(s.Path)
 	return filepath.Clean(p)
 }
+
 func (s *SourceFile) FileDir() string {
 	dir, _ := filepath.Split(s.Path)
 	fileDir := strings.Replace(filepath.Clean(dir), filepath.Clean(s.Root), "", -1)
 	return fileDir
 }
+
 func (s *SourceFile) FileName() string {
 	return s.Info.Name()
 }
+
 func (s *SourceFile) Metadata() string {
 	return fmt.Sprintf("file: %s, size: %d bytes", s.FullPath(), s.Info.Size())
 }
+
 func (s *SourceFile) Load() ([]byte, error) {
 	return ioutil.ReadFile(s.FullPath())
 }
+
 func (s *SourceFile) Hash() string {
 	return fmt.Sprintf("%d", s.Info.ModTime().UnixNano())
 }
+
 func (s *SourceFile) Do() error {
 	if s.MovePath != "" {
 		newFileName := strings.Replace(s.FullPath(), s.Root, s.MovePath, 1)
@@ -56,8 +64,8 @@ func (s *SourceFile) Do() error {
 	} else {
 		return os.Remove(s.FullPath())
 	}
-
 }
+
 func (s *SourceFile) Delete() error {
 	return os.Remove(s.FullPath())
 }

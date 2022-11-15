@@ -2,6 +2,7 @@ package events_store
 
 import (
 	"fmt"
+
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/nats-io/nuid"
 )

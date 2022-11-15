@@ -3,14 +3,14 @@ package events_store
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/types"
 
 	"github.com/stretchr/testify/require"
-	"testing"
-
-	"time"
 )
 
 type mockEventStoreReceiver struct {
@@ -44,7 +44,6 @@ func (m *mockEventStoreReceiver) run(ctx context.Context) (*kubemq.EventStoreRec
 	case <-time.After(m.timeout):
 		return nil, fmt.Errorf("timeout")
 	}
-
 }
 
 func TestClient_Do(t *testing.T) {
@@ -118,7 +117,6 @@ func TestClient_Do(t *testing.T) {
 }
 
 func TestClient_Init(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		cfg     config.Spec

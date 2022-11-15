@@ -6,6 +6,7 @@ package sources
 import (
 	"context"
 	"fmt"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/middleware"
@@ -103,7 +104,7 @@ func Init(ctx context.Context, cfg config.Spec, logger *logger.Logger) (Source, 
 			return nil, err
 		}
 		return source, nil
-	//case "messaging.ibmmq":
+	// case "messaging.ibmmq":
 	//	target := ibmmq.New()
 	//	if err := target.Init(ctx, cfg); err != nil {
 	//		return nil, err
@@ -136,7 +137,6 @@ func Init(ctx context.Context, cfg config.Spec, logger *logger.Logger) (Source, 
 	default:
 		return nil, fmt.Errorf("invalid kind %s for source %s", cfg.Kind, cfg.Name)
 	}
-
 }
 
 func Connectors() common.Connectors {

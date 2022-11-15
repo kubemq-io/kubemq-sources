@@ -11,7 +11,7 @@ func Connector() *common.Connector {
 		SetName("HTTP").
 		SetProvider("").
 		SetCategory("General").
-		SetTags("rest","api").
+		SetTags("rest", "api").
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").

@@ -3,12 +3,13 @@ package events
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/kubemq-hub/builder/connector/common"
 	"github.com/kubemq-io/kubemq-go"
 	"github.com/kubemq-io/kubemq-sources/config"
 	"github.com/kubemq-io/kubemq-sources/pkg/logger"
 	"github.com/kubemq-io/kubemq-sources/types"
-	"time"
 )
 
 const (
@@ -25,17 +26,19 @@ type Client struct {
 
 func New() *Client {
 	return &Client{}
-
 }
+
 func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
+
 func (c *Client) Stop() error {
 	if c.client != nil {
 		return c.client.Close()
 	}
 	return nil
 }
+
 func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
@@ -79,12 +82,14 @@ func (c *Client) runStreamProcessing(ctx context.Context) {
 	}
 done:
 }
+
 func (c *Client) getChannel(request *types.Request) string {
 	if request.Channel != "" {
 		return fmt.Sprintf("%s%s", c.opts.channel, request.Channel)
 	}
 	return c.opts.channel
 }
+
 func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Response, error) {
 	event := c.client.NewEvent().
 		SetChannel(c.getChannel(request)).

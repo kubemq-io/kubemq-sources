@@ -1,3 +1,4 @@
+//go:build !container
 // +build !container
 
 package global
