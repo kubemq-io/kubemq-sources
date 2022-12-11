@@ -19,14 +19,14 @@ Kafka source connector configuration properties:
 | topics             | yes      | kafka stored topic, comma separated         | "TestTopic"                                                   |
 | dynamic_mapping    | yes      | set if to map kafka topic to kubemq channel | "true"                                                        |
 | consumer_group     | yes      | kafka consumer group name                   | "Group1                                                       |
-| saslUsername       | no       | SASL based authentication with broker       | "user"                                                        |
-| saslPassword       | no       | SASL based authentication with broker       | "pass"                                                        |
-| saslMechanism      | no       | SASL Mechanism                              | SCRAM-SHA-256, SCRAM-SHA-512, plain, 0Auth bearer, or GSS-API |
-| securityProtocol   | no       | Set connection security protocol            | plaintext, SASL-plaintext, SASL-SSL, SSL                      |
+| sasl_username      | no       | SASL based authentication with broker       | "user"                                                        |
+| sasl_password      | no       | SASL based authentication with broker       | "pass"                                                        |
+| sasl_mechanism     | no       | SASL Mechanism                              | SCRAM-SHA-256, SCRAM-SHA-512, plain, 0Auth bearer, or GSS-API |
+| security_protocol  | no       | Set connection security protocol            | plaintext, SASL-plaintext, SASL-SSL, SSL                      |
 | ca_cert            | no       | SSL CA certificate                          | pem certificate value                                         |
 | client_certificate | no       | SSL Client certificate (mMTL)               | pem certificate value                                         |
 | client_key         | no       | SSL Client Key (mTLS)                       | pem key value                                                 |
-
+| insecure           | no       | SSL Insecure (Self signed)                | true / false                                                  |
 
 Example:
 

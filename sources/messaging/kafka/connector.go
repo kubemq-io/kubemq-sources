@@ -58,7 +58,7 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
-				SetName("saslMechanism").
+				SetName("sasl_mechanism").
 				SetDescription("Set SASL Mechanism").
 				SetMust(false).
 				SetDefault(""),
@@ -66,7 +66,7 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("string").
-				SetName("securityProtocol").
+				SetName("security_protocol").
 				SetDescription("Set Security Protocol").
 				SetMust(false).
 				SetDefault(""),

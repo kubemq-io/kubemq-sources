@@ -39,10 +39,10 @@ func parseOptions(cfg config.Spec) (options, error) {
 	if err != nil {
 		return m, err
 	}
-	m.saslUsername = cfg.Properties.ParseString("saslUsername", "")
-	m.saslPassword = cfg.Properties.ParseString("saslPassword", "")
-	m.saslMechanism = cfg.Properties.ParseString("saslMechanism", "")
-	m.securityProtocol = cfg.Properties.ParseString("securityProtocol", "")
+	m.saslUsername = cfg.Properties.ParseString("sasl_username", "")
+	m.saslPassword = cfg.Properties.ParseString("sasl_password", "")
+	m.saslMechanism = cfg.Properties.ParseString("sasl_mechanism", "")
+	m.consumerGroup = cfg.Properties.ParseString("consumer_group", "")
 	m.cacert = cfg.Properties.ParseString("ca_cert", "")
 	m.clientCert = cfg.Properties.ParseString("client_certificate", "")
 	m.clientKey = cfg.Properties.ParseString("client_key", "")
