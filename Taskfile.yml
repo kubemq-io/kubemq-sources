@@ -64,9 +64,9 @@ tasks:
   release:
     cmds:
       - go mod vendor
-      - task: lint
       - task: update-manifest
       - task: commit-modifed
       - task: docker
       - task: push
       - task: tag
+      - task: goreleaser
