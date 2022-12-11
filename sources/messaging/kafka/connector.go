@@ -98,6 +98,14 @@ func Connector() *common.Connector {
 		AddProperty(
 			common.NewProperty().
 				SetKind("bool").
+				SetName("insecure").
+				SetDescription("Set self-signed SSL Certificate").
+				SetMust(false).
+				SetDefault("false"),
+		).
+		AddProperty(
+			common.NewProperty().
+				SetKind("bool").
 				SetName("dynamic_mapping").
 				SetDescription("Set Topic/Channel dynamic mapping").
 				SetMust(true).
