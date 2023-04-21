@@ -1,7 +1,7 @@
 version: '3'
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v1.4.1
+  VERSION: v1.4.2
 tasks:
   default:
     cmds:
@@ -47,7 +47,7 @@ tasks:
       - docker run -it --rm kubemq/{{.BINARY_NAME}}:latest
   update-manifest:
     cmds:
-      - task: build
+      - go build -buildmode=exe -o "{{.BINARY_NAME}}.exe"
       - ./{{.BINARY_NAME}}.exe --manifest
   commit-modifed:
     cmds:
@@ -70,3 +70,6 @@ tasks:
       - task: push
       - task: tag
       - task: goreleaser
+  trivy:
+    cmds:
+      - trivy image --exit-code 1 --severity HIGH,CRITICAL kubemq/{{.BINARY_NAME}}:{{.VERSION}}
