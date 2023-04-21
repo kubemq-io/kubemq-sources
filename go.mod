@@ -22,7 +22,7 @@ require (
 	github.com/kubemq-io/kubemq-go v1.7.6
 	github.com/labstack/echo/v4 v4.9.1
 	github.com/minio/minio-go/v7 v7.0.43
-	github.com/nats-io/nats-server/v2 v2.7.2 // indirect
+	github.com/nats-io/nats-server/v2 v2.7.4 // indirect
 	github.com/nats-io/nats.go v1.20.0
 	github.com/nats-io/nuid v1.0.1
 	github.com/prometheus/client_golang v1.14.0
