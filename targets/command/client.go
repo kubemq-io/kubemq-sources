@@ -45,7 +45,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, bindingName string, 
 	}
 	c.client, err = kubemq.NewClient(ctx,
 		kubemq.WithAddress(c.opts.host, c.opts.port),
-		kubemq.WithClientId(fmt.Sprintf("kubemq-sources/%s/%s", bindingName, c.opts.clientId)),
+		kubemq.WithClientId(fmt.Sprintf("kubemq-sources_%s_%s", bindingName, c.opts.clientId)),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken),
 		// making sure that this stays false in order the http source will work correctly

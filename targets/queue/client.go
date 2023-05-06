@@ -39,7 +39,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, bindingName string, 
 	}
 	c.client, err = queues_stream.NewQueuesStreamClient(ctx,
 		queues_stream.WithAddress(c.opts.host, c.opts.port),
-		queues_stream.WithClientId(fmt.Sprintf("kubemq-sources/%s/%s", bindingName, c.opts.clientId)),
+		queues_stream.WithClientId(fmt.Sprintf("kubemq-sources_%s_%s", bindingName, c.opts.clientId)),
 		queues_stream.WithCheckConnection(true),
 		queues_stream.WithAutoReconnect(true),
 		queues_stream.WithAuthToken(c.opts.authToken),
