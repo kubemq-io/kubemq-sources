@@ -51,7 +51,7 @@ func (b *Binder) Init(ctx context.Context, cfg config.BindingConfig, exporter *m
 	}
 	b.log = log.Logger
 
-	b.target, err = targets.Init(ctx, cfg.Target, b.log)
+	b.target, err = targets.Init(ctx, cfg.Target, cfg.Name, b.log)
 	if err != nil {
 		return fmt.Errorf("error loading target conntector on binding %s, %w", b.name, err)
 	}

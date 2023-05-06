@@ -26,7 +26,7 @@ func (c *Client) Connector() *common.Connector {
 	return Connector()
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec, bindingName string, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -39,7 +39,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 	}
 	c.client, err = queues_stream.NewQueuesStreamClient(ctx,
 		queues_stream.WithAddress(c.opts.host, c.opts.port),
-		queues_stream.WithClientId(c.opts.clientId),
+		queues_stream.WithClientId(fmt.Sprintf("kubemq-sources/%s/%s", bindingName, c.opts.clientId)),
 		queues_stream.WithCheckConnection(true),
 		queues_stream.WithAutoReconnect(true),
 		queues_stream.WithAuthToken(c.opts.authToken),

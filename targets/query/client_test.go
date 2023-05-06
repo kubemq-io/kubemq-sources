@@ -154,7 +154,7 @@ func TestClient_Do(t *testing.T) {
 			err := tt.mockReceiver.run(ctx, t)
 			require.NoError(t, err)
 			target := New()
-			err = target.Init(ctx, tt.cfg, nil)
+			err = target.Init(ctx, tt.cfg, "", nil)
 			require.NoError(t, err)
 			gotResp, err := target.Do(ctx, tt.req)
 			if tt.wantErr {
@@ -206,7 +206,7 @@ func TestClient_Init(t *testing.T) {
 			defer cancel()
 			c := New()
 
-			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
+			if err := c.Init(ctx, tt.cfg, "", nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

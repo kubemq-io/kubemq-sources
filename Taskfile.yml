@@ -1,7 +1,7 @@
 version: '3'
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v1.4.2
+  VERSION: v1.5.0
 tasks:
   default:
     cmds:
@@ -69,7 +69,7 @@ tasks:
       - task: docker
       - task: push
       - task: tag
-      - task: goreleaser
+
   trivy:
     cmds:
       - trivy image --exit-code 1 --severity HIGH,CRITICAL kubemq/{{.BINARY_NAME}}:{{.VERSION}}

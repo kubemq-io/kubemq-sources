@@ -39,7 +39,7 @@ func (c *Client) Stop() error {
 	return nil
 }
 
-func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) error {
+func (c *Client) Init(ctx context.Context, cfg config.Spec, bindingName string, log *logger.Logger) error {
 	c.log = log
 	if c.log == nil {
 		c.log = logger.NewLogger(cfg.Kind)
@@ -52,7 +52,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 
 	c.client, err = kubemq.NewClient(ctx,
 		kubemq.WithAddress(c.opts.host, c.opts.port),
-		kubemq.WithClientId(c.opts.clientId),
+		kubemq.WithClientId(fmt.Sprintf("kubemq-sources/%s/%s", bindingName, c.opts.clientId)),
 		kubemq.WithTransportType(kubemq.TransportTypeGRPC),
 		kubemq.WithAuthToken(c.opts.authToken),
 		// making sure that this stays false in order the http source will work correctly

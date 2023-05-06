@@ -95,7 +95,7 @@ func TestClient_Do(t *testing.T) {
 			}()
 			time.Sleep(time.Second)
 			target := New()
-			err := target.Init(ctx, tt.cfg, nil)
+			err := target.Init(ctx, tt.cfg, "", nil)
 			require.NoError(t, err)
 			gotResp, err := target.Do(ctx, tt.sendReq)
 			if tt.wantErr {
@@ -154,7 +154,7 @@ func TestClient_Init(t *testing.T) {
 			defer cancel()
 			c := New()
 
-			if err := c.Init(ctx, tt.cfg, nil); (err != nil) != tt.wantErr {
+			if err := c.Init(ctx, tt.cfg, "", nil); (err != nil) != tt.wantErr {
 				t.Errorf("Init() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
