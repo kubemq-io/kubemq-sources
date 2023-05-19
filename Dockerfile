@@ -1,7 +1,5 @@
 FROM kubemq/gobuilder-ubuntu as builder
 ARG VERSION
-ARG GIT_COMMIT
-ARG BUILD_TIME
 ENV GOPATH=/go
 ENV PATH=$GOPATH:$PATH
 ENV ADDR=0.0.0.0
@@ -13,10 +11,10 @@ MAINTAINER KubeMQ info@kubemq.io
 LABEL name="KubeMQ Sources Connectors" \
       maintainer="info@kubemq.io" \
       vendor="kubemq.io" \
-      version="1.3.0" \
+      version="1.5.2" \
       release="stable" \
       summary="KubeMQ Sources connects external systems and cloud services to KubeMQ Message Broker" \
-      description=""
+      description="KubeMQ Sources connects external systems and cloud services to KubeMQ Message Broker"
 COPY licenses /licenses
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:$PATH
