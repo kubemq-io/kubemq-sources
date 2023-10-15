@@ -52,8 +52,8 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 		if bindingCfg.Source.Kind == "http" {
 			wg.Add(1)
 		}
-		go func(ctx context.Context, cfg config.BindingConfig) {
-			err := s.Add(ctx, cfg)
+		go func(ctx context.Context, cfg config.BindingConfig, logLevel string) {
+			err := s.Add(ctx, cfg, logLevel)
 			if cfg.Source.Kind == "http" {
 				defer wg.Done()
 			}
@@ -67,7 +67,7 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 				select {
 				case <-time.After(addRetryInterval):
 					count++
-					err := s.Add(ctx, cfg)
+					err := s.Add(ctx, cfg, logLevel)
 					if err != nil {
 						s.log.Errorf("failed to initialized binding: %s, attempt: %d, error: %s", cfg.Name, count, err.Error())
 					} else {
@@ -77,7 +77,7 @@ func (s *Service) Start(ctx context.Context, cfg *config.Config) error {
 					return
 				}
 			}
-		}(s.currentCtx, bindingCfg)
+		}(s.currentCtx, bindingCfg, cfg.LogLevel)
 
 	}
 	wg.Wait()
@@ -96,11 +96,11 @@ func (s *Service) Stop() {
 	})
 }
 
-func (s *Service) Add(ctx context.Context, cfg config.BindingConfig) error {
+func (s *Service) Add(ctx context.Context, cfg config.BindingConfig, logLevel string) error {
 	binder := NewBinder()
 	status := newStatus(cfg)
 	s.bindingStatus.Store(cfg.Name, status)
-	err := binder.Init(ctx, cfg, s.exporter)
+	err := binder.Init(ctx, cfg, s.exporter, logLevel)
 	if err != nil {
 		return err
 	}

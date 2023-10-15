@@ -28,9 +28,9 @@ var (
 )
 
 type Config struct {
-	Bindings []BindingConfig `json:"bindings"`
-	ApiPort  int             `json:"apiPort"`
-	LogLevel string          `json:"logLevel"`
+	Bindings []BindingConfig `json:"bindings" yaml:"bindings"`
+	ApiPort  int             `json:"apiPort" yaml:"apiPort"`
+	LogLevel string          `json:"logLevel" yaml:"logLevel"`
 }
 
 func SetConfigFile(filename string) {

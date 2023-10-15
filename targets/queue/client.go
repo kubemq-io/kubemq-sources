@@ -78,6 +78,7 @@ func (c *Client) Do(ctx context.Context, request *types.Request) (*types.Respons
 		SetPolicyExpirationSeconds(c.opts.expirationSeconds).
 		SetPolicyMaxReceiveCount(c.opts.maxReceiveCount).
 		SetPolicyMaxReceiveQueue(c.opts.deadLetterQueue)
+	c.log.Debugf("sending queue message to channel %s, data %s", queueMessage.Channel, string(queueMessage.Body))
 	result, err := c.client.Send(ctx, queueMessage)
 	if err != nil {
 		return nil, err
