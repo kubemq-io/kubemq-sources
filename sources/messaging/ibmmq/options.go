@@ -16,6 +16,7 @@ const (
 	defaultKeyRepository    = ""
 	defaultWaitPullTime     = 100
 	defaultPort             = 1414
+	defaultTlsCipherSpec    = ""
 	defaultTlsClientAuth    = "NONE"
 )
 
@@ -31,6 +32,7 @@ type options struct {
 	Password         string
 	transportType    int
 	pullDelay        int32
+	tlsCipherSpec    string
 	tlsClientAuth    string
 }
 
@@ -65,6 +67,7 @@ func parseOptions(cfg config.Spec) (options, error) {
 	o.pullDelay = int32(timeToLive)
 	o.portNumber = cfg.Properties.ParseInt("port_number", defaultPort)
 	o.Password = cfg.Properties.ParseString("password", defaultPassword)
+	o.tlsCipherSpec = cfg.Properties.ParseString("tls_cipher_spec", defaultTlsCipherSpec)
 	o.tlsClientAuth = cfg.Properties.ParseString("tls_client_auth", defaultTlsClientAuth)
 	o.keyRepository = cfg.Properties.ParseString("key_repository", defaultKeyRepository)
 	return o, nil
