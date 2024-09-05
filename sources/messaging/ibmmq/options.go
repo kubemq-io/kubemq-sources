@@ -32,6 +32,7 @@ type options struct {
 	Password         string
 	transportType    int
 	pullDelay        int32
+	tlsCipherSpec    string
 	tlsClientAuth    string
 }
 
