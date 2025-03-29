@@ -3,6 +3,7 @@ package mqtt
 import (
 	"context"
 	"fmt"
+	"go.uber.org/atomic"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -21,14 +22,19 @@ const (
 )
 
 type Client struct {
-	opts   options
-	client mqtt.Client
-	log    *logger.Logger
-	target middleware.Middleware
+	opts           options
+	client         mqtt.Client
+	log            *logger.Logger
+	target         middleware.Middleware
+	isConnected    *atomic.Bool
+	reconnectCount *atomic.Int32
 }
 
 func New() *Client {
-	return &Client{}
+	return &Client{
+		isConnected:    atomic.NewBool(false),
+		reconnectCount: atomic.NewInt32(0),
+	}
 }
 
 func (c *Client) Connector() *common.Connector {
@@ -51,23 +57,28 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 	opts.SetPassword(c.opts.password)
 	opts.SetClientID(c.opts.clientId)
 	opts.SetConnectTimeout(defaultConnectTimeout)
+	opts.SetAutoReconnect(true)
+	opts.SetConnectRetryInterval(1 * time.Second)
+	opts.SetMaxReconnectInterval(24 * time.Hour)
+	opts.SetConnectRetry(true)
+	opts.SetOnConnectHandler(c.onConnect)
+	opts.SetConnectionLostHandler(c.onConnectionLost)
+	opts.SetReconnectingHandler(c.onReconnectingHandler)
 	c.client = mqtt.NewClient(opts)
 	if token := c.client.Connect(); token.Wait() && token.Error() != nil {
 		return fmt.Errorf("error connecting to mqtt broker, %w", token.Error())
 	}
+	c.log.Infof("connected to mqtt broker at %s", c.opts.host)
 	return nil
 }
 
 func (c *Client) Start(ctx context.Context, target middleware.Middleware) error {
+	c.log.Infof("client started")
 	if target == nil {
 		return fmt.Errorf("invalid target received, cannot be nil")
 	} else {
 		c.target = target
 	}
-
-	c.client.Subscribe(c.opts.topic, byte(c.opts.qos), func(client mqtt.Client, message mqtt.Message) {
-		go c.processIncomingMessages(ctx, message)
-	})
 
 	return nil
 }
@@ -93,13 +104,44 @@ func (c *Client) processIncomingMessages(ctx context.Context, msg mqtt.Message) 
 	if c.opts.dynamicMapping {
 		req.SetChannel(msg.Topic())
 	}
-	_, err := c.target.Do(ctx, req)
+	c.log.Infof("sending request to target %s", req.String())
+	resp, err := c.target.Do(ctx, req)
 	if err != nil {
 		c.log.Errorf("error processing mqtt message %d , %s", msg.MessageID(), err.Error())
+	} else {
+		c.log.Infof("target response %s", resp.String())
+	}
+	if resp != nil {
+		c.log.Infof("target response %s", resp.String())
 	}
 }
 
 func (c *Client) Stop() error {
+	c.log.Infof("client stopped")
 	c.client.Disconnect(250)
 	return nil
+}
+
+func (c *Client) onConnectionLost(client mqtt.Client, err error) {
+	c.log.Errorf("mqtt client connection lost, error: %s", err.Error())
+	c.isConnected.Store(false)
+}
+
+func (c *Client) onConnect(client mqtt.Client) {
+	c.log.Infof("mqtt client connected")
+	c.isConnected.Store(true)
+	c.log.Infof("subscribing to topic %s", c.opts.topic)
+	c.client.Subscribe(c.opts.topic, byte(c.opts.qos), func(client mqtt.Client, message mqtt.Message) {
+		c.log.Infof("received message from topic %s, payload %s", message.Topic(), string(message.Payload()))
+		ctx := context.Background()
+		go c.processIncomingMessages(ctx, message)
+	})
+	c.log.Infof("subscribed to topic %s", c.opts.topic)
+	c.reconnectCount.Store(0)
+}
+
+func (c *Client) onReconnectingHandler(client mqtt.Client, opts *mqtt.ClientOptions) {
+	c.reconnectCount.Inc()
+	c.log.Warnf("mqtt client reconnecting to broker, attempt: %d", c.reconnectCount.Load())
+
 }

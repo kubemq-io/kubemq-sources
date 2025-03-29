@@ -1,13 +1,14 @@
 version: '3'
 vars:
   BINARY_NAME: kubemq-sources
-  VERSION: v1.6.2
+  VERSION: v1.7.0
   REPO_GCP: europe-docker.pkg.dev/kubemq/images
   REPO_DOCKERHUB: kubemq
 tasks:
   default:
     cmds:
-      - go build -buildmode=exe -o "{{.BINARY_NAME}}.exe"
+      - go build -buildmode=exe -o "{{.BINARY_NAME}}"
+      - ./{{.BINARY_NAME}} --config=config.yaml
   check_update:
     cmds:
       - go-mod-upgrade
@@ -24,7 +25,7 @@ tasks:
     cmds:
       - go mod tidy
       - go mod vendor
-      - go build -o "{{.BINARY_NAME}}.exe" -ldflags "-X main.version={{.VERSION}}"
+      - go build -o "{{.BINARY_NAME}}" -ldflags "-X main.version={{.VERSION}}"
   build_container:
     env:
       GOOS: '{{OS}}'
@@ -75,14 +76,14 @@ tasks:
     cmds:
       - go mod tidy
       - go mod vendor
-      - docker buildx build --platform linux/amd64,linux/arm64 --build-arg VERSION={{.VERSION}} . -t {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} --push
+      - docker buildx build --platform linux/amd64  --build-arg VERSION={{.VERSION}} . -t {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} --push
       - docker pull {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}}
-      - docker tag {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} {{.REPO_GCP}}/{{.BINARY_NAME}}:latest
-      - docker push {{.REPO_GCP}}/{{.BINARY_NAME}}:latest
+#      - docker tag {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} {{.REPO_GCP}}/{{.BINARY_NAME}}:latest
+#      - docker push {{.REPO_GCP}}/{{.BINARY_NAME}}:latest
       - docker tag {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:{{.VERSION}}
-      - docker tag {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:latest
+#      - docker tag {{.REPO_GCP}}/{{.BINARY_NAME}}:{{.VERSION}} {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:latest
       - docker push {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:{{.VERSION}}
-      - docker push {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:latest
+#      - docker push {{.REPO_DOCKERHUB}}/{{.BINARY_NAME}}:latest
 
   trivy:
     cmds:
