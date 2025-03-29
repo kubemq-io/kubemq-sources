@@ -1,11 +1,11 @@
-FROM kubemq/gobuilder-ubuntu as builder
+FROM europe-docker.pkg.dev/kubemq/images/gobuilder as builder
 ARG VERSION
 ENV GOPATH=/go
 ENV PATH=$GOPATH:$PATH
 ENV ADDR=0.0.0.0
 ADD . $GOPATH/github.com/kubemq-io/kubemq-sources
 WORKDIR $GOPATH/github.com/kubemq-io/kubemq-sources
-RUN CGO_ENABLED=1 go build -tags container -a -mod=vendor -installsuffix cgo -ldflags="-w -s -X main.version=$VERSION" -o kubemq-sources-run .
+RUN CGO_ENABLED=0 go build -a -mod=vendor -installsuffix cgo -ldflags="-w -s -X main.version=$VERSION" -o kubemq-sources-run .
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 MAINTAINER KubeMQ info@kubemq.io
 LABEL name="KubeMQ Sources Connectors" \
@@ -18,8 +18,6 @@ LABEL name="KubeMQ Sources Connectors" \
 COPY licenses /licenses
 ENV GOPATH=/go
 ENV PATH=$GOPATH/bin:$PATH
-RUN mkdir -p /opt/mqm/lib64
-COPY --from=builder /opt/mqm/lib64 /opt/mqm/lib64
 RUN mkdir /kubemq-connector
 COPY --from=builder $GOPATH/github.com/kubemq-io/kubemq-sources/kubemq-sources-run ./kubemq-connector
 COPY --from=builder $GOPATH/github.com/kubemq-io/kubemq-sources/default_config.yaml ./kubemq-connector/config.yaml
