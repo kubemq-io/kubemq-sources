@@ -2,7 +2,7 @@ version: '3'
 vars:
   BINARY_NAME: kubemq-sources
   IMAGE_NAME: europe-docker.pkg.dev/images/kubemq-sources
-  VERSION: v1.7.0
+  VERSION: v1.7.1
   REPO_GCP: europe-docker.pkg.dev/kubemq/images
   REPO_DOCKERHUB: kubemq
 tasks:

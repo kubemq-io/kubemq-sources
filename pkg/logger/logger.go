@@ -1,11 +1,7 @@
 package logger
 
 import (
-	"context"
 	"fmt"
-	"os"
-	"path/filepath"
-
 	"github.com/kubemq-io/kubemq-sources/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -32,24 +28,7 @@ var (
 func initCore() zapcore.Core {
 	var w zapcore.WriteSyncer
 	std, _, _ := zap.Open("stderr")
-	if global.EnableLogFile {
-		path, _ := os.Executable()
-
-		err := os.MkdirAll("./logs", 0o660)
-		if err != nil {
-			panic(err.Error())
-		}
-		logR := &LogRotator{
-			Ctx:        context.Background(),
-			Filename:   filepath.Join(filepath.Dir(path), "/logs/kubemq-sources.log"),
-			MaxSize:    100, // megabytes
-			MaxBackups: 5,
-			MaxAge:     28, // days
-		}
-		w = zap.CombineWriteSyncers(std, logR, ServiceLog)
-	} else {
-		w = zap.CombineWriteSyncers(std, ServiceLog)
-	}
+	w = zap.CombineWriteSyncers(std, ServiceLog)
 	enc := zapcore.NewJSONEncoder(encoderConfig)
 	if global.LoggerType == "console" {
 		enc = zapcore.NewConsoleEncoder(encoderConfig)
