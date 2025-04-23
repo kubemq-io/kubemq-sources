@@ -53,6 +53,7 @@ func (c *Client) Init(ctx context.Context, cfg config.Spec, log *logger.Logger) 
 		ChannelName:      c.opts.channelName,
 		UserName:         c.opts.userName,
 		TransportType:    c.opts.transportType,
+		TLSCipherSpec:    c.opts.tlsCipherSpec,
 		TLSClientAuth:    c.opts.tlsClientAuth,
 		KeyRepository:    c.opts.keyRepository,
 		Password:         c.opts.Password,
